@@ -14,7 +14,7 @@ export const Form = ({ name, onSubmit }: Props) => {
       <h2>アカウント情報</h2>
       <p>{name}</p>
       <div>
-        <button>編集する</button>
+        <button type="button">編集する</button>
       </div>
     </form>
   );
