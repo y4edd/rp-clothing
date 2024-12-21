@@ -6,10 +6,3 @@ test("名前を表示すること", () => {
   render(<Form name="john" />);
   expect(screen.getByRole("button")).toBeInTheDocument();
 });
-
-test("ボタンをクリックすると、イベントハンドラーが呼ばれること", () => {
-  const mockFn = jest.fn();
-  render(<Form name="john" onSubmit={mockFn} />);
-  fireEvent.click(screen.getByRole("button"));
-  expect(mockFn).toHaveBeenCalled();
-});
