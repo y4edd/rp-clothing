@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "db:generate": "drizzle-kit generate --config ./drizzle.config.ts",
-    "db:push": "drizzle-kit push:pg --config ./drizzle.config.ts",
+    "db:push": "drizzle-kit push --config ./drizzle.config.ts",
     "db:preview": "drizzle-kit studio --config ./drizzle.config.ts"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "generate": "^0.14.0",
     "next": "15.1.2",
     "pg": "^8.13.1",
+    "pg-connection-string": "^2.7.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "styled-components": "^6.1.13"
