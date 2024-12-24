@@ -5,7 +5,6 @@ import Header from "@/components/frame/header/Header";
 import Footer from "@/components/frame/footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import styles from "@/components/frame/footer/Footer.module.css";
 
 const geistSans = localFont({
   src: "./fonts/ArbutusSlab-Regular.ttf",
@@ -38,10 +37,10 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className={styles.wrapper}>
+        <div>
           <Header />
           <ToastContainer />
-          <main className={styles.content}>{children}</main>
+          <main>{children}</main>
           <Footer />
         </div>
       </body>
