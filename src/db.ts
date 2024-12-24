@@ -3,7 +3,7 @@ import { Pool } from "pg";
 import * as schema from "./db/schemas/schema";
 
 // PostgreSQL プールの初期化
-const pool = new Pool({
+export const pool = new Pool({
   connectionString: process.env.DATABASE_URL, // .env ファイルから接続情報を取得
 });
 
