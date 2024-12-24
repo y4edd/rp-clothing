@@ -46,13 +46,9 @@
         "cart_users_id_users_id_fk": {
           "name": "cart_users_id_users_id_fk",
           "tableFrom": "cart",
-          "columnsFrom": [
-            "users_id"
-          ],
+          "columnsFrom": ["users_id"],
           "tableTo": "users",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "no action"
         }
@@ -105,13 +101,9 @@
         "favorite_item_users_id_users_id_fk": {
           "name": "favorite_item_users_id_users_id_fk",
           "tableFrom": "favorite_item",
-          "columnsFrom": [
-            "users_id"
-          ],
+          "columnsFrom": ["users_id"],
           "tableTo": "users",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "no action"
         }
@@ -164,13 +156,9 @@
         "favorite_shop_users_id_users_id_fk": {
           "name": "favorite_shop_users_id_users_id_fk",
           "tableFrom": "favorite_shop",
-          "columnsFrom": [
-            "users_id"
-          ],
+          "columnsFrom": ["users_id"],
           "tableTo": "users",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "no action"
         }
@@ -223,13 +211,9 @@
         "look_history_users_id_users_id_fk": {
           "name": "look_history_users_id_users_id_fk",
           "tableFrom": "look_history",
-          "columnsFrom": [
-            "users_id"
-          ],
+          "columnsFrom": ["users_id"],
           "tableTo": "users",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "no action"
         }
@@ -294,13 +278,9 @@
         "purchase_history_users_id_users_id_fk": {
           "name": "purchase_history_users_id_users_id_fk",
           "tableFrom": "purchase_history",
-          "columnsFrom": [
-            "users_id"
-          ],
+          "columnsFrom": ["users_id"],
           "tableTo": "users",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "no action"
         }
@@ -378,13 +358,9 @@
         "search_conditions_users_id_users_id_fk": {
           "name": "search_conditions_users_id_users_id_fk",
           "tableFrom": "search_conditions",
-          "columnsFrom": [
-            "users_id"
-          ],
+          "columnsFrom": ["users_id"],
           "tableTo": "users",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "no action"
         }
@@ -450,9 +426,7 @@
       "uniqueConstraints": {
         "users_email_unique": {
           "name": "users_email_unique",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "nullsNotDistinct": false
         }
       },
