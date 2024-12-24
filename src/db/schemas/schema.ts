@@ -14,7 +14,9 @@ export const users = pgTable("users", {
 
 export const search_conditions = pgTable("search_conditions", {
   id: serial("id").primaryKey(),
-  users_id: integer("users_id").references(() => users.id).notNull(),
+  users_id: integer("users_id")
+    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
+    .notNull(),
   condition_name: text("condition_name").notNull(),
   price_min: integer("price_min"),
   price_max: integer("price_max"),
@@ -26,7 +28,9 @@ export const search_conditions = pgTable("search_conditions", {
 
 export const purchase_history = pgTable("purchase_history", {
   id: serial("id").primaryKey(),
-  users_id: integer("users_id").references(() => users.id).notNull(),
+  users_id: integer("users_id")
+    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
+    .notNull(),
   item_code: text("item_code").notNull(),
   date: date("date").notNull(),
   is_birthday_sale_use: boolean("is_birthday_sale_use"),
@@ -36,7 +40,9 @@ export const purchase_history = pgTable("purchase_history", {
 
 export const look_history = pgTable("look_history", {
   id: serial("id").primaryKey(),
-  users_id: integer("users_id").references(() => users.id).notNull(),
+  users_id: integer("users_id")
+  .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
+  .notNull(),
   item_code: text("item_code").notNull(),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
@@ -44,7 +50,9 @@ export const look_history = pgTable("look_history", {
 
 export const favorite_item = pgTable("favorite_item", {
   id: serial("id").primaryKey(),
-  users_id: integer("users_id").references(() => users.id).notNull(),
+  users_id: integer("users_id")
+  .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
+  .notNull(),
   item_code: text("item_code").notNull(),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
@@ -52,7 +60,9 @@ export const favorite_item = pgTable("favorite_item", {
 
 export const favorite_shop = pgTable("favorite_shop", {
   id: serial("id").primaryKey(),
-  users_id: integer("users_id").references(() => users.id).notNull(),
+  users_id: integer("users_id")
+  .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
+  .notNull(),
   shop_code: text("shop_code").notNull(),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
@@ -60,7 +70,9 @@ export const favorite_shop = pgTable("favorite_shop", {
 
 export const cart = pgTable("cart", {
   id: serial("id").primaryKey(),
-  users_id: integer("users_id").references(() => users.id).notNull(),
+  users_id: integer("users_id")
+  .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
+  .notNull(),
   item_code: text("item_code").notNull(),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),

@@ -1,3 +1,6 @@
+DELETE FROM users;
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+
 -- Custom SQL migration file, put your code below! --
 INSERT INTO "users" ("name", "email", "password", "birthday", "created_at", "updated_at") 
 VALUES 
@@ -17,9 +20,9 @@ VALUES
   (1,'3498837', '2024-10-23', false, NOW(), NOW()),
   (1,'1297799', '2024-09-05', true, NOW(), NOW()),
   (1,'2388', '2024-9-10', false, NOW(), NOW()),
-  (2,'2388', '2024-9-10', false, NOW(), NOW()),
+  (2,'2388', '2024-9-10', false, NOW(), NOW());
 
-INSERT INTO "look_history" ("user_id", "item_code", "created_at", "updated_at")
+INSERT INTO "look_history" ("users_id", "item_code", "created_at", "updated_at")
 VALUES
   (1,'33333', NOW(), NOW()),
   (1,'93879', NOW(), NOW()),
@@ -28,7 +31,7 @@ VALUES
   (1,'9789', NOW(), NOW()),
   (1,'3767', NOW(), NOW()),
   (1,'1728', NOW(), NOW()),
-  (1,'983', NOW(), NOW()),
+  (1,'983', NOW(), NOW());
 
 INSERT INTO "favorite_item" ("users_id", "item_code", "created_at", "updated_at")
 VALUES
