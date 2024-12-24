@@ -1,6 +1,3 @@
-DELETE FROM users;
-ALTER SEQUENCE users_id_seq RESTART WITH 1;
-
 -- Custom SQL migration file, put your code below! --
 INSERT INTO "users" ("name", "email", "password", "birthday", "created_at", "updated_at") 
 VALUES 
