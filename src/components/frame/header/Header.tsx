@@ -1,7 +1,12 @@
+import Link from "next/link";
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <div>
+      <WordSearch />
+      <p>RPclothing</p>
+      <Link />
+      </div>
   )
 }
 
