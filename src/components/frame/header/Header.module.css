@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  margin-left: 4.5rem;
+}
+
+.title {
+  font-style: bold;
+  font-size: 2.0rem;
+  margin-left: 10.0rem;
+}
+
+.login {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-left: 7.0rem;
+  text-decoration: none;
+}
+
+.container > button {
+  border:none;
+  cursor: pointer;
+  background-color: #ffffff;
+  margin-left: 7.0rem;
+}
