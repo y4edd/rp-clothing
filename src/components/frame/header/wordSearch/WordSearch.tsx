@@ -1,4 +1,4 @@
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import styles from "./WordSearch.module.css";
 
 const WordSearch = () => {
@@ -18,6 +18,6 @@ const WordSearch = () => {
       </form>
     </>
   );
-}
+};
 
 export default WordSearch;

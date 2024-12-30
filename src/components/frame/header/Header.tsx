@@ -1,9 +1,9 @@
-import Link from "next/link";
-import WordSearch from "./wordSearch/WordSearch";
-import styles from "./Header.module.css";
-import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Link from "next/link";
+import styles from "./Header.module.css";
+import WordSearch from "./wordSearch/WordSearch";
 
 const Header = () => {
   return (
@@ -23,10 +23,12 @@ const Header = () => {
       </div> */}
       {/* MEMO: ログイン済みの際はこちらが表示されます */}
       <div className={styles.navigationContainer}>
-        <Link href="/login" className={styles.login}>ログイン</Link>
+        <Link href="/login" className={styles.login}>
+          ログイン
+        </Link>
         <button type="button" aria-label="Search">
           <FavoriteBorderIcon />
-        </button>        
+        </button>
         <button type="button" aria-label="Search">
           <SearchIcon />
         </button>
@@ -35,8 +37,7 @@ const Header = () => {
         </button>
       </div>
     </div>
-
   );
-}
+};
 
 export default Header;
