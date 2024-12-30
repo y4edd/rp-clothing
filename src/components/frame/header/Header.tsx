@@ -49,7 +49,7 @@ const Header = () => {
         />
       </div>
       <div>
-        <PageTitle />
+        <PageTitle title={"トップ"}/>
       </div>
     </>
   );

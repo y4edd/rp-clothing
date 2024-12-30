@@ -1,7 +1,9 @@
-const PageTitle = ({ title }:any) => {
+import styles from "./PageTitle.module.css";
+
+const PageTitle = ({ title }: { title: string }) => {
   return (
-    <div>{title}</div>
+    <div className={styles.title}>{title}</div>
   )
 }
 
-export default PageTitle
+export default PageTitle;
