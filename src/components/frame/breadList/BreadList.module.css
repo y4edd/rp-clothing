@@ -1,0 +1,20 @@
+.breadListGroup {
+  margin-left: 2.0rem;
+  padding: 0.7rem 1rem;
+  font-size: 1.0rem;
+  display: flex;
+  align-items: center;
+}
+
+.breadListGroup span {
+  margin: 0 0.5rem;
+}
+
+.breadListTitle:hover {
+  color: #b1b1b1;
+}
+
+.navigation {
+  text-decoration: none;
+  color: #B9B6B6
+}
