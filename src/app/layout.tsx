@@ -30,10 +30,10 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${geistSans.variable}`}>
-          <Header />
-          <ToastContainer />
-          <main>{children}</main>
-          <Footer />
+        <Header />
+        <ToastContainer />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
