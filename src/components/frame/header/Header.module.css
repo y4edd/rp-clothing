@@ -1,24 +1,36 @@
-.container {
+.headerContainer {
   display: flex;
-  margin-left: 4.5rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4.5rem;
+}
+
+.container {
+  flex: 1;
 }
 
 .title {
-  font-style: bold;
-  font-size: 2.0rem;
-  margin-left: 10.0rem;
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.navigationContainer {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .login {
   font-size: 1.5rem;
-  margin-top: 2.5rem;
-  margin-left: 7.0rem;
   text-decoration: none;
 }
 
-.container > button {
-  border:none;
+.navigationContainer > button {
+  border: none;
   cursor: pointer;
-  background-color: #ffffff;
-  margin-left: 7.0rem;
+  background-color: transparent;
 }
