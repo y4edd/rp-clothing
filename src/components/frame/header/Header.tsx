@@ -40,7 +40,8 @@ const Header = () => {
           </button>
         </div>
       </div>
-      {/* 削除ページコンポーネント毎にBreadListとPageTitleをインポートしpropsで渡してもらいます */}
+      {/* MEMO: 削除予定。
+      // ページコンポーネント毎にBreadListとPageTitleをインポートしpropsで渡してもらいます */}
       <div>
         <BreadList bread={[{ link: "/", title: "トップ" }]} />
       </div>
