@@ -1,0 +1,11 @@
+.company {
+  background-color: #888383;
+}
+
+.company > p {
+  padding: 0.5rem;
+  color: #575656;
+  font-style: bold;
+  font-size: 1.5rem;
+  text-align: center;
+}

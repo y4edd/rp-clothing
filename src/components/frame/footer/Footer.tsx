@@ -1,6 +1,10 @@
+import styles from "./Footer.module.css"
+
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <div className={styles.company}>
+      <p>©株式会社ソニック</p>
+    </div>
   )
 }
 
