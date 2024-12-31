@@ -1,10 +1,10 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import WordSearch from "./WordSearch";
 
 describe("WordSearch コンポーネント", () => {
   test("検索フォームが正しくレンダリングされること", () => {
     render(<WordSearch />);
-    
+
     const input = screen.getByPlaceholderText("何かお探しですか？");
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute("type", "text");
@@ -17,7 +17,7 @@ describe("WordSearch コンポーネント", () => {
     render(<WordSearch />);
 
     const input = screen.getByPlaceholderText("何かお探しですか？") as HTMLInputElement;
-    
+
     fireEvent.change(input, { target: { value: "テスト検索" } });
     expect(input.value).toBe("テスト検索");
   });

@@ -21,7 +21,7 @@ describe("BreadList コンポーネントの単体テスト", () => {
 
   test("各リンクに正しい href 属性が設定されていること", () => {
     render(<BreadList bread={mockBread} />);
-    mockBread.forEach((item) => {
+    mockBread.map((item) => {
       const linkElement = screen.getByText(item.title);
       expect(linkElement.closest("a")).toHaveAttribute("href", item.link);
     });
@@ -29,7 +29,7 @@ describe("BreadList コンポーネントの単体テスト", () => {
 
   test("各タイトルが正しく表示されていること", () => {
     render(<BreadList bread={mockBread} />);
-    mockBread.forEach((item) => {
+    mockBread.map((item) => {
       expect(screen.getByText(item.title)).toBeInTheDocument();
     });
   });
