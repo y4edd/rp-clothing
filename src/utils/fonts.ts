@@ -1,4 +1,4 @@
-import  { Arbutus_Slab } from "next/font/google";
+import { Arbutus_Slab } from "next/font/google";
 
 const myFont = Arbutus_Slab({
   subsets: ["latin"],
@@ -6,4 +6,3 @@ const myFont = Arbutus_Slab({
 });
 
 export default myFont;
-
