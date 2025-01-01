@@ -5,13 +5,7 @@ import Footer from "@/components/frame/footer/Footer";
 import Header from "@/components/frame/header/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const geistSans = localFont({
-  src: "./fonts/ArbutusSlab-Regular.ttf",
-  variable: "--font-geist-sans",
-  weight: "400",
-  style: "normal",
-});
+import myFont from "@/utils/fonts";
 
 export const metadata: Metadata = {
   title: "RP-clothing",
@@ -29,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={`${geistSans.variable}`}>
+      <body className={`${myFont.className}`}>
         <Header />
         <ToastContainer />
         <main>{children}</main>
