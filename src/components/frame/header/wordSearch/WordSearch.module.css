@@ -1,0 +1,26 @@
+.searchForm {
+  margin: 2.5rem 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.searchForm > input {
+  padding: 0.5rem 0.5rem;
+  border: none;
+  box-shadow: none;
+  background-color: #f5f5f5;
+  font-size: 1.0rem;
+}
+
+.searchForm > input:focus {
+  outline: none;
+}
+
+.searchForm > button {
+  position: absolute;
+  border: none;
+  margin-top: 0.3rem;
+  margin-left: 11.0rem;
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
