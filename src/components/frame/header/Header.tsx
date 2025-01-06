@@ -8,6 +8,9 @@ import styles from "./Header.module.css";
 import WordSearch from "./wordSearch/WordSearch";
 
 const Header = () => {
+  const search = () => {
+    console.log("search");
+  };
   return (
     <>
       <div className={styles.headerContainer}>
@@ -32,7 +35,7 @@ const Header = () => {
           <button type="button" aria-label="Search">
             <FavoriteBorderIcon />
           </button>
-          <button type="button" aria-label="Search">
+          <button type="button" aria-label="Search" onClick={search}>
             <SearchIcon />
           </button>
           <button type="button" aria-label="Search">

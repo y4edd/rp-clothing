@@ -18,15 +18,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode,
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="ja">
       <body className={`${myFont.className}`}>
         <Header />
         <ToastContainer />
-        <main>{children}</main>
+        <main>
+          {children}
+          {modal}
+        </main>
         <Footer />
       </body>
     </html>
