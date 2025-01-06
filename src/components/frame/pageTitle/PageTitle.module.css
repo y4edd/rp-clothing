@@ -1,0 +1,8 @@
+.title {
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #e1dada;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 5.0rem;
+}
