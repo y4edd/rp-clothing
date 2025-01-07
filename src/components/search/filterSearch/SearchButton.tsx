@@ -1,10 +1,13 @@
 "use client";
 import Icon from "@/components/utils/headerIcon/Icon";
 import SearchIcon from "@mui/icons-material/Search";
+import { useRouter } from "next/navigation";
 
 const SearchButton = ({ id }: Readonly<{ id: string }>) => {
-  // 検索モーダルの展開
+  const router = useRouter();
+
   const filter = () => {
+    router.push("/search", { scroll: false });
   };
   return (
     <>

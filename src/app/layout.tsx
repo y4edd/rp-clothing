@@ -5,6 +5,7 @@ import Header from "@/components/frame/header/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import myFont from "@/utils/fonts";
+import Modal from "@/app/Modal";
 
 export const metadata: Metadata = {
   title: "RP-clothing",
@@ -17,10 +18,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal
+  search
 }: Readonly<{
   children: React.ReactNode,
-  modal: React.ReactNode;
+  search: React.ReactNode;
 }>) {
   return (
     <html lang="ja">
@@ -29,7 +30,6 @@ export default function RootLayout({
         <ToastContainer />
         <main>
           {children}
-          {modal}
         </main>
         <Footer />
       </body>
