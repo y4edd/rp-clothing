@@ -1,5 +1,5 @@
-import SearchIcon from "@mui/icons-material/Search";
 import styles from "./WordSearch.module.css";
+import Button from "./button/Button";
 
 const WordSearch = () => {
   return (
@@ -12,9 +12,7 @@ const WordSearch = () => {
           placeholder="何かお探しですか？"
           aria-label="検索ボックス"
         />
-        <button type="submit" aria-label="検索">
-          <SearchIcon />
-        </button>
+        <Button />
       </form>
     </>
   );
