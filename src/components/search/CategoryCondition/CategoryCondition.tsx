@@ -1,6 +1,8 @@
 const CategoryCondition = () => {
   return (
-    <div>CategoryCondition</div>
+    <>
+      <h3>カテゴリ</h3>
+    </>
   )
 }
 

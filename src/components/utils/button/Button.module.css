@@ -1,0 +1,25 @@
+.button {
+  padding: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.black {
+  background-color: black;
+  color: white;
+}
+
+.white {
+  background-color: white;
+  color: black;
+}
+
+.red {
+  background-color: red;
+  color: white;
+}
+
+.gray {
+  background-color: gray;
+  color: white;
+}

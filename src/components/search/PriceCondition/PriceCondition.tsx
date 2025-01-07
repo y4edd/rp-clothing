@@ -1,6 +1,8 @@
 const PriceCondition = () => {
   return (
-    <div>PriceCondition</div>
+    <>
+      <h3>値段</h3>
+    </>
   )
 }
 

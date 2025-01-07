@@ -3,7 +3,7 @@ import BreadList from "../breadList/BreadList";
 import PageTitle from "../pageTitle/PageTitle";
 import styles from "./Header.module.css";
 import WordSearch from "../../search/wordSearch/WordSearch";
-import SearchButton from "@/components/search/SearchButton/SearchButton";
+import SearchButton from "@/components/search/button/SearchButton/SearchButton";
 import CartButton from "@/components/cart/cartButton/CartButton";
 import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteButton";
 
