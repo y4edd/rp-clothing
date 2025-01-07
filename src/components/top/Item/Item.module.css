@@ -1,0 +1,18 @@
+.item {
+  width: 100%;
+}
+.item:hover {
+  opacity: 0.8;
+}
+.itemImage {
+  width: 100%;
+  height: auto;
+}
+.itemName {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+.price {
+  font-size: 0.9rem;
+  color: #111111;
+}

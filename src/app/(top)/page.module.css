@@ -1,0 +1,45 @@
+.container {
+  margin-bottom: 80px;
+}
+.contentTitle {
+  font-size: 1.25rem;
+  font-weight: normal;
+  text-align: center;
+  margin: 30px auto;
+}
+.gridItems {
+  max-width: 1120px;
+  width: 100%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px 15px;
+}
+
+.item {
+  width: 100%;
+}
+.item:hover {
+  opacity: 0.8;
+}
+.itemImage {
+  width: 100%;
+  height: auto;
+}
+.itemName {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+.price {
+  font-size: 0.9rem;
+  color: #111111;
+}
+
+.gridItemsHistory {
+  max-width: 950px;
+  width: 100%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px 15px;
+}
