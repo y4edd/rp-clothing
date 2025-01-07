@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./LookHistory.module.css";
 import Link from "next/link";
+import React from "react";
 import Item from "../Item/Item";
+import styles from "./LookHistory.module.css";
 const LookHistory = () => {
   // MEMO アイテム情報取得したら消します
 
@@ -11,8 +11,8 @@ const LookHistory = () => {
     <div className={styles.container}>
       <h2 className={styles.contentTitle}>最近チェックしたアイテム</h2>
       <div className={styles.gridItemsHistory}>
-        {sampleArrayHistory.map((item, index) => (
-          <Link href={"/"}>
+        {sampleArrayHistory.map((item) => (
+          <Link href={"/"} key={item}>
             <Item />
           </Link>
         ))}

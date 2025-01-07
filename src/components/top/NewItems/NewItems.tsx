@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./NewItems.module.css";
 import Link from "next/link";
+import React from "react";
 import Item from "../Item/Item";
+import styles from "./NewItems.module.css";
 
 const NewItems = () => {
   // MEMO アイテム情報取得したら消します
@@ -11,8 +11,8 @@ const NewItems = () => {
     <div className={styles.container}>
       <h2 className={styles.contentTitle}>新着アイテム</h2>
       <div className={styles.gridItems}>
-        {sampleArray.map((item, index) => (
-          <Link href={"/"} key={item + index}>
+        {sampleArray.map((item) => (
+          <Link href={"/"} key={item}>
             <Item />
           </Link>
         ))}
