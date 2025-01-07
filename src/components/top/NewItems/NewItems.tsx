@@ -5,7 +5,7 @@ import styles from "./NewItems.module.css";
 
 const NewItems = () => {
   // MEMO アイテム情報取得したら消します
-  const sampleArray = new Array(15).fill(0);
+  const sampleArray = new Array(15).fill("").map((_, index) => index + 1);
 
   return (
     <div className={styles.container}>

@@ -5,7 +5,7 @@ import styles from "./LookHistory.module.css";
 const LookHistory = () => {
   // MEMO アイテム情報取得したら消します
 
-  const sampleArrayHistory = new Array(5).fill(0);
+  const sampleArrayHistory = new Array(5).fill("").map((_, index) => index + 1);
 
   return (
     <div className={styles.container}>
