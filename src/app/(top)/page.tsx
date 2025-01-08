@@ -6,7 +6,6 @@ const TopPage = () => {
   return (
     <>
       <NewItems />
-
       <LookHistory />
     </>
   );
