@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import React, { useState } from "react";
 import styles from "./FavoriteButton.module.css";
 
 const FavoriteBUtton = () => {
@@ -10,7 +10,7 @@ const FavoriteBUtton = () => {
     setIsFavorite(!isFavorite);
   };
   return (
-    <button onClick={handleFavorite} className={styles.favoriteIcon}>
+    <button type="button" onClick={handleFavorite} className={styles.favoriteIcon}>
       {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
     </button>
   );

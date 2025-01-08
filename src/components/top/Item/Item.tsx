@@ -1,7 +1,7 @@
 import Image from "next/image";
-import styles from "./Item.module.css";
 import Link from "next/link";
-import FavoriteBUtton from "../FavoriteButton/FavoriteBUtton";
+import FavoriteBUtton from "../FavoriteButton/FavoriteButton";
+import styles from "./Item.module.css";
 
 type Prop = {
   linkPath: string;
