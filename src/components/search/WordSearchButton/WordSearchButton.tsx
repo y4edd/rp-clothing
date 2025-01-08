@@ -3,7 +3,7 @@
 import Icon from "@/components/utils/headerIcon/Icon";
 import SearchIcon from "@mui/icons-material/Search";
 
-const Button = () => {
+const WordSearchButton = () => {
   const search = () => {
     console.log("search");
   };
@@ -15,4 +15,4 @@ const Button = () => {
   );
 };
 
-export default Button;
+export default WordSearchButton;

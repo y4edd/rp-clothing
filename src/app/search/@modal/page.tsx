@@ -2,11 +2,11 @@
 "use client";
 
 import Modal from "@/app/Modal";
-import SearchStartButton from "@/components/search/filterSearch/button/SearchStartButton/SearchStartButton";
-import CategoryCondition from "@/components/search/filterSearch/condition/CategoryCondition/CategoryCondition";
-import FavConditions from "@/components/search/filterSearch/condition/FavConditions/FavConditions";
-import KeyWordCondition from "@/components/search/filterSearch/condition/KeyWordCondition/KeyWordCondition";
-import PriceCondition from "@/components/search/filterSearch/condition/PriceCondition/PriceCondition";
+import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
+import CategoryCondition from "@/components/search/CategoryCondition/CategoryCondition";
+import FavConditions from "@/components/search/FavConditions/FavConditions";
+import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
+import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import styles from "./page.module.css";
 
 const searchPage = () => {

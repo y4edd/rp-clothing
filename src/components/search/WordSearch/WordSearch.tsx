@@ -1,5 +1,5 @@
 import styles from "./WordSearch.module.css";
-import Button from "./button/Button";
+import WordSearchButton from "../WordSearchButton/WordSearchButton";
 
 const WordSearch = () => {
   return (
@@ -12,7 +12,7 @@ const WordSearch = () => {
           placeholder="何かお探しですか？"
           aria-label="検索ボックス"
         />
-        <Button />
+        <WordSearchButton />
       </form>
     </>
   );

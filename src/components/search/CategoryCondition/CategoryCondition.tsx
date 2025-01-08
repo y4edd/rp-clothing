@@ -1,4 +1,4 @@
-import Category from "../../category/Category";
+import Category from "../Category/Category";
 import styles from "./CategoryCondition.module.css";
 
 const CategoryCondition = () => {
