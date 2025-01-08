@@ -1,0 +1,53 @@
+.container {
+  margin-bottom: 80px;
+}
+.contentTitle {
+  font-size: 1.25rem;
+  font-weight: normal;
+  text-align: center;
+  margin: 30px auto;
+}
+.gridItemsHistory {
+  max-width: 950px;
+  width: 100%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px 15px;
+}
+
+.onlyMember {
+  background-color: #d9d9d9;
+  text-align: center;
+  padding: 20px 0;
+}
+.onlyTitle {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: normal;
+  position: relative;
+}
+.onlyTitle h3 {
+  width: 270px;
+  font-size: 1.2rem;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.onlyTitle::before,
+.onlyTitle::after {
+  content: "";
+  width: 45%;
+  height: 2px;
+  background-color: #000;
+}
+
+.onlyMember p {
+  margin: 30px auto;
+  font-size: 0.9rem;
+}
