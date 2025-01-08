@@ -18,6 +18,7 @@ const FavConditions = () => {
 
   return (
     <>
+      <div className={styles.favCondition}>
       <h3 className={styles.title}>お気に入り条件</h3>
       <div className={styles.favConditionsContent}>
         <div className={styles.favConditions}>
@@ -37,6 +38,7 @@ const FavConditions = () => {
         マイページから、お気に入り条件を登録しましょう！
       </p>
       <Button text={"マイページ"} onClick={toMyPage} className={buttonStyles.black}/> */}
+      </div>
     </>
   );
 };

@@ -1,3 +1,7 @@
+.categoryCondition {
+  margin-bottom: 20px;
+}
+
 .category {
   display: grid;
   grid-template-columns: repeat(2, auto);
