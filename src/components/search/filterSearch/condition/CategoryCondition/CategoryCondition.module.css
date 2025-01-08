@@ -6,19 +6,36 @@
   width:400px;
 }
 
+.categoryEach {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+
 /* 既存のチェックボックスを非表示に */
 .categoryEach > input[type="checkbox"] {
-  appearance:none;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  appearance: none;
+  background: #FFFFFF;
+  border: solid 2px #000000;
+  transition: all 0.2s ease-in-out;
 }
 
-/* チェックボックスのスタイルを定義 */
-.genreCheck {
-  position: absolute; 
-  content: ""; 
-  display: block; 
-  width: 17px;
-  height: 17px;
-  border: 3px solid black; 
+/* チェック時のチェックマーク */
+.categoryEach > input[type="checkbox"]:checked::before {
+  content: "✔";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  opacity: 1;
 }
 
-/* チェックマークのスタイルを定義 */
+/* ラベルのスタイル */
+.categoryEach > label {
+  cursor: pointer;
+  color: #333;
+}
