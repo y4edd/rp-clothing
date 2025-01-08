@@ -1,9 +1,7 @@
 import TopPage from "../(top)/page";
 
 const Search = () => {
-  return(
-    <TopPage />
-  );
+  return <TopPage />;
 };
 
 export default Search;

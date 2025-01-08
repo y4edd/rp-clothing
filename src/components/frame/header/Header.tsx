@@ -1,17 +1,13 @@
+import CartButton from "@/components/cart/cartButton/CartButton";
+import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteButton";
+import SearchButton from "@/components/search/filterSearch/button/SearchButton/SearchButton";
 import Link from "next/link";
+import WordSearch from "../../search/wordSearch/WordSearch";
 import BreadList from "../breadList/BreadList";
 import PageTitle from "../pageTitle/PageTitle";
 import styles from "./Header.module.css";
-import WordSearch from "../../search/wordSearch/WordSearch";
-import SearchButton from "@/components/search/filterSearch/button/SearchButton/SearchButton";
-import CartButton from "@/components/cart/cartButton/CartButton";
-import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteButton";
 
 const Header = () => {
-  const search = () => {
-    console.log("search");
-
-  };
   return (
     <>
       <div className={styles.headerContainer}>

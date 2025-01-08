@@ -8,11 +8,11 @@ const PriceCondition = () => {
         <form method="get" className={styles.price}>
           <input type="text" id="text" className={styles.priceEach} />
           ～
-          <input type="text" id="text" className={styles.priceEach}/>円
+          <input type="text" id="text" className={styles.priceEach} />円
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default PriceCondition;

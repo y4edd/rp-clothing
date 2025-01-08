@@ -1,6 +1,6 @@
 .modalContent {
   flex-direction: column;
-  margin:10px 20px;
+  margin: 10px 20px;
 }
 
 .modalContent h3 {
@@ -8,11 +8,11 @@
 }
 
 .modalTitle {
-  margin:0px;
+  margin: 0px;
 }
 
 .searchConditions {
   display: flex;
   flex-direction: column;
-  margin: 0px 40px ;
+  margin: 0px 40px;
 }

@@ -3,7 +3,7 @@ import Icon from "@/components/utils/headerIcon/Icon";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRouter } from "next/navigation";
 
-const SearchButton = ({ id }: Readonly<{ id: string }>) => {
+const SearchButton = () => {
   const router = useRouter();
 
   const filter = () => {
@@ -14,9 +14,8 @@ const SearchButton = ({ id }: Readonly<{ id: string }>) => {
       <Icon type="button" onClick={filter}>
         <SearchIcon />
       </Icon>
-      <div>{id}</div>
     </>
-  )
+  );
 };
 
 export default SearchButton;

@@ -2,8 +2,8 @@
 "use client";
 
 import CloseIcon from "@mui/icons-material/Close";
-import styles from "./Modal.module.css";
 import { useRouter } from "next/navigation";
+import styles from "./Modal.module.css";
 
 const Modal = ({
   children,
