@@ -1,7 +1,6 @@
-import Link from "next/link";
-import React from "react";
 import Item from "../Item/Item";
 import styles from "./LookHistory.module.css";
+
 const LookHistory = () => {
   // MEMO アイテム情報取得したら消します
 

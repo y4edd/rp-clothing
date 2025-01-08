@@ -1,5 +1,3 @@
-import Link from "next/link";
-import React from "react";
 import Item from "../Item/Item";
 import styles from "./NewItems.module.css";
 
