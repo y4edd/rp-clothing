@@ -1,31 +1,55 @@
 .black {
-  background-color: black;
-  color: white;
+  background-color: #000000;
+  color: #ffffff;
   padding: 10px;
-  border: none;
+  border: 2px solid #000000;
   cursor: pointer;
+}
+
+.black:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #000000;
 }
 
 .white {
-  background-color: white;
-  color: black;
+  background-color: #ffffff;
+  color: #000000;
   padding: 10px;
-  border: none;
+  border: 2px solid #000000;
   cursor: pointer;
+}
+
+.white:hover {
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
 }
 
 .red {
-  background-color: red;
-  color: white;
+  background-color: #ff0000;
+  color: #ffffff;
   padding: 10px;
-  border: none;
+  border: 2px solid #ff0000;
   cursor: pointer;
 }
 
+.red:hover {
+  background-color: #ffffff;
+  color: #ff0000;
+  border: 2px solid #ff0000;
+}
+
 .gray {
-  background-color: gray;
-  color: white;
+  background-color: #808080;
+  color: #ffffff;
   padding: 5px;
-  border: none;
+  border: 2px solid #808080;
   cursor: pointer;
+}
+
+.gray:hover {
+  background-color: #ffffff;
+  color: #808080;
+  border: 2px solid #808080;
 }
