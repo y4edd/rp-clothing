@@ -16,3 +16,6 @@
   font-size: 0.9rem;
   color: #111111;
 }
+.itemContent {
+  position: relative;
+}

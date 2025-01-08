@@ -12,9 +12,7 @@ const NewItems = () => {
       <h2 className={styles.contentTitle}>新着アイテム</h2>
       <div className={styles.gridItems}>
         {sampleArray.map((item) => (
-          <Link href={"/"} key={item}>
-            <Item />
-          </Link>
+          <Item key={item} linkPath="/" />
         ))}
       </div>
     </div>
