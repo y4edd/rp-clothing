@@ -6,8 +6,8 @@ const CategoryCondition = () => {
       <h3>カテゴリ</h3>
       <div className={styles.category}>
         <div className={styles.categoryEach}>
-          <input type="checkbox" id="トップス" name="トップス" />
-          <label htmlFor="トップス">トップス</label>
+          <input type="checkbox" id="トップス" name="トップス" className={styles.genreCheck} />
+          <label htmlFor="トップス" className={styles.genre}>トップス</label>
         </div>
         <div className={styles.categoryEach}>
           <input type="checkbox" id="ズボン・パンツ" name="ズボン・パンツ" />

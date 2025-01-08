@@ -5,3 +5,20 @@
   margin-bottom: 10px;
   width:400px;
 }
+
+/* 既存のチェックボックスを非表示に */
+.categoryEach > input[type="checkbox"] {
+  appearance:none;
+}
+
+/* チェックボックスのスタイルを定義 */
+.genreCheck {
+  position: absolute; 
+  content: ""; 
+  display: block; 
+  width: 17px;
+  height: 17px;
+  border: 3px solid black; 
+}
+
+/* チェックマークのスタイルを定義 */
