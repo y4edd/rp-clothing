@@ -7,16 +7,21 @@ import FavConditions from "@/components/search/FavConditions/FavConditions";
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import SearchStartButton from "@/components/search/button/SearchStartButton/SearchStartButton";
+import styles  from "./page.module.css";
 
 const searchPage = () => {
   return (
     <Modal>
-      <h2>検索条件</h2>
-        <FavConditions />
-        <PriceCondition />
-        <CategoryCondition />
-        <KeyWordCondition />
-        <SearchStartButton />
+      <div className={styles.modalContent}>
+        <h2 className={styles.modalTitle}>検索条件</h2>
+        <div className={styles.searchConditions}>
+          <FavConditions />
+          <PriceCondition />
+          <CategoryCondition />
+          <KeyWordCondition />
+          <SearchStartButton />
+        </div>
+      </div>
     </Modal>
   );
 }

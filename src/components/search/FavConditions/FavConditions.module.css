@@ -1,0 +1,10 @@
+.favConditionsContent {
+  margin-left:1rem;
+}
+
+.favConditions {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 5px;
+  margin-bottom: 10px;
+}
