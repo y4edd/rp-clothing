@@ -23,10 +23,8 @@
 
 .closeButton {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 32px;
-  height: 32px;
+  top: 20px;
+  right: 320px;
   background-color: transparent;
   border: none;
   cursor: pointer;
