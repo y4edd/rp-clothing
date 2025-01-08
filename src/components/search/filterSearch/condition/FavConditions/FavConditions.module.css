@@ -7,4 +7,9 @@
   grid-template-columns: repeat(2, auto);
   gap: 5px;
   margin-bottom: 10px;
+  width:400px;
+}
+
+.editButton {
+  text-align: center;
 }

@@ -26,14 +26,16 @@ const FavConditions = () => {
           <Button text={"条件3"} onClick={toSearch} className={buttonStyles.gray}/>
           <Button text={"条件4"} onClick={toSearch} className={buttonStyles.gray}/>
         </div>
-        <Button text={"お気に入り条件の編集"} onClick={toMyPage} className={buttonStyles.black}/>
-      {/* 何も登録されていない場合 */}
+        <div className={styles.editButton}>
+          <Button text={"お気に入り条件の編集"} onClick={toMyPage} className={buttonStyles.black}/>
+        </div>
+      </div>
+            {/* 何も登録されていない場合 */}
       {/* <p>
         お気に入り条件は登録されていません<br />
         マイページから、お気に入り条件を登録しましょう！
       </p>
       <Button text={"マイページ"} onClick={toMyPage} className={buttonStyles.black}/> */}
-      </div>
     </>
   )
 }

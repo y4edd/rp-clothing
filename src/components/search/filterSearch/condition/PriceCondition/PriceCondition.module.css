@@ -1,0 +1,9 @@
+.priceCondition {
+  margin-left:1rem;
+  text-align: center;
+}
+
+.priceEach {
+  width: 40%;
+  padding:5px;
+}
