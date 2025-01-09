@@ -19,7 +19,7 @@ const FavConditions = () => {
   return (
     <>
       <div className={styles.favCondition}>
-        <h3 className={styles.title}>お気に入り条件</h3>
+        <h3>お気に入り条件</h3>
         <div className={styles.favConditionsContent}>
           <div className={styles.favConditions}>
             {/* FIXME:非同期で、お気に入り条件の取得、UI表示を行う処理を実装 */}
