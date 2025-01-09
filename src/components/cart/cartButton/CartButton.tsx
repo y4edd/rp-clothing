@@ -1,3 +1,5 @@
+"use client";
+
 import Icon from "@/components/utils/headerIcon/Icon";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
