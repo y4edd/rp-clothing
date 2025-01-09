@@ -8,10 +8,6 @@
   margin-bottom: 10px;
 }
 
-.modalTitle {
-  margin: 0px;
-}
-
 .searchConditions {
   display: flex;
   flex-direction: column;
