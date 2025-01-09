@@ -7,19 +7,10 @@ import type { Config } from "jest";
 
 const config: Config = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-  transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest",
-  },
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy", // CSSモジュールをモック
     "^@/(.*)$": "<rootDir>/src/$1", // エイリアスをjest用に設定(テストでエラーが出るのでその対応)
     "^next/image$": "<rootDir>/__mocks__/next/image.tsx", // Imageコンポーネントをモック
-  },
-
-  globals: {
-    "ts-jest": {
-      tsconfig: "tsconfig.jest.json",
-    },
   },
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -161,7 +152,7 @@ const config: Config = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "jest-environment-jsdom",
+  testEnvironment: "jsdom",
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -170,10 +161,7 @@ const config: Config = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  // testMatch: [
-  //   "**/__tests__/**/*.[jt]s?(x)",
-  //   "**/?(*.)+(spec|test).[tj]s?(x)"
-  // ],
+  // testMatch: ["**/?(*.)+(test).tsx"],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -190,12 +178,18 @@ const config: Config = {
   // testRunner: "jest-circus/runner",
 
   // A map from regular expressions to paths to transformers
-  // transform: undefined,
-
+  transform: {
+    "^.+\\.(ts|tsx)$": [
+      "ts-jest",
+      {
+        tsconfig: "tsconfig.jest.json",
+        isolatedModules: true,
+      },
+    ],
+  },
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
-  //   "/node_modules/",
-  //   "\\.pnp\\.[^\\/]+$"
+  // "/node_modules/(?!react|react-dom)/",
   // ],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
