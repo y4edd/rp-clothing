@@ -1,5 +1,5 @@
-import styles from "./WordSearch.module.css";
 import WordSearchButton from "../WordSearchButton/WordSearchButton";
+import styles from "./WordSearch.module.css";
 
 const WordSearch = () => {
   return (

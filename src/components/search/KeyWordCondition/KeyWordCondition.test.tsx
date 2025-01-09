@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import KeyWordCondition from "./KeyWordCondition";
 
-describe ("KeyWordConditionコンポーネント", () => {
+describe("KeyWordConditionコンポーネント", () => {
   test("キーワードを入力するフォームが正しくレンダリングされていること", () => {
     render(<KeyWordCondition />);
 
