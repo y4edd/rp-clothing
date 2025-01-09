@@ -1,7 +1,7 @@
 // 検索モーダル
 "use client";
 
-import Modal from "@/app/Modal";
+import Modal from "@/components/Modal/Modal";
 import CategoryCondition from "@/components/search/CategoryCondition/CategoryCondition";
 import FavConditions from "@/components/search/FavConditions/FavConditions";
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
