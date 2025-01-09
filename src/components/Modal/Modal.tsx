@@ -17,18 +17,16 @@ const Modal = ({
   };
 
   return (
-    <>
-      <div className={styles.modalBackdrop}>
-        <div className={styles.modal}>
-          <div className={styles.modalItem}>
-            {children}
-            <button type="button" onClick={onDismiss} className={styles.closeButton}>
-              <CloseIcon />
-            </button>
-          </div>
+    <div className={styles.modalBackdrop}>
+      <div className={styles.modal}>
+        <div className={styles.modalItem}>
+          {children}
+          <button type="button" onClick={onDismiss} className={styles.closeButton}>
+            <CloseIcon />
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
