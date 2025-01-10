@@ -19,13 +19,13 @@ const Input = ({ title, text, type, name, setFormArray }: InputProps) => {
   };
   return (
     <dl className={styles.table}>
-      <dt>{title}</dt>
+      <dt><label htmlFor={title}>{title}</label></dt>
       <dd>
         <input
           type={type}
           name={name}
           value={text}
-          id={name}
+          id={title}
           onChange={formChange}
         />
       </dd>

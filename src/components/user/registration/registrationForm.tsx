@@ -16,7 +16,7 @@ const RegistrationForm = () => {
   });
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} role="form">
       <Input
         title="ユーザー名"
         type="text"
