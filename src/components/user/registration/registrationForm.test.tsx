@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
 import { describe } from "node:test";
+import { fireEvent, render, screen } from "@testing-library/react";
 import RegistrationForm from "./registrationForm";
 
 describe("RegistrationFormコンポーネントのテスト", () => {

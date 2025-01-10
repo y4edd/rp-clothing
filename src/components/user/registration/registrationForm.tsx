@@ -1,10 +1,10 @@
 "use client";
 
+import type { FormProps } from "@/types/registration/registration";
 import { useState } from "react";
+import Birthday from "./form/birthday";
 import Input from "./form/input";
 import styles from "./registrationForm.module.css";
-import Birthday from "./form/birthday";
-import { FormProps } from "@/types/registration/registration";
 
 const RegistrationForm = () => {
   const [formArray, setFormArray] = useState<FormProps>({
@@ -16,7 +16,7 @@ const RegistrationForm = () => {
   });
 
   return (
-    <form className={styles.form} role="form">
+    <form className={styles.form}>
       <Input
         title="ユーザー名"
         type="text"

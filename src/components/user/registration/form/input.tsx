@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import type { FormProps } from "@/types/registration/registration";
+import type { Dispatch, SetStateAction } from "react";
 import styles from "./input.module.css";
-import { FormProps } from "@/types/registration/registration";
 
 interface InputProps {
   title: string;
@@ -19,15 +19,11 @@ const Input = ({ title, text, type, name, setFormArray }: InputProps) => {
   };
   return (
     <dl className={styles.table}>
-      <dt><label htmlFor={title}>{title}</label></dt>
+      <dt>
+        <label htmlFor={title}>{title}</label>
+      </dt>
       <dd>
-        <input
-          type={type}
-          name={name}
-          value={text}
-          id={title}
-          onChange={formChange}
-        />
+        <input type={type} name={name} value={text} id={title} onChange={formChange} />
       </dd>
       <dd>
         {name === "name" ? (

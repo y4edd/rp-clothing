@@ -1,8 +1,8 @@
 "use client";
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import type { FormProps } from "@/types/registration/registration";
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import styles from "./birthday.module.css";
-import { FormProps } from "@/types/registration/registration";
 
 interface BirthdayProps {
   setFormArray: Dispatch<SetStateAction<FormProps>>;
