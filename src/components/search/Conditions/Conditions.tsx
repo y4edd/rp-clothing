@@ -2,7 +2,6 @@ import CategoryCondition from "../CategoryCondition/CategoryCondition";
 import FavConditions from "../FavConditions/FavConditions";
 import KeyWordCondition from "../KeyWordCondition/KeyWordCondition";
 import PriceCondition from "../PriceCondition/PriceCondition";
-import SearchStartButton from "../SearchStartButton/SearchStartButton";
 
 const Conditions = () => {
   return (
