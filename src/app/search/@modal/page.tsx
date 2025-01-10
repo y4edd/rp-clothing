@@ -8,6 +8,7 @@ import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondit
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
 import styles from "./page.module.css";
+import Conditions from "@/components/search/Conditions/Conditions";
 
 const searchPage = () => {
   return (
@@ -15,10 +16,7 @@ const searchPage = () => {
       <div className={styles.modalContent}>
         <h2 className={styles.modalTitle}>検索条件</h2>
         <div className={styles.searchConditions}>
-          <FavConditions />
-          <PriceCondition />
-          <CategoryCondition />
-          <KeyWordCondition />
+          <Conditions />
           <SearchStartButton />
         </div>
       </div>

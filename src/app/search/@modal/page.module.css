@@ -4,10 +4,6 @@
   padding-bottom: 40px;
 }
 
-.modalContent h3 {
-  margin-bottom: 10px;
-}
-
 .searchConditions {
   display: flex;
   flex-direction: column;

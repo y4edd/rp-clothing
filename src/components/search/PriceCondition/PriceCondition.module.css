@@ -1,6 +1,11 @@
 .price {
   margin-bottom: 20px;
 }
+
+.title {
+  margin-bottom: 10px;
+}
+
 .priceCondition {
   margin-left: 1rem;
   text-align: center;
