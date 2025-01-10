@@ -8,11 +8,7 @@ const CategoryCondition = () => {
       <h3 className={styles.title}>カテゴリ</h3>
       <div className={styles.category}>
         {categories.map((category) => (
-          <Category
-            key={category.id}
-            id={category.id}
-            text={category.text}
-          />
+          <Category key={category.id} id={category.id} text={category.text} />
         ))}
       </div>
     </div>
