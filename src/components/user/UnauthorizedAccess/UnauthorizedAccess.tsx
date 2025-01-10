@@ -1,5 +1,5 @@
-import styles from "./UnauthorizedAccess.module.css";
 import LinkBtn from "@/components/utils/link/LinkBtn";
+import styles from "./UnauthorizedAccess.module.css";
 
 const UnauthorizedAccess = () => {
   return (

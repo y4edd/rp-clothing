@@ -1,6 +1,6 @@
 "use client";
-import styles from "./unexpected.module.css";
 import LinkBtn from "@/components/utils/link/LinkBtn";
+import styles from "./unexpected.module.css";
 
 const error = () => {
   return (
