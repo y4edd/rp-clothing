@@ -11,7 +11,6 @@ const CategoryCondition = () => {
           <Category
             key={category.id}
             id={category.id}
-            htmlFor={category.id}
             text={category.text}
           />
         ))}
