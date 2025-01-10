@@ -11,7 +11,7 @@ const Conditions = () => {
       <CategoryCondition />
       <KeyWordCondition />
     </>
-  )
-}
+  );
+};
 
 export default Conditions;

@@ -2,13 +2,9 @@
 "use client";
 
 import Modal from "@/components/Modal/Modal";
-import CategoryCondition from "@/components/search/CategoryCondition/CategoryCondition";
-import FavConditions from "@/components/search/FavConditions/FavConditions";
-import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
-import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
+import Conditions from "@/components/search/Conditions/Conditions";
 import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
 import styles from "./page.module.css";
-import Conditions from "@/components/search/Conditions/Conditions";
 
 const searchPage = () => {
   return (
