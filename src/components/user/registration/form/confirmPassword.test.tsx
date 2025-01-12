@@ -3,8 +3,8 @@ import type { FormProps } from "@/types/registration/registration";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useForm } from "react-hook-form";
-import ConfirmPasswordInput from "./confirmPassword";
 import PasswordInput from "./password";
+import ConfirmPasswordInput from "./confirmPassword";
 
 const TestComponent = () => {
   const {
