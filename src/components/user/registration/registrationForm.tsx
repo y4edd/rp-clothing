@@ -51,11 +51,7 @@ const RegistrationForm = () => {
         setDay={setDay}
       />
       <PasswordInput register={register} errors={errors} />
-      <ComfirmpasswordInput
-        register={register}
-        errors={errors}
-        getValues={getValues}
-      />
+      <ComfirmpasswordInput register={register} errors={errors} getValues={getValues} />
       {/* MEMO:ボタンは後から追加予定！ */}
       <button type="submit">会員登録</button>
     </form>

@@ -1,10 +1,6 @@
 import { errorMessages } from "@/lib/user/register/message";
 import type { FormProps } from "@/types/registration/registration";
-import type {
-  FieldErrors,
-  UseFormGetValues,
-  UseFormRegister,
-} from "react-hook-form";
+import type { FieldErrors, UseFormGetValues, UseFormRegister } from "react-hook-form";
 import styles from "./input.module.css";
 
 interface InputProps {
@@ -30,8 +26,7 @@ const ConfirmPasswordInput = ({ register, errors, getValues }: InputProps) => {
           id="confirmPassword"
           {...register("confirmPassword", {
             validate: (value) =>
-              value === getValues("password") ||
-              errorMessages.ConfirmPassword.confirm,
+              value === getValues("password") || errorMessages.ConfirmPassword.confirm,
           })}
           name="confirmPassword"
         />

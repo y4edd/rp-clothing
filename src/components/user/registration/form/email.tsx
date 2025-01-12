@@ -26,8 +26,7 @@ const EmailInput = ({ register, errors }: InputProps) => {
           {...register("email", {
             required: errorMessages.email.require,
             pattern: {
-              value:
-                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+              value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
               message: errorMessages.email.pattern,
             },
           })}
