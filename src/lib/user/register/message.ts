@@ -5,6 +5,7 @@ export const errorMessages = {
   },
   email: {
     require: "※入力必須です。",
+    pattern: "※正しい形式で入力してください。",
   },
   password: {
     require: "※入力必須です。",

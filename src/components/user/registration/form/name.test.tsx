@@ -1,9 +1,9 @@
-import { FormProps } from "@/types/registration/registration";
-import { useForm } from "react-hook-form";
-import NameInput from "./name";
+import { errorMessages } from "@/lib/user/register/message";
+import type { FormProps } from "@/types/registration/registration";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { errorMessages } from "@/lib/user/register/message";
+import { useForm } from "react-hook-form";
+import NameInput from "./name";
 
 const TestComponent = () => {
   const {
@@ -35,10 +35,7 @@ describe("NameInput コンポーネントのテスト", () => {
   test("ユーザー名が20文字以上の場合、エラーメッセージが出ること", async () => {
     render(<TestComponent />);
     const submitButton = screen.getByText("登録");
-    await userEvent.type(
-      submitButton,
-      "テストテストテストテストテストテストテストテスト"
-    );
+    await userEvent.type(submitButton, "テストテストテストテストテストテストテストテスト");
     expect(screen.getByText(errorMessages.name.maxLength)).toBeInTheDocument();
   });
 

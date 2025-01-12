@@ -1,9 +1,9 @@
+import { errorMessages } from "@/lib/user/register/message";
+import type { FormProps } from "@/types/registration/registration";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useForm } from "react-hook-form";
-import { errorMessages } from "@/lib/user/register/message";
 import EmailInput from "./email";
-import { FormProps } from "@/types/registration/registration";
 
 const TestComponent = () => {
   const {
@@ -32,6 +32,16 @@ describe("EmailInput コンポーネントのテスト", () => {
     await userEvent.click(submitButton);
 
     expect(screen.getByText(errorMessages.email.require)).toBeInTheDocument();
+  });
+
+  test("メールアドレスが正しい形式でない場合、エラーメッセージが表示される", async () => {
+    render(<TestComponent />);
+    const submitButton = screen.getByText("登録");
+
+    await userEvent.type(submitButton, "aaa@");
+    await userEvent.click(submitButton);
+
+    expect(screen.getByText(errorMessages.email.pattern)).toBeInTheDocument();
   });
 
   test("正しいメールアドレスが入力された場合、エラーメッセージが表示されない", async () => {

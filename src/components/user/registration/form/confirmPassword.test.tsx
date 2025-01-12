@@ -1,11 +1,18 @@
+import { errorMessages } from "@/lib/user/register/message";
+import type { FormProps } from "@/types/registration/registration";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useForm } from "react-hook-form";
-import { errorMessages } from "@/lib/user/register/message";
 import ComfirmpasswordInput from "./confirmPassword";
+import PasswordInput from "./password";
 
 const TestComponent = () => {
-  const { register, handleSubmit, getValues, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<FormProps>({
     defaultValues: {
       password: "",
       confirmPassword: "",
@@ -16,12 +23,8 @@ const TestComponent = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="password" {...register("password")} placeholder="パスワード" />
-      <ComfirmpasswordInput
-        register={register as any} // 型エラーを無視
-        errors={errors}
-        getValues={getValues as any} // 型エラーを無視
-      />
+      <PasswordInput register={register} errors={errors} />
+      <ComfirmpasswordInput register={register} errors={errors} getValues={getValues} />
       <button type="submit">登録</button>
     </form>
   );
@@ -30,12 +33,12 @@ const TestComponent = () => {
 describe("ComfirmpasswordInput コンポーネントのテスト", () => {
   it("パスワードと一致していればエラーにならない", async () => {
     render(<TestComponent />);
-    const passwordInput = screen.getByPlaceholderText("パスワード");
+    const passwordInput = screen.getByLabelText("パスワード");
     const confirmPasswordInput = screen.getByLabelText("パスワード確認");
     const submitButton = screen.getByText("登録");
 
-    await userEvent.type(passwordInput, "password123");
-    await userEvent.type(confirmPasswordInput, "password123");
+    await userEvent.type(passwordInput, "123456");
+    await userEvent.type(confirmPasswordInput, "123456");
     await userEvent.click(submitButton);
 
     expect(screen.queryByText(errorMessages.Comfirmpassword.confirm)).toBeNull();
@@ -43,12 +46,12 @@ describe("ComfirmpasswordInput コンポーネントのテスト", () => {
 
   it("パスワードと一致しない場合はエラーメッセージが表示される", async () => {
     render(<TestComponent />);
-    const passwordInput = screen.getByPlaceholderText("パスワード");
+    const passwordInput = screen.getByLabelText("パスワード");
     const confirmPasswordInput = screen.getByLabelText("パスワード確認");
     const submitButton = screen.getByText("登録");
 
-    await userEvent.type(passwordInput, "password123");
-    await userEvent.type(confirmPasswordInput, "differentPassword");
+    await userEvent.type(passwordInput, "123456");
+    await userEvent.type(confirmPasswordInput, "654321");
     await userEvent.click(submitButton);
 
     expect(screen.getByText(errorMessages.Comfirmpassword.confirm)).toBeInTheDocument();

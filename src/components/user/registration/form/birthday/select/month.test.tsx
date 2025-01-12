@@ -6,9 +6,7 @@ describe("Monthコンポーネントのテスト", () => {
     const setMonth = jest.fn();
     render(<Month month="" setMonth={setMonth} />);
     for (let i = 1; i <= 12; i++) {
-      expect(
-        screen.getByRole("option", { name: i.toString() })
-      ).toBeInTheDocument();
+      expect(screen.getByRole("option", { name: i.toString() })).toBeInTheDocument();
     }
   });
   test("日付が選択されたとき、setDayが呼ばれること", () => {

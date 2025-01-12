@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Day from "./day";
 
 describe("Dayコンポーネントのテスト", () => {
@@ -6,9 +6,7 @@ describe("Dayコンポーネントのテスト", () => {
     const setDay = jest.fn();
     render(<Day day="15" setDay={setDay} />);
     for (let i = 1; i <= 31; i++) {
-      expect(
-        screen.getByRole("option", { name: i.toString() })
-      ).toBeInTheDocument();
+      expect(screen.getByRole("option", { name: i.toString() })).toBeInTheDocument();
     }
   });
 

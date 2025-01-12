@@ -1,7 +1,7 @@
-import type { FormProps } from "@/types/registration/registration";
-import styles from "./Input.module.css";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { errorMessages } from "@/lib/user/register/message";
+import type { FormProps } from "@/types/registration/registration";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import styles from "./Input.module.css";
 
 interface InputProps {
   register: UseFormRegister<FormProps>;
@@ -21,10 +21,14 @@ const EmailInput = ({ register, errors }: InputProps) => {
       </dt>
       <dd>
         <input
-          type="email"
+          type="text"
           id="email"
           {...register("email", {
             required: errorMessages.email.require,
+            pattern: {
+              value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+              message: errorMessages.email.pattern,
+            },
           })}
           name="email"
         />

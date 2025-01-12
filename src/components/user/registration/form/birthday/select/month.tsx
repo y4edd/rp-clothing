@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import styles from "./month.module.css";
 
 interface MonthProps {
@@ -9,7 +9,6 @@ interface MonthProps {
 const Month = ({ month, setMonth }: MonthProps) => {
   const today = new Date();
   const currentMonth = today.getMonth() + 1;
-  console.log(currentMonth)
   const monthList: number[] = [];
   for (let i = 1; i <= 12; i++) {
     monthList.push(i);
