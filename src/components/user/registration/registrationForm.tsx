@@ -2,51 +2,58 @@
 
 import type { FormProps } from "@/types/registration/registration";
 import { useState } from "react";
-import Birthday from "./form/birthday";
-import Input from "./form/input";
+import { useForm } from "react-hook-form";
+import Birthday from "./form/birthday/birthday";
+import ComfirmpasswordInput from "./form/confirmPassword";
+import EmailInput from "./form/email";
+import NameInput from "./form/name";
+import PasswordInput from "./form/password";
 import styles from "./registrationForm.module.css";
 
 const RegistrationForm = () => {
-  const [formArray, setFormArray] = useState<FormProps>({
-    name: "",
-    email: "",
-    birthday: "",
-    password: "",
-    confirmPassword: "",
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm<FormProps>({
+    defaultValues: {
+      name: "",
+      email: "",
+      birthday: undefined,
+      password: "",
+      confirmPassword: "",
+    },
   });
 
+  //BirthdayのState管理
+  const [year, setYear] = useState("");
+  const [month, setMonth] = useState("");
+  const [day, setDay] = useState("");
+
+  const onSubmit = (data: FormProps) => {
+    const birthdayValue = new Date(`${year}-${month}-${day}`);
+    setValue("birthday", birthdayValue);
+    console.log(data);
+  };
+
   return (
-    <form className={styles.form}>
-      <Input
-        title="ユーザー名"
-        type="text"
-        name="name"
-        text={formArray.name}
-        setFormArray={setFormArray}
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <NameInput register={register} errors={errors} />
+      <EmailInput register={register} errors={errors} />
+      <Birthday
+        year={year}
+        setYear={setYear}
+        month={month}
+        setMonth={setMonth}
+        day={day}
+        setDay={setDay}
       />
-      <Input
-        title="メールアドレス"
-        type="email"
-        name="email"
-        text={formArray.email}
-        setFormArray={setFormArray}
-      />
-      <Birthday setFormArray={setFormArray} name="birthday" />
-      <Input
-        title="パスワード"
-        type="password"
-        name="password"
-        text={formArray.password}
-        setFormArray={setFormArray}
-      />
-      <Input
-        title="パスワード確認"
-        type="password"
-        name="confirmPassword"
-        text={formArray.confirmPassword}
-        setFormArray={setFormArray}
-      />
+      <PasswordInput register={register} errors={errors} />
+      <ComfirmpasswordInput register={register} errors={errors} getValues={getValues} />
       {/* MEMO:ボタンは後から追加予定！ */}
+      <button type="submit">会員登録</button>
     </form>
   );
 };

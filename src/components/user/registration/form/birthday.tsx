@@ -1,62 +1,38 @@
 "use client";
-
-import type { FormProps } from "@/types/registration/registration";
-import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import styles from "./birthday.module.css";
-
+import { Dispatch, SetStateAction } from "react";
+import Year from "./birthdaySelect/year";
+import Month from "./birthdaySelect/month";
+import Day from "./birthdaySelect/day";
 interface BirthdayProps {
-  setFormArray: Dispatch<SetStateAction<FormProps>>;
-  name: string;
+  year: string;
+  setYear: Dispatch<SetStateAction<string>>;
+  month: string;
+  setMonth: Dispatch<SetStateAction<string>>;
+  day: string;
+  setDay: Dispatch<SetStateAction<string>>;
 }
 
-const Birthday = ({ setFormArray, name }: BirthdayProps) => {
-  const [year, setyear] = useState("");
-  const [month, setMonth] = useState("");
-  const [day, setDay] = useState("");
-
-  useEffect(() => {
-    setFormArray((formItem) => ({
-      ...formItem,
-      [name]: `${year}年${month}月${day}日`,
-    }));
-  }, [year, month, day, name, setFormArray]);
-
+const Birthday = ({
+  year,
+  month,
+  day,
+  setYear,
+  setMonth,
+  setDay,
+}: BirthdayProps) => {
   return (
     <dl className={styles.table}>
       <dt>生年月日</dt>
       <div className={styles.birthdayForm}>
         <dd className={styles.birthdayYear}>
-          <input
-            type="text"
-            name={name}
-            value={year}
-            id="birthdayYear"
-            maxLength={4}
-            onChange={(e) => setyear(e.target.value)}
-          />
-          <label htmlFor="birthdayYear">年</label>
+          <Year year={year} setYear={setYear} />
         </dd>
         <dd className={styles.birthdayMonth}>
-          <input
-            type="text"
-            name={name}
-            value={month}
-            id="birthdayMonth"
-            maxLength={2}
-            onChange={(e) => setMonth(e.target.value)}
-          />
-          <label htmlFor="birthdayMonth">月</label>
+          <Month month={month} setMonth={setMonth} />
         </dd>
         <dd className={styles.birthdayDate}>
-          <input
-            type="text"
-            name={name}
-            value={day}
-            id="birthdayDate"
-            maxLength={2}
-            onChange={(e) => setDay(e.target.value)}
-          />
-          <label htmlFor="birthdayDate">日</label>
+          <Day day={day} setDay={setDay} />
         </dd>
       </div>
       <p className={styles.attention}>

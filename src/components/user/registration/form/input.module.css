@@ -21,3 +21,10 @@
   margin-top: 10px;
   color: #888383;
 }
+
+/* エラー */
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-left: 10px;
+}

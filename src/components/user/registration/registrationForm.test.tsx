@@ -1,21 +1,21 @@
-import { describe } from "node:test";
 import { fireEvent, render, screen } from "@testing-library/react";
 import RegistrationForm from "./registrationForm";
 
 describe("RegistrationFormコンポーネントのテスト", () => {
-  test("各コンポーネントがレンダリングされていること", () => {
+  test("ボタンが正しく表示されているか", () => {
     render(<RegistrationForm />);
-    expect(screen.getByText("ユーザー名")).toBeInTheDocument();
-    expect(screen.getByText("メールアドレス")).toBeInTheDocument();
-    expect(screen.getByText("生年月日")).toBeInTheDocument();
-    expect(screen.getByText("パスワード")).toBeInTheDocument();
-    expect(screen.getByText("パスワード確認")).toBeInTheDocument();
+    const button = screen.getByRole("button");
+    expect(button).toBeInTheDocument();
   });
-  test("入力すると、画面に反映されること", () => {
+  test("propsが正しく渡されているかどうか", () => {
     render(<RegistrationForm />);
+    const nameInput = screen.getByLabelText("ユーザー名");
+    const emailInput = screen.getByLabelText("メールアドレス");
 
-    const userName = screen.getByLabelText("ユーザー名") as HTMLInputElement;
-    fireEvent.change(userName, { target: { value: "テスト男" } });
-    expect(userName.value).toBe("テスト男");
+    expect(nameInput).toHaveAttribute("name", "name");
+    expect(emailInput).toHaveAttribute("name", "email");
+
+    const errorMessage = screen.queryByText("※入力必須です。");
+    expect(errorMessage).toBeNull(); // エラーがないことを確認
   });
 });

@@ -1,7 +1,7 @@
 export interface FormProps {
   name: string;
   email: string;
-  birthday: string;
+  birthday: Date;
   password: string;
   confirmPassword: string;
 }
