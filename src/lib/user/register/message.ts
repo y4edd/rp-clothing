@@ -12,7 +12,7 @@ export const errorMessages = {
     maxLength: "※20文字以内で入力してください。",
     minLength: "※6文字以上で入力してください。",
   },
-  Comfirmpassword: {
+  ConfirmPassword: {
     confirm: "※パスワードが一致しません。",
   },
 };
