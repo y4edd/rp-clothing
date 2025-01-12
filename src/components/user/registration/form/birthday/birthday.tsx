@@ -1,4 +1,3 @@
-"use client";
 import type { Dispatch, SetStateAction } from "react";
 import styles from "./birthday.module.css";
 import Day from "./select/day";
@@ -13,7 +12,14 @@ interface BirthdayProps {
   setDay: Dispatch<SetStateAction<string>>;
 }
 
-const Birthday = ({ year, month, day, setYear, setMonth, setDay }: BirthdayProps) => {
+const Birthday = ({
+  year,
+  month,
+  day,
+  setYear,
+  setMonth,
+  setDay,
+}: BirthdayProps) => {
   return (
     <dl className={styles.table}>
       <dt>生年月日</dt>
