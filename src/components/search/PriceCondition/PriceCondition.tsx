@@ -1,3 +1,5 @@
+"use client";
+
 import { Action } from "@/types/type";
 import styles from "./PriceCondition.module.css";
 

@@ -1,3 +1,4 @@
+"use client";
 import { categories } from "@/utils/data/category";
 import Category from "../Category/Category";
 import styles from "./CategoryCondition.module.css";

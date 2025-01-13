@@ -32,14 +32,6 @@ const Header = () => {
           <CartButton />
         </div>
       </div>
-      {/* MEMO: 削除予定。
-      // ページコンポーネント毎にBreadListとPageTitleをインポートしpropsで渡してもらいます */}
-      <div>
-        <BreadList bread={[{ link: "/", title: "トップ" }]} />
-      </div>
-      <div>
-        <PageTitle title={"トップ"} />
-      </div>
     </>
   );
 };
