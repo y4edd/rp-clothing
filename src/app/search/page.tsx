@@ -3,7 +3,8 @@ import SearchModal from "./@modal/page";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import SearchResults from "@/components/search/SearchResults/SearchResults";
 
-const Search = ({ searchParamas }: { searchParams: Record<string, string> }) => {
+const Search = async({ searchParams }: { searchParams: Record<string, string> }) => {
+  if (!searchParams) return <p>Loading...</p>;
 
   return (
     <>
