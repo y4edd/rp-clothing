@@ -7,8 +7,6 @@ interface MonthProps {
 }
 
 const Month = ({ month, setMonth }: MonthProps) => {
-  const today = new Date();
-  const currentMonth = today.getMonth() + 1;
   const monthList: number[] = [];
   for (let i = 1; i <= 12; i++) {
     monthList.push(i);
@@ -20,7 +18,7 @@ const Month = ({ month, setMonth }: MonthProps) => {
         name="month"
         id="month"
         className={styles.monthSelect}
-        value={month || currentMonth.toString()}
+        value={month}
         onChange={(e) => setMonth(e.target.value)}
         data-testid="month-select"
       >

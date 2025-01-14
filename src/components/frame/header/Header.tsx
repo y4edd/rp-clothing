@@ -2,8 +2,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Link from "next/link";
-import BreadList from "../breadList/BreadList";
-import PageTitle from "../pageTitle/PageTitle";
 import styles from "./Header.module.css";
 import WordSearch from "./wordSearch/WordSearch";
 
@@ -39,14 +37,6 @@ const Header = () => {
             <ShoppingCartIcon />
           </button>
         </div>
-      </div>
-      {/* MEMO: 削除予定。
-      // ページコンポーネント毎にBreadListとPageTitleをインポートしpropsで渡してもらいます */}
-      <div>
-        <BreadList bread={[{ link: "/", title: "トップ" }]} />
-      </div>
-      <div>
-        <PageTitle title={"トップ"} />
       </div>
     </>
   );

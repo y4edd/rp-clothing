@@ -1,16 +1,16 @@
 "use client";
 
-import type { FormProps } from "@/types/registration/registration";
+import type { FormProps } from "@/types/user/user";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Birthday from "./form/birthday/birthday";
-import ComfirmpasswordInput from "./form/confirmPassword";
-import EmailInput from "./form/email";
-import NameInput from "./form/name";
-import PasswordInput from "./form/password";
-import styles from "./registrationForm.module.css";
+import styles from "./registerForm.module.css";
+import Name from "./form/name/name";
+import Email from "./form/email/email";
+import Password from "./form/password/password";
+import ConfirmPassword from "./form/confirmPassword/confirmPassword";
 
-const RegistrationForm = () => {
+const RegisterForm = () => {
   const {
     register,
     handleSubmit,
@@ -40,8 +40,8 @@ const RegistrationForm = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <NameInput register={register} errors={errors} />
-      <EmailInput register={register} errors={errors} />
+      <Name register={register} errors={errors} />
+      <Email register={register} errors={errors} />
       <Birthday
         year={year}
         setYear={setYear}
@@ -50,12 +50,16 @@ const RegistrationForm = () => {
         day={day}
         setDay={setDay}
       />
-      <PasswordInput register={register} errors={errors} />
-      <ComfirmpasswordInput register={register} errors={errors} getValues={getValues} />
+      <Password register={register} errors={errors} />
+      <ConfirmPassword
+        register={register}
+        errors={errors}
+        getValues={getValues}
+      />
       {/* MEMO:ボタンは後から追加予定！ */}
       <button type="submit">会員登録</button>
     </form>
   );
 };
 
-export default RegistrationForm;
+export default RegisterForm;

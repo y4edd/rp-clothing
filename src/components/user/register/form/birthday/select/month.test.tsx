@@ -6,10 +6,12 @@ describe("Monthコンポーネントのテスト", () => {
     const setMonth = jest.fn();
     render(<Month month="" setMonth={setMonth} />);
     for (let i = 1; i <= 12; i++) {
-      expect(screen.getByRole("option", { name: i.toString() })).toBeInTheDocument();
+      expect(
+        screen.getByRole("option", { name: i.toString() })
+      ).toBeInTheDocument();
     }
   });
-  test("日付が選択されたとき、setDayが呼ばれること", () => {
+  test("日付が選択されたとき、setMonthが呼ばれること", () => {
     const setMonth = jest.fn();
     render(<Month month="" setMonth={setMonth} />);
     const select = screen.getByLabelText("月");
@@ -19,12 +21,4 @@ describe("Monthコンポーネントのテスト", () => {
     expect(setMonth).toHaveBeenCalledWith("1");
   });
 
-  test("dayプロパティが空の場合、現在の日付がデフォルトで選択されること", () => {
-    const setMonth = jest.fn();
-    const today = new Date().getMonth() + 1;
-    render(<Month month="" setMonth={setMonth} />);
-
-    const select = screen.getByLabelText("月") as HTMLSelectElement;
-    expect(select.value).toBe(today.toString());
-  });
 });

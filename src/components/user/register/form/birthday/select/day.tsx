@@ -7,8 +7,6 @@ interface DayProps {
 }
 
 const Day = ({ day, setDay }: DayProps) => {
-  const today = new Date();
-  const currentDay = today.getDate();
   const dayList: number[] = [];
   for (let i = 1; i <= 31; i++) {
     dayList.push(i);
@@ -20,7 +18,7 @@ const Day = ({ day, setDay }: DayProps) => {
         name="day"
         id="day"
         className={styles.daySelect}
-        value={day || currentDay.toString()}
+        value={day}
         onChange={(e) => setDay(e.target.value)}
         data-testid="day-select"
       >

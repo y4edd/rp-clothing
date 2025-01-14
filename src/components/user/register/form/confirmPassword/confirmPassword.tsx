@@ -1,7 +1,11 @@
-import { errorMessages } from "@/lib/user/register/message";
-import type { FormProps } from "@/types/registration/registration";
-import type { FieldErrors, UseFormGetValues, UseFormRegister } from "react-hook-form";
-import styles from "./input.module.css";
+import { errorMessages } from "@/lib/user/register/errorMessage";
+import type { FormProps } from "@/types/user/user";
+import type {
+  FieldErrors,
+  UseFormGetValues,
+  UseFormRegister,
+} from "react-hook-form";
+import styles from "../input.module.css";
 
 interface InputProps {
   register: UseFormRegister<FormProps>;
@@ -9,7 +13,7 @@ interface InputProps {
   getValues: UseFormGetValues<FormProps>;
 }
 
-const ConfirmPasswordInput = ({ register, errors, getValues }: InputProps) => {
+const ConfirmPassword = ({ register, errors, getValues }: InputProps) => {
   return (
     <dl className={styles.table}>
       <dt>
@@ -26,7 +30,8 @@ const ConfirmPasswordInput = ({ register, errors, getValues }: InputProps) => {
           id="confirmPassword"
           {...register("confirmPassword", {
             validate: (value) =>
-              value === getValues("password") || errorMessages.ConfirmPassword.confirm,
+              value === getValues("password") ||
+              errorMessages.ConfirmPassword.confirm,
           })}
           name="confirmPassword"
         />
@@ -35,4 +40,4 @@ const ConfirmPasswordInput = ({ register, errors, getValues }: InputProps) => {
   );
 };
 
-export default ConfirmPasswordInput;
+export default ConfirmPassword;

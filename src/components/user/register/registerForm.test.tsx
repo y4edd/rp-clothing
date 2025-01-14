@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import RegistrationForm from "./registrationForm";
+import { render, screen } from "@testing-library/react";
+import RegistrationForm from "./registerForm";
 
 describe("RegistrationFormコンポーネントのテスト", () => {
   test("ボタンが正しく表示されているか", () => {
