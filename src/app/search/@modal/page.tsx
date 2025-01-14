@@ -2,7 +2,6 @@
 "use client";
 
 import Modal from "@/components/Modal/Modal";
-import Conditions from "@/components/search/Conditions/Conditions";
 import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
 import styles from "./page.module.css";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,6 +9,10 @@ import { State } from "@/types/type";
 import { Action } from "@/types/type";
 import { useReducer, useState } from "react";
 import dynamic from "next/dynamic";
+import FavConditions from "@/components/search/FavConditions/FavConditions";
+import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
+import CategoryCondition from "@/components/search/CategoryCondition/CategoryCondition";
+import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
@@ -61,7 +64,10 @@ const SearchModalComponent = () => {
       <div className={styles.modalContent}>
         <h2 className={styles.modalTitle}>検索条件</h2>
         <div className={styles.searchConditions}>
-          <Conditions state={state} dispatch={dispatch} />
+          <FavConditions />
+          <PriceCondition minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch}/>
+          <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch}/>
+          <KeyWordCondition />
           <SearchStartButton onSearch={handleSearch} />
         </div>
       </div>

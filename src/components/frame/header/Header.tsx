@@ -3,8 +3,6 @@ import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteB
 import SearchButton from "@/components/search/SearchButton/SearchButton";
 import Link from "next/link";
 import WordSearch from "../../search/WordSearch/WordSearch";
-import BreadList from "../breadList/BreadList";
-import PageTitle from "../pageTitle/PageTitle";
 import styles from "./Header.module.css";
 
 const Header = () => {

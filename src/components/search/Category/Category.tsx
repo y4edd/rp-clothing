@@ -4,10 +4,11 @@ type CategoryProps = {
   id: string;
   text: string;
   selectedCategory: string;
-  onCategoryChange: () => void;
+  onCategoryChange: (e:React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Category = ({ id, text, selectedCategory, onCategoryChange }: CategoryProps) => {
+  console.log(selectedCategory);
   return (
     <div className={styles.categoryEach}>
       <input

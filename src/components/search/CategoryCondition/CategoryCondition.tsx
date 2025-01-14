@@ -3,6 +3,7 @@ import { categories } from "@/utils/data/category";
 import Category from "../Category/Category";
 import styles from "./CategoryCondition.module.css";
 import { Action } from "@/types/type";
+import { useCallback } from "react";
 
 type Props = {
   selectedCategory: string;
@@ -10,6 +11,14 @@ type Props = {
 };
 
 const CategoryCondition = ({ selectedCategory, dispatch }: Props) => {
+  // 関数にメモ化を行い、不要な再レンダリングを防ぐ
+  const handleCategoryChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: "SET_CATEGORY", payload: e.target.value });
+    },
+    [dispatch]
+  );
+
   return (
     <div className={styles.categoryCondition}>
       <h3 className={styles.title}>カテゴリ</h3>
@@ -20,7 +29,7 @@ const CategoryCondition = ({ selectedCategory, dispatch }: Props) => {
             id={category.id}
             text={category.text}
             selectedCategory={selectedCategory}
-            onCategoryChange={() => dispatch({ type: "SET_CATEGORY", payload: category.id })}
+            onCategoryChange={handleCategoryChange}
           />
         ))}
       </div>
