@@ -3,7 +3,7 @@ import SearchModal from "./@modal/page";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import SearchResults from "@/components/search/SearchResults/SearchResults";
 
-const Search = () => {
+const Search = ({ searchParamas }: { searchParams: Record<string, string> }) => {
 
   return (
     <>
@@ -13,8 +13,8 @@ const Search = () => {
       {/* クライアント側で検索条件を変更するモーダル */}
       <SearchModal />
 
-      {/* 検索結果の表示（サーバー側で描画） */}
-      <SearchResults />
+      {/* 検索結果の表示（サーバー側で検索・描画） */}
+      <SearchResults searchParams={searchParams} />
     </>
   );
 };
