@@ -3,18 +3,20 @@ import { categories } from "@/utils/data/category";
 import Category from "../Category/Category";
 import styles from "./CategoryCondition.module.css";
 import { Action } from "@/types/type";
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 
 type Props = {
   selectedCategory: string;
   dispatch: (action: Action) => void;
 };
 
-const CategoryCondition = ({ selectedCategory, dispatch }: Props) => {
+const CategoryCondition = React.memo(({ selectedCategory, dispatch }: Props) => {
+  console.log("CategoryCondition が再レンダリングされました");
+
   // 関数にメモ化を行い、不要な再レンダリングを防ぐ
   const handleCategoryChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: "SET_CATEGORY", payload: e.target.value });
+      dispatch({ type: "SET_CATEGORY", payload: e.target.value });
     },
     [dispatch]
   );
@@ -35,6 +37,6 @@ const CategoryCondition = ({ selectedCategory, dispatch }: Props) => {
       </div>
     </div>
   );
-};
+});
 
 export default CategoryCondition;

@@ -1,4 +1,3 @@
-// 検索モーダル
 "use client";
 
 import Modal from "@/components/Modal/Modal";
@@ -15,6 +14,7 @@ import CategoryCondition from "@/components/search/CategoryCondition/CategoryCon
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
 
 const reducer = (state: State, action: Action) => {
+  console.log(`Action: ${action.type}, Payload: ${action.payload}`);
   switch (action.type) {
     case "SET_MIN_PRICE":
       return { ...state, minPrice: action.payload };
@@ -29,20 +29,23 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
+// 検索条件を管理する初期化関数
+const initialState = (searchParams: URLSearchParams) => ({
+  minPrice: searchParams.get("minPrice") || "",
+  maxPrice: searchParams.get("maxPrice") || "",
+  selectedCategory: searchParams.get("category") || "",
+  keyWord: searchParams.get("keyword") || "",
+});
+
 const SearchModalComponent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  // useReducer の第3引数に初期化関数を渡す
+  const [state, dispatch] = useReducer(reducer, searchParams, initialState);
+
   // モーダルの開閉状態
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // "useReducer" で検索条件を管理
-  const [state, dispatch] = useReducer(reducer, {
-    minPrice: searchParams.get("minPrice") || "",
-    maxPrice: searchParams.get("maxPrice") || "",
-    selectedCategory: searchParams.get("category") || "",
-    keyWord: searchParams.get("keyword") || "",
-  });
 
   // 検索ボタンを押した時にURLを更新
   const handleSearch = () => {
