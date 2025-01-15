@@ -3,7 +3,7 @@ import Register from "./Register";
 
 describe("RegistrationFormコンポーネントのテスト", () => {
   test("ボタンが正しく表示されているか", () => {
-    render(<Register/>);
+    render(<Register />);
     const button = screen.getByRole("button");
     expect(button).toBeInTheDocument();
   });
@@ -16,6 +16,6 @@ describe("RegistrationFormコンポーネントのテスト", () => {
     expect(emailInput).toHaveAttribute("name", "email");
 
     const errorMessage = screen.queryByText("※入力必須です。");
-    expect(errorMessage).toBeNull(); 
+    expect(errorMessage).toBeNull();
   });
 });

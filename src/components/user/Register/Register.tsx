@@ -7,7 +7,7 @@ import ConfirmPassword from "./Form/ConfirmPassword/ConfirmPassword";
 import Email from "./Form/Email/Email";
 import Name from "./Form/Name/Name";
 import Password from "./Form/Password/Password";
-import styles from "./Register.module.css"
+import styles from "./Register.module.css";
 
 const today = new Date();
 const currentYear = today.getFullYear();
@@ -46,7 +46,11 @@ const Register = () => {
       <Email register={register} errors={errors} />
       <Birthday register={register} />
       <Password register={register} errors={errors} />
-      <ConfirmPassword register={register} errors={errors} getValues={getValues} />
+      <ConfirmPassword
+        register={register}
+        errors={errors}
+        getValues={getValues}
+      />
       {/* MEMO:ボタンは後から追加予定！ */}
       <button type="submit">会員登録</button>
     </form>
