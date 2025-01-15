@@ -10,7 +10,6 @@ type CategoryProps = {
 
 const Category = React.memo(
   ({ id, text, selectedCategory, onCategoryChange }: CategoryProps) => {
-    console.log(`Category.tsx: ${id}`); // デバッグ用
     return (
       <div className={styles.categoryEach}>
         <input

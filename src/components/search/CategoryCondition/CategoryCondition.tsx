@@ -11,8 +11,6 @@ type Props = {
 };
 
 const CategoryCondition = React.memo(({ selectedCategory, dispatch }: Props) => {
-  console.log("CategoryCondition が再レンダリングされました");
-
   // 関数にメモ化を行い、不要な再レンダリングを防ぐ
   const handleCategoryChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

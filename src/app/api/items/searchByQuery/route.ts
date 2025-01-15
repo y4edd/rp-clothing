@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async(req: NextRequest,res: NextResponse) => {
+	console.log(req);
   const { searchParams } = new URL(req.url);
   const keyWord = searchParams.get("keyWord") || "";
-  const category = searchParams.get("category") || "";
+  const category = searchParams.get("selectedCategory") || "";
 
-	const appId = process.env.RAKUTEN_API_ID;
+  const appId = process.env.RAKUTEN_API_ID;
 
 	if(!appId) {
 		return NextResponse.json({ message: "RAKUTEN_AP_IDが未設定です" },{ status: 500 });
@@ -30,7 +31,7 @@ export const GET = async(req: NextRequest,res: NextResponse) => {
 	}
 
 	rakutenApiUrl += `&${params.toString()}`;
-
+	console.log(rakutenApiUrl);
   try{
     const res = await fetch(rakutenApiUrl);
     if(!res.ok) {
