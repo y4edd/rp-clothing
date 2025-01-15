@@ -3,7 +3,7 @@ import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import RegisterForm from "@/components/user/Register/RegisterForm";
 import styles from "./page.module.css";
 
-const Registration = () => {
+const Register = () => {
   return (
     <>
       <BreadList
@@ -20,4 +20,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Register;
