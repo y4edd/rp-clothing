@@ -1,0 +1,42 @@
+.categoryEach {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+
+/* 既存のラジオボタンを非表示に */
+.categoryEach > input[type="radio"] {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  appearance: none;
+  background: #ffffff;
+  border: solid 2px #000000;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+/* チェック時のスタイル */
+.categoryEach > input[type="radio"]:checked {
+  background-color: #000000;
+}
+
+/* チェック時のマーク（擬似要素） */
+.categoryEach > input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ラベルのスタイル */
+.categoryEach > label {
+  cursor: pointer;
+  color: #333;
+  margin-left: 10px;
+}

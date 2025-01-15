@@ -1,0 +1,22 @@
+.favCondition {
+  margin-bottom: 20px;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.favConditionsContent {
+  margin-left: 1rem;
+}
+
+.favConditions {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.editButton {
+  text-align: center;
+}

@@ -1,0 +1,11 @@
+.modalContent {
+  flex-direction: column;
+  margin: 10px 20px;
+  padding-bottom: 40px;
+}
+
+.searchConditions {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 40px;
+}
