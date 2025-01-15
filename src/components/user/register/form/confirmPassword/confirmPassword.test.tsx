@@ -24,11 +24,7 @@ const TestComponent = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Password register={register} errors={errors} />
-      <ConfirmPassword
-        register={register}
-        errors={errors}
-        getValues={getValues}
-      />
+      <ConfirmPassword register={register} errors={errors} getValues={getValues} />
       <button type="submit">登録</button>
     </form>
   );
@@ -45,9 +41,7 @@ describe("ConfirmPasswordInput コンポーネントのテスト", () => {
     await userEvent.type(confirmPasswordInput, "123456");
     await userEvent.click(submitButton);
 
-    expect(
-      screen.queryByText(errorMessages.ConfirmPassword.confirm)
-    ).toBeNull();
+    expect(screen.queryByText(errorMessages.ConfirmPassword.confirm)).toBeNull();
   });
 
   test("パスワードと一致しない場合はエラーメッセージが表示される", async () => {
@@ -60,8 +54,6 @@ describe("ConfirmPasswordInput コンポーネントのテスト", () => {
     await userEvent.type(confirmPasswordInput, "654321");
     await userEvent.click(submitButton);
 
-    expect(
-      screen.getByText(errorMessages.ConfirmPassword.confirm)
-    ).toBeInTheDocument();
+    expect(screen.getByText(errorMessages.ConfirmPassword.confirm)).toBeInTheDocument();
   });
 });

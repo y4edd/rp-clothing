@@ -6,9 +6,7 @@ describe("Monthコンポーネントのテスト", () => {
     const register = jest.fn();
     render(<Month register={register} />);
     for (let i = 1; i <= 12; i++) {
-      expect(
-        screen.getByRole("option", { name: i.toString() })
-      ).toBeInTheDocument();
+      expect(screen.getByRole("option", { name: i.toString() })).toBeInTheDocument();
     }
   });
 });

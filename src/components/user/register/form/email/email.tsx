@@ -26,11 +26,10 @@ const Email = ({ register, errors }: InputProps) => {
           {...register("email", {
             required: errorMessages.email.require,
             validate: {
-              noSpaces: (value) =>
-                !/\s/.test(value) || errorMessages.email.patternSpace,
+              noSpaces: (value) => !/\s/.test(value) || errorMessages.email.patternSpace,
               isEmailFormat: (value) =>
                 /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-                  value
+                  value,
                 ) || errorMessages.email.patternFormat,
             },
           })}
