@@ -11,7 +11,6 @@ import styles from "./RegisterForm.module.css";
 
 const today = new Date();
 const currentYear = today.getFullYear();
-console.log(currentYear);
 
 const RegisterForm = () => {
   const {
