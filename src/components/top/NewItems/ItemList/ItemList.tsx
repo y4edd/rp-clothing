@@ -5,7 +5,7 @@ interface Props {
   newItems: NewItemsModel[] | null;
 }
 const ItemList = ({ newItems }: Props) => {
-    // MEMO:エラー表示コンポーネント作成する？
+  // MEMO:エラー表示コンポーネント作成する？
   if (!newItems) return <p>データを取得できませんでした。</p>;
 
   return (
