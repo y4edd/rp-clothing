@@ -1,15 +1,14 @@
+import type { NewItemsModel } from "@/app/(top)/page";
 import Item from "../Item/Item";
 import styles from "./NewItems.module.css";
 
-export interface NewItemsModel {
-  itemName: string;
-  itemCode: string;
-  imageUrl: string;
-  itemPrice: number;
+interface Props {
+  newItems: NewItemsModel[] | null;
 }
 
-const NewItems = async () => {
-  const newItems: NewItemsModel[] |null = await getNewItems();
+const NewItems = ({ newItems }: Props) => {
+  // MEMO:エラー表示コンポーネント作成する？
+  // MEMO:Ladingコンポーネントもする？
   if(!newItems)return <p>データを取得できませんでした。</p>
   return (
     <div className={styles.container}>
@@ -30,19 +29,3 @@ const NewItems = async () => {
 };
 
 export default NewItems;
-
-const getNewItems = async () => {
-  try {
-    const response = await fetch("http://localhost:3000/api/items/newItems", {
-      next: { revalidate: 3600 },//１時間で再検証
-    });
-    if (!response.ok) {
-      throw new Error("データを取得できませんでした。");
-    }
-    const items = await response.json();
-    return items.items;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-};
