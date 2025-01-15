@@ -1,6 +1,6 @@
 type ButtonProps = {
   type?: "button" | "submit" | "reset";
-  onClick?: () => void;
+  onClick?: () => void | ((e?: React.MouseEvent<HTMLButtonElement>) => void);
   className?: string;
   text: string;
 };

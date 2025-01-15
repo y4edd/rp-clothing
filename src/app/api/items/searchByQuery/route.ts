@@ -31,7 +31,7 @@ export const GET = async(req: NextRequest,res: NextResponse) => {
 	}
 
 	rakutenApiUrl += `&${params.toString()}`;
-	console.log(rakutenApiUrl);
+
   try{
     const res = await fetch(rakutenApiUrl);
     if(!res.ok) {
@@ -44,4 +44,3 @@ export const GET = async(req: NextRequest,res: NextResponse) => {
     return NextResponse.json({ message: "サーバーエラーが発生しました"}, { status: 500 })
   }
 };
-

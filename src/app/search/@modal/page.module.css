@@ -9,3 +9,8 @@
   flex-direction: column;
   margin: 0px 40px;
 }
+
+.errorMessage{
+  color: #ff0000;
+  text-align: center;
+}
