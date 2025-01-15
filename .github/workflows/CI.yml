@@ -35,7 +35,7 @@ jobs:
 
     # Next.js のビルドを実行して、アプリケーションをビルドできるか確認する
     - name: Build
-      run: yarn build --no-chache
+      run: yarn build --no-cache
 
     # ビルドが成功したか確認する（`.next` フォルダができているかをチェック）
     - name: Verify Build Artifacts
