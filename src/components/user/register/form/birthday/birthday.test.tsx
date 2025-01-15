@@ -8,9 +8,7 @@ describe("BirthDayコンポーネントのテスト", () => {
   test("入力例が明記されていること", () => {
     render(<Birthday register={register} />);
     expect(screen.getByText(/※後から変更はできません！/)).toBeInTheDocument();
-    expect(
-      screen.getByText(/お間違い無いようにご注意ください/)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/お間違い無いようにご注意ください/)).toBeInTheDocument();
   });
   test("各コンポーネントが正しくレンダリングされていること", () => {
     render(<Birthday register={register} />);
