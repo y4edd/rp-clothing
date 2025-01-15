@@ -39,15 +39,23 @@ const SearchResults = async ({ searchParams }: { searchParams?: Record<string, a
     return <p>データが取得できませんでした。</p>;
   }
 
-  data.Items.map((itemObj:any) => console.log(itemObj.Item));
+  data.Items.map((itemObj:any) => {
+    console.log(itemObj.Item)
+  });
 
   return (
     <div className={styles.container}>
       <h2 className={styles.contentTitle}>検索結果</h2>
       <div className={styles.gridItems}>
-        {/* {data.Items.map((item: any, index: number) => (
-          <Item key={index} linkPath={item.Item.itemUrl} />
-        ))} */}
+        {data.Items.map((itemObj: any, index: number) => ( 
+          <Item 
+          key={index} 
+          linkPath={"/"} 
+          src={itemObj.Item.mediumImageUrls?.[0] || null} 
+          itemName={itemObj.Item.itemName} 
+          itemPrice={itemObj.Item.itemPrice} 
+          />        
+        ))}
       </div>
     </div>
   );

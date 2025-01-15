@@ -17,7 +17,7 @@ export const GET = async(req: NextRequest,res: NextResponse) => {
 	// クエリパラメータを楽天APIに適用する
 	const params = new URLSearchParams({
 		format: "json",
-		hits: "30",
+		hits: "15",
 	});
 
 	if(keyWord) {
