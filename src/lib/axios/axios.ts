@@ -1,16 +1,7 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 
-// 基本的なaxiosの設定
-const baseAxios = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000", // ベースURL
-  timeout: 10000, // タイムアウト（ミリ秒）
-  headers: {
-    "Content-Type": "application/json", // JSON形式のデータ送信を指定
-  },
-});
-export default baseAxios;
-
+// MEMO:エラーハンドリングを関数化してみたが、使えなさそうだったら消します。
 // axiosのエラーハンドリング用関数
 export const handleAxiosError = (error: unknown) => {
   if (axios.isAxiosError(error)) {
