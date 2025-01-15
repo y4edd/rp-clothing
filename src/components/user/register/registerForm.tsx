@@ -7,7 +7,7 @@ import ConfirmPassword from "./Form/ConfirmPassword/ConfirmPassword";
 import Email from "./Form/Email/Email";
 import Name from "./Form/Name/Name";
 import Password from "./Form/Password/Password";
-import styles from "./registerForm.module.css";
+import styles from "./RegisterForm.module.css";
 
 const today = new Date();
 const currentYear = today.getFullYear();

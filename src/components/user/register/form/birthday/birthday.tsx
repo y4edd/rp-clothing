@@ -1,6 +1,6 @@
 import type { FormProps } from "@/types/user/user";
 import type { UseFormRegister } from "react-hook-form";
-import styles from "./birthday.module.css";
+import styles from "./Birthday.module.css";
 import Day from "./Select/Day";
 import Month from "./Select/Month";
 import Year from "./Select/Year";

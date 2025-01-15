@@ -1,7 +1,7 @@
 import { errorMessages } from "@/lib/user/register/errorMessage";
 import type { FormProps } from "@/types/user/user";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
-import styles from "../input.module.css";
+import styles from "../Input.module.css";
 
 interface InputProps {
   register: UseFormRegister<FormProps>;

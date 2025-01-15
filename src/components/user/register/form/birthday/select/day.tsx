@@ -1,6 +1,6 @@
 import type { FormProps } from "@/types/user/user";
 import type { UseFormRegister } from "react-hook-form";
-import styles from "./day.module.css";
+import styles from "./Day.module.css";
 
 interface DayProps {
   register: UseFormRegister<FormProps>;
