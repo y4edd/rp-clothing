@@ -1,14 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import RegistrationForm from "./RegisterForm";
+import RegisterForm from "./RegisterForm";
 
 describe("RegistrationFormコンポーネントのテスト", () => {
   test("ボタンが正しく表示されているか", () => {
-    render(<RegistrationForm />);
+    render(<RegisterForm />);
     const button = screen.getByRole("button");
     expect(button).toBeInTheDocument();
   });
   test("propsが正しく渡されているかどうか", () => {
-    render(<RegistrationForm />);
+    render(<RegisterForm />);
     const nameInput = screen.getByLabelText("ユーザー名");
     const emailInput = screen.getByLabelText("メールアドレス");
 
