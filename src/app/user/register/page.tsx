@@ -1,7 +1,7 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
-import styles from "./page.module.css";
 import RegisterForm from "@/components/user/Register/RegisterForm";
+import styles from "./page.module.css";
 
 const Register = () => {
   return (

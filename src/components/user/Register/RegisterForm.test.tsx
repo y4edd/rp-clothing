@@ -16,6 +16,6 @@ describe("RegistrationFormコンポーネントのテスト", () => {
     expect(emailInput).toHaveAttribute("name", "email");
 
     const errorMessage = screen.queryByText("※入力必須です。");
-    expect(errorMessage).toBeNull(); // エラーがないことを確認
+    expect(errorMessage).toBeNull(); 
   });
 });
