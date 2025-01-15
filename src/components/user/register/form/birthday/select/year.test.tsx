@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Year from "./year";
+import Year from "./Year";
 
 describe("Monthコンポーネントのテスト", () => {
   test("1~12の選択肢が表示されているか", () => {

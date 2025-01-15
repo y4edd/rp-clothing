@@ -2,11 +2,11 @@
 
 import type { FormProps } from "@/types/user/user";
 import { useForm } from "react-hook-form";
-import Birthday from "./form/birthday/birthday";
-import ConfirmPassword from "./form/confirmPassword/confirmPassword";
-import Email from "./form/email/email";
-import Name from "./form/name/name";
-import Password from "./form/password/password";
+import Birthday from "./Form/Birthday/Birthday";
+import ConfirmPassword from "./Form/ConfirmPassword/ConfirmPassword";
+import Email from "./Form/Email/Email";
+import Name from "./Form/Name/Name";
+import Password from "./Form/Password/Password";
 import styles from "./registerForm.module.css";
 
 const today = new Date();
@@ -47,7 +47,11 @@ const RegisterForm = () => {
       <Email register={register} errors={errors} />
       <Birthday register={register} />
       <Password register={register} errors={errors} />
-      <ConfirmPassword register={register} errors={errors} getValues={getValues} />
+      <ConfirmPassword
+        register={register}
+        errors={errors}
+        getValues={getValues}
+      />
       {/* MEMO:ボタンは後から追加予定！ */}
       <button type="submit">会員登録</button>
     </form>

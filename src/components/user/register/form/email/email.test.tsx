@@ -3,7 +3,7 @@ import type { FormProps } from "@/types/user/user";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useForm } from "react-hook-form";
-import Email from "./email";
+import Email from "./Email";
 
 const TestComponent = () => {
   const {
@@ -41,7 +41,9 @@ describe("EmailInput コンポーネントのテスト", () => {
     await userEvent.type(submitButton, "aaa@");
     await userEvent.click(submitButton);
 
-    expect(screen.getByText(errorMessages.email.patternFormat)).toBeInTheDocument();
+    expect(
+      screen.getByText(errorMessages.email.patternFormat)
+    ).toBeInTheDocument();
   });
 
   test("スペースがある場合、エラーメッセージが表示される", async () => {
@@ -51,7 +53,9 @@ describe("EmailInput コンポーネントのテスト", () => {
     await userEvent.type(submitButton, "aaa@ ");
     await userEvent.click(submitButton);
 
-    expect(screen.getByText(errorMessages.email.patternSpace)).toBeInTheDocument();
+    expect(
+      screen.getByText(errorMessages.email.patternSpace)
+    ).toBeInTheDocument();
   });
 
   test("正しいメールアドレスが入力された場合、エラーメッセージが表示されない", async () => {
