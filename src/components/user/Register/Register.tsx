@@ -46,11 +46,7 @@ const Register = () => {
       <Email register={register} errors={errors} />
       <Birthday register={register} />
       <Password register={register} errors={errors} />
-      <ConfirmPassword
-        register={register}
-        errors={errors}
-        getValues={getValues}
-      />
+      <ConfirmPassword register={register} errors={errors} getValues={getValues} />
       {/* MEMO:ボタンは後から追加予定！ */}
       <button type="submit">会員登録</button>
     </form>
