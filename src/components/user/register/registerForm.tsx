@@ -1,7 +1,6 @@
 "use client";
 
 import type { FormProps } from "@/types/user/user";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Birthday from "./form/birthday/birthday";
 import ConfirmPassword from "./form/confirmPassword/confirmPassword";
@@ -9,6 +8,10 @@ import Email from "./form/email/email";
 import Name from "./form/name/name";
 import Password from "./form/password/password";
 import styles from "./registerForm.module.css";
+
+const today = new Date();
+const currentYear = today.getFullYear();
+console.log(currentYear);
 
 const RegisterForm = () => {
   const {
@@ -21,37 +24,34 @@ const RegisterForm = () => {
     defaultValues: {
       name: "",
       email: "",
-      birthday: undefined,
+      year: currentYear,
+      month: 1,
+      day: 1,
       password: "",
       confirmPassword: "",
+      birthday: undefined,
     },
   });
 
-  //BirthdayのState管理
-  const [year, setYear] = useState("");
-  const [month, setMonth] = useState("");
-  const [day, setDay] = useState("");
-
   const onSubmit = (data: FormProps) => {
-    const birthdayValue = new Date(`${year}-${month}-${day}`);
+    const birthdayValue = new Date(`${data.year}-${data.month}-${data.day}`);
     setValue("birthday", birthdayValue);
-    console.log(data);
+    const { year, month, day, ...newDate } = data;
+    const registerDate = { ...newDate, birthday: birthdayValue };
+    console.log(registerDate);
   };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <Name register={register} errors={errors} />
       <Email register={register} errors={errors} />
-      <Birthday
-        year={year}
-        setYear={setYear}
-        month={month}
-        setMonth={setMonth}
-        day={day}
-        setDay={setDay}
-      />
+      <Birthday register={register} />
       <Password register={register} errors={errors} />
-      <ConfirmPassword register={register} errors={errors} getValues={getValues} />
+      <ConfirmPassword
+        register={register}
+        errors={errors}
+        getValues={getValues}
+      />
       {/* MEMO:ボタンは後から追加予定！ */}
       <button type="submit">会員登録</button>
     </form>

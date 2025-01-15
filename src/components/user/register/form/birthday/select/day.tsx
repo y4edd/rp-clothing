@@ -1,12 +1,12 @@
-import type { Dispatch, SetStateAction } from "react";
 import styles from "./day.module.css";
+import { UseFormRegister } from "react-hook-form";
+import { FormProps } from "@/types/user/user";
 
 interface DayProps {
-  day: string;
-  setDay: Dispatch<SetStateAction<string>>;
+  register: UseFormRegister<FormProps>;
 }
 
-const Day = ({ day, setDay }: DayProps) => {
+const Day = ({ register }: DayProps) => {
   const dayList: number[] = [];
   for (let i = 1; i <= 31; i++) {
     dayList.push(i);
@@ -15,11 +15,10 @@ const Day = ({ day, setDay }: DayProps) => {
   return (
     <>
       <select
-        name="day"
         id="day"
         className={styles.daySelect}
-        value={day}
-        onChange={(e) => setDay(e.target.value)}
+        {...register("day")}
+        name="day"
         data-testid="day-select"
       >
         {dayList.map((day) => (

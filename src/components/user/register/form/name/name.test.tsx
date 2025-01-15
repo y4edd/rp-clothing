@@ -35,7 +35,10 @@ describe("Nameコンポーネントのテスト", () => {
   test("ユーザー名が20文字以上の場合、エラーメッセージが出ること", async () => {
     render(<TestComponent />);
     const submitButton = screen.getByText("登録");
-    await userEvent.type(submitButton, "テストテストテストテストテストテストテストテスト");
+    await userEvent.type(
+      submitButton,
+      "テストテストテストテストテストテストテストテスト"
+    );
     expect(screen.getByText(errorMessages.name.maxLength)).toBeInTheDocument();
   });
 

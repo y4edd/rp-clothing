@@ -3,28 +3,19 @@ import Year from "./year";
 
 describe("Monthコンポーネントのテスト", () => {
   test("1~12の選択肢が表示されているか", () => {
-    const setYear = jest.fn();
+    const register = jest.fn();
     const today = new Date();
     const currentYear = today.getFullYear();
-    render(<Year year="" setYear={setYear} />);
+    render(<Year register={register} />);
     for (let i = currentYear; i > currentYear - 100; i--) {
       expect(screen.getByRole("option", { name: i.toString() }));
     }
   });
-  test("日付が選択されたとき、setDayが呼ばれること", () => {
-    const setYear = jest.fn();
-    render(<Year year="" setYear={setYear} />);
-    const select = screen.getByLabelText("年");
-
-    fireEvent.change(select, { target: { value: "1990" } });
-
-    expect(setYear).toHaveBeenCalledWith("1990");
-  });
 
   test("dayプロパティが空の場合、現在の日付がデフォルトで選択されること", () => {
-    const setYear = jest.fn();
+    const register = jest.fn();
     const today = new Date().getFullYear();
-    render(<Year year="" setYear={setYear} />);
+    render(<Year register={register} />);
 
     const select = screen.getByLabelText("年") as HTMLSelectElement;
     expect(select.value).toBe(today.toString());

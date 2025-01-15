@@ -1,12 +1,12 @@
-import type { Dispatch, SetStateAction } from "react";
+import { FormProps } from "@/types/user/user";
 import styles from "./year.module.css";
+import { UseFormRegister } from "react-hook-form";
 
 interface YearProps {
-  year: string;
-  setYear: Dispatch<SetStateAction<string>>;
+  register: UseFormRegister<FormProps>;
 }
 
-const Year = ({ year, setYear }: YearProps) => {
+const Year = ({ register }: YearProps) => {
   const today = new Date();
   const currentYear = today.getFullYear();
   const yearList: number[] = [];
@@ -16,11 +16,10 @@ const Year = ({ year, setYear }: YearProps) => {
   return (
     <>
       <select
-        name="year"
         id="year"
         className={styles.yearSelect}
-        value={year || currentYear.toString()}
-        onChange={(e) => setYear(e.target.value)}
+        {...register("year")}
+        name="year"
         data-testid="year-select"
       >
         {yearList.map((year) => (

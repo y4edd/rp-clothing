@@ -1,12 +1,12 @@
-import type { Dispatch, SetStateAction } from "react";
 import styles from "./month.module.css";
+import { UseFormRegister } from "react-hook-form";
+import { FormProps } from "@/types/user/user";
 
 interface MonthProps {
-  month: string;
-  setMonth: Dispatch<SetStateAction<string>>;
+  register: UseFormRegister<FormProps>;
 }
 
-const Month = ({ month, setMonth }: MonthProps) => {
+const Month = ({ register }: MonthProps) => {
   const monthList: number[] = [];
   for (let i = 1; i <= 12; i++) {
     monthList.push(i);
@@ -15,11 +15,10 @@ const Month = ({ month, setMonth }: MonthProps) => {
   return (
     <>
       <select
-        name="month"
         id="month"
         className={styles.monthSelect}
-        value={month}
-        onChange={(e) => setMonth(e.target.value)}
+        {...register("month")}
+        name="month"
         data-testid="month-select"
       >
         {monthList.map((month) => (
