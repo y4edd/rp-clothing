@@ -13,12 +13,12 @@
 }
 .itemName {
   font-size: 0.9rem;
-  display: -webkit-box;         /* Flexboxを利用 */
+  display: -webkit-box; /* Flexboxを利用 */
   -webkit-box-orient: vertical; /* 縦方向にレイアウト */
-  overflow: hidden;             /* はみ出しを非表示 */
-  text-overflow: ellipsis;      /* 省略記号「...」を付加 */
-  -webkit-line-clamp: 2;        /* 表示する行数を指定（ここでは2行） */
-  line-height: 1.5;             /* 行間を設定 */
+  overflow: hidden; /* はみ出しを非表示 */
+  text-overflow: ellipsis; /* 省略記号「...」を付加 */
+  -webkit-line-clamp: 2; /* 表示する行数を指定（ここでは2行） */
+  line-height: 1.5; /* 行間を設定 */
   max-height: calc(1.5em * 2);
   margin-bottom: 10px;
 }

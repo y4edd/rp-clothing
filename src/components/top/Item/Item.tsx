@@ -23,9 +23,7 @@ const Item = ({ itemName, itemCode, imageUrl, itemPrice }: Prop) => {
             className={styles.itemImage}
           />
           <h3 className={styles.itemName}>{itemName}</h3>
-          <p className={styles.price}>
-            金額 : ¥ {itemPrice.toLocaleString()} (税込){" "}
-          </p>
+          <p className={styles.price}>金額 : ¥ {itemPrice.toLocaleString()} (税込) </p>
         </div>
       </Link>
       <FavoriteBUtton />

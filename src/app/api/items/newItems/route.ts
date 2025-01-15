@@ -32,16 +32,13 @@ export const GET = async () => {
           availability: 1, //販売可能
           elements: "itemName,itemCode,mediumImageUrls,itemPrice",
         },
-      }
+      },
     );
 
     const items: ItemListModel[] = response.data.Items;
 
     if (!items) {
-      return NextResponse.json(
-        { message: "データを取得できませんでした。" },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: "データを取得できませんでした。" }, { status: 400 });
     }
 
     // mediumImageUrlsは配列で複数のパスが入っているため、一つだけを抽出する。

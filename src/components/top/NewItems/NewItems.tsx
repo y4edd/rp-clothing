@@ -1,31 +1,38 @@
-import type { NewItemsModel } from "@/app/(top)/page";
-import Item from "../Item/Item";
-import styles from "./NewItems.module.css";
+import { Suspense } from "react";
+import ItemList from "./ItemList/ItemList";
 
-interface Props {
-  newItems: NewItemsModel[] | null;
+export interface NewItemsModel {
+  itemName: string;
+  itemCode: string;
+  imageUrl: string;
+  itemPrice: number;
 }
 
-const NewItems = ({ newItems }: Props) => {
-  // MEMO:エラー表示コンポーネント作成する？
+const NewItems = async () => {
+  const newItems: NewItemsModel[] | null = await getNewItems();
   // MEMO:Ladingコンポーネントもする？
-  if(!newItems)return <p>データを取得できませんでした。</p>
   return (
-    <div className={styles.container}>
-      <h2 className={styles.contentTitle}>新着アイテム</h2>
-      <div className={styles.gridItems}>
-        {newItems.map((item) => (
-          <Item
-            key={item.itemCode}
-            itemName={item.itemName}
-            itemCode={item.itemCode}
-            imageUrl={item.imageUrl}
-            itemPrice={item.itemPrice}
-          />
-        ))}
-      </div>
-    </div>
+    <Suspense>
+      <ItemList newItems={newItems} />
+    </Suspense>
   );
 };
 
 export default NewItems;
+
+// 新着アイテムの取得関数
+export const getNewItems = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/items/newItems", {
+      // next: { revalidate: 3600 }, //１時間で再検証
+    });
+    if (!response.ok) {
+      throw new Error("データを取得できませんでした。");
+    }
+    const items = await response.json();
+    return items.items;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
