@@ -29,8 +29,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-toastify": "^11.0.2",
-    "styled-components": "^6.1.13",
-    "swr": "^2.3.0"
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
