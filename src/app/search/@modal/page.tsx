@@ -79,9 +79,6 @@ const SearchModalComponent = () => {
     }
   };
 
-  // キーワードは下記で受け取っている
-  console.log(state.keyWord);
-
   return (
     <>
       {isModalOpen && (
