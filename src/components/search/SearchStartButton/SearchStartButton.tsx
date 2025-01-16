@@ -6,7 +6,7 @@ type Props = {
   onSearch: () => void;
 };
 
-const SearchStartButton = ({onSearch}:Props) => {
+const SearchStartButton = ({ onSearch }: Props) => {
   return <Button text={"検索"} onClick={onSearch} className={buttonStyles.black} />;
 };
 

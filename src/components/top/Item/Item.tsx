@@ -10,7 +10,7 @@ type Prop = {
   itemPrice: string;
 };
 
-const Item = ({ linkPath, src, itemName, itemPrice  }: Prop) => {
+const Item = ({ linkPath, src, itemName, itemPrice }: Prop) => {
   return (
     <div className={styles.itemContent}>
       <div className={styles.item}>

@@ -1,12 +1,11 @@
-
-import styles from "./Category.module.css";
 import React from "react";
+import styles from "./Category.module.css";
 
 type CategoryProps = {
   id: string;
   text: string;
   selectedCategory: string;
-  onCategoryChange: (e:React.ChangeEvent<HTMLInputElement>) => void;
+  onCategoryChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Category = React.memo(
@@ -30,8 +29,10 @@ const Category = React.memo(
   },
   (prevProps, nextProps) => {
     // selectedCategoryが変わっても、このCategoryのidに関係なければ再レンダリングしない
-    return prevProps.selectedCategory === nextProps.selectedCategory && prevProps.id === nextProps.id;
-  }
+    return (
+      prevProps.selectedCategory === nextProps.selectedCategory && prevProps.id === nextProps.id
+    );
+  },
 );
 
 export default Category;

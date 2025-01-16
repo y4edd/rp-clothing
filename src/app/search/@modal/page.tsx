@@ -1,17 +1,17 @@
 "use client";
 
 import Modal from "@/components/Modal/Modal";
-import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
-import styles from "./page.module.css";
-import { useRouter, useSearchParams } from "next/navigation";
-import { State } from "@/types/type";
-import { Action } from "@/types/type";
-import { useEffect, useReducer, useState, useMemo } from "react";
-import dynamic from "next/dynamic";
-import FavConditions from "@/components/search/FavConditions/FavConditions";
-import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import CategoryCondition from "@/components/search/CategoryCondition/CategoryCondition";
+import FavConditions from "@/components/search/FavConditions/FavConditions";
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
+import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
+import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
+import type { State } from "@/types/type";
+import type { Action } from "@/types/type";
+import dynamic from "next/dynamic";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useReducer, useState} from "react";
+import styles from "./page.module.css";
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
@@ -55,10 +55,13 @@ const SearchModalComponent = () => {
 
   // stateの変更をリアルタイムでqueryに反映
   const query = useMemo(() => {
-    const queryObj = Object.entries(state).reduce((acc, [key, value]) => {
-      if (value !== "") acc[key] = value;
-      return acc;
-    }, {} as Record<string, string>);
+    const queryObj = Object.entries(state).reduce(
+      (acc, [key, value]) => {
+        if (value !== "") acc[key] = value;
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
     return new URLSearchParams(queryObj).toString();
   }, [state]);
 
@@ -73,7 +76,7 @@ const SearchModalComponent = () => {
     if (!query) {
       setErrorMessage("検索条件が入力されていません");
       return;
-    }else {
+    } else {
       setIsModalOpen(false);
       router.push(`/search?${query}`);
     }
@@ -87,9 +90,13 @@ const SearchModalComponent = () => {
             <h2 className={styles.modalTitle}>検索条件</h2>
             <div className={styles.searchConditions}>
               <FavConditions />
-              <PriceCondition minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch} />
+              <PriceCondition
+                minPrice={state.minPrice}
+                maxPrice={state.maxPrice}
+                dispatch={dispatch}
+              />
               <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
-              <KeyWordCondition  keyWord={state.keyWord} dispatch={dispatch} />
+              <KeyWordCondition keyWord={state.keyWord} dispatch={dispatch} />
               <SearchStartButton onSearch={() => handleSearch()} />
               <div className={styles.errorMessage}>{errorMessage}</div>
             </div>

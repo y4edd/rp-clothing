@@ -1,10 +1,8 @@
-import Category from "@/components/search/Category/Category";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
-type Category =  "tops" | "pants" | "suits" | "overalls" | "rainwear" | "coats";
+type CategoryProps = "tops" | "pants" | "suits" | "overalls" | "rainwear" | "coats";
 
 export const GET = async (req: NextRequest) => {
-
   const { searchParams } = new URL(req.url);
   const keyWord = searchParams.get("keyWord") || "";
   const category = searchParams.get("selectedCategory") || "";
@@ -14,15 +12,11 @@ export const GET = async (req: NextRequest) => {
   const appId = process.env.RAKUTEN_API_ID;
 
   if (!appId) {
-    return NextResponse.json(
-      { message: "RAKUTEN_API_IDが未設定です" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: "RAKUTEN_API_IDが未設定です" }, { status: 500 });
   }
 
   // 基本のAPI URL
-  let rakutenApiUrl =
-    "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
+  let rakutenApiUrl = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
   const params = new URLSearchParams({
     applicationId: appId,
     format: "json",
@@ -32,7 +26,7 @@ export const GET = async (req: NextRequest) => {
   });
 
   // カテゴリに対応するgenreIdのマッピング
-  const categoryGenreMap: Record<Category, string> = {
+  const categoryGenreMap: Record<CategoryProps, string> = {
     tops: "110765",
     pants: "558846",
     suits: "100372",
@@ -42,10 +36,10 @@ export const GET = async (req: NextRequest) => {
   };
 
   // カテゴリが存在する場合はgenreIdを追加し、なければ全カテゴリーより検索
-  if (category && categoryGenreMap[category as Category]) {
-    params.append("genreId", categoryGenreMap[category as Category]);
-  }else {
-	params.append("genreId","551177");
+  if (category && categoryGenreMap[category as CategoryProps]) {
+    params.append("genreId", categoryGenreMap[category as CategoryProps]);
+  } else {
+    params.append("genreId", "551177");
   }
 
   // キーワードを追加
@@ -55,11 +49,11 @@ export const GET = async (req: NextRequest) => {
 
   // 最低価格と最高価格を整数として追加
   if (minPrice) {
-    params.append("minPrice", parseInt(minPrice, 10).toString());
+    params.append("minPrice", Number.parseInt(minPrice, 10).toString());
   }
 
   if (maxPrice) {
-    params.append("maxPrice", parseInt(maxPrice, 10).toString());
+    params.append("maxPrice", Number.parseInt(maxPrice, 10).toString());
   }
 
   // 最終的なAPI URL
@@ -74,9 +68,7 @@ export const GET = async (req: NextRequest) => {
     const data = await apiResponse.json();
     return NextResponse.json(data);
   } catch (err) {
-    return NextResponse.json(
-      { message: "サーバーエラーが発生しました" },
-      { status: 500 }
-    );
+    console.log(err);
+    return NextResponse.json({ message: "サーバーエラーが発生しました" }, { status: 500 });
   }
 };

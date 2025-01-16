@@ -9,5 +9,4 @@ export type Action =
   | { type: "SET_MIN_PRICE"; payload: string }
   | { type: "SET_MAX_PRICE"; payload: string }
   | { type: "SET_CATEGORY"; payload: string }
-  | { type: "SET_KEYWORD"; payload: string }
-  
+  | { type: "SET_KEYWORD"; payload: string };

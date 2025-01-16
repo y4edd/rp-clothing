@@ -1,21 +1,21 @@
 "use client";
 
-import { Action } from "@/types/type";
+import type { Action } from "@/types/type";
 import styles from "./PriceCondition.module.css";
 
 type Props = {
   minPrice: string;
   maxPrice: string;
-  dispatch: (action:Action) => void;
+  dispatch: (action: Action) => void;
 };
 
-const PriceCondition = ({ minPrice, maxPrice, dispatch}: Props) => {
-  const minPriceChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: "SET_MIN_PRICE", payload: e.target.value })
+const PriceCondition = ({ minPrice, maxPrice, dispatch }: Props) => {
+  const minPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: "SET_MIN_PRICE", payload: e.target.value });
   };
 
-  const maxPriceChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: "SET_MAX_PRICE", payload: e.target.value })
+  const maxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: "SET_MAX_PRICE", payload: e.target.value });
   };
 
   return (
@@ -28,14 +28,17 @@ const PriceCondition = ({ minPrice, maxPrice, dispatch}: Props) => {
             id="minPrice"
             className={styles.priceEach}
             value={minPrice}
-            onChange={minPriceChange}/>
+            onChange={minPriceChange}
+          />
           ～
           <input
             type="text"
             id="maxPrice"
             className={styles.priceEach}
             value={maxPrice}
-            onChange={maxPriceChange}/>円
+            onChange={maxPriceChange}
+          />
+          円
         </form>
       </div>
     </div>

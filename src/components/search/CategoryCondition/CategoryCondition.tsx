@@ -1,9 +1,9 @@
 "use client";
+import type { Action } from "@/types/type";
 import { categories } from "@/utils/data/category";
+import React, { useCallback } from "react";
 import Category from "../Category/Category";
 import styles from "./CategoryCondition.module.css";
-import { Action } from "@/types/type";
-import React, { useCallback } from "react";
 
 type Props = {
   selectedCategory: string;
@@ -16,7 +16,7 @@ const CategoryCondition = React.memo(({ selectedCategory, dispatch }: Props) => 
     (e: React.ChangeEvent<HTMLInputElement>) => {
       dispatch({ type: "SET_CATEGORY", payload: e.target.value });
     },
-    [dispatch]
+    [dispatch],
   );
 
   return (

@@ -1,9 +1,9 @@
 "use client";
 
-import WordSearchButton from "../WordSearchButton/WordSearchButton";
-import styles from "./WordSearch.module.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import WordSearchButton from "../WordSearchButton/WordSearchButton";
+import styles from "./WordSearch.module.css";
 
 const WordSearch = () => {
   const router = useRouter();
