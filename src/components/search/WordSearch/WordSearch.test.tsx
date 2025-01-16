@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import WordSearch from "./WordSearch";
 
+jest.mock("next/navigation", () => ({ useRouter: jest.fn() }));
+
 describe("WordSearch コンポーネント", () => {
   test("検索フォームが正しくレンダリングされること", () => {
     render(<WordSearch />);

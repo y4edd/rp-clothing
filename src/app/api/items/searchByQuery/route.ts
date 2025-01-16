@@ -1,10 +1,9 @@
 import Category from "@/components/search/Category/Category";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 type Category =  "tops" | "pants" | "suits" | "overalls" | "rainwear" | "coats";
 
-export const GET = async (req: NextRequest, res: NextResponse) => {
+export const GET = async (req: NextRequest) => {
 
   const { searchParams } = new URL(req.url);
   const keyWord = searchParams.get("keyWord") || "";
