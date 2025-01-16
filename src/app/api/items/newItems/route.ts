@@ -1,21 +1,11 @@
 import { handleAxiosError } from "@/lib/axios/axios";
+import type { Item } from "@/types/item/item";
 import axios from "axios";
 import { NextResponse } from "next/server";
 
 // 商品のリスト情報(Itemsの中の構造)
 export interface ItemListModel {
   Item: Item;
-}
-// 取得する商品の型情報
-interface Item {
-  itemCode: string;
-  itemName: string;
-  itemPrice: number;
-  mediumImageUrls: ImageUrls[];
-}
-// 商品の画像のURL情報
-interface ImageUrls {
-  imageUrl: string;
 }
 
 export const GET = async () => {
@@ -32,13 +22,16 @@ export const GET = async () => {
           availability: 1, //販売可能
           elements: "itemName,itemCode,mediumImageUrls,itemPrice",
         },
-      },
+      }
     );
 
     const items: ItemListModel[] = response.data.Items;
 
     if (!items) {
-      return NextResponse.json({ message: "データを取得できませんでした。" }, { status: 400 });
+      return NextResponse.json(
+        { message: "データを取得できませんでした。" },
+        { status: 400 }
+      );
     }
 
     // mediumImageUrlsは配列で複数のパスが入っているため、一つだけを抽出する。
