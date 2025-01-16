@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import ItemList from "./ItemList/ItemList";
 
 export interface NewItemsModel {
@@ -11,11 +10,7 @@ export interface NewItemsModel {
 const NewItems = async () => {
   const newItems: NewItemsModel[] | null = await getNewItems();
   // MEMO:Ladingコンポーネントもする？
-  return (
-    <Suspense>
-      <ItemList newItems={newItems} />
-    </Suspense>
-  );
+  return <ItemList newItems={newItems} />;
 };
 
 export default NewItems;
@@ -24,7 +19,7 @@ export default NewItems;
 export const getNewItems = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/items/newItems", {
-      // next: { revalidate: 3600 }, //１時間で再検証
+      next: { revalidate: 3600 }, //１時間で再検証
     });
     if (!response.ok) {
       throw new Error("データを取得できませんでした。");
