@@ -21,7 +21,7 @@ const fetchResults = async (query: string) => {
   }
 };
 
-const SearchResults = async ({ searchParams }: { searchParams?: Record<string, any> }) => {
+const SearchResults = async ({ searchParams }: { searchParams?: Record<string, string> }) => {
   // searchParamsが未定義の場合は空オブジェクトをセット
   const safeSearchParams = searchParams ?? {};
 
@@ -38,10 +38,6 @@ const SearchResults = async ({ searchParams }: { searchParams?: Record<string, a
   if (!data) {
     return <p>データが取得できませんでした。</p>;
   }
-
-  data.Items.map((itemObj:any) => {
-    console.log(itemObj.Item)
-  });
 
   return (
     <div className={styles.container}>

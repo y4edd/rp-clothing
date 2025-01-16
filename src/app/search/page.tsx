@@ -4,7 +4,6 @@ import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import SearchResults from "../../components/search/SearchResults/SearchResults";
 
 const Search = ({ searchParams }: { searchParams?: Record<string, string> }) => {
-
   return (
     <>
       <BreadList bread={[{ link: "/", title: "トップ" }, { link: "/search", title: "検索結果" }]} />

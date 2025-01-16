@@ -14,7 +14,6 @@ import CategoryCondition from "@/components/search/CategoryCondition/CategoryCon
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
 
 const reducer = (state: State, action: Action) => {
-  console.log(`Action: ${action.type}, Payload: ${action.payload}`);
   switch (action.type) {
     case "SET_MIN_PRICE":
       return { ...state, minPrice: action.payload };
@@ -53,8 +52,6 @@ const SearchModalComponent = () => {
       setIsModalOpen(false);
     }
   }, [searchParams]);
-  
-  
 
   // stateの変更をリアルタイムでqueryに反映
   const query = useMemo(() => {
@@ -62,7 +59,6 @@ const SearchModalComponent = () => {
       if (value !== "") acc[key] = value;
       return acc;
     }, {} as Record<string, string>);
-
     return new URLSearchParams(queryObj).toString();
   }, [state]);
 
@@ -77,10 +73,10 @@ const SearchModalComponent = () => {
     if (!query) {
       setErrorMessage("検索条件が入力されていません");
       return;
+    }else {
+      setIsModalOpen(false);
+      router.push(`/search?${query}`);
     }
-    setIsModalOpen(false);
-    console.log(isModalOpen);
-    router.push(`/search?${query}`);
   };
 
   return (
