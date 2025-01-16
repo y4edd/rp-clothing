@@ -24,10 +24,27 @@ jobs:
     # 必要な依存関係（ライブラリなど）をインストールする
     - name: Install Dependencies
       run: yarn install
-
+    
+    # githubの環境変数を読み取る
     - name: Set up .env
       run: |
         echo "DATABASE_URL=${{ secrets.RAKUTEN_API_ID }}" > .env
+
+    # localhost:3000サーバーを起動
+    - name: Start Next.js server
+      run: yarn dev &
+      env:
+        PORT: 3000
+
+    # サーバー起動まで待機
+    - name: Wait for localhost:3000
+      run: |
+        echo "Waiting for server to start..."
+        for i in {1..30}; do
+          curl -sSf http://localhost:3000 > /dev/null && echo "Server is up!" && break
+          echo "Server is not ready yet. Retrying in 2 seconds..."
+          sleep 2
+        done
 
     # コードのフォーマットをチェックし、自動整形する（美しいコードにするため）
     - name: Check Format
