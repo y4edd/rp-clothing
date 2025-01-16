@@ -79,6 +79,9 @@ const SearchModalComponent = () => {
     }
   };
 
+  // キーワードは下記で受け取っている
+  console.log(state.keyWord);
+
   return (
     <>
       {isModalOpen && (
@@ -89,7 +92,7 @@ const SearchModalComponent = () => {
               <FavConditions />
               <PriceCondition minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch} />
               <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
-              <KeyWordCondition />
+              <KeyWordCondition  keyWord={state.keyWord} dispatch={dispatch} />
               <SearchStartButton onSearch={() => handleSearch()} />
               <div className={styles.errorMessage}>{errorMessage}</div>
             </div>
