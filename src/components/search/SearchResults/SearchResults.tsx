@@ -46,8 +46,6 @@ const SearchResults = async ({ searchParams }: { searchParams?: Record<string, s
     console.log(itemObj)
   ));
 
-  
-
   return (
     <div className={styles.container}>
       <h2 className={styles.contentTitle}>検索結果</h2>
