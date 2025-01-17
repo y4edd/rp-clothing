@@ -26,6 +26,7 @@ const PriceCondition = ({ minPrice, maxPrice, dispatch }: Props) => {
           <input
             type="text"
             id="minPrice"
+            data-testid="minPrice"
             className={styles.priceEach}
             value={minPrice}
             onChange={minPriceChange}
@@ -34,6 +35,7 @@ const PriceCondition = ({ minPrice, maxPrice, dispatch }: Props) => {
           <input
             type="text"
             id="maxPrice"
+            data-testid="maxPrice"
             className={styles.priceEach}
             value={maxPrice}
             onChange={maxPriceChange}

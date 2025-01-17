@@ -1,17 +1,24 @@
 import { render, screen } from "@testing-library/react";
-import NewItems from "./ItemList";
+import ItemList from "./ItemList";
 
-jest.mock("../../Item/Item", () => () => <div>Mocked Item</div>);
-describe("NewItemsコンポーネントのテスト", () => {
+describe("ItemListコンポーネントのテスト", () => {
   const mockItemData = [
-    { itemName: "Item 1", itemCode: "001", imageUrl: "/", itemPrice: 1000 },
-    { itemName: "Item 2", itemCode: "002", imageUrl: "/", itemPrice: 2000 },
+    { itemName: "Item 1", itemCode: "001", itemImage: "/", itemPrice: 1000 },
+    { itemName: "Item 2", itemCode: "002", itemImage: "/", itemPrice: 2000 },
   ];
 
-  test("正常にUIが表示されることを確認", () => {
-    render(<NewItems newItems={mockItemData} />);
-    const titleText = screen.getByText("新着アイテム");
+  test("正常にItemListコノンポーネントが表示される", () => {
+    render(<ItemList items={mockItemData} title="テスト" />);
+    const titleText = screen.getByText("テスト");
 
     expect(titleText).toBeInTheDocument();
+  });
+
+  // 結合テスト
+  test("データに欠損があった場合、NoItemコンポーネントが表示され、取得できない旨のメッセージが表示される", () => {
+    render(<ItemList items={null} title="テスト" />);
+
+    const errorText = screen.getByText("ご指定の商品がありませんでした");
+    expect(errorText).toBeInTheDocument();
   });
 });

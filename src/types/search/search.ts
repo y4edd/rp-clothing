@@ -16,5 +16,15 @@ export type SearchParams = {
 };
 
 export type SearchParamsProps = {
-  searchParams: SearchParams;
+  minPrice?: string;
+  maxPrice?: string;
+  selectedCategory?: string;
+  keyWord?: string;
+};
+
+export type MockSearchParamsProps = {
+  minPrice: string;
+  maxPrice: string;
+  selectedCategory: string;
+  keyWord: string;
 };

@@ -11,7 +11,7 @@ const WordSearch = () => {
 
   // 検索ボタン押下時の処理
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+    e?.preventDefault();
     router.push(`/search?keyWord=${value}`);
   };
 

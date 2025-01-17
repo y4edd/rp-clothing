@@ -19,6 +19,7 @@ const KeyWordCondition = ({ keyWord, dispatch }: KeyWordConditionProps) => {
       <input
         type="text"
         id="keyWord"
+        data-testid="keyWord"
         name="keyWord"
         className={styles.keyWord}
         onChange={handleKeyWord}
