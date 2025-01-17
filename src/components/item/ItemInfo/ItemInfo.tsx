@@ -12,6 +12,7 @@ const ItemInfo = () => {
           alt="アイテム画像"
           width={200}
           height={200}
+          priority
           className={styles.img}
         />
         <FavoriteBUtton />
