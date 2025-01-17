@@ -1,18 +1,30 @@
 .item {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .item:hover {
   opacity: 0.8;
 }
 .itemImage {
-  width: 100%;
-  height: auto;
+  text-align: center;
 }
 .itemName {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
+  display: -webkit-box; /* Flexboxを利用 */
+  -webkit-box-orient: vertical; /* 縦方向にレイアウト */
+  overflow: hidden; /* はみ出しを非表示 */
+  text-overflow: ellipsis; /* 省略記号「...」を付加 */
+  -webkit-line-clamp: 2; /* 表示する行数を指定（ここでは2行） */
+  line-height: 1.5; /* 行間を設定 */
+  max-height: calc(1.5em * 2);
   margin-bottom: 10px;
 }
 .price {
+  width: 100%;
+  text-align: start;
   font-size: 0.9rem;
   color: #111111;
 }

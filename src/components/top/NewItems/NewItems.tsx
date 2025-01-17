@@ -1,20 +1,33 @@
-import Item from "../Item/Item";
-import styles from "./NewItems.module.css";
+import ItemList from "./ItemList/ItemList";
 
-const NewItems = () => {
-  // MEMO アイテム情報取得したら消します
-  const sampleArray = new Array(15).fill("").map((_, index) => index + 1);
+export interface NewItemsModel {
+  itemName: string;
+  itemCode: string;
+  imageUrl: string;
+  itemPrice: number;
+}
 
-  return (
-    <div className={styles.container}>
-      <h2 className={styles.contentTitle}>新着アイテム</h2>
-      <div className={styles.gridItems}>
-        {sampleArray.map((item) => (
-          <Item key={item} linkPath="/" />
-        ))}
-      </div>
-    </div>
-  );
+const NewItems = async () => {
+  const newItems: NewItemsModel[] | null = await getNewItems();
+  // MEMO:Ladingコンポーネントもする？
+  return <ItemList newItems={newItems} />;
 };
 
 export default NewItems;
+
+// 新着アイテムの取得関数
+export const getNewItems = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/items/newItems", {
+      next: { revalidate: 3600 }, //１時間で再検証
+    });
+    if (!response.ok) {
+      throw new Error("データを取得できませんでした。");
+    }
+    const items = await response.json();
+    return items.items;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
