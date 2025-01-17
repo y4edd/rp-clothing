@@ -32,7 +32,9 @@ export const GET = async () => {
       itemName: Item.itemName,
       itemCode: Item.itemCode,
       itemPrice: Item.itemPrice,
-      imageUrl: Item.mediumImageUrls[0]?.imageUrl.replace("128x128", "250x250"),
+      imageUrl: Item.mediumImageUrls[0]?.imageUrl
+      ? Item.mediumImageUrls[0]?.imageUrl.replace("128x128", "250x250")
+      : null,
     }));
 
     return NextResponse.json({ items: newItems }, { status: 200 });

@@ -1,5 +1,4 @@
-import Item from "@/components/top/Item/Item";
-import styles from "@/components/top/NewItems/NewItems.module.css";
+import ItemList from "@/components/utils/ItemList/ItemList";
 
 // APIから検索結果を取得する関数
 const fetchResults = async (query: string) => {
@@ -8,13 +7,15 @@ const fetchResults = async (query: string) => {
   const apiURL = `http://localhost:3000/api/items/searchByQuery?${query}`;
 
   try {
-    const res = await fetch(apiURL, { cache: "no-store" });
+    const res = await fetch(apiURL, {
+      next: { revalidate: 3600 },
+     });
 
     if (!res.ok) {
       throw new Error(`${res.status} - ${res.statusText}`);
     }
-
-    return await res.json();
+    const items = await res.json();
+    return items.items;
   } catch (err) {
     console.error("データの取得に失敗しました:", err);
     return null;
@@ -36,32 +37,9 @@ const SearchResults = async ({ searchParams }: { searchParams?: Record<string, s
 
   const query = new URLSearchParams(filteredParams).toString();
 
-  const data = await fetchResults(query);
+  const items = await fetchResults(query);
 
-  if (!data) {
-    return <p>データが取得できませんでした。</p>;
-  }
-
-  data.Items.map((itemObj: any, index: number) => (
-    console.log(itemObj)
-  ));
-
-  return (
-    <div className={styles.container}>
-      <h2 className={styles.contentTitle}>検索結果</h2>
-      <div className={styles.gridItems}>
-        {data.Items.map((itemObj: any, index: number) => (
-          <Item
-            key={index}
-            itemName={itemObj.Item.itemName}
-            itemCode={"test"}
-            imageUrl={itemObj.Item.mediumImageUrls?.[0] || null}
-            itemPrice={itemObj.Item.itemPrice}
-          />
-        ))}
-      </div>
-    </div>
-  );
+  return <ItemList items={items} title="検索結果"/>;
 };
 
 export default SearchResults;
