@@ -5,7 +5,7 @@ describe("PriceConditionコンポーネント", () => {
   const mockDispatch = jest.fn();
 
   const initialProps = {
-    minPrice: "",
+    minPrice: ""
     maxPrice: "",
     dispatch: mockDispatch,
   };
