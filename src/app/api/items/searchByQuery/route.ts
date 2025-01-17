@@ -67,7 +67,7 @@ export const GET = async (req: NextRequest) => {
       itemName: Item.itemName,
       itemCode: Item.itemCode,
       itemPrice: Item.itemPrice,
-      imageUrl: Item.mediumImageUrls[0]?.imageUrl
+      itemImage: Item.mediumImageUrls[0]?.imageUrl
       ? Item.mediumImageUrls[0]?.imageUrl.replace("128x128", "250x250")
       : null,
     }));
