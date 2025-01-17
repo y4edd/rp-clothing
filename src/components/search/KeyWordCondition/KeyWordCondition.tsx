@@ -1,6 +1,6 @@
 "use client";
 
-import type { Action } from "@/types/type";
+import type { Action } from "@/types/search/search";
 import styles from "./KeyWordCondition.module.css";
 
 type KeyWordConditionProps = {

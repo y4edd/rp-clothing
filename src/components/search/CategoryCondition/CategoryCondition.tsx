@@ -1,5 +1,5 @@
 "use client";
-import type { Action } from "@/types/type";
+import type { Action } from "@/types/search/search";
 import { categories } from "@/utils/data/category";
 import React, { useCallback } from "react";
 import Category from "../Category/Category";

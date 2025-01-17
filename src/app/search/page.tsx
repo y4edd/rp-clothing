@@ -2,8 +2,10 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import SearchResults from "../../components/search/SearchResults/SearchResults";
 import SearchModal from "./@modal/page";
+import type { SearchParamsProps } from "@/types/search/search";
 
-const Search = ({ searchParams }: { searchParams?: Record<string, string> }) => {
+const Search = async({ searchParams }: { searchParams?: SearchParamsProps }) => {
+  const params = await searchParams;
   return (
     <>
       <BreadList
@@ -14,7 +16,7 @@ const Search = ({ searchParams }: { searchParams?: Record<string, string> }) => 
       />
       <PageTitle title="検索結果" />
       <SearchModal />
-      <SearchResults searchParams={searchParams} />
+      <SearchResults searchParams={params} />
     </>
   );
 };

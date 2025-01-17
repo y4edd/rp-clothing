@@ -1,9 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-   /* config options here */
+  /* config options here */
   images: {
-    domains: ["thumbnail.image.rakuten.co.jp"], // 楽天のホスト名を追加
+    remotePatterns: [
+      {
+        protocol: "https", // プロトコルを指定
+        hostname: "thumbnail.image.rakuten.co.jp", // 楽天のホスト名を指定
+        pathname: "/**", // 任意のパスを許可
+      },
+    ],
   },
 };
 
