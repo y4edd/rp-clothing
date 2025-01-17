@@ -27,7 +27,7 @@ export const fetchResults = async (query: string) => {
     });
 
     if (!res.ok) {
-      throw new Error(`${res.status} - ${res.statusText}`);
+      throw new Error("データを取得できませんでした");
     }
     const items = await res.json();
     return items.items;
