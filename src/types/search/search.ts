@@ -12,9 +12,9 @@ export type Action =
   | { type: "SET_KEYWORD"; payload: string };
 
 export type SearchParams = {
-  searchParams: Promise<Record<string, string>>
+  searchParams: Promise<Record<string, string>>;
 };
 
 export type SearchParamsProps = {
-  searchParams: SearchParams
+  searchParams: SearchParams;
 };

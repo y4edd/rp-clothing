@@ -1,7 +1,7 @@
 import { handleAxiosError } from "@/lib/axios/axios";
-import type { CategoryProps, ItemListModel, Item } from "@/types/item/item";
+import type { CategoryProps, ItemListModel } from "@/types/item/item";
 import axios from "axios";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   try {
@@ -14,10 +14,7 @@ export const GET = async (req: NextRequest) => {
     const appId = process.env.RAKUTEN_API_ID;
 
     if (!appId) {
-      return NextResponse.json(
-        { message: "RAKUTEN_API_IDが未設定です" },
-        { status: 500 }
-      );
+      return NextResponse.json({ message: "RAKUTEN_API_IDが未設定です" }, { status: 500 });
     }
 
     // カテゴリに対応する genreId のマッピング
@@ -50,16 +47,13 @@ export const GET = async (req: NextRequest) => {
     // APIリクエスト
     const response = await axios.get(
       "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601",
-      { params }
+      { params },
     );
 
     const items: ItemListModel[] = response.data.Items;
 
     if (!items) {
-      return NextResponse.json(
-        { message: "データを取得できませんでした。" },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: "データを取得できませんでした。" }, { status: 400 });
     }
 
     // データを整形
@@ -68,8 +62,8 @@ export const GET = async (req: NextRequest) => {
       itemCode: Item.itemCode,
       itemPrice: Item.itemPrice,
       itemImage: Item.mediumImageUrls[0]?.imageUrl
-      ? Item.mediumImageUrls[0]?.imageUrl.replace("128x128", "250x250")
-      : null,
+        ? Item.mediumImageUrls[0]?.imageUrl.replace("128x128", "250x250")
+        : null,
     }));
 
     return NextResponse.json({ items: newItems }, { status: 200 });

@@ -33,8 +33,8 @@ export const GET = async () => {
       itemCode: Item.itemCode,
       itemPrice: Item.itemPrice,
       itemImage: Item.mediumImageUrls[0]?.imageUrl
-      ? Item.mediumImageUrls[0]?.imageUrl.replace("128x128", "250x250")
-      : null,
+        ? Item.mediumImageUrls[0]?.imageUrl.replace("128x128", "250x250")
+        : null,
     }));
 
     return NextResponse.json({ items: newItems }, { status: 200 });

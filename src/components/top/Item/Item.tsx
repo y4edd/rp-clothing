@@ -1,11 +1,10 @@
+import type { ItemData } from "@/types/item/item";
 import Image from "next/image";
 import Link from "next/link";
 import FavoriteBUtton from "../FavoriteButton/FavoriteButton";
 import styles from "./Item.module.css";
-import type { Item } from "@/types/item/item";
 
-
-const Item = ({ itemCode, itemName, itemPrice, itemImage }: Item) => {
+const Item = ({ itemCode, itemName, itemPrice, itemImage }: ItemData) => {
   return (
     <div className={styles.itemContent}>
       <Link href={itemCode}>

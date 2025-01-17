@@ -10,7 +10,7 @@ import type { State } from "@/types/search/search";
 import type { Action } from "@/types/search/search";
 import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useReducer, useState} from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import styles from "./page.module.css";
 
 const reducer = (state: State, action: Action) => {

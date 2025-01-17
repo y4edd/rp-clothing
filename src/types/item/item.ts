@@ -11,7 +11,7 @@ export type ImageUrls = {
 };
 
 // Itemコンポーネントの型情報
-export type Item = {
+export type ItemData = {
   itemCode: string;
   itemName: string;
   itemPrice: number;
@@ -19,9 +19,9 @@ export type Item = {
 };
 
 // 商品のリスト情報(Itemsの中の構造)
-export type ItemListModel = { 
+export type ItemListModel = {
   Item: RakutenAPIItems;
-}
+};
 
 // 検索をかける際の、商品のカテゴリの種類
 export type CategoryProps = "tops" | "pants" | "suits" | "overalls" | "rainwear" | "coats";

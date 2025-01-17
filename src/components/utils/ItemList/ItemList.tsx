@@ -1,10 +1,12 @@
+import type { ItemData } from "@/types/item/item";
 import ItemInformation from "../../top/Item/Item";
-import type { Item } from "@/types/item/item";
 import styles from "./ItemList.module.css";
-type  Props = {
-  items: Item[] | null;
+
+type Props = {
+  items: ItemData[] | null;
   title: string;
-}
+};
+
 const ItemList = ({ items, title }: Props) => {
   // MEMO:エラー表示コンポーネント作成する？
   if (!items) return <p>データを取得できませんでした。</p>;

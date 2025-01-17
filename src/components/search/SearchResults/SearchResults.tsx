@@ -1,10 +1,10 @@
 import ItemList from "@/components/utils/ItemList/ItemList";
-import { fetchResults } from "@/utils/apiFunc";
 import type { SearchParamsProps } from "@/types/search/search";
+import { fetchResults } from "@/utils/apiFunc";
 
 const SearchResults = async ({ searchParams }: { searchParams?: SearchParamsProps }) => {
   // searchParamsが未定義の場合は空オブジェクトをセット
-  const  safeSearchParams = searchParams ?? {};
+  const safeSearchParams = searchParams ?? {};
 
   // searchParamsをURLSearchParamsに変換
   const filteredParams = Object.entries(safeSearchParams).reduce(
@@ -19,7 +19,7 @@ const SearchResults = async ({ searchParams }: { searchParams?: SearchParamsProp
 
   const items = await fetchResults(query);
 
-  return <ItemList items={items} title="検索結果"/>;
+  return <ItemList items={items} title="検索結果" />;
 };
 
 export default SearchResults;
