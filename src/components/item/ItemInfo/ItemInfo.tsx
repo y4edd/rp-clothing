@@ -1,4 +1,4 @@
-import FavoriteBUtton from "@/components/top/FavoriteButton/FavoriteButton";
+import FavoriteButton from "@/components/top/FavoriteButton/FavoriteButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Image from "next/image";
 import SelectQuantity from "../SelectQuantity/SelectQuantity";
@@ -15,7 +15,7 @@ const ItemInfo = () => {
           priority
           className={styles.img}
         />
-        <FavoriteBUtton />
+        <FavoriteButton />
       </div>
       <dl className={styles.infoList}>
         <div className={styles.infoContent}>
