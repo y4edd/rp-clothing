@@ -7,11 +7,7 @@ import { Suspense } from "react";
 const TopPage = async () => {
   return (
     <>
-      <BreadList
-        bread={[
-          { link: "/", title: "トップ" },
-        ]}
-      />
+      <BreadList bread={[{ link: "/", title: "トップ" }]} />
       <PageTitle title={"トップ"} />
 
       <Suspense>

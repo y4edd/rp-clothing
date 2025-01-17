@@ -1,6 +1,6 @@
-import Button from '@/components/utils/button/Button';
-import styles from './SelectQuantity.module.css'
+import Button from "@/components/utils/button/Button";
 import btnStyles from "@/components/utils/button/Button.module.css";
+import styles from "./SelectQuantity.module.css";
 
 const SelectQuantity = () => {
   // 数量選択の配列を生成　生成させる大きさを変えるにはlength部分を変える
@@ -17,11 +17,7 @@ const SelectQuantity = () => {
             </option>
           ))}
         </select>
-        <Button
-          type="button"
-          text="カートに入れる"
-          className={btnStyles.black}
-        />
+        <Button type="button" text="カートに入れる" className={btnStyles.black} />
       </dd>
     </div>
   );

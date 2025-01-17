@@ -1,17 +1,17 @@
-.infoContent{
+.infoContent {
   display: flex;
   justify-content: start;
   align-items: center;
 }
-.infoContent dt{
+.infoContent dt {
   width: 150px;
 }
-.infoContent dd{
+.infoContent dd {
   width: calc(100% - 150px);
 }
 .selectQuantity {
   width: 45px;
   height: 30px;
   text-align: center;
-  margin-right:  30px;
+  margin-right: 30px;
 }

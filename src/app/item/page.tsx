@@ -1,7 +1,7 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
-import LookHistory from "@/components/top/LookHistoryItems/LookHistory";
 import ItemDetail from "@/components/item/ItemDetail";
+import LookHistory from "@/components/top/LookHistoryItems/LookHistory";
 
 const ItemDetailPage = () => {
   return (
@@ -13,7 +13,7 @@ const ItemDetailPage = () => {
         ]}
       />
       <PageTitle title={"商品詳細"} />
-      <ItemDetail/>
+      <ItemDetail />
       <LookHistory />
     </>
   );

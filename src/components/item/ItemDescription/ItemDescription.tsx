@@ -1,4 +1,4 @@
-import styles from "./ItemDescription.module.css"
+import styles from "./ItemDescription.module.css";
 const ItemDescription = () => {
   return (
     <div className={styles.container}>

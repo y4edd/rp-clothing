@@ -1,8 +1,8 @@
-import Image from "next/image";
-import styles from "./ItemInfo.module.css";
 import FavoriteBUtton from "@/components/top/FavoriteButton/FavoriteButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import Image from "next/image";
 import SelectQuantity from "../SelectQuantity/SelectQuantity";
+import styles from "./ItemInfo.module.css";
 const ItemInfo = () => {
   return (
     <div className={styles.container}>
