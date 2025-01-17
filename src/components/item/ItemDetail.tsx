@@ -6,8 +6,8 @@ import ItemDescription from "./ItemDescription/ItemDescription";
 const ItemDetail = () => {
   return (
     <div className={styles.container}>
-      <ItemInfo/>
-      <ItemDescription/>
+      <ItemInfo />
+      <ItemDescription />
     </div>
   );
 };

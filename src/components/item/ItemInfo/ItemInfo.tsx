@@ -3,7 +3,6 @@ import styles from "./ItemInfo.module.css";
 import FavoriteBUtton from "@/components/top/FavoriteButton/FavoriteButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SelectQuantity from "../SelectQuantity/SelectQuantity";
-
 const ItemInfo = () => {
   return (
     <div className={styles.container}>

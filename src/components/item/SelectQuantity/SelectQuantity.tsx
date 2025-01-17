@@ -8,7 +8,7 @@ const SelectQuantity = () => {
 
   return (
     <div className={styles.infoContent}>
-      <dt>数量 : </dt>
+      <dt>数量 :</dt>
       <dd>
         <select name="quantity" id="quantity" className={styles.selectQuantity}>
           {quantities.map((num) => (
