@@ -1,12 +1,10 @@
 import Image from "next/image";
 import styles from "./ItemInfo.module.css";
-import Button from "@/components/utils/button/Button";
-import btnStyles from "@/components/utils/button/Button.module.css"
+import FavoriteBUtton from "@/components/top/FavoriteButton/FavoriteButton";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import SelectQuantity from "../SelectQuantity/SelectQuantity";
 
 const ItemInfo = () => {
-  // 数量選択の配列を生成　生成させる大きさを変えるにはlength部分を変える
-  const quantities: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
-
   return (
     <div className={styles.container}>
       <div className={styles.itemImage}>
@@ -17,29 +15,26 @@ const ItemInfo = () => {
           height={200}
           className={styles.img}
         />
+        <FavoriteBUtton />
       </div>
-      <ul className={styles.infoList}>
-        <li>
-          <p>商品名 : アイテム名</p>
-        </li>
-        <li>
-          <p>販売店舗 : 〇〇〇商店</p>
-        </li>
-        <li>
-          <p>値段 : ¥ 2,000 (税込)</p>
-        </li>
-        <li >
-          <label htmlFor="quantity">数量 : </label>
-          <select name="quantity" id="quantity" className={styles.selectQuantity}>
-            {quantities.map((num) => (
-              <option key={num} value={num}>
-                {num}
-              </option>
-            ))}
-          </select>
-          <Button type="button" text="カートに入れる" className={btnStyles.black}/>
-        </li>
-      </ul>
+      <dl className={styles.infoList}>
+        <div className={styles.infoContent}>
+          <dt>商品名 :</dt>
+          <dd>サンプル商品</dd>
+        </div>
+        <div className={styles.infoContent}>
+          <dt>販売店舗 :</dt>
+          <dd className={styles.favoriteShop}>
+            {/* MEMO：店名の長さによってお気に入りボタンの位置を調整したいのでAPI作成後に調整します。 */}
+            〇〇〇商店 <FavoriteBorderIcon sx={{ fontSize: "25px" }} />
+          </dd>
+        </div>
+        <div className={styles.infoContent}>
+          <dt>値段 :</dt>
+          <dd>¥ 2,000 (税込)</dd>
+        </div>
+        <SelectQuantity />
+      </dl>
     </div>
   );
 };
