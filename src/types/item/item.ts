@@ -23,4 +23,5 @@ export type ItemListModel = {
   Item: RakutenAPIItems;
 }
 
+// 検索をかける際の、商品のカテゴリの種類
 export type CategoryProps = "tops" | "pants" | "suits" | "overalls" | "rainwear" | "coats";

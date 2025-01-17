@@ -1,5 +1,6 @@
 import type { Item } from "@/types/item/item";
 import ItemList from "../../utils/ItemList/ItemList";
+import { getNewItems } from "@/utils/apiFunc";
 
 const NewItems = async () => {
   const newItems: Item[] | null = await getNewItems();
@@ -8,20 +9,3 @@ const NewItems = async () => {
 };
 
 export default NewItems;
-
-// 新着アイテムの取得関数
-export const getNewItems = async () => {
-  try {
-    const response = await fetch("http://localhost:3000/api/items/newItems", {
-      next: { revalidate: 3600 }, //１時間で再検証
-    });
-    if (!response.ok) {
-      throw new Error("データを取得できませんでした。");
-    }
-    const items = await response.json();
-    return items.items;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-};

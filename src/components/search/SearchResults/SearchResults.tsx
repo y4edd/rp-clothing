@@ -1,26 +1,5 @@
 import ItemList from "@/components/utils/ItemList/ItemList";
-
-// APIから検索結果を取得する関数
-const fetchResults = async (query: string) => {
-  if (!query) return null;
-
-  const apiURL = `http://localhost:3000/api/items/searchByQuery?${query}`;
-
-  try {
-    const res = await fetch(apiURL, {
-      next: { revalidate: 3600 },
-     });
-
-    if (!res.ok) {
-      throw new Error(`${res.status} - ${res.statusText}`);
-    }
-    const items = await res.json();
-    return items.items;
-  } catch (err) {
-    console.error("データの取得に失敗しました:", err);
-    return null;
-  }
-};
+import { fetchResults } from "@/utils/apiFunc";
 
 const SearchResults = async ({ searchParams }: { searchParams?: Record<string, string> }) => {
   // searchParamsが未定義の場合は空オブジェクトをセット
