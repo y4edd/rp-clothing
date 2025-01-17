@@ -1,14 +1,8 @@
+import type { Item } from "@/types/item/item";
 import ItemList from "./ItemList/ItemList";
 
-export interface NewItemsModel {
-  itemName: string;
-  itemCode: string;
-  imageUrl: string;
-  itemPrice: number;
-}
-
 const NewItems = async () => {
-  const newItems: NewItemsModel[] | null = await getNewItems();
+  const newItems: Item[] | null = await getNewItems();
   // MEMO:Ladingコンポーネントもする？
   return <ItemList newItems={newItems} />;
 };

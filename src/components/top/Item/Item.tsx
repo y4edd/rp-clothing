@@ -2,21 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import FavoriteBUtton from "../FavoriteButton/FavoriteButton";
 import styles from "./Item.module.css";
+import type { Item } from "@/types/item/item";
 
-type Prop = {
-  itemName: string;
-  itemCode: string;
-  imageUrl: string;
-  itemPrice: number;
-};
 
-const Item = ({ itemName, itemCode, imageUrl, itemPrice }: Prop) => {
+const Item = ({ itemCode, itemName, itemPrice, itemImage }: Item) => {
   return (
     <div className={styles.itemContent}>
       <Link href={itemCode}>
         <div className={styles.item}>
           <Image
-            src={imageUrl}
+            src={itemImage}
             alt="アイテム画像"
             width={200}
             height={200}

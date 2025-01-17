@@ -53,9 +53,9 @@ const SearchResults = async ({ searchParams }: { searchParams?: Record<string, s
         {data.Items.map((itemObj: any, index: number) => (
           <Item
             key={index}
-            linkPath={"/"}
-            src={itemObj.Item.mediumImageUrls?.[0] || null}
             itemName={itemObj.Item.itemName}
+            itemCode={"test"}
+            imageUrl={itemObj.Item.mediumImageUrls?.[0] || null}
             itemPrice={itemObj.Item.itemPrice}
           />
         ))}

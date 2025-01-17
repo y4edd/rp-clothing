@@ -1,12 +1,7 @@
 import { handleAxiosError } from "@/lib/axios/axios";
-import type { Item } from "@/types/item/item";
+import type { Item, RakutenAPIItems, ItemListModel } from "@/types/item/item";
 import axios from "axios";
 import { NextResponse } from "next/server";
-
-// 商品のリスト情報(Itemsの中の構造)
-export interface ItemListModel {
-  Item: Item;
-}
 
 export const GET = async () => {
   try {

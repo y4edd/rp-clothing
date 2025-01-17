@@ -1,8 +1,8 @@
-import Item from "../../Item/Item";
-import type { NewItemsModel } from "../NewItems";
+import ItemInformation from "../../Item/Item";
+import type { Item } from "@/types/item/item";
 import styles from "./ItemList.module.css";
-interface Props {
-  newItems: NewItemsModel[] | null;
+type  Props = {
+  newItems: Item[] | null;
 }
 const ItemList = ({ newItems }: Props) => {
   // MEMO:エラー表示コンポーネント作成する？
@@ -13,12 +13,12 @@ const ItemList = ({ newItems }: Props) => {
       <h2 className={styles.contentTitle}>新着アイテム</h2>
       <div className={styles.gridItems}>
         {newItems.map((item) => (
-          <Item
+          <ItemInformation
             key={item.itemCode}
-            itemName={item.itemName}
             itemCode={item.itemCode}
-            imageUrl={item.imageUrl}
+            itemName={item.itemName}
             itemPrice={item.itemPrice}
+            itemImage={item.itemImage}
           />
         ))}
       </div>
