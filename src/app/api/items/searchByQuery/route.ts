@@ -1,74 +1,80 @@
-import { type NextRequest, NextResponse } from "next/server";
-
-type CategoryProps = "tops" | "pants" | "suits" | "overalls" | "rainwear" | "coats";
+import { handleAxiosError } from "@/lib/axios/axios";
+import type { CategoryProps, ItemListModel, Item } from "@/types/item/item";
+import axios from "axios";
+import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
-  const { searchParams } = new URL(req.url);
-  const keyWord = searchParams.get("keyWord") || "";
-  const category = searchParams.get("selectedCategory") || "";
-  const minPrice = searchParams.get("minPrice") || "";
-  const maxPrice = searchParams.get("maxPrice") || "";
-
-  const appId = process.env.RAKUTEN_API_ID;
-
-  if (!appId) {
-    return NextResponse.json({ message: "RAKUTEN_API_IDが未設定です" }, { status: 500 });
-  }
-
-  // 基本のAPI URL
-  let rakutenApiUrl = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
-  const params = new URLSearchParams({
-    applicationId: appId,
-    format: "json",
-    hits: "15",
-    elements:
-      "availability,catchcopy,creditCardFlag,genreId,imageFlag,itemCaption,itemCode,itemName,itemPrice,mediumImageUrls,postageFlag,shopCode,shopName,shopUrl,smallImageUrls,tagIds,taxFlag",
-  });
-
-  // カテゴリに対応するgenreIdのマッピング
-  const categoryGenreMap: Record<CategoryProps, string> = {
-    tops: "110765",
-    pants: "558846",
-    suits: "100372",
-    overalls: "558863",
-    rainwear: "566031",
-    coats: "558873",
-  };
-
-  // カテゴリが存在する場合はgenreIdを追加し、なければ全カテゴリーより検索
-  if (category && categoryGenreMap[category as CategoryProps]) {
-    params.append("genreId", categoryGenreMap[category as CategoryProps]);
-  } else {
-    params.append("genreId", "551177");
-  }
-
-  // キーワードを追加
-  if (keyWord) {
-    params.append("keyword", keyWord);
-  }
-
-  // 最低価格と最高価格を整数として追加
-  if (minPrice) {
-    params.append("minPrice", Number.parseInt(minPrice, 10).toString());
-  }
-
-  if (maxPrice) {
-    params.append("maxPrice", Number.parseInt(maxPrice, 10).toString());
-  }
-
-  // 最終的なAPI URL
-  rakutenApiUrl += `?${params.toString()}`;
-
   try {
-    const apiResponse = await fetch(rakutenApiUrl);
-    if (!apiResponse.ok) {
-      throw new Error("データの取得に失敗しました");
+    const { searchParams } = new URL(req.url);
+    const keyWord = searchParams.get("keyWord") || "";
+    const category = searchParams.get("selectedCategory") || "";
+    const minPrice = searchParams.get("minPrice") || "";
+    const maxPrice = searchParams.get("maxPrice") || "";
+
+    const appId = process.env.RAKUTEN_API_ID;
+
+    if (!appId) {
+      return NextResponse.json(
+        { message: "RAKUTEN_API_IDが未設定です" },
+        { status: 500 }
+      );
     }
 
-    const data = await apiResponse.json();
-    return NextResponse.json(data);
-  } catch (err) {
-    console.log(err);
-    return NextResponse.json({ message: "サーバーエラーが発生しました" }, { status: 500 });
+    // カテゴリに対応する genreId のマッピング
+    const categoryGenreMap: Record<CategoryProps, string> = {
+      tops: "110765",
+      pants: "558846",
+      suits: "100372",
+      overalls: "558863",
+      rainwear: "566031",
+      coats: "558873",
+    };
+
+    // ベースのパラメータ
+    const params: Record<string, string> = {
+      applicationId: appId,
+      format: "json",
+      hits: "15",
+      elements:
+        "availability,catchcopy,creditCardFlag,genreId,imageFlag,itemCaption,itemCode,itemName,itemPrice,mediumImageUrls,postageFlag,shopCode,shopName,shopUrl,smallImageUrls,tagIds,taxFlag",
+    };
+
+    // カテゴリが存在する場合は genreId を追加
+    params.genreId = categoryGenreMap[category as CategoryProps] || "551177";
+
+    // キーワード、最低価格、最高価格を追加
+    if (keyWord) params.keyword = keyWord;
+    if (minPrice) params.minPrice = Number.parseInt(minPrice, 10).toString();
+    if (maxPrice) params.maxPrice = Number.parseInt(maxPrice, 10).toString();
+
+    // APIリクエスト
+    const response = await axios.get(
+      "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601",
+      { params }
+    );
+
+    const items: ItemListModel[] = response.data.Items;
+
+    if (!items) {
+      return NextResponse.json(
+        { message: "データを取得できませんでした。" },
+        { status: 400 }
+      );
+    }
+
+    // データを整形
+    const newItems: Item[] = items.map(({ Item }) => ({
+      itemCode: Item.itemCode,
+      itemName: Item.itemName,
+      itemPrice: Item.itemPrice,
+      itemImage: Item.mediumImageUrls[0]?.imageUrl.replace(
+        "128x128",
+        "250x250"
+      ),
+    }));
+
+    return NextResponse.json({ items: newItems }, { status: 200 });
+  } catch (error) {
+    return handleAxiosError(error);
   }
 };

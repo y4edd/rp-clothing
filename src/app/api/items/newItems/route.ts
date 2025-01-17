@@ -1,5 +1,5 @@
 import { handleAxiosError } from "@/lib/axios/axios";
-import type { Item, RakutenAPIItems, ItemListModel } from "@/types/item/item";
+import type { ItemListModel } from "@/types/item/item";
 import axios from "axios";
 import { NextResponse } from "next/server";
 

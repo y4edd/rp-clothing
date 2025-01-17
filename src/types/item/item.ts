@@ -22,3 +22,5 @@ export type Item = {
 export type ItemListModel = { 
   Item: RakutenAPIItems;
 }
+
+export type CategoryProps = "tops" | "pants" | "suits" | "overalls" | "rainwear" | "coats";
