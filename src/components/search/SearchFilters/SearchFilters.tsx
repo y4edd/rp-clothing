@@ -4,8 +4,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import styles from "./SearchFilters.module.css";
 import { SearchParamsProps } from '@/types/search/search';
 import { categories } from '@/utils/data/category'; 
+import { fetchResults } from '@/utils/apiFunc';
+import { useRouter } from 'next/navigation';
 
 const SearchFilters = ({ searchParams }:{ searchParams?: SearchParamsProps }) => {
+  const router = useRouter();
   const safeSearchParams = searchParams ?? {};
 
   const filteredParams = Object.entries(safeSearchParams).reduce(
@@ -32,8 +35,30 @@ const SearchFilters = ({ searchParams }:{ searchParams?: SearchParamsProps }) =>
     { label: filteredParams.keyWord, value: filteredParams.keyWord },
   ].filter(condition => condition.value);
 
-  const deleteCondition = () => {
-    console.log("削除");
+  const deleteCondition = async (label: string) => {
+    // labelから削除対象のキーを特定する
+    const keyToDelete = Object.keys(filteredParams).find(key => {
+      const valueLabel = key === "minPrice"
+        ? `${Number(filteredParams[key]).toLocaleString()}円以上`
+        : key === "maxPrice"
+        ? `${Number(filteredParams[key]).toLocaleString()}円以下`
+        : filteredParams[key];
+      return valueLabel === label;
+    });
+
+    if(keyToDelete === "category") {
+      
+    }
+
+
+    if (keyToDelete) {
+      const params = new URLSearchParams(filteredParams);
+      console.log(keyToDelete);
+      // 正しいキーを削除
+      params.delete(keyToDelete);
+      await fetchResults(params.toString());
+      router.push(`/search?${params}`);
+    }
   };
 
   return (
@@ -46,7 +71,7 @@ const SearchFilters = ({ searchParams }:{ searchParams?: SearchParamsProps }) =>
               <p>{condition.label}</p>
               <button
                 className={styles.deleteFilterButton}
-                onClick={deleteCondition}
+                onClick={() => deleteCondition(condition.label)}
               >
                 <CloseIcon />
               </button>
