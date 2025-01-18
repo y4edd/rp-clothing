@@ -1,6 +1,6 @@
 .infoContent {
   display: flex;
-  justify-content: start;
+  justify-content: left;
   align-items: center;
 }
 .infoContent dt {

@@ -24,7 +24,7 @@
 }
 .infoContent {
   display: flex;
-  justify-content: start;
+  justify-content: left;
   align-items: center;
 }
 .infoList dt {
@@ -35,6 +35,6 @@
 }
 .favoriteShop {
   display: flex;
-  justify-content: start;
+  justify-content: left;
   align-items: center;
 }
