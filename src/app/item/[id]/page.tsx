@@ -1,6 +1,5 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
-import React from "react";
 
 const ItemDetailPage = () => {
   return (
