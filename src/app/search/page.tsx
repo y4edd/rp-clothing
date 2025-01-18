@@ -17,7 +17,7 @@ const Search = async ({ searchParams }: { searchParams?: SearchParamsProps }) =>
       />
       <PageTitle title="検索結果" />
       <SearchModal />
-      <SearchFilters />
+      <SearchFilters searchParams={params} />
       <SearchResults searchParams={params} />
     </>
   );
