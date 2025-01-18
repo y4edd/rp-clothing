@@ -6,6 +6,7 @@ import { SearchParamsProps } from '@/types/search/search';
 import { categories } from '@/utils/data/category'; 
 import { fetchResults } from '@/utils/apiFunc';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify'; 
 
 const SearchFilters = ({ searchParams }:{ searchParams?: SearchParamsProps }) => {
   const router = useRouter();
@@ -46,18 +47,19 @@ const SearchFilters = ({ searchParams }:{ searchParams?: SearchParamsProps }) =>
       return valueLabel === label;
     });
 
-    if(keyToDelete === "category") {
-      
-    }
-
-
     if (keyToDelete) {
-      const params = new URLSearchParams(filteredParams);
-      console.log(keyToDelete);
-      // 正しいキーを削除
-      params.delete(keyToDelete);
-      await fetchResults(params.toString());
-      router.push(`/search?${params}`);
+      if(keyToDelete === "selectedCategory") {
+        toast.error("カテゴリーは検索条件から削除できません！", {
+          autoClose: 1500,
+        });
+      } else {
+        const params = new URLSearchParams(filteredParams);
+        console.log(keyToDelete);
+        // 正しいキーを削除
+        params.delete(keyToDelete);
+        await fetchResults(params.toString());
+        router.push(`/search?${params}`);
+      }
     }
   };
 
