@@ -1,0 +1,33 @@
+.filtersContainer {
+  display: flex;
+  position: absolute;
+  padding-left: 25rem;
+  top: 6rem;
+}
+
+.filtersTitle {
+  font-size: 1.3rem;
+  margin-top: 1.3rem;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 1.25rem;
+  padding: 0.5rem 1rem;
+  background-color: #f9f9f9;
+}
+
+.deleteFilterButton {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
