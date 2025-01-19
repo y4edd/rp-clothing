@@ -11,7 +11,7 @@ import type { Action } from "@/types/search/search";
 import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useReducer, useState } from "react";
-import styles from "./SearchModal.module.css"
+import styles from "./SearchModal.module.css";
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {

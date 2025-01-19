@@ -1,14 +1,14 @@
 "use client";
 
-import CloseIcon from '@mui/icons-material/Close';
+import type { SearchParamsProps } from "@/types/search/search";
+import { fetchResults } from "@/utils/apiFunc";
+import { categories } from "@/utils/data/category";
+import CloseIcon from "@mui/icons-material/Close";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import styles from "./SearchFilters.module.css";
-import { SearchParamsProps } from '@/types/search/search';
-import { categories } from '@/utils/data/category'; 
-import { fetchResults } from '@/utils/apiFunc';
-import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify'; 
 
-const SearchFilters = ({ searchParams }:{ searchParams?: SearchParamsProps }) => {
+const SearchFilters = ({ searchParams }: { searchParams?: SearchParamsProps }) => {
   const router = useRouter();
   const safeSearchParams = searchParams ?? {};
 
@@ -24,31 +24,38 @@ const SearchFilters = ({ searchParams }:{ searchParams?: SearchParamsProps }) =>
 
   // selectedCategoryの変換
   if (filteredParams.selectedCategory) {
-    const category = categories.find(cat => cat.id === filteredParams.selectedCategory);
+    const category = categories.find((cat) => cat.id === filteredParams.selectedCategory);
     filteredParams.selectedCategory = category ? category.text : filteredParams.selectedCategory;
   }
 
   // 条件を配列に変換し、値が存在する項目のみ保持する
   const conditions = [
-    { label: `${Number(filteredParams.minPrice).toLocaleString()}円以上`, value: filteredParams.minPrice },
-    { label: `${Number(filteredParams.maxPrice).toLocaleString()}円以下`, value: filteredParams.maxPrice },
+    {
+      label: `${Number(filteredParams.minPrice).toLocaleString()}円以上`,
+      value: filteredParams.minPrice,
+    },
+    {
+      label: `${Number(filteredParams.maxPrice).toLocaleString()}円以下`,
+      value: filteredParams.maxPrice,
+    },
     { label: filteredParams.selectedCategory, value: filteredParams.selectedCategory },
     { label: filteredParams.keyWord, value: filteredParams.keyWord },
-  ].filter(condition => condition.value);
+  ].filter((condition) => condition.value);
 
   const deleteCondition = async (label: string) => {
     // labelから削除対象のキーを特定する
-    const keyToDelete = Object.keys(filteredParams).find(key => {
-      const valueLabel = key === "minPrice"
-        ? `${Number(filteredParams[key]).toLocaleString()}円以上`
-        : key === "maxPrice"
-        ? `${Number(filteredParams[key]).toLocaleString()}円以下`
-        : filteredParams[key];
+    const keyToDelete = Object.keys(filteredParams).find((key) => {
+      const valueLabel =
+        key === "minPrice"
+          ? `${Number(filteredParams[key]).toLocaleString()}円以上`
+          : key === "maxPrice"
+            ? `${Number(filteredParams[key]).toLocaleString()}円以下`
+            : filteredParams[key];
       return valueLabel === label;
     });
 
     if (keyToDelete) {
-      if(keyToDelete === "selectedCategory") {
+      if (keyToDelete === "selectedCategory") {
         toast.error("カテゴリーは検索条件から削除できません！", {
           autoClose: 1500,
         });
@@ -58,7 +65,7 @@ const SearchFilters = ({ searchParams }:{ searchParams?: SearchParamsProps }) =>
         // 正しいキーを削除
         params.delete(keyToDelete);
         // paramsのカテゴリを英語に戻す処理
-        
+
         await fetchResults(params.toString());
         router.push(`/search?${params}`);
       }
@@ -70,10 +77,11 @@ const SearchFilters = ({ searchParams }:{ searchParams?: SearchParamsProps }) =>
       <div className={styles.filtersContainer}>
         <div className={styles.filtersTitle}>検索内容：</div>
         <div className={styles.filters}>
-          {conditions.map((condition, index) => (
-            <div className={styles.filter} key={index}>
+          {conditions.map((condition) => (
+            <div className={styles.filter} key={condition.label}>
               <p>{condition.label}</p>
               <button
+                type="button"
                 className={styles.deleteFilterButton}
                 onClick={() => deleteCondition(condition.label)}
               >
