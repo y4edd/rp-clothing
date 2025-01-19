@@ -76,7 +76,6 @@ const SearchModalComponent = () => {
       setErrorMessage("検索条件が入力されていません");
       return;
     } else {
-      setIsModalOpen(false);
       router.push(`/search?${query}`);
     }
   };
