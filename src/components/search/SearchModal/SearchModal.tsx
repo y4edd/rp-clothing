@@ -67,7 +67,7 @@ const SearchModalComponent = () => {
 
   // モーダルを閉じる処理
   const closeModal = () => {
-    router.push(query ? `/search?${query}` : "/");
+    router.back();
   };
 
   // 検索ボタン押下時の処理
