@@ -57,6 +57,8 @@ const SearchFilters = ({ searchParams }:{ searchParams?: SearchParamsProps }) =>
         console.log(keyToDelete);
         // 正しいキーを削除
         params.delete(keyToDelete);
+        // paramsのカテゴリを英語に戻す処理
+        
         await fetchResults(params.toString());
         router.push(`/search?${params}`);
       }

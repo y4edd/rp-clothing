@@ -2,8 +2,8 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import type { SearchParamsProps } from "@/types/search/search";
 import SearchResults from "../../components/search/SearchResults/SearchResults";
-import SearchModal from "./@modal/page";
 import SearchFilters from "@/components/search/SearchFilters/SearchFilters";
+import SearchModal from "@/components/search/SearchModal/SearchModal";
 
 const Search = async ({ searchParams }: { searchParams?: SearchParamsProps }) => {
   const params = await searchParams;
