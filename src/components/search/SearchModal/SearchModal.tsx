@@ -67,7 +67,6 @@ const SearchModalComponent = () => {
 
   // モーダルを閉じる処理
   const closeModal = () => {
-    setIsModalOpen(false);
     router.push(query ? `/search?${query}` : "/");
   };
 
