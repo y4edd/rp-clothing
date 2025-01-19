@@ -1,6 +1,7 @@
 import ItemList from "@/components/utils/ItemList/ItemList";
 import type { SearchParamsProps } from "@/types/search/search";
 import { fetchResults } from "@/utils/apiFunc";
+import Error from "@/app/error";
 
 const SearchResults = async ({ searchParams }: { searchParams?: SearchParamsProps }) => {
   // searchParamsが未定義の場合は空オブジェクトをセット
@@ -14,8 +15,14 @@ const SearchResults = async ({ searchParams }: { searchParams?: SearchParamsProp
     },
     {} as Record<string, string>,
   );
-
+  
   const query = new URLSearchParams(filteredParams).toString();
+
+  if(!query) {
+    return (
+      <Error />
+    );
+  }
 
   const items = await fetchResults(query);
 
