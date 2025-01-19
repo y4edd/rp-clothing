@@ -6,35 +6,12 @@ import FavConditions from "@/components/search/FavConditions/FavConditions";
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
-import type { State } from "@/types/search/search";
-import type { Action } from "@/types/search/search";
 import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useReducer, useState } from "react";
 import styles from "./SearchModal.module.css";
-
-const reducer = (state: State, action: Action) => {
-  switch (action.type) {
-    case "SET_MIN_PRICE":
-      return { ...state, minPrice: action.payload };
-    case "SET_MAX_PRICE":
-      return { ...state, maxPrice: action.payload };
-    case "SET_CATEGORY":
-      return { ...state, selectedCategory: action.payload };
-    case "SET_KEYWORD":
-      return { ...state, keyWord: action.payload };
-    default:
-      return state;
-  }
-};
-
-// 検索条件を管理する初期化関数
-const initialState = (searchParams: URLSearchParams) => ({
-  minPrice: searchParams.get("minPrice") || "",
-  maxPrice: searchParams.get("maxPrice") || "",
-  selectedCategory: searchParams.get("category") || "",
-  keyWord: searchParams.get("keyword") || "",
-});
+import { reducer } from "@/reducer/reducer";
+import { initialState } from "@/reducer/reducer";
 
 const SearchModalComponent = () => {
   const router = useRouter();

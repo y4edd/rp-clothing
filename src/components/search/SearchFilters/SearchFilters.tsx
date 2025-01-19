@@ -83,6 +83,7 @@ const SearchFilters = ({ searchParams }: { searchParams?: SearchParamsProps }) =
               <button
                 type="button"
                 className={styles.deleteFilterButton}
+                data-testid={condition.label}
                 onClick={() => deleteCondition(condition.label)}
               >
                 <CloseIcon />
