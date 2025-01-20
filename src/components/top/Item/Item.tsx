@@ -13,7 +13,7 @@ type Prop = {
 const Item = ({ itemName, itemCode, imageUrl, itemPrice }: Prop) => {
   return (
     <div className={styles.itemContent}>
-      <Link href={itemCode}>
+      <Link href={`/item/${itemCode}`}>
         <div className={styles.item}>
           <Image
             src={imageUrl}

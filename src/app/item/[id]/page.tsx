@@ -1,7 +1,15 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
+import ItemDetail from "@/components/item/ItemDetail";
+import LookHistory from "@/components/top/LookHistoryItems/LookHistory";
 
-const ItemDetailPage = () => {
+type ItemPageProp = {
+  params: Promise<{ id: string }>;
+};
+const ItemDetailPage = async ({ params }: ItemPageProp) => {
+  const itemCode = (await params).id;
+  console.log(itemCode);
+
   return (
     <>
       <BreadList
@@ -11,10 +19,8 @@ const ItemDetailPage = () => {
         ]}
       />
       <PageTitle title={"商品詳細"} />
-      <div>
-        動的ルートで商品詳細は作成するので詳細を取得するAPIを作成時にitem直下のpage.tsxファイルを
-        [id]直下に移動します。
-      </div>
+      <ItemDetail itemCode={itemCode} />
+      <LookHistory />
     </>
   );
 };
