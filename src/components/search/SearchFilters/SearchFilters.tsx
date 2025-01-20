@@ -5,7 +5,6 @@ import { fetchResults } from "@/utils/apiFunc";
 import { categories } from "@/utils/data/category";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 import styles from "./SearchFilters.module.css";
 
 const SearchFilters = ({ searchParams }: { searchParams?: SearchParamsProps }) => {
@@ -43,6 +42,12 @@ const SearchFilters = ({ searchParams }: { searchParams?: SearchParamsProps }) =
   ].filter((condition) => condition.value);
 
   const deleteCondition = async (label: string) => {
+    // カテゴリーの日本語名から英語IDに変換する関数
+    const convertCategoryToId = (label: string): string | undefined => {
+      const category = categories.find((cat) => cat.text === label);
+      return category?.id;
+    };
+
     // labelから削除対象のキーを特定する
     const keyToDelete = Object.keys(filteredParams).find((key) => {
       const valueLabel =
@@ -55,20 +60,19 @@ const SearchFilters = ({ searchParams }: { searchParams?: SearchParamsProps }) =
     });
 
     if (keyToDelete) {
-      if (keyToDelete === "selectedCategory") {
-        toast.error("カテゴリーは検索条件から削除できません！", {
-          autoClose: 1500,
-        });
-      } else {
-        const params = new URLSearchParams(filteredParams);
-        console.log(keyToDelete);
-        // 正しいキーを削除
-        params.delete(keyToDelete);
-        // paramsのカテゴリを英語に戻す処理
-
-        await fetchResults(params.toString());
-        router.push(`/search?${params}`);
+      const params = new URLSearchParams(filteredParams);
+      // 正しいキーを削除
+      params.delete(keyToDelete);
+      // params 内の selectedCategory を日本語から英語IDに変換
+      const selectedCategory = params.get("selectedCategory");
+      if (selectedCategory) {
+        const categoryId = convertCategoryToId(selectedCategory);
+        if (categoryId) {
+          params.set("selectedCategory", categoryId);
+        }
       }
+      await fetchResults(params.toString());
+      router.push(`/search?${params}`);
     }
   };
 
