@@ -6,13 +6,13 @@ import FavConditions from "@/components/search/FavConditions/FavConditions";
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
+import { reducer } from "@/reducer/reducer";
+import { initialState } from "@/reducer/reducer";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useReducer, useState } from "react";
 import styles from "./SearchModal.module.css";
-import { reducer } from "@/reducer/reducer";
-import { initialState } from "@/reducer/reducer";
 
-const SearchModal= () => {
+const SearchModal = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(reducer, searchParams, initialState);

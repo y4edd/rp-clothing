@@ -1,21 +1,13 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import { useSearchParams } from "next/navigation";
 import SearchModal from "./SearchModal";
-import { useRouter, useSearchParams } from "next/navigation";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
   useSearchParams: jest.fn(),
 }));
 
-const mockRouter = {
-  push: jest.fn(),
-  back: jest.fn(),
-};
-
-const searchParams = {}
-
 describe("SearchModal コンポーネントのテスト", () => {
-
   test("クエリパラメータがない場合、モーダルが表示される", () => {
     // searchParams のモック
     (useSearchParams as jest.Mock).mockReturnValue({

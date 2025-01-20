@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import SearchFilters from "./SearchFilters";
 import { toast } from "react-toastify";
+import SearchFilters from "./SearchFilters";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
@@ -34,7 +34,7 @@ describe("SearchFiltersコンポーネントのテスト", () => {
 
     expect(toast.error).toHaveBeenCalledWith(
       "カテゴリーは検索条件から削除できません！",
-      expect.objectContaining({ autoClose: 1500 })
+      expect.objectContaining({ autoClose: 1500 }),
     );
   });
 });
