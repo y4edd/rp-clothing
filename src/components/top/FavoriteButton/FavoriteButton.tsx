@@ -4,7 +4,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState } from "react";
 import styles from "./FavoriteButton.module.css";
 
-const FavoriteBUtton = () => {
+const FavoriteButton = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const handleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -16,4 +16,4 @@ const FavoriteBUtton = () => {
   );
 };
 
-export default FavoriteBUtton;
+export default FavoriteButton;
