@@ -5,8 +5,9 @@ import SearchModal from "@/components/search/SearchModal/SearchModal";
 import type { SearchParamsProps } from "@/types/search/search";
 import SearchResults from "../../components/search/SearchResults/SearchResults";
 
-const Search = async ({ searchParams }: { searchParams?: SearchParamsProps }) => {
-  const params = await searchParams;
+const Search = async ({ searchParams }: { searchParams?: Promise<SearchParamsProps> }) => {
+  const params = searchParams ? await searchParams : undefined;
+
   return (
     <>
       <BreadList

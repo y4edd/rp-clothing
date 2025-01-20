@@ -1,11 +1,9 @@
 const SearchLayout = ({
   children,
-  modal,
-}: { children: React.ReactNode; modal: React.ReactNode }) => {
+}: { children: React.ReactNode }) => {
   return (
     <div>
       {children}
-      {modal}
     </div>
   );
 };

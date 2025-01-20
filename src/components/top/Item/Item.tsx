@@ -10,7 +10,7 @@ const Item = ({ itemCode, itemName, itemPrice, itemImage }: ItemData) => {
       <Link href={itemCode}>
         <div className={styles.item}>
           <Image
-            src={itemImage}
+            src={itemImage || "/images/no-image.png"}
             alt="アイテム画像"
             width={200}
             height={200}
