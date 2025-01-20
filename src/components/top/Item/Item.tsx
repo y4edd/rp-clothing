@@ -1,16 +1,25 @@
+"use client";
+
 import type { ItemData } from "@/types/item/item";
 import Image from "next/image";
 import Link from "next/link";
 import FavoriteBUtton from "../FavoriteButton/FavoriteButton";
 import styles from "./Item.module.css";
+import { useState } from "react";
 
 const Item = ({ itemCode, itemName, itemPrice, itemImage }: ItemData) => {
+  const [imageSrc, setImageSrc] = useState(itemImage);
+  const handleError = () => {
+    setImageSrc("/images/no-image.jpg");
+  };
   return (
     <div className={styles.itemContent}>
       <Link href={itemCode}>
         <div className={styles.item}>
           <Image
-            src={itemImage || "/images/no-image.png"}
+            src={itemImage || "/images/no-image.jpg"}
+            // 404エラーが出ないように
+            onError={handleError}
             alt="アイテム画像"
             width={200}
             height={200}

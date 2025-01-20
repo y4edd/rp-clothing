@@ -22,7 +22,7 @@ const ItemList = ({ items, title }: Props) => {
             itemCode={item.itemCode}
             itemName={item.itemName}
             itemPrice={item.itemPrice}
-            itemImage={item.itemImage || "/images/no-image.png"}
+            itemImage={item.itemImage || "/images/no-image.jpg"}
           />
         ))}
       </div>
