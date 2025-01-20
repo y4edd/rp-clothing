@@ -6,14 +6,13 @@ import FavConditions from "@/components/search/FavConditions/FavConditions";
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
-import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useReducer, useState } from "react";
 import styles from "./SearchModal.module.css";
 import { reducer } from "@/reducer/reducer";
 import { initialState } from "@/reducer/reducer";
 
-const SearchModalComponent = () => {
+const SearchModal= () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(reducer, searchParams, initialState);
@@ -81,8 +80,5 @@ const SearchModalComponent = () => {
     </>
   );
 };
-
-// dynamicを使ってSearchModalComponentを動的にインポートする
-const SearchModal = dynamic(() => Promise.resolve(SearchModalComponent), { ssr: false });
 
 export default SearchModal;

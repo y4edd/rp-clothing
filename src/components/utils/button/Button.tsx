@@ -7,7 +7,7 @@ type ButtonProps = {
 
 const Button = ({ type, onClick, className, text }: ButtonProps) => {
   return (
-    <button type={type} onClick={onClick} className={className}>
+    <button type={type} onClick={onClick} className={className} >
       {text}
     </button>
   );

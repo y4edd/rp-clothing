@@ -12,6 +12,8 @@ const mockRouter = {
   back: jest.fn(),
 };
 
+const searchParams = {}
+
 describe("SearchModal コンポーネントのテスト", () => {
 
   test("クエリパラメータがない場合、モーダルが表示される", () => {
@@ -25,12 +27,4 @@ describe("SearchModal コンポーネントのテスト", () => {
     const modalTitle = screen.getByText("検索条件");
     expect(modalTitle).toBeInTheDocument();
   });
-
-  // "クエリパラメータが存在する場合、モーダルが閉じている"
-
-  // "検索条件が入力されていない場合、エラーメッセージが表示される"
-
-  // "検索条件が入力された場合、正しいクエリでrouter.pushが呼び出される"
-
-  // "モーダルの閉じるボタンがrouter.backを呼び出す"
 });
