@@ -22,26 +22,26 @@ const PriceCondition = ({ minPrice, maxPrice, dispatch }: Props) => {
     <div className={styles.price}>
       <h3 className={styles.title}>値段</h3>
       <div className={styles.priceCondition}>
-        <form method="get">
-          <input
-            type="text"
-            id="minPrice"
-            data-testid="minPrice"
-            className={styles.priceEach}
-            value={minPrice}
-            onChange={minPriceChange}
-          />
-          ～
-          <input
-            type="text"
-            id="maxPrice"
-            data-testid="maxPrice"
-            className={styles.priceEach}
-            value={maxPrice}
-            onChange={maxPriceChange}
-          />
-          円
-        </form>
+        <input
+          type="text"
+          id="minPrice"
+          name="minPrice"
+          data-testid="minPrice"
+          className={styles.priceEach}
+          value={minPrice}
+          onChange={minPriceChange}
+        />
+        ～
+        <input
+          type="text"
+          id="maxPrice"
+          name="maxPrice"
+          data-testid="maxPrice"
+          className={styles.priceEach}
+          value={maxPrice}
+          onChange={maxPriceChange}
+        />
+        円
       </div>
     </div>
   );

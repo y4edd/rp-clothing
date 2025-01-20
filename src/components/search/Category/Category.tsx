@@ -15,7 +15,7 @@ const Category = React.memo(
         <input
           type="radio"
           id={id}
-          name="category"
+          name={id}
           value={id}
           className={styles.genreCheck}
           checked={selectedCategory === id}
