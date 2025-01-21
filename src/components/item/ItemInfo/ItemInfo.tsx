@@ -9,7 +9,6 @@ type Props = {
   itemData: ItemDetailModel;
 };
 const ItemInfo = ({ itemData }: Props) => {
-  console.log(itemData,'ititii')
   return (
     <div className={styles.container}>
       <div className={styles.itemImage}>

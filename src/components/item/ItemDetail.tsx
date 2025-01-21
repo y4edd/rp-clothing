@@ -7,7 +7,7 @@ export type ItemDetailModel = {
   itemCode: string;
   itemPrice: string;
   itemImage: string;
-  itemCaption: string;
+  itemCaption: string[];
   shopCode: string;
   shopName: string;
   shopUrl: string;

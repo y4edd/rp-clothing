@@ -3,3 +3,16 @@
   margin: 0 10px;
   border-bottom: 3px solid #e1dada;
 }
+.description{
+  font-size: 1.4rem;
+  text-decoration: underline;
+}
+.descriptionText{
+  margin: 15px 0;
+  line-height: 1.8rem;
+}
+.btnMore{
+  width: 200px;
+  margin: 0 auto;
+  display: grid;
+}
