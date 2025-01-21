@@ -3,12 +3,12 @@
 import type { ItemData } from "@/types/item/item";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import FavoriteBUtton from "../FavoriteButton/FavoriteButton";
 import styles from "./Item.module.css";
-import { useState } from "react";
 
 const Item = ({ itemCode, itemName, itemPrice, itemImage }: ItemData) => {
-  const [imageSrc, setImageSrc] = useState(itemImage);
+  const [_imageSrc, setImageSrc] = useState(itemImage);
   const handleError = () => {
     setImageSrc("/images/no-image.jpg");
   };
