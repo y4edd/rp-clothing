@@ -24,7 +24,6 @@ export const GET = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url);
     const itemCode = searchParams.get("itemCode");
-    console.log(itemCode, "itemCode");
 
     const response = await axios.get(
       "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601",
@@ -38,9 +37,7 @@ export const GET = async (req: NextRequest) => {
         },
       }
     );
-    // console.log(response, "ititi");
     const items: ItemListModel = response.data.Items[0];
-    // console.log(items, "response");
 
     if (!items) {
       return NextResponse.json(
@@ -48,6 +45,9 @@ export const GET = async (req: NextRequest) => {
         { status: 400 }
       );
     }
+
+    // itemCaptionを「。」で区切り新たに配列を生成する
+    const newItemCaption: string[] = formatItemCaption(items.Item.itemCaption);
 
     // // mediumImageUrlsは配列で複数のパスが入っているため、一つだけを抽出する。
     // // またパスの末尾が画像のサイズのためサイズを置き換える
@@ -59,7 +59,7 @@ export const GET = async (req: NextRequest) => {
         "128x128",
         "250x250"
       ),
-      itemCaption: items.Item.itemCaption,
+      itemCaption: newItemCaption,
       shopCode: items.Item.shopCode,
       shopName: items.Item.shopName,
       shopUrl: items.Item.shopUrl,
@@ -70,4 +70,25 @@ export const GET = async (req: NextRequest) => {
   } catch (error) {
     return handleAxiosError(error);
   }
+};
+
+// itemCaptionは改行がないかつ文字数が多いため配列型に成形する。
+const formatItemCaption = (itemCaption: string) => {
+  const LIMIT_LENGTH = 40; //検証する要素の文字制限
+  const textArray: string[] = itemCaption.split("。");
+  const formatArray: string[] = [];
+
+  for (let i = 0; i < textArray.length; i++) {
+    // textArrayの一つの要素の文字数がLIMIT_LENGTHより大きい場合はそのまま配列に挿入
+    if (textArray[i].length > LIMIT_LENGTH) {
+      formatArray.push(textArray[i]);
+    } else {
+      //LIMIT_LENGTHより小さい場合は次の要素と組み合わせて配列に挿入。
+      formatArray.push(
+        textArray[i] + "。".toString() + textArray[i + 1] + "。".toString()
+      );
+      i++; // 次の要素の検証をスキップさせる。
+    }
+  }
+  return formatArray;
 };
