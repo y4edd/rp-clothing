@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 
 const Register = () => {
   return (
-    <>
+    <div className={styles.container}>
       <BreadList
         bread={[
           { link: "/", title: "トップ" },
@@ -16,7 +16,7 @@ const Register = () => {
       <div className={styles.registrationPage}>
         <RegisterForm />
       </div>
-    </>
+    </div>
   );
 };
 

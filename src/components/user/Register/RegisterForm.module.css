@@ -3,3 +3,16 @@
   margin: 0 auto;
   padding: 30px 0;
 }
+
+/* ボタン */
+.btn{
+  text-align: center;
+}
+
+/* エラー */
+.error{
+  text-align: center;
+  color: red;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
