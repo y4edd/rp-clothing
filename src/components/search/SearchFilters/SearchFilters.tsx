@@ -19,8 +19,6 @@ const SearchFilters = ({ searchParams }: { searchParams?: SearchParamsProps }) =
     {} as Record<string, string>,
   );
 
-  if (!filteredParams) return null;
-
   // selectedCategoryの変換
   if (filteredParams.selectedCategory) {
     const category = categories.find((cat) => cat.id === filteredParams.selectedCategory);
