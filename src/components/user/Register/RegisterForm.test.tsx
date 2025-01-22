@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import RegisterForm from "./RegisterForm";
-import userEvent from "@testing-library/user-event";
 import { showToast } from "@/components/utils/toast/toast";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import RegisterForm from "./RegisterForm";
 
 jest.mock("@/components/utils/toast/toast", () => ({
   showToast: jest.fn(),
@@ -18,7 +18,6 @@ describe("RegistrationFormコンポーネントのテスト", () => {
     const button = screen.getByRole("button");
     expect(button).toBeInTheDocument();
   });
-  
 
   test("propsが正しく渡されているかどうか", () => {
     render(<RegisterForm />);
