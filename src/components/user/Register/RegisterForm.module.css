@@ -5,12 +5,12 @@
 }
 
 /* ボタン */
-.btn{
+.btn {
   text-align: center;
 }
 
 /* エラー */
-.error{
+.error {
   text-align: center;
   color: red;
   font-size: 0.8rem;

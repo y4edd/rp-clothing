@@ -1,6 +1,6 @@
-import { toast, ToastContainer, ToastOptions } from "react-toastify";
+import { ToastContainer, type ToastOptions, toast } from "react-toastify";
 
-export const showToast = (message: string, type: string) => {
+export const showToast = (message: string) => {
   const options: ToastOptions = {
     position: "top-center",
     autoClose: 3000,
@@ -12,11 +12,7 @@ export const showToast = (message: string, type: string) => {
     theme: "colored",
   };
 
-  if (type === "success") {
-    toast.success(message, options);
-  } else {
-    toast.error(message, options);
-  }
+  toast.success(message, options);
 };
 
 export const ToastContainerComponent = () => <ToastContainer />;
