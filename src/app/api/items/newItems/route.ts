@@ -1,12 +1,7 @@
 import { handleAxiosError } from "@/lib/axios/axios";
-import type { Item } from "@/types/item/item";
+import type { ItemListModel } from "@/types/item/item";
 import axios from "axios";
 import { NextResponse } from "next/server";
-
-// 商品のリスト情報(Itemsの中の構造)
-export interface ItemListModel {
-  Item: Item;
-}
 
 export const GET = async () => {
   try {
@@ -37,7 +32,9 @@ export const GET = async () => {
       itemName: Item.itemName,
       itemCode: Item.itemCode,
       itemPrice: Item.itemPrice,
-      imageUrl: Item.mediumImageUrls[0]?.imageUrl.replace("128x128", "250x250"),
+      itemImage: Item.mediumImageUrls[0]?.imageUrl
+        ? Item.mediumImageUrls[0]?.imageUrl.replace("128x128", "250x250")
+        : null,
     }));
 
     return NextResponse.json({ items: newItems }, { status: 200 });

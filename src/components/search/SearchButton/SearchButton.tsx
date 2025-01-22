@@ -8,7 +8,6 @@ const SearchButton = () => {
 
   const filter = () => {
     router.push("/search", { scroll: false });
-    console.log("検索ボタンがクリックされました");
   };
   return (
     <>

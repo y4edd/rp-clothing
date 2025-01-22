@@ -9,7 +9,6 @@ const TopPage = async () => {
     <>
       <BreadList bread={[{ link: "/", title: "トップ" }]} />
       <PageTitle title={"トップ"} />
-
       <Suspense>
         <NewItems />
       </Suspense>

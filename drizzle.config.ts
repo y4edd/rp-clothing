@@ -29,9 +29,6 @@ export default defineConfig({
     user: dbConfig.user,
     password: dbConfig.password,
     database: dbConfig.database || "default",
-    ssl: {
-      // 自己署名証明書を許可
-      rejectUnauthorized: false,
-    },
+    ssl: false,
   },
 });

@@ -1,4 +1,4 @@
-import { getNewItems } from "./NewItems";
+import { getNewItems } from "@/utils/apiFunc";
 
 describe("新着アイテムの取得関数のテスト", () => {
   const mockItemData = [
