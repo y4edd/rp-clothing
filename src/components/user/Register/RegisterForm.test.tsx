@@ -16,7 +16,9 @@ describe("RegistrationFormコンポーネントのテスト", () => {
   test("ボタンが正しく表示されているか", () => {
     render(<RegisterForm />);
     const button = screen.getByRole("button");
+    expect(button).toBeInTheDocument();
   });
+  
 
   test("propsが正しく渡されているかどうか", () => {
     render(<RegisterForm />);
