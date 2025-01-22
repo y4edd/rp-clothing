@@ -49,7 +49,7 @@ const RegisterForm = () => {
         headers: { "content-type": "application/json" },
         body: JSON.stringify(registerDate),
       });
-      console.log(res.status);
+      console.log(res.statusText);
 
       if (!res.ok) {
         setRegisterError("※このメールアドレスはすでに登録しています。");
