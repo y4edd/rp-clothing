@@ -13,7 +13,9 @@ const Header = () => {
           <WordSearch />
         </div>
         <div className={styles.title}>
-          <p>RPclothing</p>
+          <Link href="/">
+            <p>RPclothing</p>
+          </Link>
         </div>
         {/* MEMO: 未ログイン時はこちらが表示されます */}
         {/* <div className={styles.navigationContainer}>

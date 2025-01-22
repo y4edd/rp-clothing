@@ -2,7 +2,7 @@
 import LinkBtn from "@/components/utils/link/LinkBtn";
 import styles from "./unexpected.module.css";
 
-const error = () => {
+const ServerError = () => {
   return (
     <div className={styles.container}>
       <div className={styles.errorText}>
@@ -17,4 +17,4 @@ const error = () => {
   );
 };
 
-export default error;
+export default ServerError;

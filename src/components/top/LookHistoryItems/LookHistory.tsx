@@ -15,7 +15,7 @@ const LookHistory = () => {
             key={item}
             itemName={"sample Item"}
             itemCode={"sampleCode"}
-            imageUrl={"/sample/sample-item-image.png"}
+            itemImage={"/sample/sample-item-image.png"}
             itemPrice={2000}
           />
         ))}
