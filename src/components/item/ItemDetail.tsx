@@ -1,24 +1,16 @@
+import { getItemDetail } from "@/utils/apiFunc";
 import ItemDescription from "./ItemDescription/ItemDescription";
 import styles from "./ItemDetail.module.css";
 import ItemInfo from "./ItemInfo/ItemInfo";
-// typesディレクトリに移動する。
-export type ItemDetailModel = {
-  itemName: string;
-  itemCode: string;
-  itemPrice: string;
-  itemImage: string;
-  itemCaption: string[];
-  shopCode: string;
-  shopName: string;
-  shopUrl: string;
-};
+import NoItem from "./NoItem/NoItem";
+import type { ItemDetailModel } from "@/types/item/item";
+
 type Props = {
   itemCode: string;
 };
 const ItemDetail = async ({ itemCode }: Props) => {
   const itemData: ItemDetailModel | null = await getItemDetail(itemCode);
-  if (!itemData) return <p>アイテム情報を取得できませんでした。</p>;
-  // console.log(itemData, "itemData");
+  if (!itemData) return <NoItem />;
 
   return (
     <div className={styles.container}>
@@ -29,19 +21,3 @@ const ItemDetail = async ({ itemCode }: Props) => {
 };
 
 export default ItemDetail;
-
-export async function getItemDetail(itemCode: string) {
-  try {
-    const response = await fetch(
-      `http://localhost:3000/api/items/itemDetail?itemCode=${itemCode}`
-    );
-    if (!response.ok) {
-      throw new Error("データを取得できませんでした。");
-    }
-    const itemDetail = await response.json();
-    return itemDetail.item;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}

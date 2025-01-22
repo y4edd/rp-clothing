@@ -39,6 +39,9 @@
   justify-content: left;
   align-items: center;
 }
+.shopLink:hover {
+  text-decoration: underline;
+}
 .taxText {
   font-size: 0.9rem;
 }

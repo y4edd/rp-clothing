@@ -1,23 +1,11 @@
 import { handleAxiosError } from "@/lib/axios/axios";
-import type { ImageUrls } from "@/types/item/item";
+import type { RakutenItemDetailModel } from "@/types/item/item";
 import axios from "axios";
 import { type NextRequest, NextResponse } from "next/server";
 
 // 商品のリスト情報(Itemsの中の構造)
 export type ItemListModel = {
   Item: RakutenItemDetailModel;
-};
-
-// 商品
-type RakutenItemDetailModel = {
-  itemName: string;
-  itemCode: string;
-  mediumImageUrls: ImageUrls[];
-  itemPrice: string;
-  itemCaption: string;
-  shopName: string;
-  shopCode: string;
-  shopUrl: string;
 };
 
 export const GET = async (req: NextRequest) => {
@@ -46,7 +34,7 @@ export const GET = async (req: NextRequest) => {
       );
     }
 
-    // itemCaptionを「。」で区切り新たに配列を生成する
+    // itemCaptionを配列型に成形する
     const newItemCaption: string[] = formatItemCaption(items.Item.itemCaption);
 
     // // mediumImageUrlsは配列で複数のパスが入っているため、一つだけを抽出する。
@@ -64,7 +52,6 @@ export const GET = async (req: NextRequest) => {
       shopName: items.Item.shopName,
       shopUrl: items.Item.shopUrl,
     };
-    // console.log(formatItem, "syuuseigo");
 
     return NextResponse.json({ item: formatItem }, { status: 200 });
   } catch (error) {
@@ -79,11 +66,11 @@ const formatItemCaption = (itemCaption: string) => {
   const formatArray: string[] = [];
 
   for (let i = 0; i < textArray.length; i++) {
-    // textArrayの一つの要素の文字数がLIMIT_LENGTHより大きい場合はそのまま配列に挿入
+    // textArrayの一つの要素の文字数がLIMIT_LENGTHより大きい場合はそのままformatArrayに挿入
     if (textArray[i].length > LIMIT_LENGTH) {
-      formatArray.push(textArray[i]);
+      formatArray.push(textArray[i] + "。".toString());
     } else {
-      //LIMIT_LENGTHより小さい場合は次の要素と組み合わせて配列に挿入。
+      //LIMIT_LENGTHより小さい場合は次の要素と組み合わせてformatArrayに挿入。
       formatArray.push(
         textArray[i] + "。".toString() + textArray[i + 1] + "。".toString()
       );
