@@ -1,9 +1,9 @@
 import FavoriteButton from "@/components/top/FavoriteButton/FavoriteButton";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Image from "next/image";
 import SelectQuantity from "../SelectQuantity/SelectQuantity";
 import styles from "./ItemInfo.module.css";
 import type { ItemDetailModel } from "../ItemDetail";
+import FavoriteShopButton from "../FavoriteShopButton/FavoriteShopButton";
 
 type Props = {
   itemData: ItemDetailModel;
@@ -30,13 +30,13 @@ const ItemInfo = ({ itemData }: Props) => {
         <div className={styles.infoContent}>
           <dt>販売店舗 :</dt>
           <dd className={styles.favoriteShop}>
-            {/* MEMO：店名の長さによってお気に入りボタンの位置を調整したいのでAPI作成後に調整します。 */}
-            {itemData.shopName} <FavoriteBorderIcon sx={{ fontSize: "25px" }} />
+            <p>{itemData.shopName}</p>
+            <FavoriteShopButton/>
           </dd>
         </div>
         <div className={styles.infoContent}>
           <dt>値段 :</dt>
-          <dd>¥ {itemData.itemPrice.toLocaleString()} (税込)</dd>
+          <dd>¥ {itemData.itemPrice.toLocaleString()} <span className={styles.taxText}>(税込)</span></dd>
         </div>
         <SelectQuantity />
       </dl>

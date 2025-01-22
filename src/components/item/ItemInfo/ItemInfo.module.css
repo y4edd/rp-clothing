@@ -16,16 +16,17 @@
 }
 .infoList {
   width: 60%;
-  margin: 40px 0;
-  font-size: 1.4rem;
+  margin: 20px 0;
+  font-size: 1.25rem;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  word-break: break-all;
 }
 .infoContent {
   display: flex;
   justify-content: left;
-  align-items: center;
+  align-items: baseline;
 }
 .infoList dt {
   width: 150px;
@@ -37,4 +38,7 @@
   display: flex;
   justify-content: left;
   align-items: center;
+}
+.taxText {
+  font-size: 0.9rem;
 }

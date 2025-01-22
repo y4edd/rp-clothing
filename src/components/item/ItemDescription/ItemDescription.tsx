@@ -9,14 +9,14 @@ type Props = {
 const ItemDescription = ({ description }: Props) => {
   const [isSeeMore, setIsSeeMore] = useState(false);
   const CUT_LINE = 7;//初期表示の表示する配列数
-  
+
   const visibleLines: string[] = isSeeMore
     ? description
     : description.slice(0, CUT_LINE);
 
   return (
     <div className={styles.container}>
-      <p className={styles.description}>商品詳細</p>
+      <p className={styles.description}>商品説明</p>
       <div className={styles.descriptionText}>
         {visibleLines.map((text, index) => (
           <p key={index.toString()}>{text}</p>
