@@ -2,7 +2,7 @@ import styles from "./Icon.module.css";
 
 type IconProps = {
   type: "button" | "submit" | "reset";
-  onClick: () => void;
+  onClick?: (e?: React.FormEvent) => void;
   children: React.ReactNode;
 };
 

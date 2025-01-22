@@ -11,7 +11,13 @@ const LookHistory = () => {
       <h2 className={styles.contentTitle}>最近チェックしたアイテム</h2>
       <div className={styles.gridItemsHistory}>
         {sampleArrayHistory.map((item) => (
-          <Item key={item} linkPath="/" />
+          <Item
+            key={item}
+            itemName={"sample Item"}
+            itemCode={"sampleCode"}
+            itemImage={"/sample/sample-item-image.png"}
+            itemPrice={2000}
+          />
         ))}
       </div>
 

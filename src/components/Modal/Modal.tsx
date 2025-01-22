@@ -2,26 +2,15 @@
 "use client";
 
 import CloseIcon from "@mui/icons-material/Close";
-import { useRouter } from "next/navigation";
 import styles from "./Modal.module.css";
 
-const Modal = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const router = useRouter();
-
-  const onDismiss = () => {
-    router.back();
-  };
-
+const Modal = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => {
   return (
     <div className={styles.modalBackdrop}>
       <div className={styles.modal}>
         <div className={styles.modalItem}>
           {children}
-          <button type="button" onClick={onDismiss} className={styles.closeButton}>
+          <button type="button" onClick={onClose} className={styles.closeButton}>
             <CloseIcon />
           </button>
         </div>
