@@ -1,0 +1,9 @@
+.conditionContainer {
+  display: flex;
+  margin-top:2.0rem;
+  font-size: 1.5rem;
+}
+
+.name {
+  padding: 0rem 12.0rem ;
+}
