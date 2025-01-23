@@ -36,7 +36,7 @@ const FavConditions = () => {
         <ConditionEditButtons />
       </div>
     </>
-  )
-}
+  );
+};
 
 export default FavConditions;

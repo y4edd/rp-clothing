@@ -1,9 +1,9 @@
-"use client"
+"use client";
+import FavConditions from "@/components/favorite/FavConditions/FavConditions";
+import RegisterConditionButton from "@/components/favorite/RegisterConditionButton/RegisterConditionButton";
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import styles from "./page.module.css";
-import FavConditions from "@/components/favorite/FavConditions/FavConditions";
-import RegisterConditionButton from "@/components/favorite/RegisterConditionButton/RegisterConditionButton";
 
 const SearchCondition = () => {
   return (
@@ -11,12 +11,12 @@ const SearchCondition = () => {
       <BreadList
         bread={[
           { link: "/", title: "トップ" },
-          { link: "/mypage", title: "マイページ"},
+          { link: "/mypage", title: "マイページ" },
           { link: "/mypage/searchCondition", title: "お気に入り条件" },
         ]}
       />
       <PageTitle title="お気に入り条件" />
-      <RegisterConditionButton /> 
+      <RegisterConditionButton />
       <div className={styles.container}>
         <div className={styles.conditionGroup}>
           <div className={styles.conditionName}>条件名</div>

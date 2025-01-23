@@ -1,8 +1,8 @@
 "use client";
 
 import Button from "@/components/utils/button/Button";
-import styles from "./ConditionEditButtons.module.css";
 import buttonStyles from "@/components/utils/button/Button.module.css";
+import styles from "./ConditionEditButtons.module.css";
 
 const ConditionEditButtons = () => {
   const toEdit = () => {
@@ -18,10 +18,15 @@ const ConditionEditButtons = () => {
         <Button type="button" onClick={toEdit} className={buttonStyles.white} text="編集" />
       </div>
       <div className={styles.deleteButton}>
-        <Button type="button" onClick={deleteCondition} className={buttonStyles.white} text="削除" />
+        <Button
+          type="button"
+          onClick={deleteCondition}
+          className={buttonStyles.white}
+          text="削除"
+        />
       </div>
     </div>
   );
-}
+};
 
 export default ConditionEditButtons;

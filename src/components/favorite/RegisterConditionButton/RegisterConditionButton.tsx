@@ -1,6 +1,6 @@
 "use client";
-import Button from "@/components/utils/button/Button"
-import buttonStyles from "@/components/utils/button/Button.module.css"
+import Button from "@/components/utils/button/Button";
+import buttonStyles from "@/components/utils/button/Button.module.css";
 import styles from "./RegisterConditionButton.module.css";
 
 const RegisterConditionButton = () => {
@@ -18,9 +18,7 @@ const RegisterConditionButton = () => {
         text="お気に入り条件を登録する"
       />
     </div>
-  )
-}
+  );
+};
 
-export default RegisterConditionButton
-
-
+export default RegisterConditionButton;
