@@ -1,0 +1,84 @@
+"use client";
+
+import Modal from "@/components/Modal/Modal";
+import CategoryCondition from "@/components/search/CategoryCondition/CategoryCondition";
+import FavConditions from "@/components/search/FavConditions/FavConditions";
+import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
+import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
+import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
+import { reducer } from "@/reducer/reducer";
+import { initialState } from "@/reducer/reducer";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useReducer, useState } from "react";
+import styles from "./SearchModal.module.css";
+
+const SearchModal = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [state, dispatch] = useReducer(reducer, searchParams, initialState);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // ページ遷移時にモーダルを開く
+  // 新しく渡ってくるクエリの有無でモーダル開閉を管理
+  useEffect(() => {
+    if (!searchParams.toString()) {
+      setIsModalOpen(true);
+    } else {
+      setIsModalOpen(false);
+    }
+  }, [searchParams]);
+
+  // stateの変更をリアルタイムでqueryに反映
+  const query = useMemo(() => {
+    const queryObj = Object.entries(state).reduce(
+      (acc, [key, value]) => {
+        if (value !== "") acc[key] = value;
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
+    return new URLSearchParams(queryObj).toString();
+  }, [state]);
+
+  // モーダルを閉じる処理
+  const closeModal = () => {
+    router.back();
+  };
+
+  // 検索ボタン押下時の処理
+  const handleSearch = () => {
+    if (!query) {
+      setErrorMessage("検索条件が入力されていません");
+      return;
+    } else {
+      router.push(`/search?${query}`);
+    }
+  };
+
+  return (
+    <>
+      {isModalOpen && (
+        <Modal onClose={closeModal}>
+          <div className={styles.modalContent}>
+            <h2 className={styles.modalTitle}>検索条件</h2>
+            <div className={styles.searchConditions}>
+              <FavConditions />
+              <PriceCondition
+                minPrice={state.minPrice}
+                maxPrice={state.maxPrice}
+                dispatch={dispatch}
+              />
+              <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
+              <KeyWordCondition keyWord={state.keyWord} dispatch={dispatch} />
+              <SearchStartButton onSearch={() => handleSearch()} />
+              <div className={styles.errorMessage}>{errorMessage}</div>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </>
+  );
+};
+
+export default SearchModal;

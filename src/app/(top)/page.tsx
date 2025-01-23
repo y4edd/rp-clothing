@@ -1,10 +1,17 @@
+import BreadList from "@/components/frame/breadList/BreadList";
+import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import LookHistory from "@/components/top/LookHistoryItems/LookHistory";
 import NewItems from "@/components/top/NewItems/NewItems";
+import { Suspense } from "react";
 
-const TopPage = () => {
+const TopPage = async () => {
   return (
     <>
-      <NewItems />
+      <BreadList bread={[{ link: "/", title: "トップ" }]} />
+      <PageTitle title={"トップ"} />
+      <Suspense>
+        <NewItems />
+      </Suspense>
       <LookHistory />
     </>
   );

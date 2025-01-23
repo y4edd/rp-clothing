@@ -1,13 +1,5 @@
-const SearchLayout = ({
-  children,
-  modal,
-}: { children: React.ReactNode; modal: React.ReactNode }) => {
-  return (
-    <div>
-      {children}
-      {modal}
-    </div>
-  );
+const SearchLayout = ({ children }: { children: React.ReactNode }) => {
+  return <div>{children}</div>;
 };
 
 export default SearchLayout;
