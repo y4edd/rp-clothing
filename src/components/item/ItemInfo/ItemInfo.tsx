@@ -1,10 +1,9 @@
-import FavoriteButton from "@/components/top/FavoriteButton/FavoriteButton";
-import Image from "next/image";
 import SelectQuantity from "../SelectQuantity/SelectQuantity";
 import styles from "./ItemInfo.module.css";
 import type { ItemDetailModel } from "@/types/item/item";
 import FavoriteShopButton from "../FavoriteShopButton/FavoriteShopButton";
 import Link from "next/link";
+import ItemImage from "../ItemImage/ItemImage";
 
 type Props = {
   itemData: ItemDetailModel;
@@ -13,17 +12,7 @@ type Props = {
 const ItemInfo = ({ itemData }: Props) => {
   return (
     <div className={styles.container}>
-      <div className={styles.itemImage}>
-        <Image
-          src={itemData.itemImage}
-          alt="アイテム画像"
-          width={200}
-          height={200}
-          priority
-          className={styles.img}
-        />
-        <FavoriteButton />
-      </div>
+      <ItemImage itemImage={itemData.itemImage} />
       <dl className={styles.infoList}>
         <div className={styles.infoContent}>
           <dt>商品名 :</dt>
@@ -32,7 +21,9 @@ const ItemInfo = ({ itemData }: Props) => {
         <div className={styles.infoContent}>
           <dt>販売店舗 :</dt>
           <dd className={styles.favoriteShop}>
-            <Link href={itemData.shopUrl} className={styles.shopLink}>{itemData.shopName}</Link>
+            <Link href={itemData.shopUrl} className={styles.shopLink}>
+              {itemData.shopName}
+            </Link>
             <FavoriteShopButton />
           </dd>
         </div>

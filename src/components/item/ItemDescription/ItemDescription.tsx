@@ -7,8 +7,8 @@ type Props = {
   description: string[];
 };
 const ItemDescription = ({ description }: Props) => {
+  const CUT_LINE: number = 7; //初期表示の表示する配列数
   const [isSeeMore, setIsSeeMore] = useState(false);
-  const CUT_LINE = 7;//初期表示の表示する配列数
 
   const visibleLines: string[] = isSeeMore
     ? description
@@ -22,23 +22,26 @@ const ItemDescription = ({ description }: Props) => {
           <p key={index.toString()}>{text}</p>
         ))}
       </div>
-      <div className={styles.btnMore}>
-        {!isSeeMore ? (
-          <Button
-            type="button"
-            className={btnStyle.black}
-            onClick={() => setIsSeeMore(true)}
-            text="More"
-          />
-        ) : (
-          <Button
-            type="button"
-            className={btnStyle.black}
-            onClick={() => setIsSeeMore(false)}
-            text="Close"
-          />
-        )}
-      </div>
+      {/* description配列の数がCUT_LIMEより大きい時にボタンを表示 */}
+      {description.length > CUT_LINE && (
+        <div className={styles.btnMore}>
+          {!isSeeMore ? (
+            <Button
+              type="button"
+              className={btnStyle.black}
+              onClick={() => setIsSeeMore(true)}
+              text="More"
+            />
+          ) : (
+            <Button
+              type="button"
+              className={btnStyle.white}
+              onClick={() => setIsSeeMore(false)}
+              text="Close"
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };
