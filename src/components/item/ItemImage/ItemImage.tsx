@@ -1,8 +1,8 @@
 "use client";
-import Image from "next/image";
-import styles from "./ItemImage.module.css";
 import FavoriteButton from "@/components/top/FavoriteButton/FavoriteButton";
+import Image from "next/image";
 import { useState } from "react";
+import styles from "./ItemImage.module.css";
 
 type Prop = {
   itemImage: string;

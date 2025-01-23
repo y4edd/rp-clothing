@@ -1,9 +1,9 @@
+import type { ItemDetailModel } from "@/types/item/item";
+import Link from "next/link";
+import FavoriteShopButton from "../FavoriteShopButton/FavoriteShopButton";
+import ItemImage from "../ItemImage/ItemImage";
 import SelectQuantity from "../SelectQuantity/SelectQuantity";
 import styles from "./ItemInfo.module.css";
-import type { ItemDetailModel } from "@/types/item/item";
-import FavoriteShopButton from "../FavoriteShopButton/FavoriteShopButton";
-import Link from "next/link";
-import ItemImage from "../ItemImage/ItemImage";
 
 type Props = {
   itemData: ItemDetailModel;

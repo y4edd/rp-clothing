@@ -24,13 +24,7 @@ export type ItemListModel = {
 };
 
 // 検索をかける際の、商品のカテゴリの種類
-export type CategoryProps =
-  | "tops"
-  | "pants"
-  | "suits"
-  | "overalls"
-  | "rainwear"
-  | "coats";
+export type CategoryProps = "tops" | "pants" | "suits" | "overalls" | "rainwear" | "coats";
 
 // 楽天APIから取得する商品の型情報
 export type RakutenItemDetailModel = {

@@ -1,15 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import ItemInfo from "./ItemInfo";
 
-jest.mock("@/components/top/FavoriteButton/FavoriteButton", () => () => (
-  <div>FavoriteButton</div>
-));
-jest.mock("../FavoriteShopButton/FavoriteShopButton", () => () => (
-  <div>FavoriteShopButton</div>
-));
-jest.mock("../SelectQuantity/SelectQuantity", () => () => (
-  <div>SelectQuantity</div>
-));
+jest.mock("@/components/top/FavoriteButton/FavoriteButton", () => () => <div>FavoriteButton</div>);
+jest.mock("../FavoriteShopButton/FavoriteShopButton", () => () => <div>FavoriteShopButton</div>);
+jest.mock("../SelectQuantity/SelectQuantity", () => () => <div>SelectQuantity</div>);
 describe("ItemInfoコンポーネントのテスト", () => {
   const mockItemData = {
     itemName: "テスト",

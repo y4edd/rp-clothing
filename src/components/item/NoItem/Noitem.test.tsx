@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import NoItem from "./NoItem";
 import { useRouter } from "next/navigation";
+import NoItem from "./NoItem";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
@@ -9,9 +9,7 @@ describe("NoItemコンポーネントのテスト", () => {
   test("テキストが正常に表示されているか", () => {
     render(<NoItem />);
     const text1 = screen.getByText("アイテム情報を取得できませんでした。");
-    const text2 = screen.getByText(
-      "下記ボタンよりもう一度試すか、前のページのお戻りください。"
-    );
+    const text2 = screen.getByText("下記ボタンよりもう一度試すか、前のページのお戻りください。");
 
     expect(text1).toBeInTheDocument();
     expect(text2).toBeInTheDocument();

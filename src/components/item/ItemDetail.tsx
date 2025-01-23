@@ -1,9 +1,9 @@
+import type { ItemDetailModel } from "@/types/item/item";
 import { getItemDetail } from "@/utils/apiFunc";
 import ItemDescription from "./ItemDescription/ItemDescription";
 import styles from "./ItemDetail.module.css";
 import ItemInfo from "./ItemInfo/ItemInfo";
 import NoItem from "./NoItem/NoItem";
-import type { ItemDetailModel } from "@/types/item/item";
 
 type Props = {
   itemCode: string;

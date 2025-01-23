@@ -1,13 +1,11 @@
+import { getItemDetail } from "@/utils/apiFunc";
 import { render, screen } from "@testing-library/react";
 import ItemDetail from "./ItemDetail";
-import { getItemDetail } from "@/utils/apiFunc";
 jest.mock("@/utils/apiFunc", () => ({
   getItemDetail: jest.fn(),
 }));
 jest.mock("./ItemInfo/ItemInfo", () => () => <div>Mocked ItemInfo</div>);
-jest.mock("./ItemDescription/ItemDescription", () => () => (
-  <div>Mocked ItemDescription</div>
-));
+jest.mock("./ItemDescription/ItemDescription", () => () => <div>Mocked ItemDescription</div>);
 jest.mock("./NoItem/NoItem", () => () => <div>Mocked NoItem</div>);
 const mockItemData = {
   itemName: "test",

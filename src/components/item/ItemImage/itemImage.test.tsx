@@ -1,9 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ItemImage from "./ItemImage";
 
-jest.mock("@/components/top/FavoriteButton/FavoriteButton", () => () => (
-  <div>FavoriteButton</div>
-));
+jest.mock("@/components/top/FavoriteButton/FavoriteButton", () => () => <div>FavoriteButton</div>);
 describe("ItemImageコンポーネントのテスト", () => {
   const mockImagePath = "/testPath";
 

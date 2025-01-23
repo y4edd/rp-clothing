@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
-import styles from "./ItemDescription.module.css";
 import Button from "@/components/utils/button/Button";
 import btnStyle from "@/components/utils/button/Button.module.css";
+import { useState } from "react";
+import styles from "./ItemDescription.module.css";
 type Props = {
   description: string[];
 };
@@ -10,9 +10,7 @@ const ItemDescription = ({ description }: Props) => {
   const CUT_LINE: number = 7; //初期表示の表示する配列数
   const [isSeeMore, setIsSeeMore] = useState(false);
 
-  const visibleLines: string[] = isSeeMore
-    ? description
-    : description.slice(0, CUT_LINE);
+  const visibleLines: string[] = isSeeMore ? description : description.slice(0, CUT_LINE);
 
   return (
     <div className={styles.container}>

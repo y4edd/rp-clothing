@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import styles from "./FavoriteShopButton.module.css"
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useState } from "react";
+import styles from "./FavoriteShopButton.module.css";
 
 const FavoriteShopButton = () => {
   const [isFavorite, setIsFavorite] = useState(false);

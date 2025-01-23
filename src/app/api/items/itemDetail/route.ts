@@ -23,15 +23,12 @@ export const GET = async (req: NextRequest) => {
           elements:
             "itemName,itemCode,mediumImageUrls,itemPrice,itemCaption,shopName,shopCode,shopUrl",
         },
-      }
+      },
     );
     const items: ItemListModel = response.data.Items[0];
 
     if (!items) {
-      return NextResponse.json(
-        { message: "データを取得できませんでした。" },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: "データを取得できませんでした。" }, { status: 400 });
     }
 
     // itemCaptionを配列型に成形する
@@ -43,10 +40,7 @@ export const GET = async (req: NextRequest) => {
       itemName: items.Item.itemName,
       itemCode: items.Item.itemCode,
       itemPrice: items.Item.itemPrice,
-      itemImage: items.Item.mediumImageUrls[0]?.imageUrl.replace(
-        "128x128",
-        "250x250"
-      ),
+      itemImage: items.Item.mediumImageUrls[0]?.imageUrl.replace("128x128", "250x250"),
       itemCaption: newItemCaption,
       shopCode: items.Item.shopCode,
       shopName: items.Item.shopName,
@@ -71,9 +65,7 @@ const formatItemCaption = (itemCaption: string) => {
       formatArray.push(textArray[i] + "。".toString());
     } else {
       //LIMIT_LENGTHより小さい場合は次の要素と組み合わせてformatArrayに挿入。
-      formatArray.push(
-        textArray[i] + "。".toString() + textArray[i + 1] + "。".toString()
-      );
+      formatArray.push(textArray[i] + "。".toString() + textArray[i + 1] + "。".toString());
       i++; // 次の要素の検証をスキップさせる。
     }
   }
