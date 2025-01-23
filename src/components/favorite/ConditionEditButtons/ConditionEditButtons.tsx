@@ -17,12 +17,7 @@ const ConditionEditButtons = () => {
         <Button type="button" onClick={toEdit} className={styles.white} text="編集" />
       </div>
       <div className={styles.deleteButton}>
-        <Button
-          type="button"
-          onClick={deleteCondition}
-          className={styles.white}
-          text="削除"
-        />
+        <Button type="button" onClick={deleteCondition} className={styles.white} text="削除" />
       </div>
     </div>
   );
