@@ -28,3 +28,11 @@ export type MockSearchParamsProps = {
   selectedCategory: string;
   keyWord: string;
 };
+
+export type FavConditionProps = {
+  name: string;
+  minPrice?: string;
+  maxPrice?: string;
+  category?: string;
+  keyWord?: string;
+};

@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin: 5.0rem 0rem 0rem 10.0rem;
+  margin: 3.0rem 0rem 8.0rem 10.0rem;
 }
 
 .conditionGroup {
@@ -25,37 +25,4 @@
   border: 1px solid #FFFFFF;
   background-color: #D9D9D9;
   padding: 1.0rem 5.0rem ;
-}
-
-/* FavCondition.module.css */
-.conditionList {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #D9D9D9;
-  width: 1090px;
-  font-size: 1.3rem;
-}
-
-.name {
-  width: 250px;
-  padding: 0rem 0rem 0rem 2.5rem;
-}
-
-.condition {
-  width: 560px;
-  padding: 1.0rem 11.0rem;
-}
-
-.buttons {
-  display: flex;
-  width: 280px;
-  padding-left: 5.0rem;
-}
-
-.editButton {
-  margin: 1.0rem;
-}
-
-.deleteButton {
-  margin: 1.0rem;
 }

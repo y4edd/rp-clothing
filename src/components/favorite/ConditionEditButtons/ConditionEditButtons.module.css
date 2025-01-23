@@ -1,0 +1,13 @@
+.buttons {
+  display: flex;
+  width: 280px;
+  padding-left: 5.0rem;
+}
+
+.editButton {
+  margin: 1.0rem;
+}
+
+.deleteButton {
+  margin: 1.0rem;
+}
