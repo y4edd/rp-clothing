@@ -49,7 +49,6 @@ const RegisterForm = () => {
         headers: { "content-type": "application/json" },
         body: JSON.stringify(registerDate),
       });
-      console.log(res.statusText);
 
       if (!res.ok) {
         setRegisterError("※このメールアドレスはすでに登録しています。");
@@ -73,7 +72,7 @@ const RegisterForm = () => {
         <ConfirmPassword register={register} errors={errors} getValues={getValues} />
         {registerError && <p className={styles.error}>{registerError}</p>}
         <div className={styles.btn}>
-          <Button type="submit" className={buttonStyles.black} text="会員登録" />
+          <Button type="submit" className={`${buttonStyles.black} ${styles.btn}`} text="会員登録" />
         </div>
       </form>
       <ToastContainerComponent />

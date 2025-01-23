@@ -6,7 +6,8 @@
 
 /* ボタン */
 .btn {
-  text-align: center;
+  width: 100%;
+  margin-top: 10px;
 }
 
 /* エラー */
