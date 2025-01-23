@@ -1,5 +1,5 @@
 import CartButton from "@/components/cart/cartButton/CartButton";
-import ToFavoriteButton from "@/components/favorite/ToFavoriteButton/ToFavoriteButton";
+import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteButton";
 import SearchButton from "@/components/search/SearchButton/SearchButton";
 import Link from "next/link";
 import WordSearch from "../../search/WordSearch/WordSearch";
