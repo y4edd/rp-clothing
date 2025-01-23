@@ -39,8 +39,7 @@ const RegisterForm = () => {
   });
 
   const onSubmit = async (data: FormProps) => {
-    const birthdayValue = new Date(`${data.year}-${data.month}-${data.day}`);
-    console.log(birthdayValue);
+    const birthdayValue = new Date(Date.UTC(data.year, data.month - 1, data.day));
     setValue("birthday", birthdayValue);
     const { year, month, day, ...newDate } = data;
     const registerDate = { ...newDate, birthday: birthdayValue };
