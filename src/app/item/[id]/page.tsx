@@ -15,7 +15,7 @@ const ItemDetailPage = async ({ params }: ItemPageProp) => {
       <BreadList
         bread={[
           { link: "/", title: "トップ" },
-          { link: "/item", title: "商品詳細" },
+          { link: `/item/${itemCode}`, title: "商品詳細" },
         ]}
       />
       <PageTitle title={"商品詳細"} />
