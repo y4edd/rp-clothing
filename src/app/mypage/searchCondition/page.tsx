@@ -18,12 +18,14 @@ const SearchCondition = () => {
       <PageTitle title="お気に入り条件" />
       <RegisterConditionButton />
       <div className={styles.container}>
-        <div className={styles.conditionGroup}>
-          <div className={styles.conditionName}>条件名</div>
-          <div className={styles.registerCondition}>登録条件</div>
-          <div className={styles.conditionControl}>編集/削除</div>
-        </div>
-        <FavConditions />
+        <table className={styles.table}>
+          <tr className={styles.conditionTitle}>
+            <td className={styles.conditionName}>条件名</td>
+            <td className={styles.registerCondition}>登録条件</td>
+            <td className={styles.conditionControl}>編集・削除</td>
+          </tr>
+          <FavConditions />
+        </table>
       </div>
     </>
   );

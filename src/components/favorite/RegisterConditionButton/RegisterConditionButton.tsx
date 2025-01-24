@@ -2,22 +2,30 @@
 import Button from "@/components/utils/button/Button";
 import buttonStyles from "@/components/utils/button/Button.module.css";
 import styles from "./RegisterConditionButton.module.css";
+import RegisterConditionModal from "../RegisterConditionModal/RegisterConditionModal";
+import { useState } from "react";
 
 const RegisterConditionButton = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const toRegisterCondition = () => {
-    // MEMO: のちに実装(2025/1/22記載)
-    console.log("登録ボタンがクリックされました");
+    setIsModalOpen(true);
   };
 
   return (
-    <div className={styles.registerButton}>
-      <Button
-        type="button"
-        onClick={toRegisterCondition}
-        className={buttonStyles.black}
-        text="お気に入り条件を登録する"
-      />
-    </div>
+    <>
+        <div className={styles.registerButton}>
+          <Button
+            type="button"
+            onClick={toRegisterCondition}
+            className={buttonStyles.black}
+            text="お気に入り条件を登録する"
+          />
+        </div>
+        {isModalOpen && (
+          <RegisterConditionModal />
+        )}
+    </>
   );
 };
 

@@ -1,12 +1,19 @@
 .container {
+  align-items: center;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  margin: 3.0rem 0rem 8.0rem 10.0rem;
+  align-items: center;
+  justify-content: center;
 }
 
-.conditionGroup {
-  display: flex;
-  font-size: 1.8rem;
+.table {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.conditionTitle {
+  font-size: 1.7rem;
 }
 
 .conditionName {

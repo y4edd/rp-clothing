@@ -3,9 +3,23 @@ import FavCondition from "../FavCondition/FavCondition";
 import styles from "./FavConditions.module.css";
 
 const FavConditions = () => {
+
   return (
     <>
-      <div className={styles.conditionList}>
+      <tr>
+        <td>ビンテージ市場</td>
+        <td>
+          <dl>
+            <dt>値段：0〜4000円</dt>
+            <dt>カテゴリ：Tシャツ</dt>
+            <dt>キーワード：allegri</dt>
+          </dl>
+        </td>
+        <td>
+          <ConditionEditButtons />
+        </td>
+      </tr>
+      {/* <div className={styles.conditionList}>
         <FavCondition
           name="ビンテージ市場"
           minPrice="0"
@@ -34,7 +48,7 @@ const FavConditions = () => {
           keyWord="オールシーズン"
         />
         <ConditionEditButtons />
-      </div>
+      </div> */}
     </>
   );
 };
