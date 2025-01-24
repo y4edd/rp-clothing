@@ -1,54 +1,86 @@
 import ConditionEditButtons from "../ConditionEditButtons/ConditionEditButtons";
 import FavCondition from "../FavCondition/FavCondition";
 import styles from "./FavConditions.module.css";
+import pageStyles from "@/app/mypage/searchCondition/page.module.css"
 
 const FavConditions = () => {
 
   return (
     <>
-      <tr>
-        <td>ビンテージ市場</td>
-        <td>
-          <dl>
-            <dt>値段：0〜4000円</dt>
-            <dt>カテゴリ：Tシャツ</dt>
-            <dt>キーワード：allegri</dt>
+      <tr className={styles.conditionList}>
+        <td className={styles.conditionNameEach}>ビンテージ市場</td>
+        <td className={styles.registerConditionEach}>
+          <dl className={styles.conditions}>
+            <dt>値段：</dt>
+            <dd>0〜4000円</dd>
+            <dt>カテゴリ：</dt>
+            <dd>Tシャツ</dd>
+            <dt>キーワード：</dt>
+            <dd>burberrys(三陽商会は除く)</dd>
           </dl>
         </td>
-        <td>
+        <td className={styles.conditionControlEach}>
           <ConditionEditButtons />
         </td>
       </tr>
-      {/* <div className={styles.conditionList}>
-        <FavCondition
-          name="ビンテージ市場"
-          minPrice="0"
-          maxPrice="4000"
-          category="Tシャツ"
-          keyWord="allegri"
-        />
-        <ConditionEditButtons />
-      </div>
-      <div className={styles.conditionList}>
-        <FavCondition
-          name="軍パン（レギュラー）"
-          minPrice="4000"
-          maxPrice="16000"
-          category="軍パン"
-          keyWord="80s"
-        />
-        <ConditionEditButtons />
-      </div>
-      <div className={styles.conditionList}>
-        <FavCondition
-          name="プチプラ（出勤）"
-          minPrice="0"
-          maxPrice="6000"
-          category="ジャケット・セットアップ"
-          keyWord="オールシーズン"
-        />
-        <ConditionEditButtons />
-      </div> */}
+      <tr className={styles.conditionList}>
+        <td className={styles.conditionNameEach}>軍パン（レギュラー）</td>
+        <td className={styles.registerConditionEach}>
+          <dl className={styles.conditions}>
+            <dt>値段：</dt>
+            <dd>4000〜16000円</dd>
+            <dt>カテゴリ：</dt>
+            <dd>ズボン・パンツ</dd>
+            <dt>キーワード：</dt>
+            <dd>80s</dd>
+          </dl>
+        </td>
+        <td className={styles.conditionControlEach}>
+          <ConditionEditButtons />
+        </td>
+      </tr>
+      <tr className={styles.conditionList}>
+        <td className={styles.conditionNameEach}>プチプラ（出勤）</td>
+        <td className={styles.registerConditionEach}>
+          <dl className={styles.conditions}>
+            <dt>値段：</dt>
+            <dd>0〜6000円</dd>
+            <dt>カテゴリ：</dt>
+            <dd>ジャケット・セットアップ</dd>
+            <dt>キーワード：</dt>
+            <dd>オールシーズン</dd>
+          </dl>
+        </td>
+        <td className={styles.conditionControlEach}>
+          <ConditionEditButtons />
+        </td>
+      </tr>
+      <tr className={styles.conditionList}>
+        <td className={styles.conditionNameEach}>軍パン（レギュラー）</td>
+        <td className={styles.registerConditionEach}>
+          <dl>
+            <dt>値段：4000〜16000円</dt>
+            <dt>カテゴリ：ズボン・パンツ</dt>
+            <dt>キーワード：80s</dt>
+          </dl>
+        </td>
+        <td className={styles.conditionControlEach}>
+          <ConditionEditButtons />
+        </td>
+      </tr>
+      <tr className={styles.conditionList}>
+        <td className={styles.conditionNameEach}>軍パン（レギュラー）</td>
+        <td className={styles.registerConditionEach}>
+          <dl>
+            <dt>値段：4000〜16000円</dt>
+            <dt>カテゴリ：ズボン・パンツ</dt>
+            <dt>キーワード：80s</dt>
+          </dl>
+        </td>
+        <td className={styles.conditionControlEach}>
+          <ConditionEditButtons />
+        </td>
+      </tr>
     </>
   );
 };

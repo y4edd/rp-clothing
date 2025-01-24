@@ -19,12 +19,16 @@ const SearchCondition = () => {
       <RegisterConditionButton />
       <div className={styles.container}>
         <table className={styles.table}>
-          <tr className={styles.conditionTitle}>
-            <td className={styles.conditionName}>条件名</td>
-            <td className={styles.registerCondition}>登録条件</td>
-            <td className={styles.conditionControl}>編集・削除</td>
-          </tr>
-          <FavConditions />
+          <thead>
+            <tr className={styles.conditionTitle}>
+              <td className={styles.conditionName}>条件名</td>
+              <td className={styles.registerCondition}>登録条件</td>
+              <td className={styles.conditionControl}>編集・削除</td>
+            </tr>
+          </thead>
+          <tbody>
+            <FavConditions />
+          </tbody>
         </table>
       </div>
     </>

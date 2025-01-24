@@ -1,15 +1,13 @@
 .buttons {
   display: flex;
-  width: 280px;
-  padding-left: 3.0rem;
+  justify-content: center;
 }
 
 .editButton {
-  margin: 1.0rem;
+  margin-right: 1.0rem;
 }
 
 .deleteButton {
-  margin: 1.0rem 0rem 0rem 1.0rem;
 }
 
 .white {
