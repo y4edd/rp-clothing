@@ -7,7 +7,6 @@ describe("ItemImageコンポーネントのテスト", () => {
 
   test("propsで渡された値がimgに適応されているか", () => {
     render(<ItemImage itemImage={mockImagePath} />);
-    screen.debug();
     const imgElem = screen.getByAltText("アイテム画像");
     expect(imgElem).toHaveAttribute("src", "/testPath");
   });
