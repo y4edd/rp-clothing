@@ -12,6 +12,11 @@ const RegisterConditionButton = () => {
     setIsModalOpen(true);
   };
 
+  // モーダルを閉じる処理
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
         <div className={styles.registerButton}>
@@ -23,7 +28,7 @@ const RegisterConditionButton = () => {
           />
         </div>
         {isModalOpen && (
-          <RegisterConditionModal />
+          <RegisterConditionModal closeModal={closeModal} />
         )}
     </>
   );

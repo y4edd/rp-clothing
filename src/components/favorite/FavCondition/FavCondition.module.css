@@ -1,9 +1,37 @@
-.name {
-  width: 250px;
-  padding: 0rem 0rem 0rem 2.5rem;
+.conditionList {
+  align-items: center;
+  font-size: 1.3rem;
 }
 
-.condition {
-  width: 560px;
-  padding: 1.0rem 0rem 1.0rem 11.0rem;
+
+.conditionNameEach {
+  width: 30%;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 1.0rem 1.0rem 1.0rem;
+}
+
+.registerConditionEach {
+  width: 45%;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 1.0rem 1.0rem 1.0rem;
+}
+
+.conditionControlEach {
+  width: 25%;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.conditions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.conditions dt {
+  width: 50%;
+  text-align: right;
+}
+
+.conditions dd {
+  width: 50%;
+  text-align: left;
 }

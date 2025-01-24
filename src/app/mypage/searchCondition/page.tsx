@@ -1,4 +1,3 @@
-"use client";
 import FavConditions from "@/components/favorite/FavConditions/FavConditions";
 import RegisterConditionButton from "@/components/favorite/RegisterConditionButton/RegisterConditionButton";
 import BreadList from "@/components/frame/breadList/BreadList";

@@ -1,47 +1,50 @@
 "use client";
 
 import Modal from "@/components/Modal/Modal";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./RegisterConditionModal.module.css";
+import { useReducer, useState } from "react";
+import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
+import CategoryCondition from "@/components/search/CategoryCondition/CategoryCondition";
+import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
+import { registerInitialState, registerReducer } from "@/reducer/reducer";
+import ConditionName from "../ConditionName/ConditionName";
+import RegisterButton from "../RegisterButton/RegisterButton";
 
-const RegisterConditionModal = () => {
+type ModalProps = {
+  closeModal: () => void;
+};
+
+const RegisterConditionModal: React.FC<ModalProps> = ({closeModal}) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // モーダルを閉じる処理
-  const closeModal = () => {
-    router.back();
+  // 登録ボタン押下時の処理
+  const handleSearch = () => {
+    console.log("押された");
   };
 
   return (
     <>
-        <Modal onClose={closeModal}>
-          <div className={styles.modalContent}>
-            <h2>お気に入り条件登録</h2>
-            <div className={styles.registerConditionsList}>
-              <div className={styles.conditionName}>
-                <h3>条件名（必須入力）</h3>
-                <input
-                  type="text"
-                  id="conditionName"
-                  data-testid="conditionName"
-                  name="conditionName"
-                  className={styles.conditionNameInput}
-                  onChange={handleConditionName}
-                  value={conditionName}
-                />
-              </div>  
-              <div className={styles.price}>
-                <h3>値段</h3>
-              </div>
-              <div className={styles.category}>
-                <h3>カテゴリ</h3>
-              </div>
-              <div className={styles.keyWord}>
-                <h3>キーワード</h3>
-              </div>
-            </div>
+      <Modal onClose={closeModal}>
+        <div className={styles.modalContent}>
+          <h2>お気に入り条件登録</h2>
+          <div className={styles.searchConditions}>
+            <ConditionName conditionName={state.conditionName} dispatch={dispatch} />
+            <PriceCondition
+              minPrice={state.minPrice}
+              maxPrice={state.maxPrice}
+              dispatch={dispatch}
+            />
+            <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
+            <KeyWordCondition keyWord={state.keyWord} dispatch={dispatch} />
+            <RegisterButton onSearch={() => handleSearch()}/>
+            <div className={styles.errorMessage}>{errorMessage}</div>
           </div>
-        </Modal>
+        </div>
+      </Modal>
     </>
   );
 };
