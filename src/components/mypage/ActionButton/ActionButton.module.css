@@ -1,0 +1,20 @@
+.content {
+  max-width: 270px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: solid 1px #e1dada;
+  margin: 40px 0;
+  padding: 8px;
+  cursor: pointer;
+}
+.content:hover {
+  background-color: #f7f7f7;
+}
+
+.contentText {
+  width: 100%;
+  font-size: 1.25rem;
+  text-align: center;
+}

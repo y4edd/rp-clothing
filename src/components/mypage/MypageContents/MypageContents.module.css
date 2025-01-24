@@ -1,0 +1,7 @@
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: space-between;
+}
