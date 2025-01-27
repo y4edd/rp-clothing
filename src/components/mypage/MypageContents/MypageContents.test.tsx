@@ -4,6 +4,7 @@ import MypageContents from "./MypageContents";
 jest.mock("../AccountList/AccountList", () => () => <div>AccountList</div>);
 jest.mock("../ShoppingList/ShoppingList", () => () => <div>ShoppingList</div>);
 jest.mock("../FavoriteList/FavoriteList", () => () => <div>FavoriteList</div>);
+
 describe("MypageContentsコンポーネントのテスト", () => {
   test("指定のコンポーネントが３つ正常に表示されることを確認", () => {
     render(<MypageContents />);

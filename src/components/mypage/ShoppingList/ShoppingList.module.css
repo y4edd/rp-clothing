@@ -5,3 +5,7 @@
   font-weight: normal;
   border-bottom: solid 2px #e1dada;
 }
+.contentList button {
+  width: 100%;
+  border: none;
+}
