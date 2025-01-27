@@ -1,9 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import FavoriteList from "./FavoriteList";
 
-jest.mock("@/components/mypage/ActionButton/ActionButton", () => () => (
-  <div>ActionButton</div>
-));
+jest.mock("@/components/mypage/ActionButton/ActionButton", () => () => <div>ActionButton</div>);
 
 describe("AccountListコンポーネントのテスト", () => {
   test("テキストが正常に表示されていることを確認", () => {

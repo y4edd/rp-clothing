@@ -1,6 +1,6 @@
+import PersonIcon from "@mui/icons-material/Person";
 import { render, screen } from "@testing-library/react";
 import ActionButton from "./ActionButton";
-import PersonIcon from "@mui/icons-material/Person";
 
 describe("ActionButtonコンポーネントのテスト", () => {
   test("MUIのアイコンが正常に表示されることを確認", () => {
@@ -14,9 +14,7 @@ describe("ActionButtonコンポーネントのテスト", () => {
     expect(textElem).toBeInTheDocument();
   });
   test("propsで渡されたtextArray.lengthが2以上の時正常に表示されることを確認", () => {
-    render(
-      <ActionButton MUIicon={<PersonIcon />} textArray={["text1", "text2"]} />
-    );
+    render(<ActionButton MUIicon={<PersonIcon />} textArray={["text1", "text2"]} />);
 
     // textArray.lengthが1の時の表示
     const textElem1 = screen.getByText("text1");
