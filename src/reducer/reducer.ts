@@ -24,7 +24,6 @@ export const initialState = (searchParams: URLSearchParams) => ({
   keyWord: searchParams.get("keyword") || "",
 });
 
-
 // 検索条件を保存するためのreducer
 export const registerReducer = (state: RegisterState, action: RegisterAction) => {
   switch (action.type) {

@@ -6,8 +6,8 @@ type Props = {
   onSearch: () => void;
 };
 
-const RegisterButton = ({ onSearch }:Props) => {
+const RegisterButton = ({ onSearch }: Props) => {
   return <Button text={"検索条件を登録"} onClick={onSearch} className={buttonStyles.black} />;
-}
+};
 
-export default RegisterButton
+export default RegisterButton;

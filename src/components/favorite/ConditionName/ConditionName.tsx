@@ -1,4 +1,3 @@
-
 import type { RegisterAction } from "@/types/search/search";
 import styles from "./ConditionName.module.css";
 
@@ -7,7 +6,7 @@ type ConditionNameProps = {
   dispatch: (action: RegisterAction) => void;
 };
 
-const ConditionName = ({conditionName, dispatch}: ConditionNameProps) => {
+const ConditionName = ({ conditionName, dispatch }: ConditionNameProps) => {
   const handleConditionName = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: "SET_CONDITION_NAME", payload: e.target.value });
   };
@@ -24,7 +23,7 @@ const ConditionName = ({conditionName, dispatch}: ConditionNameProps) => {
         value={conditionName}
       />
     </div>
-  )
-}
+  );
+};
 
 export default ConditionName;

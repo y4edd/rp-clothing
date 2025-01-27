@@ -1,12 +1,11 @@
 import { handleAxiosError } from "@/lib/axios/axios";
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest, NextResponse } from "next/server";
 
-export const  GET = (req: NextRequest, res: NextResponse) => {
-  try{
+export const GET = (req: NextRequest, res: NextResponse) => {
+  try {
     const request = req.json();
     console.log(request);
-
-  }catch(error) {
+  } catch (error) {
     return handleAxiosError(error);
   }
 };

@@ -19,7 +19,7 @@ export type Action =
   | { type: "SET_CATEGORY"; payload: string }
   | { type: "SET_KEYWORD"; payload: string };
 
- export type RegisterAction =
+export type RegisterAction =
   | { type: "SET_CONDITION_NAME"; payload: string }
   | { type: "SET_MIN_PRICE"; payload: string }
   | { type: "SET_MAX_PRICE"; payload: string }
