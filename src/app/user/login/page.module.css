@@ -1,0 +1,18 @@
+.login {
+  position: relative;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  align-items: stretch;
+  align-items: flex-start;
+  width: 70%;
+  /* margin: 180px auto ; */
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #d9d9d9;
+  justify-content: space-between;
+}

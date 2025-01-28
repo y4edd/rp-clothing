@@ -1,0 +1,24 @@
+.register {
+  padding: 3%;
+  width: 50%;
+  position: relative;
+  height: 450px;
+}
+
+.register h2 {
+  margin-bottom: 10px;
+}
+
+.registerContents {
+  width: 60%;
+  position: relative;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.btn {
+  text-align: center;
+  width: 100%;
+  border: 1px solid #888383;
+}

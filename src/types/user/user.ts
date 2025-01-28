@@ -8,3 +8,8 @@ export interface FormProps {
   password: string;
   confirmPassword: string;
 }
+
+export interface loginProps {
+  email: string;
+  password: string;
+}
