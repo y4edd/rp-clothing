@@ -36,3 +36,18 @@ export const fetchResults = async (query: string) => {
     return null;
   }
 };
+
+// 楽天APIから商品詳細情報を取得する関数
+export async function getItemDetail(itemCode: string) {
+  try {
+    const response = await fetch(`http://localhost:3000/api/items/itemDetail?itemCode=${itemCode}`);
+    if (!response.ok) {
+      throw new Error("データを取得できませんでした。");
+    }
+    const itemDetail = await response.json();
+    return itemDetail.item;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
