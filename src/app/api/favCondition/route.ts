@@ -1,7 +1,8 @@
 import { handleAxiosError } from "@/lib/axios/axios";
 import type { NextRequest, NextResponse } from "next/server";
 
-export const GET = (req: NextRequest, res: NextResponse) => {
+// FIXME: モックレビュー完了後実装予定
+export const GET = (req: NextRequest, _res: NextResponse) => {
   try {
     const request = req.json();
     console.log(request);

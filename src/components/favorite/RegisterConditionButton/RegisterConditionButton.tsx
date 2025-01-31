@@ -27,7 +27,9 @@ const RegisterConditionButton = () => {
           text="お気に入り条件を登録する"
         />
       </div>
-      {isModalOpen && <RegisterConditionModal closeModal={closeModal} />}
+      {isModalOpen && (
+        <RegisterConditionModal closeModal={closeModal} setIsModalOpen={setIsModalOpen} />
+      )}
     </>
   );
 };

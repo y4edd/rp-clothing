@@ -18,6 +18,7 @@ const SearchModal = () => {
   const [state, dispatch] = useReducer(reducer, searchParams, initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  console.log(searchParams);
 
   // ページ遷移時にモーダルを開く
   // 新しく渡ってくるクエリの有無でモーダル開閉を管理
