@@ -15,6 +15,13 @@
       "when": 1735003128274,
       "tag": "0001_seed-users",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1738576002983,
+      "tag": "0002_ancient_typhoid_mary",
+      "breakpoints": true
     }
   ]
 }

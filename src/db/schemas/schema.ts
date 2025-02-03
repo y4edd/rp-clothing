@@ -18,9 +18,9 @@ export const search_conditions = pgTable("search_conditions", {
     .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
     .notNull(),
   condition_name: text("condition_name").notNull(),
-  price_min: integer("price_min"),
-  price_max: integer("price_max"),
-  category: text("category").array().default(sql`ARRAY[]::text[]`),
+  price_min: text("price_min"),
+  price_max: text("price_max"),
+  category: text("category"),
   word: text("word"),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
