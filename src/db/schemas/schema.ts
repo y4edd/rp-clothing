@@ -31,7 +31,10 @@ export const purchase_history = pgTable("purchase_history", {
   users_id: integer("users_id")
     .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
     .notNull(),
-  item_code: text("item_code").notNull(),
+  item_price: text("item_price").notNull(),
+  item_name: text("item_name").notNull(),
+  item_image: text("item_image").notNull(),
+  item_shop: text("item_shop").notNull(),
   date: date("date").notNull(),
   is_birthday_sale_use: boolean("is_birthday_sale_use"),
   created_at: timestamp("created_at").defaultNow(),
