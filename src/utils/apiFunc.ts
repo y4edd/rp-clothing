@@ -39,12 +39,12 @@ export const fetchResults = async (query: string) => {
 
 // 検索条件を保存する非同期関数
 export const postCondition = async(req:any) => {
-  console.log(req);
   try{
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "POST",
-      body: JSON.stringify(req.body),
+      body: JSON.stringify(req),
     })
+    const res = await response.json();
   } catch(err) {
     console.error("通信に失敗しました", err);
     return null;

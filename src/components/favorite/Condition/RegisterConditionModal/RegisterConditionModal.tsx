@@ -6,11 +6,13 @@ import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondit
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import { registerInitialState, registerReducer } from "@/reducer/reducer";
 import { useSearchParams } from "next/navigation";
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import ConditionName from "../ConditionName/ConditionName";
 import RegisterButton from "../RegisterButton/RegisterButton";
 import styles from "./RegisterConditionModal.module.css";
 import { postCondition } from "@/utils/apiFunc";
+import { useForm } from "react-hook-form";
+import { FormProps } from "@/types/user/user";
 
 type ModalProps = {
   closeModal: () => void;
@@ -20,14 +22,18 @@ const RegisterConditionModal: React.FC<ModalProps> = ({ closeModal }) => {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
-  console.log(state);
+  const { register, setValue } = useForm<FormProps>();
+
+  useEffect(() => {
+    setValue("conditionName", state.conditionName);
+  }, [state.conditionName, setValue]);
 
   // 登録ボタン押下時の処理
   const handleSearch = () => {
-    // FIXME:　条件名が何も入力されていない時はエラーメッセージが出るようにする
-    // react-Hook-Form以外の何かで実装予定
     if (!state.conditionName.trim()) {
       setErrorMessage("条件名は必須です！");
+    } else if (state.conditionName.trim().length >= 15 ) {
+      setErrorMessage("条件名は15文字以内です!");
     } else {
       postCondition(state);
       closeModal();
@@ -40,7 +46,7 @@ const RegisterConditionModal: React.FC<ModalProps> = ({ closeModal }) => {
         <div className={styles.modalContent}>
           <h2>お気に入り条件登録</h2>
           <div className={styles.searchConditions}>
-            <ConditionName conditionName={state.conditionName} dispatch={dispatch} />
+            <ConditionName dispatch={dispatch} register={register} />
             <PriceCondition
               minPrice={state.minPrice}
               maxPrice={state.maxPrice}

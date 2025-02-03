@@ -1,15 +1,14 @@
 import type { RegisterAction } from "@/types/search/search";
 import styles from "./ConditionName.module.css";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FormProps } from "@/types/user/user";
 
 type ConditionNameProps = {
-  conditionName: string;
   dispatch: (action: RegisterAction) => void;
+  register: UseFormRegister<FormProps>;
 };
 
-const ConditionName = ({ conditionName, dispatch }: ConditionNameProps) => {
-  const handleConditionName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: "SET_CONDITION_NAME", payload: e.target.value });
-  };
+const ConditionName = ({register, dispatch }: ConditionNameProps) => {
   return (
     <div className={styles.conditionName}>
       <h3 className={styles.title}>条件名（必須入力）</h3>
@@ -17,10 +16,10 @@ const ConditionName = ({ conditionName, dispatch }: ConditionNameProps) => {
         type="text"
         id="conditionName"
         data-testid="conditionName"
-        name="conditionName"
         className={styles.conditionNameInput}
-        onChange={handleConditionName}
-        value={conditionName}
+        {...register("conditionName", {
+          onChange: (e) => dispatch({ type: "SET_CONDITION_NAME", payload: e.target.value })
+        })}
       />
     </div>
   );

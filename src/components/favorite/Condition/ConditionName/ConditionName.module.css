@@ -13,3 +13,7 @@
   margin-bottom: 20px;
   width: 80%;
 }
+
+.errorMessage {
+  color: red;
+}

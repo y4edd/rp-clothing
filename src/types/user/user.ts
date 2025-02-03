@@ -7,4 +7,5 @@ export interface FormProps {
   birthday: Date;
   password: string;
   confirmPassword: string;
+  conditionName: string;
 }
