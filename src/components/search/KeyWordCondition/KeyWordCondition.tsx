@@ -1,11 +1,11 @@
 "use client";
 
-import type { Action } from "@/types/search/search";
+import type { RegisterAction } from "@/types/search/search";
 import styles from "./KeyWordCondition.module.css";
 
 type KeyWordConditionProps = {
   keyWord: string;
-  dispatch: (action: Action) => void;
+  dispatch: (action: RegisterAction) => void;
 };
 
 const KeyWordCondition = ({ keyWord, dispatch }: KeyWordConditionProps) => {

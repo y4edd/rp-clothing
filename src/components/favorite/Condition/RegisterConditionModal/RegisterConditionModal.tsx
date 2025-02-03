@@ -10,6 +10,7 @@ import { useReducer, useState } from "react";
 import ConditionName from "../ConditionName/ConditionName";
 import RegisterButton from "../RegisterButton/RegisterButton";
 import styles from "./RegisterConditionModal.module.css";
+import { postCondition } from "@/utils/apiFunc";
 
 type ModalProps = {
   closeModal: () => void;
@@ -19,14 +20,16 @@ const RegisterConditionModal: React.FC<ModalProps> = ({ closeModal }) => {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
+  console.log(state);
 
   // 登録ボタン押下時の処理
   const handleSearch = () => {
     // FIXME:　条件名が何も入力されていない時はエラーメッセージが出るようにする
     // react-Hook-Form以外の何かで実装予定
-    if (!state.conditionName) {
+    if (!state.conditionName.trim()) {
       setErrorMessage("条件名は必須です！");
     } else {
+      postCondition(state);
       closeModal();
     }
   };

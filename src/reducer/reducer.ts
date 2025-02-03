@@ -28,7 +28,7 @@ export const initialState = (searchParams: URLSearchParams) => ({
 export const registerReducer = (state: RegisterState, action: RegisterAction) => {
   switch (action.type) {
     case "SET_CONDITION_NAME":
-      return { ...state, minPrice: action.payload };
+      return { ...state, conditionName: action.payload };
     case "SET_MIN_PRICE":
       return { ...state, minPrice: action.payload };
     case "SET_MAX_PRICE":

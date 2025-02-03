@@ -1,12 +1,12 @@
 "use client";
 
-import type { Action } from "@/types/search/search";
+import type { RegisterAction } from "@/types/search/search";
 import styles from "./PriceCondition.module.css";
 
 type Props = {
   minPrice: string;
   maxPrice: string;
-  dispatch: (action: Action) => void;
+  dispatch: (action: RegisterAction) => void;
 };
 
 const PriceCondition = ({ minPrice, maxPrice, dispatch }: Props) => {
