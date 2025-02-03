@@ -1,4 +1,4 @@
-import FavCondition from "../condition/FavCondition/FavCondition";
+import FavCondition from "../FavCondition/FavCondition";
 
 const FavConditions = () => {
   // MEMO: 非同期処理でお気に入りの検索条件を受け取り、渡してmapで表示させる

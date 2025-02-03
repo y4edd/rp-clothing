@@ -1,4 +1,6 @@
 .registerButton {
-  text-align: right;
-  margin: 2.0rem 15.0rem;
+  width: 80%;
+  display: flex;
+  justify-content: right;
+  margin: 2rem auto;
 }
