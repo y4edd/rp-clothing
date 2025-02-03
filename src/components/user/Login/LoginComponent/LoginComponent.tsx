@@ -21,6 +21,7 @@ const LoginComponent = () => {
   });
 
   const onSubmit = async (data: loginProps) => {
+    //MEMO: api処理を実装予定
     console.log(data);
   };
   return (

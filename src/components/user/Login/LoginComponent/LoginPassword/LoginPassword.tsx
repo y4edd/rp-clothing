@@ -3,10 +3,10 @@ import type { loginProps } from "@/types/user/user";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import styles from "./LoginPassword.module.css";
 
-interface loginPasswordProps {
+type loginPasswordProps = {
   register: UseFormRegister<loginProps>;
   errors: FieldErrors<loginProps>;
-}
+};
 
 const LoginPassword = ({ register, errors }: loginPasswordProps) => {
   return (
@@ -26,6 +26,8 @@ const LoginPassword = ({ register, errors }: loginPasswordProps) => {
           data-testid="input"
           {...register("password", {
             required: errorMessages.password.require,
+            maxLength: { value: 19, message: errorMessages.password.maxLength },
+            minLength: { value: 6, message: errorMessages.password.minLength },
           })}
           name="password"
         />

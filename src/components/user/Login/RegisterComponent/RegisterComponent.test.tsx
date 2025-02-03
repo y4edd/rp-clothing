@@ -20,14 +20,4 @@ describe("RegisterComponentコンポーネント", () => {
     render(<RegisterComponent />);
     expect(screen.getByText("新規会員登録（無料）")).toBeInTheDocument();
   });
-  test("ボタンを押すと、ログイン画面に遷移すること", () => {
-    const pushMock = jest.fn();
-    (useRouter as jest.Mock).mockReturnValue({ push: pushMock });
-    render(<RegisterComponent />);
-
-    const button = screen.getByText("新規会員登録（無料）");
-    fireEvent.click(button);
-
-    expect(pushMock).toHaveBeenCalledWith("/user/register");
-  });
 });

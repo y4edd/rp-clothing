@@ -3,10 +3,10 @@ import type { loginProps } from "@/types/user/user";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import styles from "./LoginEmail.module.css";
 
-interface loginEmailProps {
+type loginEmailProps = {
   register: UseFormRegister<loginProps>;
   errors: FieldErrors<loginProps>;
-}
+};
 
 const LoginEmail = ({ register, errors }: loginEmailProps) => {
   return (
@@ -25,8 +25,16 @@ const LoginEmail = ({ register, errors }: loginEmailProps) => {
           id="email"
           {...register("email", {
             required: errorMessages.email.require,
+            validate: {
+              noSpaces: (value) => !/\s/.test(value) || errorMessages.email.patternSpace,
+              isEmailFormat: (value) =>
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+                  value,
+                ) || errorMessages.email.patternFormat,
+            },
           })}
           name="email"
+          autoComplete="off"
         />
       </dd>
       <dd className={styles.attention}>例：example.@clothing.com</dd>
