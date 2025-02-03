@@ -18,13 +18,17 @@ type ModalProps = {
 const RegisterConditionModal: React.FC<ModalProps> = ({ closeModal }) => {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
-  const [errorMessage, _setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   // 登録ボタン押下時の処理
   const handleSearch = () => {
     // FIXME:　条件名が何も入力されていない時はエラーメッセージが出るようにする
     // react-Hook-Form以外の何かで実装予定
-    closeModal();
+    if(!state.conditionName) {
+      setErrorMessage("条件名は必須です！");
+    } else {
+      closeModal();
+    }
   };
 
   return (
