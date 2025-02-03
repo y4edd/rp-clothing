@@ -28,7 +28,7 @@ const RegisterConditionButton = () => {
         />
       </div>
       {isModalOpen && (
-        <RegisterConditionModal closeModal={closeModal} setIsModalOpen={setIsModalOpen} />
+        <RegisterConditionModal closeModal={closeModal} />
       )}
     </>
   );
