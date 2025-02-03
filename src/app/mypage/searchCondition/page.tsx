@@ -1,8 +1,8 @@
-import FavConditions from "@/components/favorite/FavConditions/FavConditions";
-import RegisterConditionButton from "@/components/favorite/RegisterConditionButton/RegisterConditionButton";
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import styles from "./page.module.css";
+import FavConditions from "@/components/favorite/Condition/FavConditions/FavConditions";
+import RegisterConditionButton from "@/components/favorite/Condition/RegisterConditionButton/RegisterConditionButton";
 
 const SearchCondition = () => {
   return (
