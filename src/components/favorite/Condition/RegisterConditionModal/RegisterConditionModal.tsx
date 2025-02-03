@@ -24,7 +24,7 @@ const RegisterConditionModal: React.FC<ModalProps> = ({ closeModal }) => {
   const handleSearch = () => {
     // FIXME:　条件名が何も入力されていない時はエラーメッセージが出るようにする
     // react-Hook-Form以外の何かで実装予定
-    if(!state.conditionName) {
+    if (!state.conditionName) {
       setErrorMessage("条件名は必須です！");
     } else {
       closeModal();
