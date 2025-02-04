@@ -10,8 +10,12 @@ type RegisterButtonProps = {
   closeModal: () => void;
 };
 
-const RegisterButton: React.FC<RegisterButtonProps> = ({ buttonType, state, validate, closeModal }) => {
-
+const RegisterButton: React.FC<RegisterButtonProps> = ({
+  buttonType,
+  state,
+  validate,
+  closeModal,
+}) => {
   // ボタン押下時の処理
   const handleClick = async () => {
     if (!validate()) return;
@@ -23,12 +27,12 @@ const RegisterButton: React.FC<RegisterButtonProps> = ({ buttonType, state, vali
         await editCondition(state);
       }
       closeModal();
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
   };
 
-  return (<Button text={"検索条件を登録"} onClick={handleClick} className={buttonStyles.black} />)
+  return <Button text={"検索条件を登録"} onClick={handleClick} className={buttonStyles.black} />;
 };
 
 export default RegisterButton;

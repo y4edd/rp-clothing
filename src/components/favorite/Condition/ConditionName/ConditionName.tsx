@@ -6,7 +6,8 @@ type ConditionNameProps = {
 };
 
 const ConditionName = ({ dispatch }: ConditionNameProps) => {
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => dispatch({ type: "SET_CONDITION_NAME", payload: e.target.value })
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    dispatch({ type: "SET_CONDITION_NAME", payload: e.target.value });
   return (
     <div className={styles.conditionName}>
       <h3 className={styles.title}>条件名（必須入力）</h3>

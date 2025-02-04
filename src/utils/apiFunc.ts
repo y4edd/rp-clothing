@@ -1,4 +1,4 @@
-import { FavConditionProps } from "@/types/search/search";
+import type { FavConditionProps } from "@/types/search/search";
 
 // 新着アイテムの取得関数
 export const getNewItems = async () => {
@@ -40,49 +40,49 @@ export const fetchResults = async (query: string) => {
 };
 
 // 検索条件を保存する非同期関数
-export const postCondition = async(req:FavConditionProps) => {
-  try{
+export const postCondition = async (req: FavConditionProps) => {
+  try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req),
-    })
-  } catch(err) {
+    });
+  } catch (err) {
     console.error("通信に失敗しました", err);
     return null;
   }
 };
 
 // 検索条件を編集する非同期関数
-export const editCondition = async(req:FavConditionProps) => {
+export const editCondition = async (req: FavConditionProps) => {
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req),
-    })
-  } catch(err) {
-  console.error("通信に失敗しました", err);
-  return null;
+    });
+  } catch (err) {
+    console.error("通信に失敗しました", err);
+    return null;
   }
 };
 
 // 検索条件を取得する非同期関数
-export const getCondition = async() => {
-  try{
+export const getCondition = async () => {
+  try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "GET",
     });
     const res = await response.json();
     return res;
-  } catch(err) {
-    console.error("通信に失敗しました",err);
+  } catch (err) {
+    console.error("通信に失敗しました", err);
     return null;
   }
 };
 
-export const deleteCondition = async(req:number) => {
-  try{
+export const deleteCondition = async (req: number) => {
+  try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -90,8 +90,8 @@ export const deleteCondition = async(req:number) => {
     });
     const res = await response.json();
     return res;
-  } catch(err) {
-    console.error("通信に失敗しました",err);
+  } catch (err) {
+    console.error("通信に失敗しました", err);
     return null;
   }
 };

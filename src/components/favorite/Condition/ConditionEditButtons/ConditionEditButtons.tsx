@@ -10,14 +10,14 @@ type searchConditionIdProps = {
   searchConditionId: number;
 };
 
-const ConditionEditButtons: React.FC<searchConditionIdProps> = ({searchConditionId}) => {
+const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ searchConditionId }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const toEdit = () => {
     setIsEditModalOpen(true);
   };
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     await deleteCondition(searchConditionId);
   };
 
@@ -35,7 +35,9 @@ const ConditionEditButtons: React.FC<searchConditionIdProps> = ({searchCondition
           <Button type="button" onClick={handleDelete} className={styles.white} text="削除" />
         </dd>
       </dl>
-      {isEditModalOpen && <EditConditionModal closeModal={closeModal} modalTitle={"お気に入り条件編集"} />}
+      {isEditModalOpen && (
+        <EditConditionModal closeModal={closeModal} modalTitle={"お気に入り条件編集"} />
+      )}
     </>
   );
 };

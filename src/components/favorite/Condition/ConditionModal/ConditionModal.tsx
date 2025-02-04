@@ -42,11 +42,11 @@ const ConditionModal: React.FC<ModalProps> = ({ closeModal, modalTitle }) => {
           <PriceCondition minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch} />
           <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
           <KeyWordCondition keyWord={state.keyWord} dispatch={dispatch} />
-          <RegisterButton 
-            buttonType={buttonType} 
-            state={state} 
-            validate={validateConditionName} 
-            closeModal={closeModal} 
+          <RegisterButton
+            buttonType={buttonType}
+            state={state}
+            validate={validateConditionName}
+            closeModal={closeModal}
           />
           <div className={styles.errorMessage}>{errorMessage}</div>
         </div>

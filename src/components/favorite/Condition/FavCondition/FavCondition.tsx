@@ -2,12 +2,17 @@ import type { FavConditionProps } from "@/types/search/search";
 import ConditionEditButtons from "../ConditionEditButtons/ConditionEditButtons";
 import styles from "./FavCondition.module.css";
 
-const FavCondition = ({ searchConditionId, conditionName, minPrice, maxPrice, selectedCategory, keyWord }: FavConditionProps) => {
-  if(!searchConditionId) {
-    return (
-      <dt>検索条件が取得できていません</dt>
-    );
-  };
+const FavCondition = ({
+  searchConditionId,
+  conditionName,
+  minPrice,
+  maxPrice,
+  selectedCategory,
+  keyWord,
+}: FavConditionProps) => {
+  if (!searchConditionId) {
+    return <dt>検索条件が取得できていません</dt>;
+  }
 
   return (
     <>

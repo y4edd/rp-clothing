@@ -15,13 +15,18 @@ const FavConditions = () => {
     doFetch();
   }, [doFetch]);
 
-  if (!state.value) return <tr><th>Loading...</th></tr>;
+  if (!state.value)
+    return (
+      <tr>
+        <th>Loading...</th>
+      </tr>
+    );
 
   return (
     <>
       {state.value.map((condition: FavConditionProps) => (
         <FavCondition
-          searchConditionId = {condition.searchConditionId}
+          searchConditionId={condition.searchConditionId}
           key={condition.conditionName}
           conditionName={condition.conditionName}
           minPrice={condition.minPrice}
