@@ -22,14 +22,14 @@ const ConditionEditButtons = () => {
 
   return (
     <>
-      <div className={styles.buttons}>
-        <div className={styles.editButton}>
+      <dl className={styles.buttons}>
+        <dd className={styles.editButton}>
           <Button type="button" onClick={toEdit} className={styles.white} text="編集" />
-        </div>
-        <div className={styles.deleteButton}>
+        </dd>
+        <dd className={styles.deleteButton}>
           <Button type="button" onClick={deleteCondition} className={styles.white} text="削除" />
-        </div>
-      </div>
+        </dd>
+      </dl>
       {isEditModalOpen && <EditConditionModal closeModal={closeModal} modalTitle={"お気に入り条件編集"} />}
     </>
   );
