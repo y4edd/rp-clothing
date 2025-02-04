@@ -4,11 +4,13 @@ import UserEditButtons from "../UserEditButtons/UserEditButtons";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import type { EditUserProps } from "@/types/user/user";
 import { errorMessages } from "@/lib/user/register/errorMessage";
+
 type Prop = {
   register: UseFormRegister<EditUserProps>;
   errors: FieldErrors<EditUserProps>;
   handleSubmit: () => void;
 };
+
 const EditForm = ({ register, errors, handleSubmit }: Prop) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -44,7 +46,9 @@ const EditForm = ({ register, errors, handleSubmit }: Prop) => {
           })}
         />
       </InputField>
+      {/* Memo:Propsで誕生日を渡す */}
       <Birthday />
+
       <InputField
         id="password"
         label="パスワード"
@@ -68,6 +72,7 @@ const EditForm = ({ register, errors, handleSubmit }: Prop) => {
         />
       </InputField>
 
+      {/* Memo:コンポーネント内部で処理完結していそうなためPropsでデータ渡す必要ないかも */}
       <UserEditButtons />
     </form>
   );
