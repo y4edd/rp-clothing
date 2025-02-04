@@ -14,7 +14,12 @@ type Prop = {
 const EditForm = ({ register, errors, handleSubmit }: Prop) => {
   return (
     <form onSubmit={handleSubmit}>
-      <InputField id="name" label="ユーザー名" example="RP太郎" errors={errors}>
+      <InputField
+        id="name"
+        label="ユーザー名"
+        example="RP太郎"
+        errors={errors.name?.message}
+      >
         <input
           type="text"
           id="name"
@@ -28,7 +33,7 @@ const EditForm = ({ register, errors, handleSubmit }: Prop) => {
         id="email"
         label="メールアドレス"
         example="example@clothing.com"
-        errors={errors}
+        errors={errors.email?.message}
       >
         <input
           type="text"
@@ -53,7 +58,7 @@ const EditForm = ({ register, errors, handleSubmit }: Prop) => {
         id="password"
         label="パスワード"
         example="password"
-        errors={errors}
+        errors={errors.password?.message}
       >
         <input
           type="password"

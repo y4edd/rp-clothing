@@ -6,15 +6,17 @@ type Prop = {
   id: string;
   label: string;
   example: string;
-  errors: FieldErrors<EditUserProps>;
+  errors?: string;
 };
 const InputField = ({ children, id, label, example, errors }: Prop) => {
   return (
     <div className={styles.formItem}>
       <div className={styles.label}>
         <label htmlFor={id}>{label} </label>
-        {errors.name?.message && (
-          <p className={styles.error}>{errors.name.message}</p>
+        {errors && (
+          <p className={styles.error} data-testid={id}>
+            {errors}
+          </p>
         )}
       </div>
       {children}
