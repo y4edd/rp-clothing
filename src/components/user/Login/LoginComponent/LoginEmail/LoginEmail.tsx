@@ -1,22 +1,22 @@
-import { errorMessages } from "@/lib/user/register/errorMessage";
-import type { FormProps } from "@/types/user/user";
+import { errorMessages } from "@/lib/user/login/errorMessage";
+import type { LoginProps } from "@/types/user/user";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
-import styles from "../Input.module.css";
+import styles from "./LoginEmail.module.css";
 
-interface InputProps {
-  register: UseFormRegister<FormProps>;
-  errors: FieldErrors<FormProps>;
-}
+type loginEmailProps = {
+  register: UseFormRegister<LoginProps>;
+  errors: FieldErrors<LoginProps>;
+};
 
-const Email = ({ register, errors }: InputProps) => {
+const LoginEmail = ({ register, errors }: loginEmailProps) => {
   return (
-    <dl className={styles.table}>
+    <dl className={styles.email}>
       <dt>
         <label htmlFor="email">メールアドレス</label>
-        {errors.email?.message && (
-          <label htmlFor="email" className={styles.error}>
-            {errors.email.message}
-          </label>
+        {errors.email && (
+          <span className={styles.error} data-testid="email-error">
+            {errors.email?.message}
+          </span>
         )}
       </dt>
       <dd>
@@ -36,11 +36,9 @@ const Email = ({ register, errors }: InputProps) => {
           autoComplete="off"
         />
       </dd>
-      <dd>
-        <p className={styles.attention}>※例：example@clothing.com</p>
-      </dd>
+      <dd className={styles.attention}>例：example.@clothing.com</dd>
     </dl>
   );
 };
 
-export default Email;
+export default LoginEmail;

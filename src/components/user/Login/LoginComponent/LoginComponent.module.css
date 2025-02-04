@@ -1,0 +1,21 @@
+.login {
+  margin: 3% 0;
+  width: 50%;
+  height: 400px;
+  border-right: 1px solid black;
+}
+
+.login h2 {
+  margin-bottom: 30px;
+  padding-left: 7%;
+}
+
+.form {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.btn {
+  text-align: center;
+  width: 100%;
+}

@@ -3,6 +3,12 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import RegisterForm from "./RegisterForm";
 
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+}));
+
 jest.mock("@/components/utils/toast/toast", () => ({
   showToast: jest.fn(),
   ToastContainerComponent: () => null,
@@ -15,7 +21,7 @@ beforeEach(() => {
 describe("RegistrationFormコンポーネントのテスト", () => {
   test("ボタンが正しく表示されているか", () => {
     render(<RegisterForm />);
-    const button = screen.getByRole("button");
+    const button = screen.getByRole("button", { name: "会員登録" }); // ボタンのテキストで取得
     expect(button).toBeInTheDocument();
   });
 
@@ -28,7 +34,7 @@ describe("RegistrationFormコンポーネントのテスト", () => {
     expect(emailInput).toHaveAttribute("name", "email");
 
     const errorMessage = screen.queryByText("※入力必須です。");
-    expect(errorMessage).toBeNull();
+    expect(errorMessage).toBeNull(); // 初期状態ではエラーメッセージが表示されていない
   });
 
   test("フォームの入力が正しい場合、トースト通知が出る", async () => {

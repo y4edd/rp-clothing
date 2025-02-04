@@ -19,7 +19,6 @@ const Year = ({ register }: YearProps) => {
         id="year"
         className={styles.yearSelect}
         {...register("year")}
-        name="year"
         data-testid="year-select"
       >
         {yearList.map((year) => (

@@ -27,7 +27,7 @@ const Name = ({ register, errors }: InputProps) => {
             required: errorMessages.name.require,
             maxLength: { value: 20, message: errorMessages.name.maxLength },
           })}
-          name="name"
+          autoComplete="off"
         />
       </dd>
       <dd>
