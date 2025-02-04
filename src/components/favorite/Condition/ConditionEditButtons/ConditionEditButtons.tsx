@@ -13,10 +13,9 @@ const ConditionEditButtons = () => {
   };
 
   const deleteCondition = () => {
-    // 削除する非同期処理が走る
+    // MEMO: 削除する非同期処理が走る
   };
 
-  // モーダルを閉じる処理
   const closeModal = () => {
     setIsEditModalOpen(false);
   };

@@ -64,3 +64,17 @@ export const editCondition = async(req:FavConditionProps) => {
   return null;
   }
 };
+
+// 検索条件を取得する非同期関数
+export const getCondition = async() => {
+  try{
+    const response = await fetch("http://localhost:3000/api/condition", {
+      method: "GET",
+    });
+    const res = await response.json();
+    return res;
+  } catch(err) {
+    console.error("通信に失敗しました",err);
+    return null;
+  }
+};
