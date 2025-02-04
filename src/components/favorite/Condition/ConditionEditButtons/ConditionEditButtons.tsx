@@ -4,6 +4,7 @@ import Button from "@/components/utils/button/Button";
 import styles from "./ConditionEditButtons.module.css";
 import { useState } from "react";
 import EditConditionModal from "../EditConditionModal/EditConditionModal";
+import { deleteCondition } from "@/utils/apiFunc";
 
 const ConditionEditButtons = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -12,9 +13,8 @@ const ConditionEditButtons = () => {
     setIsEditModalOpen(true);
   };
 
-  const handleDelete = () => {
-    // MEMO: 削除する非同期処理が走る
-    
+  const handleDelete = async() => {
+    await deleteCondition();
   };
 
   const closeModal = () => {
