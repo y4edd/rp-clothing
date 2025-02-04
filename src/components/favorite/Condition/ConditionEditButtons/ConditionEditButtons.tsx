@@ -6,7 +6,11 @@ import { useState } from "react";
 import EditConditionModal from "../EditConditionModal/EditConditionModal";
 import { deleteCondition } from "@/utils/apiFunc";
 
-const ConditionEditButtons = () => {
+type searchConditionIdProps = {
+  searchConditionId: number;
+};
+
+const ConditionEditButtons: React.FC<searchConditionIdProps> = ({searchConditionId}) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const toEdit = () => {
@@ -14,7 +18,7 @@ const ConditionEditButtons = () => {
   };
 
   const handleDelete = async() => {
-    await deleteCondition();
+    await deleteCondition(searchConditionId);
   };
 
   const closeModal = () => {

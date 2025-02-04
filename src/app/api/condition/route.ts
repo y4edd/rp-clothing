@@ -56,6 +56,7 @@ export const PATCH = async(req: NextRequest) => {
 export const GET = async() => {
   try{
     const response = await db.select({
+      searchConditionId: search_conditions.id,
       conditionName: search_conditions.condition_name,
       minPrice: search_conditions.price_min,
       maxPrice: search_conditions.price_max,
@@ -72,12 +73,13 @@ export const GET = async() => {
 };
 
 // 検索条件を削除する(リクエストでcondition_idとuser_idは受け取る必要がある)
-export const DELETE = async() => {
+export const DELETE = async(req:NextRequest) => {
+  const searchConditionId = await req.json();
   try{
     await db.delete(search_conditions).where(
       and(
         // MEMO: ユーザーのID、検索条件のIDを元に書き換える
-        eq(search_conditions.id, 4),  
+        eq(search_conditions.id, searchConditionId),  
         eq(search_conditions.users_id, 1),      
       )
     );

@@ -44,6 +44,7 @@ export const postCondition = async(req:FavConditionProps) => {
   try{
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req),
     })
   } catch(err) {
@@ -57,6 +58,7 @@ export const editCondition = async(req:FavConditionProps) => {
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "PATCH",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req),
     })
   } catch(err) {
@@ -79,10 +81,12 @@ export const getCondition = async() => {
   }
 };
 
-export const deleteCondition = async() => {
+export const deleteCondition = async(req:number) => {
   try{
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(req),
     });
     const res = await response.json();
     return res;

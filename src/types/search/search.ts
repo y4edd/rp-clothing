@@ -45,6 +45,7 @@ export type MockSearchParamsProps = {
 };
 
 export type FavConditionProps = {
+  searchConditionId?: number;
   conditionName: string;
   minPrice?: string;
   maxPrice?: string;

@@ -2,7 +2,13 @@ import type { FavConditionProps } from "@/types/search/search";
 import ConditionEditButtons from "../ConditionEditButtons/ConditionEditButtons";
 import styles from "./FavCondition.module.css";
 
-const FavCondition = ({ conditionName, minPrice, maxPrice, selectedCategory, keyWord }: FavConditionProps) => {
+const FavCondition = ({ searchConditionId, conditionName, minPrice, maxPrice, selectedCategory, keyWord }: FavConditionProps) => {
+  if(!searchConditionId) {
+    return (
+      <dt>検索条件が取得できていません</dt>
+    );
+  };
+
   return (
     <>
       <tr className={styles.conditionList}>
@@ -20,7 +26,7 @@ const FavCondition = ({ conditionName, minPrice, maxPrice, selectedCategory, key
           </dl>
         </td>
         <td className={styles.conditionControlEach}>
-          <ConditionEditButtons />
+          <ConditionEditButtons searchConditionId={searchConditionId} />
         </td>
       </tr>
     </>

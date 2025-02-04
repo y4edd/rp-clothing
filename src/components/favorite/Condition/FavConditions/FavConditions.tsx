@@ -21,6 +21,7 @@ const FavConditions = () => {
     <>
       {state.value.map((condition: FavConditionProps) => (
         <FavCondition
+          searchConditionId = {condition.searchConditionId}
           key={condition.conditionName}
           conditionName={condition.conditionName}
           minPrice={condition.minPrice}
