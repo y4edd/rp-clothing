@@ -78,3 +78,16 @@ export const getCondition = async() => {
     return null;
   }
 };
+
+export const deleteCondition = async() => {
+  try{
+    const response = await fetch("http://localhost:3000/api/condition", {
+      method: "DELETE",
+    });
+    const res = await response.json();
+    return res;
+  } catch(err) {
+    console.error("通信に失敗しました",err);
+    return null;
+  }
+};

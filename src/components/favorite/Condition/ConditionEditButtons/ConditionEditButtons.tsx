@@ -12,8 +12,9 @@ const ConditionEditButtons = () => {
     setIsEditModalOpen(true);
   };
 
-  const deleteCondition = () => {
+  const handleDelete = () => {
     // MEMO: 削除する非同期処理が走る
+    
   };
 
   const closeModal = () => {
@@ -27,7 +28,7 @@ const ConditionEditButtons = () => {
           <Button type="button" onClick={toEdit} className={styles.white} text="編集" />
         </dd>
         <dd className={styles.deleteButton}>
-          <Button type="button" onClick={deleteCondition} className={styles.white} text="削除" />
+          <Button type="button" onClick={handleDelete} className={styles.white} text="削除" />
         </dd>
       </dl>
       {isEditModalOpen && <EditConditionModal closeModal={closeModal} modalTitle={"お気に入り条件編集"} />}

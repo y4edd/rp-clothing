@@ -1,9 +1,9 @@
 import { db } from "@/db";
 import { search_conditions } from "@/db/schemas/schema";
 import { and, eq } from "drizzle-orm";
-import { type NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-// 検索条件を登録する
+// 検索条件を登録する(リクエストでuser_idは受け取る必要がある)
 export const POST = async ( req:NextRequest ) => {
   // MEMO: ユーザーIDが必要
   const request = await req.json();
@@ -24,7 +24,7 @@ export const POST = async ( req:NextRequest ) => {
  } 
 };
 
-// 検索条件を編集する
+// 検索条件を編集する(リクエストでcondition_idとuser_idは受け取る必要がある)
 export const PATCH = async(req: NextRequest) => {
   // MEMO: ユーザーIDが必要
   const request = await req.json();
@@ -52,9 +52,7 @@ export const PATCH = async(req: NextRequest) => {
   } 
 };
 
-// 検索条件を削除する
-
-// 検索条件を取得する
+// 検索条件を取得する(リクエストでuser_idは受け取る必要がある)
 export const GET = async() => {
   try{
     const response = await db.select({
@@ -70,5 +68,22 @@ export const GET = async() => {
   }catch(error){
     console.error(error);
     NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });  
+  }
+};
+
+// 検索条件を削除する(リクエストでcondition_idとuser_idは受け取る必要がある)
+export const DELETE = async() => {
+  try{
+    await db.delete(search_conditions).where(
+      and(
+        // MEMO: ユーザーのID、検索条件のIDを元に書き換える
+        eq(search_conditions.id, 4),  
+        eq(search_conditions.users_id, 1),      
+      )
+    );
+    return NextResponse.json({ message: "検索条件の編集が成功しました。" }, { status: 200 });
+  }catch(error){
+    console.error(error);
+    NextResponse.json({ message: "サバーエラーが発生しました。"}, { status: 500 });
   }
 };
