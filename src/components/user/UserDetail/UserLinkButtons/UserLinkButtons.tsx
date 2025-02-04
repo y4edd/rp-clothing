@@ -1,6 +1,6 @@
 import LinkBtn from "@/components/utils/link/LinkBtn";
-import styles from "./UserButtons.module.css";
-const UserButtons = () => {
+import styles from "./UserLinkButtons.module.css";
+const UserLinkButtons = () => {
   return (
     <div className={styles.buttons}>
       <div className={styles.btn}>
@@ -13,4 +13,4 @@ const UserButtons = () => {
   );
 };
 
-export default UserButtons;
+export default UserLinkButtons;
