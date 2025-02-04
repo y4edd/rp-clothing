@@ -41,13 +41,11 @@ export const fetchResults = async (query: string) => {
 
 // 検索条件を保存する非同期関数
 export const postCondition = async(req:FavConditionProps) => {
-  console.log(req);
   try{
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "POST",
       body: JSON.stringify(req),
     })
-    const res = await response.json();
   } catch(err) {
     console.error("通信に失敗しました", err);
     return null;
@@ -56,5 +54,13 @@ export const postCondition = async(req:FavConditionProps) => {
 
 // 検索条件を編集する非同期関数
 export const editCondition = async(req:FavConditionProps) => {
-
-}
+  try {
+    const response = await fetch("http://localhost:3000/api/condition", {
+      method: "PATCH",
+      body: JSON.stringify(req),
+    })
+  } catch(err) {
+  console.error("通信に失敗しました", err);
+  return null;
+  }
+};

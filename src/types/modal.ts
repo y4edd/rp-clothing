@@ -1,4 +1,4 @@
 export type ModalProps = {
   closeModal: () => void;
-  modalTitle: string;
+  modalTitle?: string;
 };
