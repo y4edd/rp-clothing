@@ -3,8 +3,11 @@
   justify-content: space-between;
 }
 .btn {
-  width: 170px;
+  width: 200px;
   display: grid;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
+}
+.btn button {
+  font-size: 1rem;
 }

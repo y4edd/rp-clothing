@@ -1,0 +1,76 @@
+import InputField from "../InputField/InputField";
+import Birthday from "../Birthday/Birthday";
+import UserEditButtons from "../UserEditButtons/UserEditButtons";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import type { EditUserProps } from "@/types/user/user";
+import { errorMessages } from "@/lib/user/register/errorMessage";
+type Prop = {
+  register: UseFormRegister<EditUserProps>;
+  errors: FieldErrors<EditUserProps>;
+  handleSubmit: () => void;
+};
+const EditForm = ({ register, errors, handleSubmit }: Prop) => {
+  return (
+    <form onSubmit={handleSubmit}>
+      <InputField id="name" label="ユーザー名" example="RP太郎" errors={errors}>
+        <input
+          type="text"
+          id="name"
+          {...register("name", {
+            required: errorMessages.name.require,
+            maxLength: { value: 20, message: errorMessages.name.maxLength },
+          })}
+        />
+      </InputField>
+      <InputField
+        id="email"
+        label="メールアドレス"
+        example="example@clothing.com"
+        errors={errors}
+      >
+        <input
+          type="text"
+          id="email"
+          {...register("email", {
+            required: errorMessages.email.require,
+            validate: {
+              noSpaces: (value) =>
+                !/\s/.test(value) || errorMessages.email.patternSpace,
+              isEmailFormat: (value) =>
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+                  value
+                ) || errorMessages.email.patternFormat,
+            },
+          })}
+        />
+      </InputField>
+      <Birthday />
+      <InputField
+        id="password"
+        label="パスワード"
+        example="password"
+        errors={errors}
+      >
+        <input
+          type="password"
+          id="password"
+          {...register("password", {
+            required: errorMessages.password.require,
+            maxLength: {
+              value: 19,
+              message: errorMessages.password.maxLength,
+            },
+            minLength: {
+              value: 6,
+              message: errorMessages.password.minLength,
+            },
+          })}
+        />
+      </InputField>
+
+      <UserEditButtons />
+    </form>
+  );
+};
+
+export default EditForm;
