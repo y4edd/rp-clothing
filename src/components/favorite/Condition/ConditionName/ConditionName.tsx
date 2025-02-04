@@ -1,6 +1,6 @@
 import type { RegisterAction } from "@/types/search/search";
 import styles from "./ConditionName.module.css";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
 import { FormProps } from "@/types/user/user";
 
 type ConditionNameProps = {

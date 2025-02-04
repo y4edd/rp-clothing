@@ -2,11 +2,11 @@ import type { FavConditionProps } from "@/types/search/search";
 import ConditionEditButtons from "../ConditionEditButtons/ConditionEditButtons";
 import styles from "./FavCondition.module.css";
 
-const FavCondition = ({ name, minPrice, maxPrice, category, keyWord }: FavConditionProps) => {
+const FavCondition = ({ conditionName, minPrice, maxPrice, selectedCategory, keyWord }: FavConditionProps) => {
   return (
     <>
       <tr className={styles.conditionList}>
-        <td className={styles.conditionNameEach}>{name}</td>
+        <td className={styles.conditionNameEach}>{conditionName}</td>
         <td className={styles.registerConditionEach}>
           <dl className={styles.conditions}>
             <dt>値段：</dt>
@@ -14,7 +14,7 @@ const FavCondition = ({ name, minPrice, maxPrice, category, keyWord }: FavCondit
               {minPrice}〜{maxPrice}円
             </dd>
             <dt>カテゴリ：</dt>
-            <dd>{category}</dd>
+            <dd>{selectedCategory}</dd>
             <dt>キーワード：</dt>
             <dd>{keyWord}</dd>
           </dl>

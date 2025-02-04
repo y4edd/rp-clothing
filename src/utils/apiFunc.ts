@@ -1,3 +1,5 @@
+import { FavConditionProps } from "@/types/search/search";
+
 // 新着アイテムの取得関数
 export const getNewItems = async () => {
   try {
@@ -38,7 +40,8 @@ export const fetchResults = async (query: string) => {
 };
 
 // 検索条件を保存する非同期関数
-export const postCondition = async(req:any) => {
+export const postCondition = async(req:FavConditionProps) => {
+  console.log(req);
   try{
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "POST",
@@ -50,3 +53,8 @@ export const postCondition = async(req:any) => {
     return null;
   }
 };
+
+// 検索条件を編集する非同期関数
+export const editCondition = async(req:FavConditionProps) => {
+
+}

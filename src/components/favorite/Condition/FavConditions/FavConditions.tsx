@@ -5,24 +5,24 @@ const FavConditions = () => {
   return (
     <>
       <FavCondition
-        name={"ビンテージ市場"}
+        conditionName={"ビンテージ市場"}
         minPrice="0"
         maxPrice="4000"
-        category="Tシャツ"
+        selectedCategory="Tシャツ"
         keyWord="三陽商会"
       />
       <FavCondition
-        name={"軍パン"}
+        conditionName={"軍パン"}
         minPrice="4000"
         maxPrice="16000"
-        category="ズボン・パンツ"
+        selectedCategory="ズボン・パンツ"
         keyWord="80s"
       />
       <FavCondition
-        name={"プチプラ（出勤）"}
+        conditionName={"プチプラ（出勤）"}
         minPrice="0"
         maxPrice="6000"
-        category="ジャケット・セットアップ"
+        selectedCategory="ジャケット・セットアップ"
         keyWord="オールシーズン"
       />
     </>
