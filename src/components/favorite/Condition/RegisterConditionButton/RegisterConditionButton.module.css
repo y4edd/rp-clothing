@@ -1,0 +1,6 @@
+.registerButton {
+  width: 80%;
+  display: flex;
+  justify-content: right;
+  margin: 2rem auto;
+}

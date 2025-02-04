@@ -1,0 +1,24 @@
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.editButton {
+  margin-right: 1.0rem;
+}
+
+.white {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 1.0rem;
+  border: 2px solid #000000;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.white:hover {
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  font-size: 1.2rem;
+}
