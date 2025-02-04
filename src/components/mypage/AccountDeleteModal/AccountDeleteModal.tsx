@@ -1,7 +1,7 @@
-import DeleteButtons from "./DeleteButtons/DeleteButtons";
-import DeleteDataList from "./DeleteDataList/DeleteDataList";
-import DeleteConfirmText from "./DeleteConfirmText/DeleteConfirmText";
 import styles from "./AccountDeleteModal.module.css";
+import DeleteButtons from "./DeleteButtons/DeleteButtons";
+import DeleteConfirmText from "./DeleteConfirmText/DeleteConfirmText";
+import DeleteDataList from "./DeleteDataList/DeleteDataList";
 
 type Prop = {
   setIsDeleteModal: (boolean: boolean) => void;

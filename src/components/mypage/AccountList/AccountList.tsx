@@ -2,11 +2,11 @@
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
+import { useState } from "react";
+import AccountDeleteModal from "../AccountDeleteModal/AccountDeleteModal";
 import ActionButton from "../ActionButton/ActionButton";
 import ActionLink from "../ActionLink/ActionLink";
 import styles from "./AccountList.module.css";
-import AccountDeleteModal from "../AccountDeleteModal/AccountDeleteModal";
-import { useState } from "react";
 
 const ICON_SIZE = "70px";
 
@@ -37,9 +37,7 @@ const AccountList = () => {
         />
       </div>
       {/* アカウント削除確認モーダル */}
-      {isDeleteModalOpen && (
-        <AccountDeleteModal setIsDeleteModal={setIsDeleteModalOpen} />
-      )}
+      {isDeleteModalOpen && <AccountDeleteModal setIsDeleteModal={setIsDeleteModalOpen} />}
     </>
   );
 };

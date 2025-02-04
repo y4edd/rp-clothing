@@ -1,15 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import AccountDeleteModal from "./AccountDeleteModal";
 
-jest.mock("./DeleteConfirmText/DeleteConfirmText", () => () => (
-  <div>DeleteConfirmText</div>
-));
-jest.mock("./DeleteDataList/DeleteDataList", () => () => (
-  <div>DeleteDataList</div>
-));
-jest.mock("./DeleteButtons/DeleteButtons", () => () => (
-  <div>DeleteButtons</div>
-));
+jest.mock("./DeleteConfirmText/DeleteConfirmText", () => () => <div>DeleteConfirmText</div>);
+jest.mock("./DeleteDataList/DeleteDataList", () => () => <div>DeleteDataList</div>);
+jest.mock("./DeleteButtons/DeleteButtons", () => () => <div>DeleteButtons</div>);
 
 const mockFunc = jest.fn();
 

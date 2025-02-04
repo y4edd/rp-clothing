@@ -1,6 +1,6 @@
 import Button from "@/components/utils/button/Button";
-import styles from "./DeleteButtons.module.css";
 import buttonStyles from "@/components/utils/button/Button.module.css";
+import styles from "./DeleteButtons.module.css";
 type Prop = {
   setIsDeleteModal: (boolean: boolean) => void;
 };
