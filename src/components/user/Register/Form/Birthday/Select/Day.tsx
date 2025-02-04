@@ -14,13 +14,7 @@ const Day = ({ register }: DayProps) => {
 
   return (
     <>
-      <select
-        id="day"
-        className={styles.daySelect}
-        {...register("day")}
-        name="day"
-        data-testid="day-select"
-      >
+      <select id="day" className={styles.daySelect} {...register("day")} data-testid="day-select">
         {dayList.map((day) => (
           <option value={day} key={day}>
             {day}

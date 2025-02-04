@@ -1,11 +1,11 @@
 import { errorMessages } from "@/lib/user/login/errorMessage";
-import type { loginProps } from "@/types/user/user";
+import type { LoginProps } from "@/types/user/user";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import styles from "./LoginEmail.module.css";
 
 type loginEmailProps = {
-  register: UseFormRegister<loginProps>;
-  errors: FieldErrors<loginProps>;
+  register: UseFormRegister<LoginProps>;
+  errors: FieldErrors<LoginProps>;
 };
 
 const LoginEmail = ({ register, errors }: loginEmailProps) => {
@@ -33,7 +33,6 @@ const LoginEmail = ({ register, errors }: loginEmailProps) => {
                 ) || errorMessages.email.patternFormat,
             },
           })}
-          name="email"
           autoComplete="off"
         />
       </dd>

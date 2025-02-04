@@ -28,7 +28,6 @@ const ConfirmPassword = ({ register, errors, getValues }: InputProps) => {
             validate: (value) =>
               value === getValues("password") || errorMessages.ConfirmPassword.confirm,
           })}
-          name="confirmPassword"
         />
       </dd>
     </dl>

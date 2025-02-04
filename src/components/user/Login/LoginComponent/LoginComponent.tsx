@@ -2,7 +2,7 @@
 
 import Button from "@/components/utils/button/Button";
 import buttonStyles from "@/components/utils/button/Button.module.css";
-import type { loginProps } from "@/types/user/user";
+import type { LoginProps } from "@/types/user/user";
 import { useForm } from "react-hook-form";
 import styles from "./LoginComponent.module.css";
 import LoginEmail from "./LoginEmail/LoginEmail";
@@ -13,14 +13,14 @@ const LoginComponent = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<loginProps>({
+  } = useForm<LoginProps>({
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = async (data: loginProps) => {
+  const onSubmit = async (data: LoginProps) => {
     //MEMO: api処理を実装予定
     console.log(data);
   };

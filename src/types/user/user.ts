@@ -9,7 +9,7 @@ export type FormProps = {
   confirmPassword: string;
 };
 
-export type loginProps = {
+export type LoginProps = {
   email: string;
   password: string;
 };
