@@ -1,8 +1,6 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import UserDetail from "@/components/user/UserDetail/UserDetail";
-import LinkBtn from "@/components/utils/link/LinkBtn";
-import React from "react";
 
 const UserPage = () => {
   return (

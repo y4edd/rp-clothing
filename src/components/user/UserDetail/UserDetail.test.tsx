@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import UserInfo from "./UserInfo/UserInfo";
 import UserDetail from "./UserDetail";
+import UserInfo from "./UserInfo/UserInfo";
 
 jest.mock("./UserInfo/UserInfo", () => () => {
   return <div>UserInfo</div>;
