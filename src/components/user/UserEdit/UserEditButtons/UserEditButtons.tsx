@@ -7,7 +7,7 @@ const UserEditButtons = () => {
   return (
     <div className={styles.buttons}>
       <div className={styles.btn}>
-        <LinkBtn text="戻る" pathName="/user" btnColor="black" />
+        <LinkBtn text="戻る" pathName="/mypage" btnColor="black" />
       </div>
       <div className={styles.btn}>
         <Button text="更新する" type="submit" className={buttonStyles.black} />

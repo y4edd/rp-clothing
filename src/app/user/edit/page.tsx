@@ -9,10 +9,10 @@ const UserEditPage = () => {
         bread={[
           { link: "/", title: "トップ" },
           { link: "/mypage", title: "マイページ" },
-          { link: "/user", title: "ユーザー情報確認・編集" },
+          { link: "/edit", title: "ユーザー情報編集" },
         ]}
       />
-      <PageTitle title={"ユーザー情報確認・編集"} />
+      <PageTitle title={"ユーザー情報編集"} />
       <UserEdit />
     </>
   );
