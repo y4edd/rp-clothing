@@ -37,9 +37,7 @@ const AccountList = () => {
         />
       </div>
       {/* アカウント削除確認モーダル */}
-      {isDeleteModalOpen && (
-        <AccountDeleteModal setIsDeleteModal={setIsDeleteModalOpen} />
-      )}
+      {isDeleteModalOpen && <AccountDeleteModal setIsDeleteModal={setIsDeleteModalOpen} />}
     </>
   );
 };
