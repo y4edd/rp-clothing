@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import EditForm from "./EditForm/EditForm";
 import UserEdit from "./UserEdit";
 
 jest.mock("./EditForm/EditForm", () => () => {

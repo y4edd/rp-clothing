@@ -1,6 +1,4 @@
-import type { FieldErrors } from "react-hook-form";
 import styles from "./InputField.module.css";
-import type { EditUserProps } from "@/types/user/user";
 type Prop = {
   children: React.ReactNode;
   id: string;
@@ -20,7 +18,7 @@ const InputField = ({ children, id, label, example, errors }: Prop) => {
         )}
       </div>
       {children}
-      <p className={styles.example}>例）{example}</p>
+      <p className={styles.example}>例 : {example}</p>
     </div>
   );
 };

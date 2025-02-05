@@ -1,7 +1,7 @@
-import LinkBtn from "@/components/utils/link/LinkBtn";
-import styles from "./UserEditButtons.module.css";
 import Button from "@/components/utils/button/Button";
 import buttonStyles from "@/components/utils/button/Button.module.css";
+import LinkBtn from "@/components/utils/link/LinkBtn";
+import styles from "./UserEditButtons.module.css";
 
 const UserEditButtons = () => {
   return (

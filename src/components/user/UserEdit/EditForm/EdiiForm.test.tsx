@@ -1,8 +1,8 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import EditForm from "./EditForm";
-import { useForm } from "react-hook-form";
-import type { EditUserProps } from "@/types/user/user";
 import { errorMessages } from "@/lib/user/register/errorMessage";
+import type { EditUserProps } from "@/types/user/user";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { useForm } from "react-hook-form";
+import EditForm from "./EditForm";
 
 describe("EditFormコンポーネントのテスト", () => {
   const mockHandleSubmit = jest.fn();
@@ -13,11 +13,7 @@ describe("EditFormコンポーネントのテスト", () => {
       formState: { errors },
     } = useForm<EditUserProps>();
     return (
-      <EditForm
-        register={register}
-        handleSubmit={handleSubmit(mockHandleSubmit)}
-        errors={errors}
-      />
+      <EditForm register={register} handleSubmit={handleSubmit(mockHandleSubmit)} errors={errors} />
     );
   };
   test("EditFormコンポーネントが表示されることを確認", () => {
@@ -25,9 +21,9 @@ describe("EditFormコンポーネントのテスト", () => {
     expect(screen.getByLabelText("ユーザー名")).toBeInTheDocument();
     expect(screen.getByLabelText("メールアドレス")).toBeInTheDocument();
     expect(screen.getByLabelText("パスワード")).toBeInTheDocument();
-    expect(screen.getByText("例）RP太郎")).toBeInTheDocument();
-    expect(screen.getByText("例）example@clothing.com")).toBeInTheDocument();
-    expect(screen.getByText("例）password")).toBeInTheDocument();
+    expect(screen.getByText("例 : RP太郎")).toBeInTheDocument();
+    expect(screen.getByText("例 : example@clothing.com")).toBeInTheDocument();
+    expect(screen.getByText("例 : password")).toBeInTheDocument();
   });
 
   test("3つの入力欄で未入力の時エラー出ることを確認", async () => {

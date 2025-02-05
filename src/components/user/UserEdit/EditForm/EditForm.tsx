@@ -1,9 +1,9 @@
-import InputField from "../InputField/InputField";
-import Birthday from "../Birthday/Birthday";
-import UserEditButtons from "../UserEditButtons/UserEditButtons";
-import type { FieldErrors, UseFormRegister } from "react-hook-form";
-import type { EditUserProps } from "@/types/user/user";
 import { errorMessages } from "@/lib/user/register/errorMessage";
+import type { EditUserProps } from "@/types/user/user";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import Birthday from "../Birthday/Birthday";
+import InputField from "../InputField/InputField";
+import UserEditButtons from "../UserEditButtons/UserEditButtons";
 
 type Prop = {
   register: UseFormRegister<EditUserProps>;
@@ -14,12 +14,7 @@ type Prop = {
 const EditForm = ({ register, errors, handleSubmit }: Prop) => {
   return (
     <form onSubmit={handleSubmit}>
-      <InputField
-        id="name"
-        label="ユーザー名"
-        example="RP太郎"
-        errors={errors.name?.message}
-      >
+      <InputField id="name" label="ユーザー名" example="RP太郎" errors={errors.name?.message}>
         <input
           type="text"
           id="name"
@@ -41,11 +36,10 @@ const EditForm = ({ register, errors, handleSubmit }: Prop) => {
           {...register("email", {
             required: errorMessages.email.require,
             validate: {
-              noSpaces: (value) =>
-                !/\s/.test(value) || errorMessages.email.patternSpace,
+              noSpaces: (value) => !/\s/.test(value) || errorMessages.email.patternSpace,
               isEmailFormat: (value) =>
                 /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-                  value
+                  value,
                 ) || errorMessages.email.patternFormat,
             },
           })}
