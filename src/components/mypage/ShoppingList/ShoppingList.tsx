@@ -4,24 +4,27 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import ActionLink from "../ActionLink/ActionLink";
 import styles from "./ShoppingList.module.css";
+
+const ICON_SIZE = "70px";
+
 const ShoppingList = () => {
   return (
     <div className={styles.contentList}>
       <h2 className={styles.title}>ショッピング関連</h2>
       <ActionLink
-        linkPath="/"
+        linkPath="/cart"
         textArray={["カート"]}
-        MUIicon={<ShoppingCartOutlinedIcon sx={{ fontSize: "70px" }} />}
+        MUIicon={<ShoppingCartOutlinedIcon sx={{ fontSize: ICON_SIZE }} />}
       />
       <ActionLink
-        linkPath="/"
+        linkPath="/history/watched"
         textArray={["最近チェックした", "アイテム"]}
-        MUIicon={<AccessTimeOutlinedIcon sx={{ fontSize: "70px" }} />}
+        MUIicon={<AccessTimeOutlinedIcon sx={{ fontSize: ICON_SIZE }} />}
       />
       <ActionLink
-        linkPath="/"
+        linkPath="/history/purchased"
         textArray={["購入履歴"]}
-        MUIicon={<ShoppingBasketIcon sx={{ fontSize: "70px" }} />}
+        MUIicon={<ShoppingBasketIcon sx={{ fontSize: ICON_SIZE }} />}
       />
     </div>
   );
