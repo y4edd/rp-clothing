@@ -9,8 +9,9 @@ const FavCondition = ({
   maxPrice,
   selectedCategory,
   keyWord,
+  condition,
 }: FavConditionProps) => {
-  if (!searchConditionId) {
+  if (!searchConditionId || !condition) {
     return <dt>検索条件が取得できていません</dt>;
   }
 
@@ -31,7 +32,7 @@ const FavCondition = ({
           </dl>
         </td>
         <td className={styles.conditionControlEach}>
-          <ConditionEditButtons searchConditionId={searchConditionId} />
+          <ConditionEditButtons condition={condition} />
         </td>
       </tr>
     </>

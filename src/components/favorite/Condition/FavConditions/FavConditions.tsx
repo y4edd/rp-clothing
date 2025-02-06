@@ -19,6 +19,7 @@ const FavConditions = () => {
           maxPrice={condition.maxPrice}
           selectedCategory={condition.selectedCategory}
           keyWord={condition.keyWord}
+          condition = {condition}
         />
       ))}
     </>

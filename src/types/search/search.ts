@@ -51,6 +51,7 @@ export type FavConditionProps = {
   maxPrice?: string;
   selectedCategory?: string;
   keyWord?: string;
+  condition?: FavConditionProps;
 };
 
 export type ConditionContextType = {

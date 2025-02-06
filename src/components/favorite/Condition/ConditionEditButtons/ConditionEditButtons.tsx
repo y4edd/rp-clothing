@@ -2,18 +2,29 @@
 
 import Button from "@/components/utils/button/Button";
 import styles from "./ConditionEditButtons.module.css";
-import { deleteCondition } from "@/utils/apiFunc";
 import { useRouter } from "next/navigation";
+import { FavConditionProps } from "@/types/search/search";
 
 type searchConditionIdProps = {
-  searchConditionId: number;
+  condition: FavConditionProps
 };
 
-const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ searchConditionId }) => {
+const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ condition }) => {
   const router = useRouter();
 
+
   const toEdit = () => {
-    router.push("/mypage/searchCondition/edit");
+    // 空の値を除外
+    const filteredParams = Object.fromEntries(
+      Object.entries(condition)
+      .filter(([_, v]) => v !== "")
+      // number型入ってきてもstring型にする
+      .map(([key, value]) => [key, String(value)])
+    );
+    // クエリパラメータを作成
+    const queryString = new URLSearchParams(filteredParams).toString();
+    console.log(queryString);
+    router.push(`/mypage/searchCondition/edit?${queryString}`);
   };
 
   const handleDelete = async () => {
