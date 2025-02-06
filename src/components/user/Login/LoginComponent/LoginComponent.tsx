@@ -3,11 +3,11 @@
 import Button from "@/components/utils/button/Button";
 import buttonStyles from "@/components/utils/button/Button.module.css";
 import type { LoginProps } from "@/types/user/user";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./LoginComponent.module.css";
 import LoginEmail from "./LoginEmail/LoginEmail";
 import LoginPassword from "./LoginPassword/LoginPassword";
-import { useState } from "react";
 
 const LoginComponent = () => {
   const [loginError, setLoginError] = useState("");
@@ -29,10 +29,8 @@ const LoginComponent = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
-      console.log(res)
-      if(!res.ok){
-        setLoginError("メールアドレスもしくはパスワードが違います。")
+      if (!res.ok) {
+        setLoginError("メールアドレスもしくはパスワードが違います。");
       }
     } catch (error) {
       console.error("エラー内容", error);
@@ -46,11 +44,7 @@ const LoginComponent = () => {
         <LoginPassword register={register} errors={errors} />
         <div className={styles.btn}>
           {loginError && <div className="error">{loginError}</div>}
-          <Button
-            type="submit"
-            className={`${buttonStyles.black} ${styles.btn}`}
-            text="ログイン"
-          />
+          <Button type="submit" className={`${buttonStyles.black} ${styles.btn}`} text="ログイン" />
         </div>
       </form>
     </div>

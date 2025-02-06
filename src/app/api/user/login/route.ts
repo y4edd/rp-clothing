@@ -1,9 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcrypt";
 import { db } from "@/db";
 import { users } from "@/db/schemas/schema";
-import { and, eq } from "drizzle-orm";
-import { log } from "console";
+import { type NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
@@ -22,23 +19,15 @@ export const POST = async (req: NextRequest) => {
     if (!selectEmail) {
       NextResponse.json(
         { message: "メースアドレスもしくはパスワードが違います。" },
-        { status: 409 }
+        { status: 409 },
       );
     }
 
-    console.log("aaa");
-
     // ここにcookieの処理をかく！
 
-    return NextResponse.json(
-      { message: "ログインが成功しました。" },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: "ログインが成功しました。" }, { status: 200 });
   } catch (error) {
     console.error({ error });
-    return NextResponse.json(
-      { message: "サーバーエラーが発生しました。" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });
   }
 };
