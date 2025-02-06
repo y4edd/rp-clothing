@@ -8,12 +8,13 @@ import { useEffect } from "react";
 
 const FavConditions = () => {
   const [state, doFetch] = useAsyncFn(async () => {
-    return await getCondition();
+    const data = await getCondition();
+    return data;
   }, []);
-
+  
   useEffect(() => {
     doFetch();
-  }, [doFetch]);
+  }, []);
 
   if (!state.value)
     return (
