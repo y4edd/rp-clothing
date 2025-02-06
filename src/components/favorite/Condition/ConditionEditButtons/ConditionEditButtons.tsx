@@ -2,28 +2,22 @@
 
 import Button from "@/components/utils/button/Button";
 import styles from "./ConditionEditButtons.module.css";
-import { useContext, useState } from "react";
-import EditConditionModal from "../EditConditionModal/EditConditionModal";
 import { deleteCondition } from "@/utils/apiFunc";
-import { ConditionContext } from "@/context/searchConditionContext";
+import { useRouter } from "next/navigation";
 
 type searchConditionIdProps = {
   searchConditionId: number;
 };
 
 const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ searchConditionId }) => {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const router = useRouter();
 
   const toEdit = () => {
-    setIsEditModalOpen(true);
+    router.push("/mypage/searchCondition/edit");
   };
 
   const handleDelete = async () => {
-    await deleteCondition(searchConditionId);
-  };
-
-  const closeModal = () => {
-    setIsEditModalOpen(false);
+    router.push("/mypage/searchCondition/delete");
   };
 
   return (
@@ -36,9 +30,6 @@ const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ searchConditio
           <Button type="button" onClick={handleDelete} className={styles.white} text="削除" />
         </dd>
       </dl>
-      {isEditModalOpen && (
-        <EditConditionModal closeModal={closeModal} modalTitle={"お気に入り条件編集"} searchConditionId={searchConditionId} />
-      )}
     </>
   );
 };

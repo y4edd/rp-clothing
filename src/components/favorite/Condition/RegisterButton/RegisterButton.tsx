@@ -9,7 +9,7 @@ type RegisterButtonProps = {
   state: FavConditionProps;
   validate: () => boolean;
   closeModal: () => void;
-  searchConditionId: number;
+  searchConditionId: number | undefined;
 };
 
 const RegisterButton: React.FC<RegisterButtonProps> = ({
@@ -30,8 +30,8 @@ const RegisterButton: React.FC<RegisterButtonProps> = ({
        router.push("/mypage/searchCondition");
       } else {
         await editCondition(state,searchConditionId);
+        router.push("/mypage/searchCondition");
       }
-      closeModal();
     } catch (err) {
       console.error(err);
     }

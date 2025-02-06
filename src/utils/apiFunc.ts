@@ -54,7 +54,7 @@ export const postCondition = async (req: FavConditionProps) => {
 };
 
 // 検索条件を編集する非同期関数
-export const editCondition = async (req: FavConditionProps,searchConditionId: number) => {
+export const editCondition = async (req: FavConditionProps,searchConditionId: number | undefined) => {
   req.searchConditionId= searchConditionId;
 
   try {

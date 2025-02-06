@@ -1,0 +1,30 @@
+.modalContent {
+  flex-direction: column;
+  margin: 10px 20px;
+  text-align: left;
+  font-size: 1.0rem;
+}
+
+.confirm {
+  text-align: center;
+  margin-top: 5.0rem;
+}
+
+.conditionName {
+  text-align: center;
+  margin-top: 1.0rem;
+}
+
+.buttons {
+  margin-top: 2.0rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.0rem;
+}
+
+.button {
+  display: grid;
+  width: 160px;
+  margin-right: 1.0rem;
+}
