@@ -1,5 +1,7 @@
+import { ConditionContext } from "@/context/searchConditionContext";
 import type { RegisterAction, RegisterState, State } from "@/types/search/search";
 import type { Action } from "@/types/search/search";
+import { useContext } from "react";
 
 export const reducer = (state: State, action: Action) => {
   switch (action.type) {
@@ -45,6 +47,7 @@ export const registerReducer = (state: RegisterState, action: RegisterAction) =>
 // 検索条件の保存を管理する初期化関数
 // MEMO: もし編集用なのであれば、stateから取得するようにする。
 export const registerInitialState = () => ({
+  searchConditionId: "",
   conditionName: "",
   minPrice: "",
   maxPrice: "",

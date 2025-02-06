@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { search_conditions } from "@/db/schemas/schema";
 import { and, eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 
 // 検索条件を登録する(リクエストでuser_idは受け取る必要がある)
@@ -17,6 +18,7 @@ export const POST = async (req: NextRequest) => {
       category: selectedCategory,
       word: keyWord,
     });
+    revalidatePath("/mypage/searchCondition");
     return NextResponse.json({ message: "検索条件の登録が成功しました。" }, { status: 200 });
   } catch (error) {
     console.error(error);
@@ -28,7 +30,8 @@ export const POST = async (req: NextRequest) => {
 export const PATCH = async (req: NextRequest) => {
   // MEMO: ユーザーIDが必要
   const request = await req.json();
-  const { conditionName, minPrice, maxPrice, selectedCategory, keyWord } = request;
+  const { searchConditionId, conditionName, minPrice, maxPrice, selectedCategory, keyWord } = request;
+
   try {
     await db
       .update(search_conditions)
@@ -42,7 +45,7 @@ export const PATCH = async (req: NextRequest) => {
       .where(
         and(
           // MEMO: ユーザーのID、検索条件のIDを元に書き換える
-          eq(search_conditions.id, 4),
+          eq(search_conditions.id, searchConditionId),
           eq(search_conditions.users_id, 1),
         ),
       );

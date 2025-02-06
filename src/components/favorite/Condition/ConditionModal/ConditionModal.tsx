@@ -6,13 +6,13 @@ import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondit
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import { registerInitialState, registerReducer } from "@/reducer/reducer";
 import { useSearchParams } from "next/navigation";
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import ConditionName from "../ConditionName/ConditionName";
 import RegisterButton from "../RegisterButton/RegisterButton";
 import styles from "./ConditionModal.module.css";
 import { type ModalProps } from "@/types/modal";
 
-const ConditionModal: React.FC<ModalProps> = ({ closeModal, modalTitle }) => {
+const ConditionModal: React.FC<ModalProps> = ({ closeModal, modalTitle,searchConditionId}) => {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
@@ -47,6 +47,7 @@ const ConditionModal: React.FC<ModalProps> = ({ closeModal, modalTitle }) => {
             state={state}
             validate={validateConditionName}
             closeModal={closeModal}
+            searchConditionId={searchConditionId}
           />
           <div className={styles.errorMessage}>{errorMessage}</div>
         </div>

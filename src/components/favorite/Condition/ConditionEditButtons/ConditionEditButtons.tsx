@@ -2,9 +2,10 @@
 
 import Button from "@/components/utils/button/Button";
 import styles from "./ConditionEditButtons.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import EditConditionModal from "../EditConditionModal/EditConditionModal";
 import { deleteCondition } from "@/utils/apiFunc";
+import { ConditionContext } from "@/context/searchConditionContext";
 
 type searchConditionIdProps = {
   searchConditionId: number;
@@ -36,7 +37,7 @@ const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ searchConditio
         </dd>
       </dl>
       {isEditModalOpen && (
-        <EditConditionModal closeModal={closeModal} modalTitle={"お気に入り条件編集"} />
+        <EditConditionModal closeModal={closeModal} modalTitle={"お気に入り条件編集"} searchConditionId={searchConditionId} />
       )}
     </>
   );

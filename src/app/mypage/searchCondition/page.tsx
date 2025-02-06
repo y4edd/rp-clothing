@@ -3,6 +3,7 @@ import RegisterConditionButton from "@/components/favorite/Condition/RegisterCon
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import styles from "./page.module.css";
+import { ConditionProvider } from "@/context/searchConditionContext";
 
 const SearchCondition = () => {
   return (
@@ -26,7 +27,9 @@ const SearchCondition = () => {
             </tr>
           </thead>
           <tbody>
-            <FavConditions />
+            <ConditionProvider>
+              <FavConditions />
+            </ConditionProvider>
           </tbody>
         </table>
       </div>

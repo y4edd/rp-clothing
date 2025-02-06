@@ -1,31 +1,16 @@
 "use client";
 
-import { getCondition } from "@/utils/apiFunc";
 import FavCondition from "../FavCondition/FavCondition";
 import { FavConditionProps } from "@/types/search/search";
-import { useAsyncFn } from "react-use";
-import { useEffect } from "react";
+import { useContext } from "react";
+import { ConditionContext } from "@/context/searchConditionContext";
 
 const FavConditions = () => {
-  const [state, doFetch] = useAsyncFn(async () => {
-    const data = await getCondition();
-    return data;
-  }, []);
-  
-  useEffect(() => {
-    doFetch();
-  }, []);
-
-  if (!state.value)
-    return (
-      <tr>
-        <th>Loading...</th>
-      </tr>
-    );
+  const { conditions } = useContext(ConditionContext);
 
   return (
     <>
-      {state.value.map((condition: FavConditionProps) => (
+      {conditions.map((condition: FavConditionProps) => (
         <FavCondition
           searchConditionId={condition.searchConditionId}
           key={condition.conditionName}
