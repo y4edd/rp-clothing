@@ -14,6 +14,7 @@ const DeleteConditionModal = () => {
   // クエリパラメータから削除対象の検索条件IDを取得
   const searchConditionIdString = searchParams.get("searchConditionId");
   const searchConditionId = Number(searchConditionIdString);
+  const conditionName = searchParams.get("conditionName");
 
   // モーダルを閉じる
   const closeModal = () => {
@@ -40,7 +41,7 @@ const DeleteConditionModal = () => {
         <div className={styles.modalContent}>
           <h2>お気に入り条件削除</h2>
           <div className={styles.confirm}>本当に削除しますか？</div>
-          <div className={styles.conditionName}>お気に入り条件名：{}</div>
+          <div className={styles.conditionName}>お気に入り条件名：{conditionName}</div>
           <div className={styles.buttons}>
             <div className={styles.button}>
               <Button type="submit" text="削除する" onClick={handleDelete} className={buttonStyles.red} />
