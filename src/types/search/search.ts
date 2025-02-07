@@ -53,7 +53,3 @@ export type FavConditionProps = {
   keyWord?: string;
   condition?: FavConditionProps;
 };
-
-export type ConditionContextType = {
-  conditions: FavConditionProps[];
-};

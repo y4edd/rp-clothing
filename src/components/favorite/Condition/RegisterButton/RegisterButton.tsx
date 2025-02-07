@@ -6,6 +6,7 @@ import buttonStyles from "@/components/utils/button/Button.module.css";
 import { FavConditionProps } from "@/types/search/search";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import styles from "./RegisterButton.module.css";
 
 type RegisterButtonProps = {
   buttonType: "register" | "edit";
@@ -21,7 +22,7 @@ const RegisterButton: React.FC<RegisterButtonProps> = ({
   searchConditionId,
 }) => {
   const router = useRouter();
-  const [serverError, setServerError] = useState<string | null>(null);
+  const [serverError, setServerError] = useState<string>("");
 
   // ボタン押下時の処理
   const handleClick = async () => {
@@ -35,19 +36,21 @@ const RegisterButton: React.FC<RegisterButtonProps> = ({
       if (!response) {
         return;
       }
-
-      const error = await response.json();
-      setServerError(error.message);
-      router.push("/mypage/searchCondition");
+      const res = await response.json();
+      setServerError(res.message);
+      if(response.ok) {
+        router.push("/mypage/searchCondition");
+      };
+  
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
   return (
     <>
       <Button text={"検索条件を登録"} onClick={handleClick} className={buttonStyles.black} />
-      {serverError}
+      <div className={styles.errorMessage}>{serverError}</div>
     </>
   );
 };

@@ -12,7 +12,7 @@ export const getNewItems = async () => {
     const items = await response.json();
     return items.items;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 };

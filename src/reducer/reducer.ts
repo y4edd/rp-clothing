@@ -1,9 +1,6 @@
-import { ConditionContext } from "@/context/searchConditionContext";
 import type { RegisterAction, RegisterState, State } from "@/types/search/search";
-import type { Action } from "@/types/search/search";
-import { useContext } from "react";
 
-export const reducer = (state: State, action: Action) => {
+export const reducer = (state: State, action: RegisterAction) => {
   switch (action.type) {
     case "SET_MIN_PRICE":
       return { ...state, minPrice: action.payload };

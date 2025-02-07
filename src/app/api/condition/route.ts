@@ -14,7 +14,7 @@ export const POST = async (req: NextRequest) => {
   const conditionCount = await db.select({ count: count() }).from(search_conditions);
 
   if(conditionCount[0].count >= 5) {
-    NextResponse.json({message: "登録できるのは５件までです！"}, { status: 403 });
+    return NextResponse.json({message: "登録できるのは５件までです！"}, { status: 403 });
   }
 
   // 検索条件の名前が重複していたらエラーを返す
@@ -30,7 +30,7 @@ export const POST = async (req: NextRequest) => {
   ;
 
   if(existingItem.length > 0) {
-    NextResponse.json({message: "同じ名前の条件は登録できません！"}, { status: 409 });
+    return NextResponse.json({message: "同じ名前の条件は登録できません！"}, { status: 409 });
   }
   
   try {
@@ -47,7 +47,7 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ message: "検索条件の登録が成功しました。" }, { status: 200 });
   } catch (error) {
     console.error(error);
-    NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });
+    return NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });
   }
 };
 
@@ -70,7 +70,7 @@ export const PATCH = async (req: NextRequest) => {
   ;
 
   if(existingItem.length > 0) {
-    NextResponse.json({message: "同じ名前の条件は登録できません！"}, { status: 409 });
+    return NextResponse.json({message: "同じ名前の条件は登録できません！"}, { status: 409 });
   }
 
   try {
@@ -93,7 +93,7 @@ export const PATCH = async (req: NextRequest) => {
     return NextResponse.json({ message: "検索条件の編集が成功しました。" }, { status: 200 });
   } catch (error) {
     console.error(error);
-    NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });
+    return NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });
   }
 };
 
@@ -114,7 +114,7 @@ export const GET = async () => {
     return NextResponse.json(response);
   } catch (error) {
     console.error(error);
-    NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });
+    return NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });
   }
 };
 
@@ -132,6 +132,6 @@ export const DELETE = async (req: NextRequest) => {
     return NextResponse.json({ message: "検索条件の編集が成功しました。" }, { status: 200 });
   } catch (error) {
     console.error(error);
-    NextResponse.json({ message: "サバーエラーが発生しました。" }, { status: 500 });
+    return NextResponse.json({ message: "サバーエラーが発生しました。" }, { status: 500 });
   }
 };
