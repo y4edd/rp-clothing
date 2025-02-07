@@ -2,7 +2,6 @@
 
 import Modal from "@/components/Modal/Modal";
 import CategoryCondition from "@/components/search/CategoryCondition/CategoryCondition";
-import FavConditions from "@/components/search/FavConditions/FavConditions";
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
@@ -11,6 +10,9 @@ import { initialState } from "@/reducer/reducer";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useReducer, useState } from "react";
 import styles from "./SearchModal.module.css";
+import { getCondition } from "@/utils/apiFunc";
+import SearchFavConditions from "../SearchFavConditions/SearchFavConditions";
+import { FavConditionProps } from "@/types/search/search";
 
 const SearchModal = () => {
   const router = useRouter();
@@ -18,6 +20,7 @@ const SearchModal = () => {
   const [state, dispatch] = useReducer(reducer, searchParams, initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [favConditions, setFavConditions] = useState<FavConditionProps[]>([]);
 
   // ページ遷移時にモーダルを開く
   // 新しく渡ってくるクエリの有無でモーダル開閉を管理
@@ -28,6 +31,18 @@ const SearchModal = () => {
       setIsModalOpen(false);
     }
   }, [searchParams]);
+
+  // 初回レンダリングと同時にお気に入り条件を取得する
+  useEffect(() => {
+    const fetchConditions = async () => {
+      const response = await getCondition();
+      if(response) {
+        const res:FavConditionProps[] = await response.json();
+        setFavConditions(res);
+      }
+    };
+    fetchConditions();
+  }, []);
 
   // stateの変更をリアルタイムでqueryに反映
   const query = useMemo(() => {
@@ -63,7 +78,7 @@ const SearchModal = () => {
           <div className={styles.modalContent}>
             <h2 className={styles.modalTitle}>検索条件</h2>
             <div className={styles.searchConditions}>
-              <FavConditions />
+              <SearchFavConditions favConditions={favConditions}/>
               <PriceCondition
                 minPrice={state.minPrice}
                 maxPrice={state.maxPrice}

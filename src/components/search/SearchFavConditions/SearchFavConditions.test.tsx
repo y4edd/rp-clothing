@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import FavConditions from "./FavConditions";
+import FavConditions from "./SearchFavConditions";
 
 jest.mock("next/navigation", () => ({ useRouter: jest.fn() }));
 describe("FavConditionsコンポーネント", () => {
