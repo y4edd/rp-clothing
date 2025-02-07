@@ -1,12 +1,15 @@
-"use client";
-
 import FavCondition from "../FavCondition/FavCondition";
 import { FavConditionProps } from "@/types/search/search";
-import { useContext } from "react";
-import { ConditionContext } from "@/context/searchConditionContext";
+import { getCondition } from "@/utils/apiFunc";
 
-const FavConditions = () => {
-  const { conditions } = useContext(ConditionContext);
+const FavConditions = async() => {
+  const response = await getCondition();
+
+  if(!response) {
+    return;
+  }
+
+  const conditions = await response.json();
 
   return (
     <>

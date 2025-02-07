@@ -1,0 +1,1 @@
+ALTER TABLE "search_conditions" ADD CONSTRAINT "search_conditions_users_id_condition_name_unique" UNIQUE("users_id","condition_name");

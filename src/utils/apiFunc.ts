@@ -47,6 +47,7 @@ export const postCondition = async (req: FavConditionProps) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req),
     });
+    return response;
   } catch (err) {
     console.error("通信に失敗しました", err);
     return null;
@@ -64,9 +65,9 @@ export const editCondition = async (req: FavConditionProps,searchConditionId: nu
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req),
     });
+    return response;
   } catch (err) {
     console.error("通信に失敗しました", err);
-    return null;
   }
 };
 
@@ -76,11 +77,9 @@ export const getCondition = async () => {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "GET",
     });
-    const res = await response.json();
-    return res;
+    return response;
   } catch (err) {
     console.error("通信に失敗しました", err);
-    return null;
   }
 };
 
@@ -92,10 +91,8 @@ export const deleteCondition = async (req: number) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req),
     });
-    const res = await response.json();
-    return res;
+    return response;
   } catch (err) {
     console.error("通信に失敗しました", err);
-    return null;
   }
 };

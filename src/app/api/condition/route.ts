@@ -17,6 +17,22 @@ export const POST = async (req: NextRequest) => {
     NextResponse.json({message: "登録できるのは５件までです！"}, { status: 403 });
   }
 
+  // 検索条件の名前が重複していたらエラーを返す
+  const existingItem = await db
+    .select()
+    .from(search_conditions)
+    .where(
+      and(
+        eq(search_conditions.users_id,1),
+        eq(search_conditions.condition_name,conditionName)
+      )
+    )
+  ;
+
+  if(existingItem.length > 0) {
+    NextResponse.json({message: "同じ名前の条件は登録できません！"}, { status: 409 });
+  }
+  
   try {
 
     await db.insert(search_conditions).values({
@@ -40,6 +56,22 @@ export const PATCH = async (req: NextRequest) => {
   // MEMO: ユーザーIDが必要
   const request = await req.json();
   const { searchConditionId, conditionName, minPrice, maxPrice, selectedCategory, keyWord } = request;
+
+    // 検索条件の名前が重複していたらエラーを返す
+    const existingItem = await db
+    .select()
+    .from(search_conditions)
+    .where(
+      and(
+        eq(search_conditions.users_id,1),
+        eq(search_conditions.condition_name,conditionName)
+      )
+    )
+  ;
+
+  if(existingItem.length > 0) {
+    NextResponse.json({message: "同じ名前の条件は登録できません！"}, { status: 409 });
+  }
 
   try {
     await db
