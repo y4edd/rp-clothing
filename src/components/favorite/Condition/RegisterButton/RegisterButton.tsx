@@ -12,7 +12,7 @@ type RegisterButtonProps = {
   buttonType: "register" | "edit";
   state: FavConditionProps;
   validate: () => boolean;
-  searchConditionId: number | undefined;
+  searchConditionId?: number | undefined;
 };
 
 const RegisterButton: React.FC<RegisterButtonProps> = ({

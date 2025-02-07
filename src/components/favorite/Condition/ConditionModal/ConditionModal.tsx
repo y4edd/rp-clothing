@@ -6,15 +6,13 @@ import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondit
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import { registerInitialState, registerReducer } from "@/reducer/reducer";
 import type { ModalProps } from "@/types/modal";
-import { useSearchParams } from "next/navigation";
 import { useReducer, useState } from "react";
 import ConditionName from "../ConditionName/ConditionName";
 import RegisterButton from "../RegisterButton/RegisterButton";
 import styles from "./ConditionModal.module.css";
 
 const ConditionModal: React.FC<ModalProps> = ({ closeModal, modalTitle, searchConditionId }) => {
-  const searchParams = useSearchParams();
-  const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
+  const [state, dispatch] = useReducer(registerReducer,registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
 
   // モーダルのタイトルでボタンの種類を決定
@@ -46,7 +44,6 @@ const ConditionModal: React.FC<ModalProps> = ({ closeModal, modalTitle, searchCo
             buttonType={buttonType}
             state={state}
             validate={validateConditionName}
-            closeModal={closeModal}
             searchConditionId={searchConditionId}
           />
           <div className={styles.errorMessage}>{errorMessage}</div>

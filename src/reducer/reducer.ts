@@ -42,12 +42,11 @@ export const registerReducer = (state: RegisterState, action: RegisterAction) =>
 };
 
 // 検索条件の保存を管理する初期化関数
-// MEMO: もし編集用なのであれば、stateから取得するようにする。
-export const registerInitialState = () => ({
+export const registerInitialState = {
   searchConditionId: "",
   conditionName: "",
   minPrice: "",
   maxPrice: "",
   selectedCategory: "",
   keyWord: "",
-});
+};

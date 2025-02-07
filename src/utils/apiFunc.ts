@@ -79,6 +79,8 @@ export const getCondition = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "GET",
+      // SSRにする
+      cache: "no-store",
     });
     return response;
   } catch (err) {

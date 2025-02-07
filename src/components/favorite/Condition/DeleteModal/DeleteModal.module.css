@@ -29,3 +29,8 @@
   width: 160px;
   margin-right: 1.0rem;
 }
+
+.errorMessage {
+  color: #ff0000;
+  text-align: center;
+}

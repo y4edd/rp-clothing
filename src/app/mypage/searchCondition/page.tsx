@@ -15,21 +15,21 @@ const SearchCondition = () => {
         ]}
       />
       <PageTitle title="お気に入り条件" />
-      <RegisterConditionButton />
-      <div className={styles.container}>
-        <table className={styles.table}>
-          <thead>
-            <tr className={styles.conditionTitleContainer}>
-              <td className={styles.conditionName}>条件名</td>
-              <td className={styles.registerCondition}>登録条件</td>
-              <td className={styles.conditionControl}>編集・削除</td>
-            </tr>
-          </thead>
-          <tbody>
-            <FavConditions />
-          </tbody>
-        </table>
-      </div>
+        <RegisterConditionButton />
+        <div className={styles.container}>
+          <table className={styles.table}>
+            <thead>
+              <tr className={styles.conditionTitleContainer}>
+                <td className={styles.conditionName}>条件名</td>
+                <td className={styles.registerCondition}>登録条件</td>
+                <td className={styles.conditionControl}>編集・削除</td>
+              </tr>
+            </thead>
+            <tbody>
+              <FavConditions />
+            </tbody>
+          </table>
+        </div>
     </>
   );
 };
