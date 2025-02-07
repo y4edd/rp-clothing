@@ -1,9 +1,9 @@
 "use client";
 
 import Button from "@/components/utils/button/Button";
-import { editCondition, postCondition } from "@/utils/apiFunc";
 import buttonStyles from "@/components/utils/button/Button.module.css";
-import { FavConditionProps } from "@/types/search/search";
+import type { FavConditionProps } from "@/types/search/search";
+import { editCondition, postCondition } from "@/utils/apiFunc";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./RegisterButton.module.css";
@@ -29,19 +29,19 @@ const RegisterButton: React.FC<RegisterButtonProps> = ({
     if (!validate()) return;
 
     try {
-      const response = buttonType === "register"
-      ? await postCondition(state)
-      : await editCondition(state, searchConditionId);
+      const response =
+        buttonType === "register"
+          ? await postCondition(state)
+          : await editCondition(state, searchConditionId);
 
       if (!response) {
         return;
       }
       const res = await response.json();
       setServerError(res.message);
-      if(response.ok) {
+      if (response.ok) {
         router.push("/mypage/searchCondition");
-      };
-  
+      }
     } catch (err) {
       console.error(err);
     }

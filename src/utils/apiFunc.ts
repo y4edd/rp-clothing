@@ -56,8 +56,11 @@ export const postCondition = async (req: FavConditionProps) => {
 
 // 検索条件を編集する非同期関数
 // reqは更新のための検索条件が入り、searchConditionIdでどの検索条件を変更するかを確定させます
-export const editCondition = async (req: FavConditionProps,searchConditionId: number | undefined) => {
-  req.searchConditionId= searchConditionId;
+export const editCondition = async (
+  req: FavConditionProps,
+  searchConditionId: number | undefined,
+) => {
+  req.searchConditionId = searchConditionId;
 
   try {
     const response = await fetch("http://localhost:3000/api/condition", {

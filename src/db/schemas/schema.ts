@@ -1,5 +1,14 @@
 import { sql } from "drizzle-orm";
-import { boolean, date, integer, pgTable, serial, text, timestamp, unique } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  date,
+  integer,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  unique,
+} from "drizzle-orm/pg-core";
 
 // テーブルの定義
 export const users = pgTable("users", {
@@ -12,23 +21,25 @@ export const users = pgTable("users", {
   updated_at: timestamp("updated_at").defaultNow(),
 });
 
-export const search_conditions = pgTable("search_conditions", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
-    .notNull(),
-  condition_name: text("condition_name").notNull(),
-  price_min: text("price_min"),
-  price_max: text("price_max"),
-  category: text("category"),
-  word: text("word"),
-  created_at: timestamp("created_at").defaultNow(),
-  updated_at: timestamp("updated_at").defaultNow(),
-},
-(table) => ({
-  // １人のユーザーが同じ名前の検索条件を持つことをゆるさない
-  uniqueSearchCondition: unique().on(table.users_id, table.condition_name),
-})
+export const search_conditions = pgTable(
+  "search_conditions",
+  {
+    id: serial("id").primaryKey(),
+    users_id: integer("users_id")
+      .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
+      .notNull(),
+    condition_name: text("condition_name").notNull(),
+    price_min: text("price_min"),
+    price_max: text("price_max"),
+    category: text("category"),
+    word: text("word"),
+    created_at: timestamp("created_at").defaultNow(),
+    updated_at: timestamp("updated_at").defaultNow(),
+  },
+  (table) => ({
+    // １人のユーザーが同じ名前の検索条件を持つことをゆるさない
+    uniqueSearchCondition: unique().on(table.users_id, table.condition_name),
+  }),
 );
 
 export const purchase_history = pgTable("purchase_history", {

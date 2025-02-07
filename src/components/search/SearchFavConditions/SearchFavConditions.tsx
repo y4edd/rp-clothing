@@ -1,15 +1,15 @@
 "use client";
 import Button from "@/components/utils/button/Button";
 import buttonStyles from "@/components/utils/button/Button.module.css";
+import type { FavConditionProps } from "@/types/search/search";
 import { useRouter } from "next/navigation";
 import styles from "./SearchFavConditions.module.css";
-import { FavConditionProps } from "@/types/search/search";
 
 type SearchFavConditionsProps = {
   favConditions: FavConditionProps[];
-}
+};
 
-const SearchFavConditions = ({favConditions}:SearchFavConditionsProps) => {
+const SearchFavConditions = ({ favConditions }: SearchFavConditionsProps) => {
   const router = useRouter();
 
   const toMyPage = () => {
@@ -24,7 +24,7 @@ const SearchFavConditions = ({favConditions}:SearchFavConditionsProps) => {
       selectedCategory: favCondition.selectedCategory || "",
       keyWord: favCondition.keyWord || "",
     }).toString();
-  
+
     router.push(`/search?${query}`);
   };
 
@@ -35,8 +35,15 @@ const SearchFavConditions = ({favConditions}:SearchFavConditionsProps) => {
         <div className={styles.favConditionsContent}>
           <div className={styles.favConditions}>
             {/* FIXME:非同期で、お気に入り条件の取得、UI表示を行う処理を実装 */}
-            {favConditions.map((favCondition:FavConditionProps) => {
-              return (<Button text={favCondition.conditionName} key={favCondition.conditionName} className={buttonStyles.gray} onClick={() => toSearch(favCondition)} />);
+            {favConditions.map((favCondition: FavConditionProps) => {
+              return (
+                <Button
+                  text={favCondition.conditionName}
+                  key={favCondition.conditionName}
+                  className={buttonStyles.gray}
+                  onClick={() => toSearch(favCondition)}
+                />
+              );
             })}
           </div>
           <div className={styles.editButton}>

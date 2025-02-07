@@ -1,8 +1,8 @@
 "use client";
 import Button from "@/components/utils/button/Button";
 import buttonStyles from "@/components/utils/button/Button.module.css";
-import styles from "./RegisterConditionButton.module.css";
 import { useRouter } from "next/navigation";
+import styles from "./RegisterConditionButton.module.css";
 
 const RegisterConditionButton = () => {
   const router = useRouter();

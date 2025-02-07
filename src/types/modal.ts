@@ -3,4 +3,3 @@ export type ModalProps = {
   modalTitle?: string;
   searchConditionId: number | undefined;
 };
-

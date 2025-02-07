@@ -1,18 +1,18 @@
 "use client";
 
-import { type ModalProps } from "@/types/modal";
 import Modal from "@/components/Modal/Modal";
+import ConditionName from "@/components/favorite/Condition/ConditionName/ConditionName";
+import RegisterButton from "@/components/favorite/Condition/RegisterButton/RegisterButton";
 import CategoryCondition from "@/components/search/CategoryCondition/CategoryCondition";
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import { registerInitialState, registerReducer } from "@/reducer/reducer";
+import type { ModalProps } from "@/types/modal";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useReducer, useState } from "react";
-import ConditionName from "@/components/favorite/Condition/ConditionName/ConditionName";
-import RegisterButton from "@/components/favorite/Condition/RegisterButton/RegisterButton";
 import styles from "./page.module.css";
 
-const RegisterConditionModal: React.FC<ModalProps> = ({searchConditionId }) => {
+const RegisterConditionModal: React.FC<ModalProps> = ({ searchConditionId }) => {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
@@ -40,13 +40,17 @@ const RegisterConditionModal: React.FC<ModalProps> = ({searchConditionId }) => {
     <>
       {/* Next.js の自動トップスクロールを防ぐためのダミー要素
       → Next.js ではページ遷移時にデフォルトでトップにスクロールされるが、これを防ぐために使用 */}
-      <div></div>
+      <div />
       <Modal onClose={closeModal}>
         <div className={styles.modalContent}>
           <h2>お気に入り条件登録</h2>
           <div className={styles.searchConditions}>
             <ConditionName dispatch={dispatch} />
-            <PriceCondition minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch} />
+            <PriceCondition
+              minPrice={state.minPrice}
+              maxPrice={state.maxPrice}
+              dispatch={dispatch}
+            />
             <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
             <KeyWordCondition keyWord={state.keyWord} dispatch={dispatch} />
             <RegisterButton

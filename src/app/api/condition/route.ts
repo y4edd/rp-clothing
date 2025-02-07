@@ -13,8 +13,8 @@ export const POST = async (req: NextRequest) => {
   // すでに５件登録されていたら、エラーを発生させる
   const conditionCount = await db.select({ count: count() }).from(search_conditions);
 
-  if(conditionCount[0].count >= 5) {
-    return NextResponse.json({message: "登録できるのは５件までです！"}, { status: 403 });
+  if (conditionCount[0].count >= 5) {
+    return NextResponse.json({ message: "登録できるのは５件までです！" }, { status: 403 });
   }
 
   // 検索条件の名前が重複していたらエラーを返す
@@ -22,19 +22,14 @@ export const POST = async (req: NextRequest) => {
     .select()
     .from(search_conditions)
     .where(
-      and(
-        eq(search_conditions.users_id,1),
-        eq(search_conditions.condition_name,conditionName)
-      )
-    )
-  ;
+      and(eq(search_conditions.users_id, 1), eq(search_conditions.condition_name, conditionName)),
+    );
 
-  if(existingItem.length > 0) {
-    return NextResponse.json({message: "同じ名前の条件は登録できません！"}, { status: 409 });
+  if (existingItem.length > 0) {
+    return NextResponse.json({ message: "同じ名前の条件は登録できません！" }, { status: 409 });
   }
-  
-  try {
 
+  try {
     await db.insert(search_conditions).values({
       users_id: 1,
       condition_name: conditionName,
@@ -55,22 +50,19 @@ export const POST = async (req: NextRequest) => {
 export const PATCH = async (req: NextRequest) => {
   // MEMO: ユーザーIDが必要
   const request = await req.json();
-  const { searchConditionId, conditionName, minPrice, maxPrice, selectedCategory, keyWord } = request;
+  const { searchConditionId, conditionName, minPrice, maxPrice, selectedCategory, keyWord } =
+    request;
 
-    // 検索条件の名前が重複していたらエラーを返す
-    const existingItem = await db
+  // 検索条件の名前が重複していたらエラーを返す
+  const existingItem = await db
     .select()
     .from(search_conditions)
     .where(
-      and(
-        eq(search_conditions.users_id,1),
-        eq(search_conditions.condition_name,conditionName)
-      )
-    )
-  ;
+      and(eq(search_conditions.users_id, 1), eq(search_conditions.condition_name, conditionName)),
+    );
 
-  if(existingItem.length > 0) {
-    return NextResponse.json({message: "同じ名前の条件は登録できません！"}, { status: 409 });
+  if (existingItem.length > 0) {
+    return NextResponse.json({ message: "同じ名前の条件は登録できません！" }, { status: 409 });
   }
 
   try {

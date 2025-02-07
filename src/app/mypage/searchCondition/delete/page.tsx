@@ -1,11 +1,11 @@
 "use client";
 
 import Modal from "@/components/Modal/Modal";
-import styles from "./page.module.css";
-import { useRouter, useSearchParams } from "next/navigation";
-import buttonStyles from "@/components/utils/button/Button.module.css";
 import Button from "@/components/utils/button/Button";
+import buttonStyles from "@/components/utils/button/Button.module.css";
 import { deleteCondition } from "@/utils/apiFunc";
+import { useRouter, useSearchParams } from "next/navigation";
+import styles from "./page.module.css";
 
 const DeleteConditionModal = () => {
   const searchParams = useSearchParams();
@@ -36,7 +36,7 @@ const DeleteConditionModal = () => {
     <>
       {/* Next.js の自動トップスクロールを防ぐためのダミー要素
           → Next.js ではページ遷移時にデフォルトでトップにスクロールされるが、これを防ぐために使用 */}
-      <div></div>
+      <div />
       <Modal onClose={closeModal}>
         <div className={styles.modalContent}>
           <h2>お気に入り条件削除</h2>
@@ -44,10 +44,20 @@ const DeleteConditionModal = () => {
           <div className={styles.conditionName}>お気に入り条件名：{conditionName}</div>
           <div className={styles.buttons}>
             <div className={styles.button}>
-              <Button type="submit" text="削除する" onClick={handleDelete} className={buttonStyles.red} />
+              <Button
+                type="submit"
+                text="削除する"
+                onClick={handleDelete}
+                className={buttonStyles.red}
+              />
             </div>
             <div className={styles.button}>
-              <Button type="button" text="キャンセル" onClick={handleCancel} className={buttonStyles.black} />
+              <Button
+                type="button"
+                text="キャンセル"
+                onClick={handleCancel}
+                className={buttonStyles.black}
+              />
             </div>
           </div>
         </div>

@@ -1,11 +1,11 @@
-import FavCondition from "../FavCondition/FavCondition";
-import { FavConditionProps } from "@/types/search/search";
+import type { FavConditionProps } from "@/types/search/search";
 import { getCondition } from "@/utils/apiFunc";
+import FavCondition from "../FavCondition/FavCondition";
 
-const FavConditions = async() => {
+const FavConditions = async () => {
   const response = await getCondition();
 
-  if(!response) {
+  if (!response) {
     return;
   }
 
@@ -22,7 +22,7 @@ const FavConditions = async() => {
           maxPrice={condition.maxPrice}
           selectedCategory={condition.selectedCategory}
           keyWord={condition.keyWord}
-          condition = {condition}
+          condition={condition}
         />
       ))}
     </>

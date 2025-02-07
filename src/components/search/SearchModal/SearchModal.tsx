@@ -7,12 +7,12 @@ import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import SearchStartButton from "@/components/search/SearchStartButton/SearchStartButton";
 import { reducer } from "@/reducer/reducer";
 import { initialState } from "@/reducer/reducer";
+import type { FavConditionProps } from "@/types/search/search";
+import { getCondition } from "@/utils/apiFunc";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useReducer, useState } from "react";
-import styles from "./SearchModal.module.css";
-import { getCondition } from "@/utils/apiFunc";
 import SearchFavConditions from "../SearchFavConditions/SearchFavConditions";
-import { FavConditionProps } from "@/types/search/search";
+import styles from "./SearchModal.module.css";
 
 const SearchModal = () => {
   const router = useRouter();
@@ -36,8 +36,8 @@ const SearchModal = () => {
   useEffect(() => {
     const fetchConditions = async () => {
       const response = await getCondition();
-      if(response) {
-        const res:FavConditionProps[] = await response.json();
+      if (response) {
+        const res: FavConditionProps[] = await response.json();
         setFavConditions(res);
       }
     };
@@ -78,7 +78,7 @@ const SearchModal = () => {
           <div className={styles.modalContent}>
             <h2 className={styles.modalTitle}>検索条件</h2>
             <div className={styles.searchConditions}>
-              <SearchFavConditions favConditions={favConditions}/>
+              <SearchFavConditions favConditions={favConditions} />
               <PriceCondition
                 minPrice={state.minPrice}
                 maxPrice={state.maxPrice}

@@ -1,12 +1,12 @@
 "use client";
 
 import Button from "@/components/utils/button/Button";
-import styles from "./ConditionEditButtons.module.css";
+import type { FavConditionProps } from "@/types/search/search";
 import { useRouter } from "next/navigation";
-import { FavConditionProps } from "@/types/search/search";
+import styles from "./ConditionEditButtons.module.css";
 
 type searchConditionIdProps = {
-  condition: FavConditionProps
+  condition: FavConditionProps;
 };
 
 const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ condition }) => {
@@ -14,14 +14,13 @@ const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ condition }) =
   // 空の値を除外
   const filteredParams = Object.fromEntries(
     Object.entries(condition)
-    .filter(([_, v]) => v !== "")
-    // number型入ってきてもstring型にする
-    .map(([key, value]) => [key, String(value)])
+      .filter(([_, v]) => v !== "")
+      // number型入ってきてもstring型にする
+      .map(([key, value]) => [key, String(value)]),
   );
   // クエリパラメータを作成
   const queryString = new URLSearchParams(filteredParams).toString();
 
-  
   const toEdit = () => {
     router.push(`/mypage/searchCondition/edit?${queryString}`);
   };
