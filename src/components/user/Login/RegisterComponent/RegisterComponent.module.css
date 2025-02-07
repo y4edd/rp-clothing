@@ -1,0 +1,25 @@
+.register {
+  margin: 3% 0;
+  width: 50%;
+  height: 400px;
+}
+
+.register h2 {
+  margin-bottom: 10px;
+  padding-left: 7%;
+}
+
+.registerContents {
+  width: 80%;
+  position: relative;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.btn {
+  text-align: center;
+  display: grid;
+  width: 100%;
+  margin: 0 auto;
+}

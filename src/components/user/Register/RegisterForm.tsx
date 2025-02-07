@@ -13,11 +13,12 @@ import Name from "./Form/Name/Name";
 import Password from "./Form/Password/Password";
 import styles from "./RegisterForm.module.css";
 import "react-toastify/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 const today = new Date();
 const currentYear = today.getFullYear();
-
 const RegisterForm = () => {
+  const router = useRouter();
   const [registerError, setRegisterError] = useState("");
   const {
     register,
@@ -56,6 +57,7 @@ const RegisterForm = () => {
       }
       showToast("会員登録が完了しました。");
       setRegisterError("");
+      router.push("/user/login");
     } catch (error) {
       console.error("エラー内容:", error);
       setRegisterError("※サーバーエラーが発生しました。");

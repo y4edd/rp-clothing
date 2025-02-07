@@ -24,7 +24,7 @@ const Header = () => {
         </div> */}
         {/* MEMO: ログイン済みの際はこちらが表示されます */}
         <div className={styles.navigationContainer}>
-          <Link href="/login" className={styles.login}>
+          <Link href="/user/login" className={styles.login}>
             ログイン
           </Link>
           <ToFavoriteButton />

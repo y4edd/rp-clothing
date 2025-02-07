@@ -7,8 +7,8 @@
   cursor: pointer;
 }
 .favoriteIcon::after {
-  content: "お気に入り";
-  width: 75px;
+  content: "お気に入りアイテム";
+  width: 120px;
   padding: 3px;
   font-size: 0.8rem;
   text-align: center;
@@ -16,7 +16,7 @@
   border-radius: 5px;
   border: solid 1px #111111;
   position: absolute;
-  top: -32px;
+  top: -30px;
   right: -50px;
   z-index: 10;
   opacity: 0;

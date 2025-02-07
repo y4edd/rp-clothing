@@ -1,4 +1,4 @@
-export interface FormProps {
+export type FormProps = {
   name: string;
   email: string;
   year: number;
@@ -9,3 +9,14 @@ export interface FormProps {
   confirmPassword: string;
   conditionName: string;
 }
+
+export type LoginProps = {
+  email: string;
+  password: string;
+};
+
+export type EditUserProps = {
+  name: string;
+  email: string;
+  password: string;
+};

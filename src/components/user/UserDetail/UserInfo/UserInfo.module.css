@@ -1,0 +1,12 @@
+.userDetail dt {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.userDetail dd {
+  margin-bottom: 50px;
+  margin-left: 20px;
+}
+
+.birthday span {
+  margin-right: 50px;
+}

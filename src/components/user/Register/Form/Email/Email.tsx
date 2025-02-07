@@ -33,7 +33,7 @@ const Email = ({ register, errors }: InputProps) => {
                 ) || errorMessages.email.patternFormat,
             },
           })}
-          name="email"
+          autoComplete="off"
         />
       </dd>
       <dd>

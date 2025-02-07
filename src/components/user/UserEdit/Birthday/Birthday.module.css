@@ -1,0 +1,9 @@
+.birthday {
+  margin-bottom: 50px;
+}
+.birthday dd {
+  text-align: center;
+}
+.birthday dd span {
+  margin: 0 30px;
+}

@@ -18,7 +18,6 @@ const Month = ({ register }: MonthProps) => {
         id="month"
         className={styles.monthSelect}
         {...register("month")}
-        name="month"
         data-testid="month-select"
       >
         {monthList.map((month) => (

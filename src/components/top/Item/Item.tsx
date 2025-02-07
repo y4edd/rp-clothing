@@ -8,16 +8,16 @@ import FavoriteBUtton from "../FavoriteButton/FavoriteButton";
 import styles from "./Item.module.css";
 
 const Item = ({ itemCode, itemName, itemPrice, itemImage }: ItemData) => {
-  const [_imageSrc, setImageSrc] = useState(itemImage);
+  const [imageSrc, setImageSrc] = useState(itemImage);
   const handleError = () => {
     setImageSrc("/images/no-image.jpg");
   };
   return (
     <div className={styles.itemContent}>
-      <Link href={itemCode}>
+      <Link href={`/item/${itemCode}`}>
         <div className={styles.item}>
           <Image
-            src={itemImage || "/images/no-image.jpg"}
+            src={imageSrc || "/images/no-image.jpg"}
             // 404エラーが出ないように
             onError={handleError}
             alt="アイテム画像"

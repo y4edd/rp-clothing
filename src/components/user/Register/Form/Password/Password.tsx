@@ -28,7 +28,6 @@ const Password = ({ register, errors }: InputProps) => {
             maxLength: { value: 19, message: errorMessages.password.maxLength },
             minLength: { value: 6, message: errorMessages.password.minLength },
           })}
-          name="password"
         />
       </dd>
       <dd>
