@@ -12,11 +12,15 @@ import ConditionName from "@/components/favorite/Condition/ConditionName/Conditi
 import RegisterButton from "@/components/favorite/Condition/RegisterButton/RegisterButton";
 import styles from "./page.module.css";
 
-const RegisterConditionModal: React.FC<ModalProps> = ({searchConditionId }) => {
+const EditConditionModal: React.FC<ModalProps> = () => {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+
+  // searchConditionIdをクエリから受け取る
+  const searchConditionIdString = searchParams.get("searchConditionId");
+  const searchConditionId = Number(searchConditionIdString);
 
   // モーダルを閉じる処理
   const closeModal = () => {
@@ -37,26 +41,30 @@ const RegisterConditionModal: React.FC<ModalProps> = ({searchConditionId }) => {
   };
 
   return (
-    <Modal onClose={closeModal}>
-      <div className={styles.modalContent}>
-        <h2>お気に入り条件編集</h2>
-        <div className={styles.searchConditions}>
-          <ConditionName dispatch={dispatch} />
-          <PriceCondition minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch} />
-          <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
-          <KeyWordCondition keyWord={state.keyWord} dispatch={dispatch} />
-          <RegisterButton
-            buttonType="edit"
-            state={state}
-            validate={validateConditionName}
-            closeModal={closeModal}
-            searchConditionId={searchConditionId}
-          />
-          <div className={styles.errorMessage}>{errorMessage}</div>
+    <>
+      {/* Next.js の自動トップスクロールを防ぐためのダミー要素
+      → Next.js ではページ遷移時にデフォルトでトップにスクロールされるが、これを防ぐために使用 */}
+      <div></div>
+      <Modal onClose={closeModal}>
+        <div className={styles.modalContent}>
+          <h2>お気に入り条件編集</h2>
+          <div className={styles.searchConditions}>
+            <ConditionName dispatch={dispatch} />
+            <PriceCondition minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch} />
+            <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
+            <KeyWordCondition keyWord={state.keyWord} dispatch={dispatch} />
+            <RegisterButton
+              buttonType="edit"
+              state={state}
+              validate={validateConditionName}
+              searchConditionId={searchConditionId}
+            />
+            <div className={styles.errorMessage}>{errorMessage}</div>
+          </div>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    </>
   );
 };
 
-export default RegisterConditionModal;
+export default EditConditionModal;

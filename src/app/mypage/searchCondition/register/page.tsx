@@ -37,25 +37,29 @@ const RegisterConditionModal: React.FC<ModalProps> = ({searchConditionId }) => {
   };
 
   return (
-    <Modal onClose={closeModal}>
-      <div className={styles.modalContent}>
-        <h2>お気に入り条件登録</h2>
-        <div className={styles.searchConditions}>
-          <ConditionName dispatch={dispatch} />
-          <PriceCondition minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch} />
-          <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
-          <KeyWordCondition keyWord={state.keyWord} dispatch={dispatch} />
-          <RegisterButton
-            buttonType="register"
-            state={state}
-            validate={validateConditionName}
-            closeModal={closeModal}
-            searchConditionId={searchConditionId}
-          />
-          <div className={styles.errorMessage}>{errorMessage}</div>
+    <>
+      {/* Next.js の自動トップスクロールを防ぐためのダミー要素
+      → Next.js ではページ遷移時にデフォルトでトップにスクロールされるが、これを防ぐために使用 */}
+      <div></div>
+      <Modal onClose={closeModal}>
+        <div className={styles.modalContent}>
+          <h2>お気に入り条件登録</h2>
+          <div className={styles.searchConditions}>
+            <ConditionName dispatch={dispatch} />
+            <PriceCondition minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch} />
+            <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
+            <KeyWordCondition keyWord={state.keyWord} dispatch={dispatch} />
+            <RegisterButton
+              buttonType="register"
+              state={state}
+              validate={validateConditionName}
+              searchConditionId={searchConditionId}
+            />
+            <div className={styles.errorMessage}>{errorMessage}</div>
+          </div>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    </>
   );
 };
 

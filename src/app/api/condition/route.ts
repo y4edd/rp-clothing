@@ -10,6 +10,8 @@ export const POST = async (req: NextRequest) => {
   const request = await req.json();
   const { conditionName, minPrice, maxPrice, selectedCategory, keyWord } = request;
   try {
+    // すでに５件登録されていたら、エラーを発生させる
+    
     await db.insert(search_conditions).values({
       users_id: 1,
       condition_name: conditionName,

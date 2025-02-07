@@ -8,7 +8,6 @@ type RegisterButtonProps = {
   buttonType: "register" | "edit";
   state: FavConditionProps;
   validate: () => boolean;
-  closeModal: () => void;
   searchConditionId: number | undefined;
 };
 
@@ -16,7 +15,6 @@ const RegisterButton: React.FC<RegisterButtonProps> = ({
   buttonType,
   state,
   validate,
-  closeModal,
   searchConditionId,
 }) => {
 
@@ -27,7 +25,7 @@ const RegisterButton: React.FC<RegisterButtonProps> = ({
     try {
       if (buttonType === "register") {
         await postCondition(state);
-       router.push("/mypage/searchCondition");
+        router.push("/mypage/searchCondition");
       } else {
         await editCondition(state,searchConditionId);
         router.push("/mypage/searchCondition");

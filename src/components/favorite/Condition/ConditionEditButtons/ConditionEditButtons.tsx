@@ -11,24 +11,23 @@ type searchConditionIdProps = {
 
 const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ condition }) => {
   const router = useRouter();
+  // 空の値を除外
+  const filteredParams = Object.fromEntries(
+    Object.entries(condition)
+    .filter(([_, v]) => v !== "")
+    // number型入ってきてもstring型にする
+    .map(([key, value]) => [key, String(value)])
+  );
+  // クエリパラメータを作成
+  const queryString = new URLSearchParams(filteredParams).toString();
 
-
+  
   const toEdit = () => {
-    // 空の値を除外
-    const filteredParams = Object.fromEntries(
-      Object.entries(condition)
-      .filter(([_, v]) => v !== "")
-      // number型入ってきてもstring型にする
-      .map(([key, value]) => [key, String(value)])
-    );
-    // クエリパラメータを作成
-    const queryString = new URLSearchParams(filteredParams).toString();
-    console.log(queryString);
     router.push(`/mypage/searchCondition/edit?${queryString}`);
   };
 
   const handleDelete = async () => {
-    router.push("/mypage/searchCondition/delete");
+    router.push(`/mypage/searchCondition/delete?${queryString}`);
   };
 
   return (
