@@ -94,12 +94,17 @@ export const getCondition = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "GET",
-      // SSRにする
-      cache: "no-store",
     });
+
+    if (!response.ok) {
+      throw new Error(`APIエラー: ${response.status}`);
+    }
+
     return response;
   } catch (err) {
     console.error("通信に失敗しました", err);
+    // ビルド時、クラッシュが起きないようにする
+    return null;
   }
 };
 
@@ -115,4 +120,4 @@ export const deleteCondition = async (req: number) => {
   } catch (err) {
     console.error("通信に失敗しました", err);
   }
-}
+};

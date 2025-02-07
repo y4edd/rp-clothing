@@ -19,7 +19,7 @@ const EditModal: React.FC = () => {
 
   // searchConditionIdをクエリから受け取る
   const searchConditionIdString = searchParams.get("searchConditionId");
-  const searchConditionId = searchConditionIdString?  Number(searchConditionIdString) : undefined;
+  const searchConditionId = searchConditionIdString ? Number(searchConditionIdString) : undefined;
 
   // モーダルを閉じる処理
   const closeModal = () => {

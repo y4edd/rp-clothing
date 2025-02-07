@@ -5,8 +5,8 @@ import Button from "@/components/utils/button/Button";
 import buttonStyles from "@/components/utils/button/Button.module.css";
 import { deleteCondition } from "@/utils/apiFunc";
 import { useRouter, useSearchParams } from "next/navigation";
-import styles from "./DeleteModal.module.css";
 import { useState } from "react";
+import styles from "./DeleteModal.module.css";
 
 const DeleteModal = () => {
   const searchParams = useSearchParams();
@@ -28,10 +28,8 @@ const DeleteModal = () => {
     router.back();
   };
 
-  if(!searchConditionId || !conditionName) {
-    return (
-      <div>検索条件を取得できませんでした。</div>
-    );
+  if (!searchConditionId || !conditionName) {
+    return <div>検索条件を取得できませんでした。</div>;
   }
   // 削除ボタンを押したときの処理
   const handleDelete = async () => {

@@ -12,7 +12,7 @@ import RegisterButton from "../RegisterButton/RegisterButton";
 import styles from "./ConditionModal.module.css";
 
 const ConditionModal: React.FC<ModalProps> = ({ closeModal, modalTitle, searchConditionId }) => {
-  const [state, dispatch] = useReducer(registerReducer,registerInitialState);
+  const [state, dispatch] = useReducer(registerReducer, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
 
   // モーダルのタイトルでボタンの種類を決定

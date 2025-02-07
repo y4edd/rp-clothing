@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import DeleteModal from "@/components/favorite/Condition/DeleteModal/DeleteModal";
+import { Suspense } from "react";
 
 const Page = () => {
   return (
@@ -8,6 +8,6 @@ const Page = () => {
       <DeleteModal />
     </Suspense>
   );
-}
+};
 
 export default Page;

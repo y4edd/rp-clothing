@@ -8,7 +8,7 @@ export type FormProps = {
   password: string;
   confirmPassword: string;
   conditionName: string;
-}
+};
 
 export type LoginProps = {
   email: string;

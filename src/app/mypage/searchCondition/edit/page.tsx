@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import EditModal from "@/components/favorite/Condition/EditModal/EditModal";
+import { Suspense } from "react";
 
 const Page = () => {
   return (
@@ -8,6 +8,6 @@ const Page = () => {
       <EditModal />
     </Suspense>
   );
-}
+};
 
 export default Page;

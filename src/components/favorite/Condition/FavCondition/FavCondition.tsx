@@ -1,7 +1,6 @@
 import type { FavConditionProps } from "@/types/search/search";
 import ConditionEditButtons from "../ConditionEditButtons/ConditionEditButtons";
 import styles from "./FavCondition.module.css";
-import { Suspense } from "react";
 
 const FavCondition = ({
   searchConditionId,
