@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { search_conditions } from "@/db/schemas/schema";
-import { and, eq } from "drizzle-orm";
+import { and, count, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -9,9 +9,16 @@ export const POST = async (req: NextRequest) => {
   // MEMO: ユーザーIDが必要
   const request = await req.json();
   const { conditionName, minPrice, maxPrice, selectedCategory, keyWord } = request;
+
+  // すでに５件登録されていたら、エラーを発生させる
+  const conditionCount = await db.select({ count: count() }).from(search_conditions);
+
+  if(conditionCount[0].count >= 5) {
+    NextResponse.json({message: "登録できるのは５件までです！"}, { status: 403 });
+  }
+
   try {
-    // すでに５件登録されていたら、エラーを発生させる
-    
+
     await db.insert(search_conditions).values({
       users_id: 1,
       condition_name: conditionName,
