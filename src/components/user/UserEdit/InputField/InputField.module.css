@@ -1,0 +1,26 @@
+.formItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+.formItem input {
+  font-size: 1.2rem;
+  padding: 5px 5px;
+}
+.example {
+  font-size: 1rem;
+
+  color: #948d8d;
+  margin-top: 10px;
+}
+
+.label {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-left: 15px;
+}

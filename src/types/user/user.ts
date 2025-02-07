@@ -13,3 +13,9 @@ export type LoginProps = {
   email: string;
   password: string;
 };
+
+export type EditUserProps = {
+  name: string;
+  email: string;
+  password: string;
+};
