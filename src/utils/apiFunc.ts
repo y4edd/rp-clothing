@@ -94,6 +94,7 @@ export const getCondition = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "GET",
+      cache: "no-cache",
     });
 
     if (!response.ok) {
