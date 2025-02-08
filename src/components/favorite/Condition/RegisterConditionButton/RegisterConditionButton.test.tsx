@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import RegisterConditionButton from "./RegisterConditionButton";
 import { useRouter } from "next/navigation";
+import RegisterConditionButton from "./RegisterConditionButton";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import ConditionEditButtons from "./ConditionEditButtons";
 import { useRouter } from "next/navigation";
+import ConditionEditButtons from "./ConditionEditButtons";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
@@ -28,11 +28,12 @@ describe("ConditionEditButtonsコンポーネントのテスト", () => {
   test("編集ボタン押下で、ページ遷移が行われること", () => {
     render(<ConditionEditButtons condition={conditionMock} />);
 
-    const editButtons = screen.getByRole("button", { name: "編集"});
+    const editButtons = screen.getByRole("button", { name: "編集" });
     fireEvent.click(editButtons);
 
     // URLをエンコードして比較する
-    const expectedUrl = "/mypage/searchCondition/edit?searchConditionId=47&conditionName=566&minPrice=4000"
+    const expectedUrl =
+      "/mypage/searchCondition/edit?searchConditionId=47&conditionName=566&minPrice=4000";
     const actualUrl = pushMock.mock.calls[0][0];
 
     expect(decodeURIComponent(actualUrl)).toBe(expectedUrl);
@@ -41,14 +42,14 @@ describe("ConditionEditButtonsコンポーネントのテスト", () => {
   test("削除ボタン押下で、ページ遷移が行われること", () => {
     render(<ConditionEditButtons condition={conditionMock} />);
 
-    const deleteButtons = screen.getByRole("button", { name: "削除"});
+    const deleteButtons = screen.getByRole("button", { name: "削除" });
     fireEvent.click(deleteButtons);
 
     // URLをエンコードして比較する
-    const expectedUrl = "/mypage/searchCondition/delete?searchConditionId=47&conditionName=566&minPrice=4000"
+    const expectedUrl =
+      "/mypage/searchCondition/delete?searchConditionId=47&conditionName=566&minPrice=4000";
     const actualUrl = pushMock.mock.calls[0][0];
 
     expect(decodeURIComponent(actualUrl)).toBe(expectedUrl);
-  })
-
+  });
 });

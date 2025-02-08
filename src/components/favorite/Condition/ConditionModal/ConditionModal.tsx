@@ -6,11 +6,11 @@ import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondit
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import { registerInitialState, registerReducer } from "@/reducer/reducer";
 import type { ModalProps } from "@/types/modal";
+import { useSearchParams } from "next/navigation";
 import { useReducer, useState } from "react";
 import ConditionName from "../ConditionName/ConditionName";
 import RegisterButton from "../RegisterButton/RegisterButton";
 import styles from "./ConditionModal.module.css";
-import { useSearchParams } from "next/navigation";
 
 const ConditionModal: React.FC<ModalProps> = ({ closeModal, modalTitle, searchConditionId }) => {
   const searchParams = useSearchParams();
