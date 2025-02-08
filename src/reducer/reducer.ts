@@ -49,4 +49,3 @@ export const registerInitialState = (searchParams: URLSearchParams) => ({
   selectedCategory: searchParams.get("selectedCategory") || "",
   keyWord: searchParams.get("keyWord") || "",
 });
-

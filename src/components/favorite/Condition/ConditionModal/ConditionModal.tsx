@@ -10,9 +10,11 @@ import { useReducer, useState } from "react";
 import ConditionName from "../ConditionName/ConditionName";
 import RegisterButton from "../RegisterButton/RegisterButton";
 import styles from "./ConditionModal.module.css";
+import { useSearchParams } from "next/navigation";
 
 const ConditionModal: React.FC<ModalProps> = ({ closeModal, modalTitle, searchConditionId }) => {
-  const [state, dispatch] = useReducer(registerReducer, registerInitialState);
+  const searchParams = useSearchParams();
+  const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
 
   // モーダルのタイトルでボタンの種類を決定
@@ -36,7 +38,7 @@ const ConditionModal: React.FC<ModalProps> = ({ closeModal, modalTitle, searchCo
       <div className={styles.modalContent}>
         <h2>{modalTitle}</h2>
         <div className={styles.searchConditions}>
-          <ConditionName dispatch={dispatch} />
+          <ConditionName dispatch={dispatch} conditionName={state.conditionName} />
           <PriceCondition minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch} />
           <CategoryCondition selectedCategory={state.selectedCategory} dispatch={dispatch} />
           <KeyWordCondition keyWord={state.keyWord} dispatch={dispatch} />
