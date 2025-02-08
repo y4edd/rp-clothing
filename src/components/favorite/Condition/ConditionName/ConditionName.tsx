@@ -3,9 +3,10 @@ import styles from "./ConditionName.module.css";
 
 type ConditionNameProps = {
   dispatch: (action: RegisterAction) => void;
+  conditionName: string;
 };
 
-const ConditionName = ({ dispatch }: ConditionNameProps) => {
+const ConditionName = ({ dispatch, conditionName }: ConditionNameProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     dispatch({ type: "SET_CONDITION_NAME", payload: e.target.value });
   return (
@@ -17,6 +18,7 @@ const ConditionName = ({ dispatch }: ConditionNameProps) => {
         data-testid="conditionName"
         className={styles.conditionNameInput}
         onChange={handleChange}
+        value={conditionName}
       />
     </div>
   );

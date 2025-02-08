@@ -13,7 +13,7 @@ import styles from "./EditModal.module.css";
 
 const EditModal: React.FC = () => {
   const searchParams = useSearchParams();
-  const [state, dispatch] = useReducer(registerReducer, registerInitialState);
+  const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
@@ -48,7 +48,7 @@ const EditModal: React.FC = () => {
         <div className={styles.modalContent}>
           <h2>お気に入り条件編集</h2>
           <div className={styles.searchConditions}>
-            <ConditionName dispatch={dispatch} />
+            <ConditionName dispatch={dispatch} conditionName={state.conditionName} />
             <PriceCondition
               minPrice={state.minPrice}
               maxPrice={state.maxPrice}

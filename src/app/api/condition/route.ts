@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { search_conditions } from "@/db/schemas/schema";
-import { and, count, eq } from "drizzle-orm";
+import { and, count, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -58,7 +58,12 @@ export const PATCH = async (req: NextRequest) => {
     .select()
     .from(search_conditions)
     .where(
-      and(eq(search_conditions.users_id, 1), eq(search_conditions.condition_name, conditionName)),
+      and(
+        eq(search_conditions.users_id, 1),
+        eq(search_conditions.condition_name, conditionName),
+        // 変更を加えるデータについては一意制約を無視（名前が変更されない場合のコンフリクトエラーを回避）
+        sql`${search_conditions.id} <> ${searchConditionId}`,
+      ),
     );
 
   if (existingItem.length > 0) {
@@ -74,13 +79,11 @@ export const PATCH = async (req: NextRequest) => {
         price_max: maxPrice,
         category: selectedCategory,
         word: keyWord,
+        updated_at: new Date(),
       })
       .where(
-        and(
-          // MEMO: ユーザーのID、検索条件のIDを元に書き換える
-          eq(search_conditions.id, searchConditionId),
-          eq(search_conditions.users_id, 1),
-        ),
+        // MEMO: 検索条件のIDを元に書き換える
+        eq(search_conditions.id, searchConditionId),
       );
     return NextResponse.json({ message: "検索条件の編集が成功しました。" }, { status: 200 });
   } catch (error) {

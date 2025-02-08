@@ -42,11 +42,11 @@ export const registerReducer = (state: RegisterState, action: RegisterAction) =>
 };
 
 // 検索条件の保存を管理する初期化関数
-export const registerInitialState = {
-  searchConditionId: "",
-  conditionName: "",
-  minPrice: "",
-  maxPrice: "",
-  selectedCategory: "",
-  keyWord: "",
-};
+export const registerInitialState = (searchParams: URLSearchParams) => ({
+  conditionName: searchParams.get("conditionName") || "",
+  minPrice: searchParams.get("minPrice") || "",
+  maxPrice: searchParams.get("maxPrice") || "",
+  selectedCategory: searchParams.get("selectedCategory") || "",
+  keyWord: searchParams.get("keyWord") || "",
+});
+

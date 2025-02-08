@@ -7,12 +7,13 @@ import CategoryCondition from "@/components/search/CategoryCondition/CategoryCon
 import KeyWordCondition from "@/components/search/KeyWordCondition/KeyWordCondition";
 import PriceCondition from "@/components/search/PriceCondition/PriceCondition";
 import { registerInitialState, registerReducer } from "@/reducer/reducer";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useReducer, useState } from "react";
 import styles from "./RegisterModal.module.css";
 
 const RegisterModal: React.FC = () => {
-  const [state, dispatch] = useReducer(registerReducer, registerInitialState);
+  const searchParams = useSearchParams();
+  const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
@@ -43,7 +44,7 @@ const RegisterModal: React.FC = () => {
         <div className={styles.modalContent}>
           <h2>お気に入り条件登録</h2>
           <div className={styles.searchConditions}>
-            <ConditionName dispatch={dispatch} />
+            <ConditionName dispatch={dispatch} conditionName="" />
             <PriceCondition
               minPrice={state.minPrice}
               maxPrice={state.maxPrice}
