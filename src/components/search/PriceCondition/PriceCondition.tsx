@@ -18,7 +18,6 @@ const PriceCondition = ({ minPrice, maxPrice, dispatch }: Props) => {
     dispatch({ type: "SET_MAX_PRICE", payload: e.target.value });
   };
 
-
   return (
     <div className={styles.price}>
       <h3 className={styles.title}>値段</h3>

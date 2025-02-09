@@ -1,23 +1,21 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { useRouter } from "next/navigation";
+import { render, screen } from "@testing-library/react";
 import ConditionEditButtons from "./ConditionEditButtons";
 
-jest.mock("next/navigation", () => ({
-  useRouter: jest.fn(),
+// next/linkをモック化し、href属性を持つ<a>として扱う。
+jest.mock("next/link", () => ({
+  __esModule: true,
+  default: ({ href, children }: { href: string; children: React.ReactNode }) => (
+    <a href={href}>{children}</a>
+  ),
 }));
 
-const pushMock = jest.fn();
-(useRouter as jest.Mock).mockReturnValue({
-  push: pushMock,
-});
-
-const conditionMock = {
-  searchConditionId: 47,
-  conditionName: "566",
-  minPrice: "4000",
-};
-
 describe("ConditionEditButtonsコンポーネントのテスト", () => {
+  const conditionMock = {
+    searchConditionId: 47,
+    conditionName: "566",
+    minPrice: "4000",
+  };
+
   test("コンポーネントが正常に表示されること", () => {
     render(<ConditionEditButtons condition={conditionMock} />);
 
@@ -25,24 +23,25 @@ describe("ConditionEditButtonsコンポーネントのテスト", () => {
     expect(screen.getByText("削除")).toBeInTheDocument();
   });
 
-  test("編集ボタン押下で、ページ遷移が行われること", () => {
+  test("編集ボタン押下で、正しいURLにリンクされていること", async () => {
     render(<ConditionEditButtons condition={conditionMock} />);
 
-    const editButtons = screen.getByRole("link", { name: "編集" });
-    fireEvent.click(editButtons);
+    const editLink = screen.getByRole("link", { name: "編集" });
+
+    const expectedUrl =
+      "/mypage/searchCondition/edit?searchConditionId=47&conditionName=566&minPrice=4000";
+
+    expect(editLink).toHaveAttribute("href", expectedUrl);
   });
 
-  test("削除ボタン押下で、ページ遷移が行われること", () => {
+  test("削除ボタン押下で、正しいURLにリンクされていること", async () => {
     render(<ConditionEditButtons condition={conditionMock} />);
 
-    const deleteButtons = screen.getByRole("button", { name: "削除" });
-    fireEvent.click(deleteButtons);
+    const deleteLink = screen.getByRole("link", { name: "削除" });
 
-    // URLをエンコードして比較する
     const expectedUrl =
       "/mypage/searchCondition/delete?searchConditionId=47&conditionName=566&minPrice=4000";
-    const actualUrl = pushMock.mock.calls[0][0];
 
-    expect(decodeURIComponent(actualUrl)).toBe(expectedUrl);
+    expect(deleteLink).toHaveAttribute("href", expectedUrl);
   });
 });

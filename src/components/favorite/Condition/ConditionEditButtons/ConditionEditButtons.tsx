@@ -1,13 +1,12 @@
 import type { FavConditionProps } from "@/types/search/search";
-import styles from "./ConditionEditButtons.module.css";
 import Link from "next/link";
+import styles from "./ConditionEditButtons.module.css";
 
 type searchConditionIdProps = {
   condition: FavConditionProps;
 };
 
 const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ condition }) => {
-
   // 空の値を除外
   const filteredParams = Object.fromEntries(
     Object.entries(condition)
@@ -22,10 +21,14 @@ const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ condition }) =
     <>
       <dl className={styles.buttons}>
         <dd className={styles.editButton}>
-          <Link href={`/mypage/searchCondition/edit?${queryString}`} className={styles.white}>編集</Link>
+          <Link href={`/mypage/searchCondition/edit?${queryString}`} className={styles.white}>
+            編集
+          </Link>
         </dd>
         <dd className={styles.deleteButton}>
-          <Link href={`/mypage/searchCondition/delete?${queryString}`} className={styles.white}>削除</Link>
+          <Link href={`/mypage/searchCondition/delete?${queryString}`} className={styles.white}>
+            削除
+          </Link>
         </dd>
       </dl>
     </>
