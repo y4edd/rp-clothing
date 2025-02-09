@@ -44,7 +44,7 @@ const RegisterModal: React.FC = () => {
         <div className={styles.modalContent}>
           <h2>お気に入り条件登録</h2>
           <div className={styles.searchConditions}>
-            <ConditionName dispatch={dispatch} conditionName="" />
+            <ConditionName dispatch={dispatch} conditionName={state.conditionName} />
             <PriceCondition
               minPrice={state.minPrice}
               maxPrice={state.maxPrice}
