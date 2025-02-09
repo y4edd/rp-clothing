@@ -1,16 +1,21 @@
 .buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  margin: 0.6rem;
 }
 
 .editButton {
-  margin-right: 1.0rem;
+  max-width: 60%;
+}
+
+.deleteButton {
+  max-width: 60%;
 }
 
 .white {
   background-color: #ffffff;
   color: #000000;
-  padding: 1.0rem;
+  padding: 1rem;
   border: 2px solid #000000;
   cursor: pointer;
   font-size: 1.2rem;
