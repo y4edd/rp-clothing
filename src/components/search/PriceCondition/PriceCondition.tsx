@@ -17,7 +17,7 @@ const PriceCondition = ({ minPrice, maxPrice, dispatch }: Props) => {
   const maxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: "SET_MAX_PRICE", payload: e.target.value });
   };
-  
+
 
   return (
     <div className={styles.price}>

@@ -66,9 +66,16 @@ const SearchModal = () => {
     if (!query) {
       setErrorMessage("検索条件が入力されていません");
       return;
-    } else {
-      router.push(`/search?${query}`);
     }
+
+    if (state.maxPrice !== "") {
+      if (Number(state.minPrice) > Number(state.maxPrice)) {
+        setErrorMessage("金額の入力が正しくありません！");
+        return;
+      }
+    }
+    // 検索ページへ遷移
+    router.push(`/search?${query}`);
   };
 
   return (
