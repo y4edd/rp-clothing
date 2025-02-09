@@ -15,8 +15,12 @@ const DeleteModal = () => {
 
   // クエリパラメータから削除対象の検索条件IDを取得
   const searchConditionIdString = searchParams.get("searchConditionId");
-  const searchConditionId = searchConditionIdString ? Number(searchConditionIdString) : undefined;
+  const searchConditionId = Number(searchConditionIdString);
   const conditionName = searchParams.get("conditionName");
+
+  if (!searchConditionIdString || !conditionName) {
+    return <div>検索条件を取得できませんでした。</div>;
+  }
 
   // モーダルを閉じる
   const closeModal = () => {
@@ -28,9 +32,6 @@ const DeleteModal = () => {
     router.back();
   };
 
-  if (!searchConditionId || !conditionName) {
-    return <div>検索条件を取得できませんでした。</div>;
-  }
   // 削除ボタンを押したときの処理
   const handleDelete = async () => {
     setErrorMessage("");
