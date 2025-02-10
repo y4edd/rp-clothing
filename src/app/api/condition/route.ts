@@ -13,8 +13,8 @@ export const POST = async (req: NextRequest) => {
   // すでに５件登録されていたら、エラーを発生させる
   const conditionCount = await db.select({ count: count() }).from(search_conditions);
 
-  if (conditionCount[0].count >= 5) {
-    return NextResponse.json({ message: "登録できるのは５件までです！" }, { status: 403 });
+  if (conditionCount[0].count >= 6) {
+    return NextResponse.json({ message: "登録できるのは6件までです！" }, { status: 403 });
   }
 
   // 検索条件の名前が重複していたらエラーを返す
