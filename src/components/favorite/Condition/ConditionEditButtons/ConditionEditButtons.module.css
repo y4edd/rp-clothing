@@ -1,6 +1,6 @@
 .buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0.6rem;
 }
 
