@@ -27,10 +27,10 @@
 
 .conditions dt {
   width: 50%;
-  text-align: right;
+  text-align: justify;
+  text-align-last:justify;
 }
 
 .conditions dd {
   width: 50%;
-  text-align: left;
 }
