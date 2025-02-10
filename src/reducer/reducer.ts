@@ -1,7 +1,6 @@
 import type { RegisterAction, RegisterState, State } from "@/types/search/search";
-import type { Action } from "@/types/search/search";
 
-export const reducer = (state: State, action: Action) => {
+export const reducer = (state: State, action: RegisterAction) => {
   switch (action.type) {
     case "SET_MIN_PRICE":
       return { ...state, minPrice: action.payload };
@@ -28,7 +27,7 @@ export const initialState = (searchParams: URLSearchParams) => ({
 export const registerReducer = (state: RegisterState, action: RegisterAction) => {
   switch (action.type) {
     case "SET_CONDITION_NAME":
-      return { ...state, minPrice: action.payload };
+      return { ...state, conditionName: action.payload };
     case "SET_MIN_PRICE":
       return { ...state, minPrice: action.payload };
     case "SET_MAX_PRICE":
@@ -43,10 +42,10 @@ export const registerReducer = (state: RegisterState, action: RegisterAction) =>
 };
 
 // 検索条件の保存を管理する初期化関数
-export const registerInitialState = () => ({
-  conditionName: "",
-  minPrice: "",
-  maxPrice: "",
-  selectedCategory: "",
-  keyWord: "",
+export const registerInitialState = (searchParams: URLSearchParams) => ({
+  conditionName: searchParams.get("conditionName") || "",
+  minPrice: searchParams.get("minPrice") || "",
+  maxPrice: searchParams.get("maxPrice") || "",
+  selectedCategory: searchParams.get("selectedCategory") || "",
+  keyWord: searchParams.get("keyWord") || "",
 });

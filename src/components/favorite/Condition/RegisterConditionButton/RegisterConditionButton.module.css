@@ -1,6 +1,7 @@
 .registerButton {
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: right;
   margin: 2rem auto;
+  max-width: 1000px;
 }

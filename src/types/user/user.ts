@@ -7,6 +7,7 @@ export type FormProps = {
   birthday: Date;
   password: string;
   confirmPassword: string;
+  conditionName: string;
 };
 
 export type LoginProps = {

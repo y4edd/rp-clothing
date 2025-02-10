@@ -16,4 +16,8 @@ export const errorMessages = {
   ConfirmPassword: {
     confirm: "※パスワードが一致しません。",
   },
+  conditioName: {
+    require: "※入力必須です。",
+    maxLength: "※15文字以内で入力してください",
+  },
 };

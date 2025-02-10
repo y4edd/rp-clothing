@@ -1,30 +1,41 @@
-import FavCondition from "../FavCondition/FavCondition";
+import type { FavConditionProps } from "@/types/search/search";
+import { getCondition } from "@/utils/apiFunc";
+import ConditionEditButtons from "../ConditionEditButtons/ConditionEditButtons";
+import styles from "./FavConditions.module.css";
 
-const FavConditions = () => {
-  // MEMO: 非同期処理でお気に入りの検索条件を受け取り、渡してmapで表示させる
+const FavConditions = async () => {
+  const response = await getCondition();
+
+  // API が失敗した場合のエラーチェック
+  if (!response || !response.ok) {
+    console.error(response);
+    return <div>データの取得に失敗しました。</div>;
+  }
+
+  const conditions = await response.json();
+
   return (
     <>
-      <FavCondition
-        name={"ビンテージ市場"}
-        minPrice="0"
-        maxPrice="4000"
-        category="Tシャツ"
-        keyWord="三陽商会"
-      />
-      <FavCondition
-        name={"軍パン"}
-        minPrice="4000"
-        maxPrice="16000"
-        category="ズボン・パンツ"
-        keyWord="80s"
-      />
-      <FavCondition
-        name={"プチプラ（出勤）"}
-        minPrice="0"
-        maxPrice="6000"
-        category="ジャケット・セットアップ"
-        keyWord="オールシーズン"
-      />
+      {conditions.map((condition: FavConditionProps) => (
+        <tr className={styles.conditionList} key={condition.conditionName}>
+          <td className={styles.conditionNameEach}>{condition.conditionName}</td>
+          <td className={styles.registerConditionEach}>
+            <dl className={styles.conditions}>
+              <dt>値段：</dt>
+              <dd>
+                {condition.minPrice}〜{condition.maxPrice}円
+              </dd>
+              <dt>カテゴリ：</dt>
+              <dd>{condition.selectedCategory}</dd>
+              <dt>キーワード：</dt>
+              <dd>{condition.keyWord}</dd>
+            </dl>
+          </td>
+          <td className={styles.conditionControlEach}>
+            <ConditionEditButtons condition={condition} />
+          </td>
+        </tr>
+      ))}
     </>
   );
 };

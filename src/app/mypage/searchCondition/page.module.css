@@ -8,13 +8,14 @@
 }
 
 .table {
-  width: 80%;
+  width: 100%;
   height: 80%;
   margin: 0 0 6.0rem 0rem;
   text-align: center;
+  max-width: 1000px;
 }
 
-.conditionTitle {
+.conditionTitleContainer {
   font-size: 1.7rem;
 }
 

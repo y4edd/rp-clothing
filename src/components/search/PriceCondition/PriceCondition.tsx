@@ -1,12 +1,12 @@
 "use client";
 
-import type { Action } from "@/types/search/search";
+import type { RegisterAction } from "@/types/search/search";
 import styles from "./PriceCondition.module.css";
 
 type Props = {
   minPrice: string;
   maxPrice: string;
-  dispatch: (action: Action) => void;
+  dispatch: (action: RegisterAction) => void;
 };
 
 const PriceCondition = ({ minPrice, maxPrice, dispatch }: Props) => {
@@ -23,7 +23,7 @@ const PriceCondition = ({ minPrice, maxPrice, dispatch }: Props) => {
       <h3 className={styles.title}>値段</h3>
       <div className={styles.priceCondition}>
         <input
-          type="text"
+          type="number"
           id="minPrice"
           name="minPrice"
           data-testid="minPrice"
@@ -33,7 +33,7 @@ const PriceCondition = ({ minPrice, maxPrice, dispatch }: Props) => {
         />
         ～
         <input
-          type="text"
+          type="number"
           id="maxPrice"
           name="maxPrice"
           data-testid="maxPrice"

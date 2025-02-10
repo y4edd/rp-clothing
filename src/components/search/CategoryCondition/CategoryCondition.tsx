@@ -1,5 +1,5 @@
 "use client";
-import type { Action } from "@/types/search/search";
+import type { RegisterAction } from "@/types/search/search";
 import { categories } from "@/utils/data/category";
 import React, { useCallback } from "react";
 import Category from "../Category/Category";
@@ -7,7 +7,7 @@ import styles from "./CategoryCondition.module.css";
 
 type Props = {
   selectedCategory: string;
-  dispatch: (action: Action) => void;
+  dispatch: (action: RegisterAction) => void;
 };
 
 const CategoryCondition = React.memo(({ selectedCategory, dispatch }: Props) => {

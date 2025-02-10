@@ -1,34 +1,25 @@
 "use client";
 import Button from "@/components/utils/button/Button";
 import buttonStyles from "@/components/utils/button/Button.module.css";
-import { useState } from "react";
-import RegisterConditionModal from "../RegisterConditionModal/RegisterConditionModal";
+import { useRouter } from "next/navigation";
 import styles from "./RegisterConditionButton.module.css";
 
 const RegisterConditionButton = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
   const toRegisterCondition = () => {
-    setIsModalOpen(true);
-  };
-
-  // モーダルを閉じる処理
-  const closeModal = () => {
-    setIsModalOpen(false);
+    router.push("/mypage/searchCondition/register");
   };
 
   return (
-    <>
-      <div className={styles.registerButton}>
-        <Button
-          type="button"
-          onClick={toRegisterCondition}
-          className={buttonStyles.black}
-          text="お気に入り条件を登録する"
-        />
-      </div>
-      {isModalOpen && <RegisterConditionModal closeModal={closeModal} />}
-    </>
+    <div className={styles.registerButton}>
+      <Button
+        type="button"
+        onClick={toRegisterCondition}
+        className={buttonStyles.black}
+        text="お気に入り条件を登録する"
+      />
+    </div>
   );
 };
 

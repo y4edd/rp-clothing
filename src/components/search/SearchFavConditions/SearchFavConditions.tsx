@@ -1,19 +1,31 @@
 "use client";
 import Button from "@/components/utils/button/Button";
 import buttonStyles from "@/components/utils/button/Button.module.css";
+import type { FavConditionProps } from "@/types/search/search";
 import { useRouter } from "next/navigation";
-import styles from "./FavConditions.module.css";
+import styles from "./SearchFavConditions.module.css";
 
-const FavConditions = () => {
+type SearchFavConditionsProps = {
+  favConditions: FavConditionProps[];
+};
+
+const SearchFavConditions = ({ favConditions }: SearchFavConditionsProps) => {
   const router = useRouter();
 
   const toMyPage = () => {
-    router.push("/mypage");
+    router.push("/mypage/searchCondition");
   };
 
-  const toSearch = () => {
-    // FIXME:非同期で、お気に入り条件での検索を実行する処理を実装
-    console.log("検索条件で検索を実行");
+  const toSearch = (favCondition: FavConditionProps) => {
+    //遷移先の画面で、非同期は走る
+    const query = new URLSearchParams({
+      minPrice: favCondition.minPrice || "",
+      maxPrice: favCondition.maxPrice || "",
+      selectedCategory: favCondition.selectedCategory || "",
+      keyWord: favCondition.keyWord || "",
+    }).toString();
+
+    router.push(`/search?${query}`);
   };
 
   return (
@@ -23,10 +35,16 @@ const FavConditions = () => {
         <div className={styles.favConditionsContent}>
           <div className={styles.favConditions}>
             {/* FIXME:非同期で、お気に入り条件の取得、UI表示を行う処理を実装 */}
-            <Button text={"条件1"} onClick={toSearch} className={buttonStyles.gray} />
-            <Button text={"条件2"} onClick={toSearch} className={buttonStyles.gray} />
-            <Button text={"条件3"} onClick={toSearch} className={buttonStyles.gray} />
-            <Button text={"条件4"} onClick={toSearch} className={buttonStyles.gray} />
+            {favConditions.map((favCondition: FavConditionProps) => {
+              return (
+                <Button
+                  text={favCondition.conditionName}
+                  key={favCondition.conditionName}
+                  className={buttonStyles.gray}
+                  onClick={() => toSearch(favCondition)}
+                />
+              );
+            })}
           </div>
           <div className={styles.editButton}>
             <Button
@@ -47,4 +65,4 @@ const FavConditions = () => {
   );
 };
 
-export default FavConditions;
+export default SearchFavConditions;

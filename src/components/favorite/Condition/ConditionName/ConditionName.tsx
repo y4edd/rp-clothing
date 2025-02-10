@@ -2,14 +2,13 @@ import type { RegisterAction } from "@/types/search/search";
 import styles from "./ConditionName.module.css";
 
 type ConditionNameProps = {
-  conditionName: string;
   dispatch: (action: RegisterAction) => void;
+  conditionName: string;
 };
 
-const ConditionName = ({ conditionName, dispatch }: ConditionNameProps) => {
-  const handleConditionName = (e: React.ChangeEvent<HTMLInputElement>) => {
+const ConditionName = ({ dispatch, conditionName }: ConditionNameProps) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     dispatch({ type: "SET_CONDITION_NAME", payload: e.target.value });
-  };
   return (
     <div className={styles.conditionName}>
       <h3 className={styles.title}>条件名（必須入力）</h3>
@@ -17,9 +16,8 @@ const ConditionName = ({ conditionName, dispatch }: ConditionNameProps) => {
         type="text"
         id="conditionName"
         data-testid="conditionName"
-        name="conditionName"
         className={styles.conditionNameInput}
-        onChange={handleConditionName}
+        onChange={handleChange}
         value={conditionName}
       />
     </div>

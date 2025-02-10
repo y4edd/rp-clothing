@@ -1,0 +1,36 @@
+.conditionList {
+  align-items: center;
+  font-size: 1.3rem;
+}
+
+.conditionNameEach {
+  width: 30%;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 1.0rem 1.0rem 1.0rem;
+}
+
+.registerConditionEach {
+  width: 45%;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 1.0rem 0rem 1.0rem;
+}
+
+.conditionControlEach {
+  width: 25%;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.conditions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.conditions dt {
+  width: 50%;
+  text-align: justify;
+  text-align-last: justify;
+}
+
+.conditions dd {
+  width: 50%;
+}

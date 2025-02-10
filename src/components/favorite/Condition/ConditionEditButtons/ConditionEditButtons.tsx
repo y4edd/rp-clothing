@@ -1,25 +1,37 @@
-"use client";
-
-import Button from "@/components/utils/button/Button";
+import type { FavConditionProps } from "@/types/search/search";
+import Link from "next/link";
 import styles from "./ConditionEditButtons.module.css";
 
-const ConditionEditButtons = () => {
-  const toEdit = () => {
-    console.log("編集がクリックされました");
-  };
-  const deleteCondition = () => {
-    console.log("削除がクリックされました");
-  };
+type searchConditionIdProps = {
+  condition: FavConditionProps;
+};
+
+const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ condition }) => {
+  // 空の値を除外
+  const filteredParams = Object.fromEntries(
+    Object.entries(condition)
+      .filter(([_, v]) => v !== "")
+      // number型入ってきてもstring型にする
+      .map(([key, value]) => [key, String(value)]),
+  );
+  // クエリパラメータを作成
+  const queryString = new URLSearchParams(filteredParams).toString();
 
   return (
-    <div className={styles.buttons}>
-      <div className={styles.editButton}>
-        <Button type="button" onClick={toEdit} className={styles.white} text="編集" />
-      </div>
-      <div className={styles.deleteButton}>
-        <Button type="button" onClick={deleteCondition} className={styles.white} text="削除" />
-      </div>
-    </div>
+    <>
+      <dl className={styles.buttons}>
+        <dd className={styles.editButton}>
+          <Link href={`/mypage/searchCondition/edit?${queryString}`} className={styles.white}>
+            編集
+          </Link>
+        </dd>
+        <dd className={styles.deleteButton}>
+          <Link href={`/mypage/searchCondition/delete?${queryString}`} className={styles.white}>
+            削除
+          </Link>
+        </dd>
+      </dl>
+    </>
   );
 };
 
