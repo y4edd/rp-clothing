@@ -2,7 +2,7 @@
 
 import type { SearchParamsProps } from "@/types/search/search";
 import { fetchResults } from "@/utils/apiFunc";
-import { categories } from "@/utils/data/category";
+import { categories } from "@/utils/category";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/navigation";
 import styles from "./SearchFilters.module.css";
