@@ -5,10 +5,22 @@ import { type NextRequest, NextResponse } from "next/server";
 import Redis from "ioredis";
 import bcrypt from "bcrypt";
 import { REDIS_MAX_AGE } from "@/utils/redis";
+import { COOKIE_MAX_AGE } from "@/utils/cookie";
+import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export const POST = async (req: NextRequest) => {
   // 環境変数の秘密鍵を取得
   const secretKey = process.env.SECRET_KEY;
+
+  // cookieの設定（セッションID保存するため）
+  const cookieOpt:Partial<ResponseCookie> = {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+    maxAge: COOKIE_MAX_AGE,
+    path: "/",
+  };
+
   if (!secretKey) {
     return NextResponse.json({ message: "秘密鍵が設定されていません" }, { status: 409 });
   }
@@ -48,13 +60,17 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "パスワードが違います。" }, { status: 401 });
     }
 
-    // セッション情報を Redis に保存（手動で管理）
+    // セッションIDを保存し、ユーザー情報を Redis に保存（手動で管理）
     const sessionId = `session:${userData.id}`;
     await redisClient.set(sessionId, JSON.stringify(userData), "EX", REDIS_MAX_AGE);
 
-    return NextResponse.json({ message: "ログインが成功しました。" }, { status: 200 });
+    const response = NextResponse.json({ message: "ログインが成功しました。" }, { status: 200 });
+    // クライアントのCookieにセッションIDを保存（認証情報として使用）
+    response.cookies.set("token", sessionId, cookieOpt);
+
+    return response;
   } catch (error) {
     console.error("エラー発生:", error);
     return NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });
   }
-};
+}
