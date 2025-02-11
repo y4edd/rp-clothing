@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 
 const Login = () => {
   return (
-    <div className={styles.login}>
+    <>
       <BreadList
         bread={[
           { link: "/", title: "トップ" },
@@ -18,7 +18,7 @@ const Login = () => {
         <LoginComponent />
         <RegisterComponent />
       </div>
-    </div>
+    </>
   );
 };
 

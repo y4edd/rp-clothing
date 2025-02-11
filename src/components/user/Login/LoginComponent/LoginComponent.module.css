@@ -18,6 +18,16 @@
 .btn {
   text-align: center;
   width: 100%;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px;
+  border: 2px solid #000000;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ffffff;
+  color: #000000;
 }
 
 .error {

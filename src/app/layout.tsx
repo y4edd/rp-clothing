@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "@/components/frame/footer/Footer";
 import Header from "@/components/frame/header/Header";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import myFont from "@/utils/fonts";
+import { ToastContainerComponent } from "@/components/utils/toast/toast";
 
 export const metadata: Metadata = {
   title: "RP-clothing",
@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={`${myFont.className}`}>
         <Header />
-        <ToastContainer />
+        <ToastContainerComponent />
         <main>{children}</main>
         <Footer />
       </body>

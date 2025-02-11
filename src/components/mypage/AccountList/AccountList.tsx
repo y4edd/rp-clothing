@@ -7,14 +7,19 @@ import AccountDeleteModal from "../AccountDeleteModal/AccountDeleteModal";
 import ActionButton from "../ActionButton/ActionButton";
 import ActionLink from "../ActionLink/ActionLink";
 import styles from "./AccountList.module.css";
+import { postLogout } from "@/utils/apiFunc";
 
 const ICON_SIZE = "70px";
 
 const AccountList = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const sampleFunc = () => {
-    console.log("クリックされました");
+  const handleLogout = async() => {
+    const response: Response = await postLogout();
+
+    if(!response.ok) {
+      
+    }
   };
   return (
     <>
@@ -26,7 +31,7 @@ const AccountList = () => {
           MUIicon={<PersonIcon sx={{ fontSize: ICON_SIZE }} />}
         />
         <ActionButton
-          onClick={sampleFunc}
+          onClick={handleLogout}
           textArray={["ログアウト"]}
           MUIicon={<LogoutIcon sx={{ fontSize: ICON_SIZE }} />}
         />

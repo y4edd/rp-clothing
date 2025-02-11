@@ -142,3 +142,23 @@ export const getUserId = async (data: LoginProps): Promise<Response> => {
     });
   }
 };
+
+// ログアウトを行うための非同期関数
+export const postLogout = async() => {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      // Cookieを送るために必要
+      credentials: "include",
+    });
+
+    return response;
+  } catch (error) {
+  console.error("エラー内容", error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};

@@ -1,7 +1,6 @@
 "use client";
 
 import Button from "@/components/utils/button/Button";
-import buttonStyles from "@/components/utils/button/Button.module.css";
 import type { LoginProps } from "@/types/user/user";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,8 +8,11 @@ import styles from "./LoginComponent.module.css";
 import LoginEmail from "./LoginEmail/LoginEmail";
 import LoginPassword from "./LoginPassword/LoginPassword";
 import { getUserId } from "@/utils/apiFunc";
+import { showToast } from "@/components/utils/toast/toast";
+import { useRouter } from "next/navigation";
 
 const LoginComponent = () => {
+  const router = useRouter();
   const [loginError, setLoginError] = useState("");
   const {
     register,
@@ -31,8 +33,14 @@ const LoginComponent = () => {
         const res = await response.json();
         setLoginError(res.message || "ログインに失敗しました。");
         return;
+      } else {
+        setLoginError("");
+        showToast("ログインに成功しました！");
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);  
       }
-      setLoginError("");
+
     } catch (error) {
       console.error(error);
     }
@@ -44,10 +52,10 @@ const LoginComponent = () => {
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <LoginEmail register={register} errors={errors} />
         <LoginPassword register={register} errors={errors} />
-        <div className={styles.btn}>
-          {loginError && <div className="error">{loginError}</div>}
-          <Button type="submit" className={`${buttonStyles.black} ${styles.btn}`} text="ログイン" />
+        <div>
+          <Button type="submit" className={styles.btn} text="ログイン" />
         </div>
+        {loginError && <div className={styles.error}>{loginError}</div>}
       </form>
     </div>
   );

@@ -3,8 +3,8 @@ import { ToastContainer, type ToastOptions, toast } from "react-toastify";
 export const showToast = (message: string) => {
   const options: ToastOptions = {
     position: "top-center",
-    autoClose: 1500,
-    hideProgressBar: false,
+    autoClose: 500,
+    hideProgressBar: true,
     closeOnClick: false,
     pauseOnHover: true,
     draggable: false,
