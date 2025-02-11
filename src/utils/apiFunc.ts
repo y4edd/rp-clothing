@@ -1,4 +1,5 @@
 import type { FavConditionProps } from "@/types/search/search";
+import { LoginProps } from "@/types/user/user";
 
 // 新着アイテムの取得関数
 export const getNewItems = async () => {
@@ -120,5 +121,24 @@ export const deleteCondition = async (req: number) => {
     return response;
   } catch (err) {
     console.error("通信に失敗しました", err);
+  }
+};
+
+// ログインを行うための非同期関数
+export const getUserId = async (data: LoginProps): Promise<Response> => {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    return response;
+  } catch (error) {
+    console.error("エラー内容", error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 };

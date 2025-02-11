@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import styles from "./LoginComponent.module.css";
 import LoginEmail from "./LoginEmail/LoginEmail";
 import LoginPassword from "./LoginPassword/LoginPassword";
+import { getUserId } from "@/utils/apiFunc";
 
 const LoginComponent = () => {
   const [loginError, setLoginError] = useState("");
@@ -24,18 +25,19 @@ const LoginComponent = () => {
 
   const onSubmit = async (data: LoginProps) => {
     try {
-      const res = await fetch("/api/user/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) {
-        setLoginError("メールアドレスもしくはパスワードが違います。");
+      const response: Response = await getUserId(data);
+
+      if (!response.ok) {
+        const res = await response.json();
+        setLoginError(res.message || "ログインに失敗しました。");
+        return;
       }
+      setLoginError("");
     } catch (error) {
-      console.error("エラー内容", error);
+      console.error(error);
     }
   };
+
   return (
     <div className={styles.login}>
       <h2>ログイン</h2>
