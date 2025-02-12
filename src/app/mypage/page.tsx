@@ -2,7 +2,7 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import MypageContents from "@/components/mypage/MypageContents/MypageContents";
 
-const MyPage = async() => {
+const MyPage = async () => {
   return (
     <>
       <BreadList

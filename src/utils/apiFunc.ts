@@ -1,5 +1,5 @@
 import type { FavConditionProps } from "@/types/search/search";
-import { LoginProps } from "@/types/user/user";
+import type { LoginProps } from "@/types/user/user";
 
 // 新着アイテムの取得関数
 export const getNewItems = async () => {
@@ -144,7 +144,7 @@ export const getUserId = async (data: LoginProps): Promise<Response> => {
 };
 
 // ログアウトを行うための非同期関数
-export const postLogout = async() => {
+export const postLogout = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/user/logout", {
       method: "POST",
@@ -155,7 +155,7 @@ export const postLogout = async() => {
 
     return response;
   } catch (error) {
-  console.error("エラー内容", error);
+    console.error("エラー内容", error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
@@ -166,7 +166,7 @@ export const postLogout = async() => {
 // サーバーサイドからログインしているかどうか、確認するための非同期関数
 // （※HttpOnly: trueのためクライアントからは中身を見ることはできない）
 // 返り値はsessionId（登録済みユーザー限定ページにて使用予定）
-export const checkAuth = async(token: string) => {
+export const checkAuth = async (token: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/user/auth", {
       method: "GET",
@@ -184,7 +184,10 @@ export const checkAuth = async(token: string) => {
 };
 
 // クライアントサイドから、cookieの中のトークンを取得
-export const getSessionId = async (setToken: (token: string | null) => void, setLoading: (loading: boolean) => void) => {
+export const getSessionId = async (
+  setToken: (token: string | null) => void,
+  setLoading: (loading: boolean) => void,
+) => {
   try {
     const res = await fetch("http://localhost:3000/api/user/token");
     const data = await res.json();
@@ -204,7 +207,7 @@ export const getSessionId = async (setToken: (token: string | null) => void, set
 
 // アカウントを削除する非同期関数
 export const deleteUser = async () => {
-  try{
+  try {
     const response = await fetch("http://localhost:3000/api/user/delete", {
       method: "DELETE",
       // ブラウザに自動でCokoieやセッション情報を送ってもらう

@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
 // クライアントサイドにて、cookieからトークンを取得するために実装
-export const GET = async() => {
+export const GET = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get("sessionId");
 
@@ -12,4 +12,4 @@ export const GET = async() => {
   const sessionId = token.value;
 
   return NextResponse.json({ sessionId });
-}
+};

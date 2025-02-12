@@ -1,12 +1,12 @@
 import { db } from "@/db";
 import { users } from "@/db/schemas/schema";
-import { eq } from "drizzle-orm";
-import { type NextRequest, NextResponse } from "next/server";
-import Redis from "ioredis";
-import bcrypt from "bcrypt";
-import { REDIS_MAX_AGE } from "@/utils/redis";
 import { COOKIE_MAX_AGE } from "@/utils/cookie";
-import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { REDIS_MAX_AGE } from "@/utils/redis";
+import bcrypt from "bcrypt";
+import { eq } from "drizzle-orm";
+import Redis from "ioredis";
+import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { type NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   const secretKey = process.env.SECRET_KEY;

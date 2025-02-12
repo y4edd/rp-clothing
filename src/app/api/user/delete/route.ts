@@ -1,13 +1,13 @@
 import { db } from "@/db";
-import { eq } from "drizzle-orm";
 import { users } from "@/db/schemas/schema";
-import { NextRequest, NextResponse } from "next/server";
+import { eq } from "drizzle-orm";
+import { type NextRequest, NextResponse } from "next/server";
 
-export const DELETE = async(request: NextRequest) => {
+export const DELETE = async (request: NextRequest) => {
   const sessionId = request.cookies.get("sessionId");
 
-  if(!sessionId) {
-    return NextResponse.json({ message: "ログインしていません"}, { status: 401 });
+  if (!sessionId) {
+    return NextResponse.json({ message: "ログインしていません" }, { status: 401 });
   }
   try {
     // Number型にし、DB検索ができるようにする
@@ -18,11 +18,8 @@ export const DELETE = async(request: NextRequest) => {
       where: eq(users.id, userId),
     });
 
-    if(!user) {
-      return NextResponse.json(
-        { message: "ユーザーの検証に失敗しました。" },
-        { status: 401 },
-      );
+    if (!user) {
+      return NextResponse.json({ message: "ユーザーの検証に失敗しました。" }, { status: 401 });
     }
 
     await db.delete(users).where(eq(users.id, userId));
@@ -36,6 +33,6 @@ export const DELETE = async(request: NextRequest) => {
     return response;
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: "サーバーエラーが発生しました"}, { status: 500 });
+    return NextResponse.json({ message: "サーバーエラーが発生しました" }, { status: 500 });
   }
 };

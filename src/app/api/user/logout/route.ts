@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import Redis from "ioredis";
+import { type NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   const redisURL = process.env.REDIS_URL;
@@ -12,11 +12,11 @@ export const POST = async (req: NextRequest) => {
   try {
     // クライアントのセッションIDを取得
     const sessionId = req.cookies.get("sessionId");
-  
+
     if (!sessionId) {
       return NextResponse.json({ message: "ログインしていません" }, { status: 401 });
     }
-     // Redis からセッションを削除
+    // Redis からセッションを削除
     await redisClient.del(`session:${sessionId}`);
 
     const response = NextResponse.json({ message: "ログアウトしました" }, { status: 200 });

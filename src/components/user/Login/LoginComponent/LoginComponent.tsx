@@ -1,15 +1,15 @@
 "use client";
 
 import Button from "@/components/utils/button/Button";
+import { showToast } from "@/components/utils/toast/toast";
 import type { LoginProps } from "@/types/user/user";
+import { getUserId } from "@/utils/apiFunc";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./LoginComponent.module.css";
 import LoginEmail from "./LoginEmail/LoginEmail";
 import LoginPassword from "./LoginPassword/LoginPassword";
-import { getUserId } from "@/utils/apiFunc";
-import { showToast } from "@/components/utils/toast/toast";
-import { useRouter } from "next/navigation";
 
 const LoginComponent = () => {
   const router = useRouter();
@@ -38,9 +38,8 @@ const LoginComponent = () => {
         showToast("ログインに成功しました！");
         setTimeout(() => {
           router.push("/");
-        }, 1000);  
+        }, 1000);
       }
-
     } catch (error) {
       console.error(error);
     }

@@ -1,15 +1,15 @@
 "use client";
+import { showErrorToast, showToast } from "@/components/utils/toast/toast";
+import { postLogout } from "@/utils/apiFunc";
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import AccountDeleteModal from "../AccountDeleteModal/AccountDeleteModal";
 import ActionButton from "../ActionButton/ActionButton";
 import ActionLink from "../ActionLink/ActionLink";
 import styles from "./AccountList.module.css";
-import { postLogout } from "@/utils/apiFunc";
-import { showErrorToast, showToast } from "@/components/utils/toast/toast";
-import { useRouter } from "next/navigation";
 
 const ICON_SIZE = "70px";
 
@@ -17,12 +17,11 @@ const AccountList = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const router = useRouter();
 
-  const handleLogout = async() => {
-    try{
+  const handleLogout = async () => {
+    try {
       const response: Response = await postLogout();
 
-      if(!response.ok) {
-        const res = await response.json();
+      if (!response.ok) {
         showErrorToast("ログアウトに失敗しました");
         return;
       } else {

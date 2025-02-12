@@ -1,15 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
-export const GET = async(req: NextRequest) => {
+export const GET = async (req: NextRequest) => {
   try {
     const sessionId = req.cookies.get("sessionId");
 
-    if(!sessionId) {
-      return NextResponse.json({ message: "ログインしていません"}, { status: 401 });
+    if (!sessionId) {
+      return NextResponse.json({ message: "ログインしていません" }, { status: 401 });
     }
     return NextResponse.json({ sessionId });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: "サーバーエラーが発生しました"}, { status: 500 });
+    return NextResponse.json({ message: "サーバーエラーが発生しました" }, { status: 500 });
   }
-}
+};
