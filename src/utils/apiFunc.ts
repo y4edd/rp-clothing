@@ -193,7 +193,6 @@ export const getSessionId = async (
     const data = await res.json();
 
     if (!res.ok) {
-      console.error(data);
       setLoading(false);
       return;
     }

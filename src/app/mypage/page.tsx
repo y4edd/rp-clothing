@@ -1,6 +1,7 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import MypageContents from "@/components/mypage/MypageContents/MypageContents";
+import { AuthProvider } from "@/contexts/Countcontexts";
 
 const MyPage = async () => {
   return (
@@ -12,7 +13,9 @@ const MyPage = async () => {
         ]}
       />
       <PageTitle title={"マイページ"} />
-      <MypageContents />
+      <AuthProvider>
+        <MypageContents />
+      </AuthProvider>
     </>
   );
 };
