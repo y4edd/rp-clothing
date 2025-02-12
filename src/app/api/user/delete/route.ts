@@ -4,7 +4,6 @@ import { users } from "@/db/schemas/schema";
 import { NextRequest, NextResponse } from "next/server";
 
 export const DELETE = async(request: NextRequest) => {
-
   const sessionId = request.cookies.get("sessionId");
 
   if(!sessionId) {

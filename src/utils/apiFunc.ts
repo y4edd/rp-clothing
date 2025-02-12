@@ -165,7 +165,7 @@ export const postLogout = async() => {
 
 // サーバーサイドからログインしているかどうか、確認するための非同期関数
 // （※HttpOnly: trueのためクライアントからは中身を見ることはできない）
-// 返り値はsessionId（ユーザー限定ページにて使用予定）
+// 返り値はsessionId（登録済みユーザー限定ページにて使用予定）
 export const checkAuth = async(token: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/user/auth", {
@@ -183,13 +183,32 @@ export const checkAuth = async(token: string) => {
   }
 };
 
+// クライアントサイドから、cookieの中のトークンを取得
+export const getSessionId = async (setToken: (token: string | null) => void, setLoading: (loading: boolean) => void) => {
+  try {
+    const res = await fetch("http://localhost:3000/api/user/token");
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.error(data);
+      setLoading(false);
+      return;
+    }
+    setToken(data.sessionId);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 // アカウントを削除する非同期関数
-export const deleteUser = async (token: string) => {
+export const deleteUser = async () => {
   try{
-    const response = await fetch("http://localhost:3000/api/user/auth", {
-      method: "GET",
-      // サーバーサイドのため、手動でsessionIdをクッキーとして設定する
-      headers: { Cookie: token },
+    const response = await fetch("http://localhost:3000/api/user/delete", {
+      method: "DELETE",
+      // ブラウザに自動でCokoieやセッション情報を送ってもらう
+      credentials: "include",
     });
     return response;
   } catch (error) {
