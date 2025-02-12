@@ -9,7 +9,6 @@ const MyPage = async() => {
   if (!token) {
     return <UnauthorizedAccess />;
   }
-  await checkAuth(token);
 
   return (
     <>
@@ -26,5 +25,3 @@ const MyPage = async() => {
 };
 
 export default MyPage;
-
-// getTokenFromCookie、checkLoggedInServer

@@ -165,18 +165,35 @@ export const postLogout = async() => {
 
 // サーバーサイドからログインしているかどうか、確認するための非同期関数
 // （※HttpOnly: trueのためクライアントからは中身を見ることはできない）
+// 返り値はsessionId（ユーザー限定ページにて使用予定）
 export const checkAuth = async(token: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/user/auth", {
       method: "GET",
       // サーバーサイドのため、手動でsessionIdをクッキーとして設定する
       headers: { Cookie: token },
-      // Cookieを送るために必要
-      credentials: "include",
     });
     return response;
   } catch (error) {
-    console.error("エラー内容", error);
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// アカウントを削除する非同期関数
+export const deleteUser = async (token: string) => {
+  try{
+    const response = await fetch("http://localhost:3000/api/user/auth", {
+      method: "GET",
+      // サーバーサイドのため、手動でsessionIdをクッキーとして設定する
+      headers: { Cookie: token },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
