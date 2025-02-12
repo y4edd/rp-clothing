@@ -15,4 +15,20 @@ export const showToast = (message: string) => {
   toast.success(message, options);
 };
 
+export const showErrorToast = (message: string) => {
+  const options: ToastOptions = {
+    position: "top-center",
+    autoClose: 500,
+    hideProgressBar: true,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "colored",
+  };
+
+  toast.error(message, options);
+};
+
 export const ToastContainerComponent = () => <ToastContainer />;
+

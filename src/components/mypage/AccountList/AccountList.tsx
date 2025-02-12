@@ -8,17 +8,31 @@ import ActionButton from "../ActionButton/ActionButton";
 import ActionLink from "../ActionLink/ActionLink";
 import styles from "./AccountList.module.css";
 import { postLogout } from "@/utils/apiFunc";
+import { showErrorToast, showToast } from "@/components/utils/toast/toast";
+import { useRouter } from "next/navigation";
 
 const ICON_SIZE = "70px";
 
 const AccountList = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const router = useRouter();
 
   const handleLogout = async() => {
-    const response: Response = await postLogout();
+    try{
+      const response: Response = await postLogout();
 
-    if(!response.ok) {
-      
+      if(!response.ok) {
+        const res = await response.json();
+        showErrorToast("ログアウトに失敗しました");
+        return;
+      } else {
+        showToast("ログアウトに成功しました！");
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
   return (

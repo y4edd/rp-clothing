@@ -50,7 +50,7 @@ export async function getItemDetail(itemCode: string) {
     const itemDetail = await response.json();
     return itemDetail.item;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 }
@@ -156,6 +156,27 @@ export const postLogout = async() => {
     return response;
   } catch (error) {
   console.error("エラー内容", error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// サーバーサイドからログインしているかどうか、確認するための非同期関数
+// （※HttpOnly: trueのためクライアントからは中身を見ることはできない）
+export const checkAuth = async(token: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/auth", {
+      method: "GET",
+      // サーバーサイドのため、手動でsessionIdをクッキーとして設定する
+      headers: { Cookie: token },
+      // Cookieを送るために必要
+      credentials: "include",
+    });
+    return response;
+  } catch (error) {
+    console.error("エラー内容", error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

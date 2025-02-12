@@ -12,20 +12,20 @@ export const POST = async (req: NextRequest) => {
   try {
     // クライアントのセッションIDを取得
     const sessionId = req.cookies.get("sessionId");
+  
     if (!sessionId) {
       return NextResponse.json({ message: "ログインしていません" }, { status: 401 });
     }
      // Redis からセッションを削除
     await redisClient.del(`session:${sessionId}`);
 
-    // クライアントの Cookie を削除
     const response = NextResponse.json({ message: "ログアウトしました" }, { status: 200 });
     // Cookie を無効化
     response.cookies.set("sessionId", "", { expires: new Date(0) });
 
     return response;
   } catch (error) {
-    console.error("ログアウトエラー:", error);
+    console.error(error);
     return NextResponse.json({ message: "サーバーエラーが発生しました" }, { status: 500 });
   }
 };

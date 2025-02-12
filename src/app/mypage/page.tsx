@@ -1,7 +1,16 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import MypageContents from "@/components/mypage/MypageContents/MypageContents";
-const MyPage = () => {
+import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
+import { checkAuth } from "@/utils/apiFunc";
+import { getTokenFromCookie } from "@/utils/cookie";
+const MyPage = async() => {
+  const token = await getTokenFromCookie();
+  if (!token) {
+    return <UnauthorizedAccess />;
+  }
+  await checkAuth(token);
+
   return (
     <>
       <BreadList
@@ -17,3 +26,5 @@ const MyPage = () => {
 };
 
 export default MyPage;
+
+// getTokenFromCookie、checkLoggedInServer

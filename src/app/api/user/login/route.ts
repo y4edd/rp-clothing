@@ -9,18 +9,7 @@ import { COOKIE_MAX_AGE } from "@/utils/cookie";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export const POST = async (req: NextRequest) => {
-  // 環境変数の秘密鍵を取得
   const secretKey = process.env.SECRET_KEY;
-
-  // cookieの設定（セッションID保存するため）
-  const cookieOpt:Partial<ResponseCookie> = {
-    httpOnly: true,
-    secure: true,
-    sameSite: "strict",
-    maxAge: COOKIE_MAX_AGE,
-    path: "/",
-  };
-
   if (!secretKey) {
     return NextResponse.json({ message: "秘密鍵が設定されていません" }, { status: 409 });
   }
@@ -30,7 +19,6 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ message: "Redisが設定されていません" }, { status: 409 });
   }
 
-  // Redis クライアントの初期化
   const redisClient = new Redis(redisURL);
 
   try {
@@ -60,17 +48,30 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "パスワードが違います。" }, { status: 401 });
     }
 
-    // セッションIDを保存し、ユーザー情報を Redis に保存（手動で管理）
-    const sessionId = `session:${userData.id}`;
+    // セッションIDを生成（userのIDをそのまま使用）
+    const sessionId = userData.id.toString();
     await redisClient.set(sessionId, JSON.stringify(userData), "EX", REDIS_MAX_AGE);
 
+    // クッキー設定（httpOnlyを有効化）
+    const cookieOpt: Partial<ResponseCookie> = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: COOKIE_MAX_AGE,
+      path: "/",
+    };
+
     const response = NextResponse.json({ message: "ログインが成功しました。" }, { status: 200 });
-    // クライアントのCookieにセッションIDを保存（認証情報として使用）
-    response.cookies.set("token", sessionId, cookieOpt);
+
+    // クライアントのクッキーにセッションIDを保存
+    response.cookies.set("sessionId", sessionId, cookieOpt);
+
+    // Redisの接続を閉じる
+    await redisClient.quit();
 
     return response;
   } catch (error) {
     console.error("エラー発生:", error);
     return NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });
   }
-}
+};
