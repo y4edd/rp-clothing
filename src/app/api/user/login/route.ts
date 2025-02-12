@@ -66,9 +66,6 @@ export const POST = async (req: NextRequest) => {
     // クライアントのクッキーにセッションIDを保存
     response.cookies.set("sessionId", sessionId, cookieOpt);
 
-    // Redisの接続を閉じる
-    await redisClient.quit();
-
     return response;
   } catch (error) {
     console.error("エラー発生:", error);
