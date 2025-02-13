@@ -18,7 +18,7 @@ jest.mock("@/components/utils/toast/toast", () => ({
   showErrorToast: jest.fn(),
 }));
 
-jest.mock("@/contexts/Countcontexts", () => ({
+jest.mock("@/contexts/Authcontexts", () => ({
   useAuth: jest.fn(),
 }));
 

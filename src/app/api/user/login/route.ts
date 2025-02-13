@@ -63,7 +63,8 @@ export const POST = async (req: NextRequest) => {
 
     const response = NextResponse.json({ message: "ログインが成功しました。" }, { status: 200 });
 
-    // クライアントのクッキーにセッションIDを保存
+    // クライアントのcookieにセッションIDを保存
+    // MEMO: cookieに保存するのはカート情報、閲覧履歴のみ。ユーザー情報は保存しない
     response.cookies.set("sessionId", sessionId, cookieOpt);
 
     return response;

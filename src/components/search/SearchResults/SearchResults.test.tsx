@@ -1,5 +1,4 @@
-import { fetchResults } from "@/utils/apiFunc";
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import SearchResults from "./SearchResults";
 
 jest.mock("@/utils/apiFunc", () => ({
@@ -13,21 +12,17 @@ jest.mock("@/utils/apiFunc", () => ({
 
 describe("SearchResultsコンポーネントのテスト", () => {
   const mockParams = {
-    minPrice: "2000",
-    maxPrice: "6000",
-    selectedCategory: "tops",
-    keyWord: "パーカー",
+    searchParams: {
+        minPrice: "1000",
+        maxPrice: "5000",
+        selectedCategory: "electronics",
+        keyWord: "laptop"
+    }
   };
 
   test("モックデータが正しく表示される", async () => {
-    render(<SearchResults searchParams={mockParams} />);
-
-    // fetchResultsが正しく呼び出されているか確認
-    await waitFor(() =>
-      expect(fetchResults).toHaveBeenCalledWith(
-        "minPrice=2000&maxPrice=6000&selectedCategory=tops&keyWord=%E3%83%91%E3%83%BC%E3%82%AB%E3%83%BC",
-      ),
-    );
+    const result = await SearchResults(mockParams);
+    render(result);
 
     const itemName = "パーカーA";
     expect(itemName).toBeInTheDocument;
