@@ -13,11 +13,11 @@ jest.mock("@/utils/apiFunc", () => ({
 describe("SearchResultsコンポーネントのテスト", () => {
   const mockParams = {
     searchParams: {
-        minPrice: "1000",
-        maxPrice: "5000",
-        selectedCategory: "electronics",
-        keyWord: "laptop"
-    }
+      minPrice: "1000",
+      maxPrice: "5000",
+      selectedCategory: "electronics",
+      keyWord: "laptop",
+    },
   };
 
   test("モックデータが正しく表示される", async () => {

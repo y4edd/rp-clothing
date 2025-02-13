@@ -7,6 +7,8 @@ import { eq } from "drizzle-orm";
 import Redis from "ioredis";
 import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { type NextRequest, NextResponse } from "next/server";
+import { v5 as uuidv5 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 export const POST = async (req: NextRequest) => {
   const secretKey = process.env.SECRET_KEY;
@@ -50,7 +52,11 @@ export const POST = async (req: NextRequest) => {
 
     // セッションIDを生成（userのIDをそのまま使用）
     const sessionId = userData.id.toString();
-    await redisClient.set(sessionId, JSON.stringify(userData), "EX", REDIS_MAX_AGE);
+    // 事前に生成（アプリ起動時に固定）
+    const NAMESPACE = uuidv4();
+    // 第二引数はuuidの任意の名前空間です
+    const uniqueSessionId = uuidv5(sessionId, NAMESPACE);
+    await redisClient.set(uniqueSessionId, JSON.stringify(userData), "EX", REDIS_MAX_AGE);
 
     // クッキー設定（httpOnlyを有効化）
     const cookieOpt: Partial<ResponseCookie> = {
@@ -65,7 +71,7 @@ export const POST = async (req: NextRequest) => {
 
     // クライアントのcookieにセッションIDを保存
     // MEMO: cookieに保存するのはカート情報、閲覧履歴のみ。ユーザー情報は保存しない
-    response.cookies.set("sessionId", sessionId, cookieOpt);
+    response.cookies.set("sessionId", uniqueSessionId, cookieOpt);
 
     return response;
   } catch (error) {

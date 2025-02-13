@@ -1,8 +1,8 @@
+import { getCondition } from "@/utils/apiFunc";
 import { render, screen, waitFor } from "@testing-library/react";
 import FavConditions from "./FavConditions";
-import { getCondition } from "@/utils/apiFunc";
 
-// `getCondition` をモックする
+// "getCondition" をモックする
 jest.mock("@/utils/apiFunc", () => ({
   getCondition: jest.fn(),
 }));
@@ -13,7 +13,6 @@ describe("FavConditions", () => {
   });
 
   test("正常にデータを取得し、条件一覧を表示する", async () => {
-
     const mockData = [
       {
         conditionName: "セール",
