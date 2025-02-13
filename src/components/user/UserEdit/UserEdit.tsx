@@ -3,8 +3,13 @@ import type { EditUserProps } from "@/types/user/user";
 import { useForm } from "react-hook-form";
 import EditForm from "./EditForm/EditForm";
 import styles from "./UserEdit.module.css";
+import { editUser } from "@/utils/apiFunc";
 
-const UserEdit = () => {
+type UserEditProps ={
+  token: string;
+}
+
+const UserEdit = ({token}:UserEditProps) => {
   const {
     register,
     formState: { errors },
@@ -18,13 +23,15 @@ const UserEdit = () => {
     },
   });
 
-  const onSubmit = (data: EditUserProps) => {
+  const onSubmit = async(data: EditUserProps) => {
+    // !dataならエラーメッセージが出る
     // MEMO: ここでdataを使ってAPI通信を行う
-    console.log(data);
+    const response = await editUser(data);
   };
   return (
     <div className={styles.container}>
       <EditForm register={register} errors={errors} handleSubmit={handleSubmit(onSubmit)} />
+      {/* ここにエラーメッセージ */}
     </div>
   );
 };

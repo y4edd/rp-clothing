@@ -1,5 +1,5 @@
 import type { FavConditionProps } from "@/types/search/search";
-import type { LoginProps } from "@/types/user/user";
+import type { EditUserProps, LoginProps } from "@/types/user/user";
 
 // 新着アイテムの取得関数
 export const getNewItems = async () => {
@@ -163,7 +163,7 @@ export const postLogout = async () => {
   }
 };
 
-// サーバーサイドからログインしているかどうか、確認するための非同期関数
+// サーバーサイドから誰がログインしているのか、確認するための非同期関数
 // （※HttpOnly: trueのためクライアントからは中身を見ることはできない）
 // 返り値はsessionId（登録済みユーザー限定ページにて使用予定）
 export const checkAuth = async (token: string) => {
@@ -209,11 +209,31 @@ export const deleteUser = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/user/delete", {
       method: "DELETE",
-      // ブラウザに自動でCokoieやセッション情報を送ってもらう
+      // ブラウザに自動でCookieやセッション情報を送ってもらう
       credentials: "include",
     });
     return response;
   } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// アカウント情報を編集する非同期関数
+export const editUser = async (data: EditUserProps) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/edit", {
+      method: "PATCH",
+      // ブラウザに自動でCookieやセッション情報を送ってもらう
+      credentials: "include",
+      body: JSON.stringify(data),
+    });
+    console.log(response);
+    return response;
+  }catch(error) {
     console.error(error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
       status: 500,
