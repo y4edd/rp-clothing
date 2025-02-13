@@ -1,4 +1,4 @@
-import { useAuth } from "@/contexts/Countcontexts";
+import { useAuth } from "@/contexts/Authcontexts";
 import { deleteUser } from "@/utils/apiFunc";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useRouter } from "next/navigation";
