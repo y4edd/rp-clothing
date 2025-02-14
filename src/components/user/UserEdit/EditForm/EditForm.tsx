@@ -9,9 +9,10 @@ type Prop = {
   register: UseFormRegister<EditUserProps>;
   errors: FieldErrors<EditUserProps>;
   handleSubmit: () => void;
+  birthDay: string;
 };
 
-const EditForm = ({ register, errors, handleSubmit }: Prop) => {
+const EditForm = ({ register, errors, handleSubmit, birthDay }: Prop) => {
   return (
     <form onSubmit={handleSubmit}>
       <InputField id="name" label="ユーザー名" example="RP太郎" errors={errors.name?.message}>
@@ -46,7 +47,7 @@ const EditForm = ({ register, errors, handleSubmit }: Prop) => {
         />
       </InputField>
       {/* Memo:Propsで誕生日を渡す */}
-      <Birthday />
+      <Birthday birthDay={birthDay} />
 
       <InputField
         id="password"

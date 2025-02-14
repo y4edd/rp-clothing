@@ -11,7 +11,10 @@ export const getTokenFromCookie = async () => {
   // 読み書きできる関数（cookies）を使う
   const cookieStore = await cookies();
   const token = cookieStore.get("sessionId");
-  return token ? `${token.name}=${token.value}` : "";
+  if(!token){
+    return null;
+  }
+  return token.value;
 };
 
 // クッキー設定（httpOnlyを有効化）

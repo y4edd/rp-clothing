@@ -6,7 +6,17 @@ import EditForm from "./EditForm/EditForm";
 import styles from "./UserEdit.module.css";
 import { useState } from "react";
 
-const UserEdit = () => {
+type UserData = {
+  name: string;
+  email: string;
+  birthday: string;
+}
+
+type UserEditProps = {
+  userData: UserData;
+}
+
+const UserEdit = ({userData}: UserEditProps) => {
   const [defaultUserData, setDefaultUserData] = useState();
   const [serverError, setServerError] = useState();
   const {
@@ -15,10 +25,8 @@ const UserEdit = () => {
     handleSubmit,
   } = useForm<EditUserProps>({
     defaultValues: {
-      // MEMO: ここでAPI作成後、初期値を設定
-      name: "",
-      email: "",
-      password: "",
+      name: userData.name,
+      email: userData.email,
     },
   });
 
@@ -34,7 +42,7 @@ const UserEdit = () => {
 
   return (
     <div className={styles.container}>
-      <EditForm register={register} errors={errors} handleSubmit={handleSubmit(onSubmit)} />
+      <EditForm register={register} errors={errors} handleSubmit={handleSubmit(onSubmit)} birthDay={userData.birthday} />
       <div className={styles.errorMessage}>{serverError}</div>
     </div>
   );
