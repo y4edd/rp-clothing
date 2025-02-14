@@ -21,7 +21,6 @@ export const PATCH = async (request: NextRequest) => {
     }
 
     const userId = JSON.parse(userIdJason).userId;
-    console.log(userId);
 
     const data = await request.json();
     const { name, email, password } = data;
