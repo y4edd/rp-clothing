@@ -227,8 +227,6 @@ export const editUser = async (data: EditUserProps) => {
   try {
     const response = await fetch("http://localhost:3000/api/user/edit", {
       method: "PATCH",
-      // ブラウザに自動でCookieやセッション情報を送ってもらう
-      credentials: "include",
       body: JSON.stringify(data),
     });
     console.log(response);

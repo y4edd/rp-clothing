@@ -54,10 +54,6 @@ jobs:
     - name: Check Lint
       run: yarn biome check
 
-    # キャッシュを削除
-    - name: cache delete
-      run: yarn cache clean
-
     # Next.js のビルドを実行して、アプリケーションをビルドできるか確認する
     - name: Build
       run: yarn build
