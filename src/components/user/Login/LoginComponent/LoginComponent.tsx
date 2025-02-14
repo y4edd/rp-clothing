@@ -3,7 +3,7 @@
 import Button from "@/components/utils/button/Button";
 import { showToast } from "@/components/utils/toast/toast";
 import type { LoginProps } from "@/types/user/user";
-import { getUserId } from "@/utils/apiFunc";
+import { login } from "@/utils/apiFunc";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -27,7 +27,7 @@ const LoginComponent = () => {
 
   const onSubmit = async (data: LoginProps) => {
     try {
-      const response: Response = await getUserId(data);
+      const response: Response = await login(data);
 
       if (!response.ok) {
         const res = await response.json();
