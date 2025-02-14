@@ -149,8 +149,6 @@ export const postLogout = async () => {
     const response = await fetch("http://localhost:3000/api/user/logout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // Cookieを送るために必要
-      credentials: "include",
     });
 
     return response;
@@ -209,8 +207,6 @@ export const deleteUser = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/user/delete", {
       method: "DELETE",
-      // ブラウザに自動でCookieやセッション情報を送ってもらう
-      credentials: "include",
     });
     return response;
   } catch (error) {
