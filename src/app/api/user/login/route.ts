@@ -1,11 +1,10 @@
 import { db } from "@/db";
 import { users } from "@/db/schemas/schema";
-import { COOKIE_MAX_AGE } from "@/utils/cookie";
+import { cookieOpt } from "@/utils/cookie";
 import { REDIS_MAX_AGE } from "@/utils/redis";
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
-import Redis from "ioredis";
-import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { redisClient } from "@/lib/redis/redis";
 import { type NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
@@ -15,13 +14,6 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ message: "秘密鍵が設定されていません" }, { status: 409 });
   }
 
-  const redisURL = process.env.REDIS_URL;
-  if (!redisURL) {
-    return NextResponse.json({ message: "Redisが設定されていません" }, { status: 409 });
-  }
-
-  const redisClient = new Redis(redisURL);
-
   try {
     const body = await req.json();
     const { email, password } = body;
@@ -29,7 +21,7 @@ export const POST = async (req: NextRequest) => {
     if (!email || !password) {
       return NextResponse.json(
         { message: "メールアドレスとパスワードを入力してください。" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -40,7 +32,7 @@ export const POST = async (req: NextRequest) => {
     if (!userData) {
       return NextResponse.json(
         { message: "メールアドレスもしくはパスワードが違います。" },
-        { status: 401 },
+        { status: 401 }
       );
     }
 
@@ -49,23 +41,31 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "パスワードが違います。" }, { status: 401 });
     }
 
-    const uniqueSessionId = uuidv4();
-    await redisClient.set(uniqueSessionId, JSON.stringify(userData), "EX", REDIS_MAX_AGE);
+    // クッキーから既存の sessionId を取得
+    const existingSessionId = req.cookies.get("sessionId")?.value;
+    let sessionId = existingSessionId;
 
-    // クッキー設定（httpOnlyを有効化）
-    const cookieOpt: Partial<ResponseCookie> = {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-      maxAge: COOKIE_MAX_AGE,
-      path: "/",
-    };
+    // 既存の sessionId がある場合、Redis のデータを更新
+    if (sessionId) {
+      await redisClient.set(
+        `sessionId:${sessionId}`,
+        JSON.stringify({ userId: userData.id }),
+        "EX",
+        REDIS_MAX_AGE
+      );
+    } else {
+      // 新規に sessionId を生成し、Cookie & Redis に保存
+      sessionId = uuidv4();
+      await redisClient.set(
+        `sessionId:${sessionId}`,
+        JSON.stringify({ userId: userData.id }),
+        "EX",
+        REDIS_MAX_AGE
+      );
+    }
 
     const response = NextResponse.json({ message: "ログインが成功しました。" }, { status: 200 });
-
-    // クライアントのcookieにセッションIDを保存
-    // MEMO: cookieに保存するのはカート情報、閲覧履歴のみ。ユーザー情報は保存しない
-    response.cookies.set("sessionId", uniqueSessionId, cookieOpt);
+    response.cookies.set("sessionId", sessionId, cookieOpt);
 
     return response;
   } catch (error) {

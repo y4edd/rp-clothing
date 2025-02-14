@@ -1,3 +1,4 @@
+import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
 
 // Cookieの有効期限を2日とする
@@ -11,4 +12,13 @@ export const getTokenFromCookie = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get("sessionId");
   return token ? `${token.name}=${token.value}` : "";
+};
+
+// クッキー設定（httpOnlyを有効化）
+export const cookieOpt: Partial<ResponseCookie> = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "strict",
+  maxAge: COOKIE_MAX_AGE,
+  path: "/",
 };

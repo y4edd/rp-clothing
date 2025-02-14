@@ -1,17 +1,27 @@
 import { db } from "@/db";
 import { users } from "@/db/schemas/schema";
+import { redisClient } from "@/lib/redis/redis";
+import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export const PATCH = async(request: NextRequest) => {
   try{
-    const sessionId = request.cookies.get("sessionId");
+    // cookieからsessionIdを取得し、
+    // sessionIdをもとにredisからuserIdを取得
+    const sessionId = request.cookies.get("sessionId")?.value;
 
-    if (!sessionId) {
-      return NextResponse.json({ message: "ログインしていません" }, { status: 401 });
+    if(!sessionId) {
+      return NextResponse.json({ message: "セッションエラーが発生しました"}, { status: 401 });
     }
 
-    const userId = Number(sessionId.value);
+    const userIdJason = await redisClient.get(`sessionId:${sessionId}`);
+    if(!userIdJason) {
+      return NextResponse.json({ message: "ユーザーの認証に失敗しました"}, { status: 401 });
+    }
+
+    const userId = JSON.parse(userIdJason).userId;
+    console.log(userId);
 
     const data = await request.json();
     const { name, email, password } = data;
@@ -20,18 +30,21 @@ export const PATCH = async(request: NextRequest) => {
       return NextResponse.json({ message: "編集用のデータがありません" }, { status: 401 });
     }
 
-    // userIdを元に対象のデータを持ってくる
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // userIdを元に対象のデータを更新する
     await db
       .update(users)
       .set({
         name: name,
         email: email,
-        password: password,
+        password: hashedPassword,
         updated_at: new Date(),
       })
       .where(
         eq(users.id, userId),
       );
+
     return NextResponse.json({ message: "ユーザー情報の編集に成功しました"}, { status: 200 });
   } catch(error) {
     console.error(error);

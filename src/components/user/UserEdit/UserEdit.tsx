@@ -5,11 +5,7 @@ import EditForm from "./EditForm/EditForm";
 import styles from "./UserEdit.module.css";
 import { editUser } from "@/utils/apiFunc";
 
-type UserEditProps ={
-  token: string;
-}
-
-const UserEdit = ({token}:UserEditProps) => {
+const UserEdit = () => {
   const {
     register,
     formState: { errors },

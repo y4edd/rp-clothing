@@ -21,7 +21,7 @@ const UserEditPage = async() => {
         ]}
       />
       <PageTitle title={"ユーザー情報編集"} />
-      <UserEdit token={token}/>
+      <UserEdit/>
     </>
   );
 };
