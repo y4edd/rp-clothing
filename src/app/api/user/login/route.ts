@@ -7,7 +7,6 @@ import { eq } from "drizzle-orm";
 import Redis from "ioredis";
 import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { type NextRequest, NextResponse } from "next/server";
-import { v5 as uuidv5 } from "uuid";
 import { v4 as uuidv4 } from "uuid";
 
 export const POST = async (req: NextRequest) => {
@@ -50,12 +49,7 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "パスワードが違います。" }, { status: 401 });
     }
 
-    // セッションIDを生成（userのIDをそのまま使用）
-    const sessionId = userData.id.toString();
-    // 事前に生成（アプリ起動時に固定）
-    const NAMESPACE = uuidv4();
-    // 第二引数はuuidの任意の名前空間です
-    const uniqueSessionId = uuidv5(sessionId, NAMESPACE);
+    const uniqueSessionId = uuidv4();
     await redisClient.set(uniqueSessionId, JSON.stringify(userData), "EX", REDIS_MAX_AGE);
 
     // クッキー設定（httpOnlyを有効化）
