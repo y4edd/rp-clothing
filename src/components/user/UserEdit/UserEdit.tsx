@@ -1,23 +1,22 @@
 "use client";
 import type { EditUserProps } from "@/types/user/user";
 import { editUser } from "@/utils/apiFunc";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import EditForm from "./EditForm/EditForm";
 import styles from "./UserEdit.module.css";
-import { useState } from "react";
 
 type UserData = {
   name: string;
   email: string;
   birthday: string;
-}
+};
 
 type UserEditProps = {
   userData: UserData;
-}
+};
 
-const UserEdit = ({userData}: UserEditProps) => {
-  const [defaultUserData, setDefaultUserData] = useState();
+const UserEdit = ({ userData }: UserEditProps) => {
   const [serverError, setServerError] = useState();
   const {
     register,
@@ -34,7 +33,7 @@ const UserEdit = ({userData}: UserEditProps) => {
     const response = await editUser(data);
     const res = await response.json();
 
-    if(!res.ok) {
+    if (!res.ok) {
       setServerError(res.message);
     }
     return;
@@ -42,7 +41,12 @@ const UserEdit = ({userData}: UserEditProps) => {
 
   return (
     <div className={styles.container}>
-      <EditForm register={register} errors={errors} handleSubmit={handleSubmit(onSubmit)} birthDay={userData.birthday} />
+      <EditForm
+        register={register}
+        errors={errors}
+        handleSubmit={handleSubmit(onSubmit)}
+        birthDay={userData.birthday}
+      />
       <div className={styles.errorMessage}>{serverError}</div>
     </div>
   );

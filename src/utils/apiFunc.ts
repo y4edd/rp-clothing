@@ -1,7 +1,6 @@
 import type { FavConditionProps } from "@/types/search/search";
 import type { EditUserProps, LoginProps } from "@/types/user/user";
 
-
 // 新着アイテムの取得関数
 export const getNewItems = async () => {
   try {
@@ -217,14 +216,14 @@ export const editUser = async (data: EditUserProps) => {
 };
 
 //ユーザー情報を取得する非同期関数（引数：userId）
-export const getUserInfo = async(userId: string) => {
-  try{
+export const getUserInfo = async (userId: string) => {
+  try {
     const response = await fetch("http://localhost:3000/api/user/getInfo", {
       method: "POST",
       body: JSON.stringify(userId),
     });
     return response;
-  } catch(error) {
+  } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
       status: 500,
@@ -232,5 +231,3 @@ export const getUserInfo = async(userId: string) => {
     });
   }
 };
-
-

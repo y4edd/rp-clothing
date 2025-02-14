@@ -11,7 +11,7 @@ export const getTokenFromCookie = async () => {
   // 読み書きできる関数（cookies）を使う
   const cookieStore = await cookies();
   const token = cookieStore.get("sessionId");
-  if(!token){
+  if (!token) {
     return null;
   }
   return token.value;

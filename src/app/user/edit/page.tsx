@@ -18,10 +18,10 @@ const UserEditPage = async () => {
   }
 
   const userId = JSON.parse(userIdJason).userId;
-  if(!userId) {
+  if (!userId) {
     return <UnauthorizedAccess />;
   }
-  
+
   const userDataJson = await getUserInfo(userId);
   const userDataArr = await userDataJson.json();
   const userData = userDataArr[0];

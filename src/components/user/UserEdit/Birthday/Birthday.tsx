@@ -2,9 +2,9 @@ import styles from "./Birthday.module.css";
 
 type BirthDayProps = {
   birthDay: string;
-}
+};
 
-const Birthday = ({birthDay}: BirthDayProps) => {
+const Birthday = ({ birthDay }: BirthDayProps) => {
   const [year, month, day] = birthDay.split("-");
   return (
     <dl className={styles.birthday}>
