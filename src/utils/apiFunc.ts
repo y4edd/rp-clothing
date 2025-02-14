@@ -207,7 +207,7 @@ export const editUser = async (data: EditUserProps) => {
     });
     console.log(response);
     return response;
-  }catch(error) {
+  } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
       status: 500,

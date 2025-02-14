@@ -4,10 +4,10 @@ import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/Unauthorize
 import UserEdit from "@/components/user/UserEdit/UserEdit";
 import { getTokenFromCookie } from "@/utils/cookie";
 
-const UserEditPage = async() => {
+const UserEditPage = async () => {
   const token = await getTokenFromCookie();
 
-  if(!token) {
+  if (!token) {
     return <UnauthorizedAccess />;
   }
 
@@ -21,7 +21,7 @@ const UserEditPage = async() => {
         ]}
       />
       <PageTitle title={"ユーザー情報編集"} />
-      <UserEdit/>
+      <UserEdit />
     </>
   );
 };

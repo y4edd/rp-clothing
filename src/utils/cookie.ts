@@ -1,4 +1,4 @@
-import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
 
 // Cookieの有効期限を2日とする

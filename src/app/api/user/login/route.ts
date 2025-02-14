@@ -1,10 +1,10 @@
 import { db } from "@/db";
 import { users } from "@/db/schemas/schema";
+import { redisClient } from "@/lib/redis/redis";
 import { cookieOpt } from "@/utils/cookie";
 import { REDIS_MAX_AGE } from "@/utils/redis";
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
-import { redisClient } from "@/lib/redis/redis";
 import { type NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
@@ -21,7 +21,7 @@ export const POST = async (req: NextRequest) => {
     if (!email || !password) {
       return NextResponse.json(
         { message: "メールアドレスとパスワードを入力してください。" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -32,7 +32,7 @@ export const POST = async (req: NextRequest) => {
     if (!userData) {
       return NextResponse.json(
         { message: "メールアドレスもしくはパスワードが違います。" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -51,7 +51,7 @@ export const POST = async (req: NextRequest) => {
         `sessionId:${sessionId}`,
         JSON.stringify({ userId: userData.id }),
         "EX",
-        REDIS_MAX_AGE
+        REDIS_MAX_AGE,
       );
     } else {
       // 新規に sessionId を生成し、Cookie & Redis に保存
@@ -60,7 +60,7 @@ export const POST = async (req: NextRequest) => {
         `sessionId:${sessionId}`,
         JSON.stringify({ userId: userData.id }),
         "EX",
-        REDIS_MAX_AGE
+        REDIS_MAX_AGE,
       );
     }
 

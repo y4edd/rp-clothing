@@ -1,11 +1,14 @@
 "use client";
 import type { EditUserProps } from "@/types/user/user";
+import { editUser } from "@/utils/apiFunc";
 import { useForm } from "react-hook-form";
 import EditForm from "./EditForm/EditForm";
 import styles from "./UserEdit.module.css";
-import { editUser } from "@/utils/apiFunc";
+import { useState } from "react";
 
 const UserEdit = () => {
+  const [defaultUserData, setDefaultUserData] = useState();
+  const [serverError, setServerError] = useState();
   const {
     register,
     formState: { errors },
@@ -19,15 +22,20 @@ const UserEdit = () => {
     },
   });
 
-  const onSubmit = async(data: EditUserProps) => {
-    // !dataならエラーメッセージが出る
-    // MEMO: ここでdataを使ってAPI通信を行う
+  const onSubmit = async (data: EditUserProps) => {
     const response = await editUser(data);
+    const res = await response.json();
+
+    if(!res.ok) {
+      setServerError(res.message);
+    }
+    return;
   };
+
   return (
     <div className={styles.container}>
       <EditForm register={register} errors={errors} handleSubmit={handleSubmit(onSubmit)} />
-      {/* ここにエラーメッセージ */}
+      <div className={styles.errorMessage}>{serverError}</div>
     </div>
   );
 };

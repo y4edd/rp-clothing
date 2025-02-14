@@ -1,13 +1,5 @@
-import {
-  boolean,
-  date,
-  integer,
-  pgTable,
-  text,
-  timestamp,
-  unique,
-} from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
+import { boolean, date, pgTable, text, timestamp, unique } from "drizzle-orm/pg-core";
 
 // シーケンスを `TEXT` 型で管理（連番を `TEXT` で保存）
 const nextTextId = (tableName: string) => sql`nextval('${tableName}_id_seq')::text`;
