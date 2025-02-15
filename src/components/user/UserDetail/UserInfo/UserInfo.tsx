@@ -5,11 +5,12 @@ import UnauthorizedAccess from "../../UnauthorizedAccess/UnauthorizedAccess";
 import { redisClient } from "@/lib/redis/redis";
 
 const UserInfo = async() => {
+  // sessionIdをcookieから取得
   const sessionId = await getTokenFromCookie();
   if (!sessionId) {
     return <UnauthorizedAccess />;
   }
-
+  // sessionIdを元にredisからuserIdを取得
   const userIdJason = await redisClient.get(`sessionId:${sessionId}`);
   if (!userIdJason) {
     return <UnauthorizedAccess />;

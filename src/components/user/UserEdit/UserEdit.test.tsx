@@ -6,7 +6,12 @@ jest.mock("./EditForm/EditForm", () => () => {
 });
 describe("UserEditコンポーネントのテスト", () => {
   test("EditFormコンポーネントが表示されることを確認", () => {
-    render(<UserEdit />);
+    const mockUserData = {
+      name: "test",
+      email: "test@test.com",
+      birthday: "2001-01-29",
+    }
+    render(<UserEdit userData={mockUserData} />);
     expect(screen.getByText("EditForm")).toBeInTheDocument();
   });
 });

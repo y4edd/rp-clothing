@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import EditForm from "./EditForm";
 
 describe("EditFormコンポーネントのテスト", () => {
+  const birthDay = "2000-01-29";
   const mockHandleSubmit = jest.fn();
   const TestComponent = () => {
     const {
@@ -13,7 +14,7 @@ describe("EditFormコンポーネントのテスト", () => {
       formState: { errors },
     } = useForm<EditUserProps>();
     return (
-      <EditForm register={register} handleSubmit={handleSubmit(mockHandleSubmit)} errors={errors} />
+      <EditForm register={register} handleSubmit={handleSubmit(mockHandleSubmit)} errors={errors} birthDay={birthDay} />
     );
   };
   test("EditFormコンポーネントが表示されることを確認", () => {
