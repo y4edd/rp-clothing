@@ -46,7 +46,6 @@ const EditForm = ({ register, errors, handleSubmit, birthDay }: Prop) => {
           })}
         />
       </InputField>
-      {/* Memo:Propsで誕生日を渡す */}
       <Birthday birthDay={birthDay} />
 
       <InputField
@@ -71,8 +70,6 @@ const EditForm = ({ register, errors, handleSubmit, birthDay }: Prop) => {
           })}
         />
       </InputField>
-
-      {/* Memo:コンポーネント内部で処理完結していそうなためPropsでデータ渡す必要ないかも */}
       <UserEditButtons />
     </form>
   );
