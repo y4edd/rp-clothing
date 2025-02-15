@@ -1,10 +1,10 @@
+import { redisClient } from "@/lib/redis/redis";
 import { getUserInfo } from "@/utils/apiFunc";
-import styles from "./UserInfo.module.css";
 import { getTokenFromCookie } from "@/utils/cookie";
 import UnauthorizedAccess from "../../UnauthorizedAccess/UnauthorizedAccess";
-import { redisClient } from "@/lib/redis/redis";
+import styles from "./UserInfo.module.css";
 
-const UserInfo = async() => {
+const UserInfo = async () => {
   // sessionIdをcookieから取得
   const sessionId = await getTokenFromCookie();
   if (!sessionId) {

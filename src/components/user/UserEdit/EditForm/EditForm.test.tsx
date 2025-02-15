@@ -14,7 +14,12 @@ describe("EditFormコンポーネントのテスト", () => {
       formState: { errors },
     } = useForm<EditUserProps>();
     return (
-      <EditForm register={register} handleSubmit={handleSubmit(mockHandleSubmit)} errors={errors} birthDay={birthDay} />
+      <EditForm
+        register={register}
+        handleSubmit={handleSubmit(mockHandleSubmit)}
+        errors={errors}
+        birthDay={birthDay}
+      />
     );
   };
   test("EditFormコンポーネントが表示されることを確認", () => {

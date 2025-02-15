@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import UserInfo from "./UserInfo";
 import { redisClient } from "@/lib/redis/redis";
 import { getUserInfo } from "@/utils/apiFunc";
+import { render, screen, waitFor } from "@testing-library/react";
+import UserInfo from "./UserInfo";
 
 // "getTokenFromCookie" をモック化
 jest.mock("@/utils/cookie", () => ({
@@ -15,7 +15,7 @@ jest.mock("@/lib/redis/redis", () => ({
   },
 }));
 
-// "getUserInfo" をモック化 
+// "getUserInfo" をモック化
 jest.mock("@/utils/apiFunc", () => ({
   getUserInfo: jest.fn(),
 }));

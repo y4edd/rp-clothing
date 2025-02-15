@@ -22,7 +22,7 @@ export const POST = async (req: NextRequest) => {
     .select()
     .from(search_conditions)
     .where(
-      and(eq(search_conditions.users_id, 1), eq(search_conditions.condition_name, conditionName)),
+      and(eq(search_conditions.users_id, "1"), eq(search_conditions.condition_name, conditionName)),
     );
 
   if (existingItem.length > 0) {
@@ -31,7 +31,7 @@ export const POST = async (req: NextRequest) => {
 
   try {
     await db.insert(search_conditions).values({
-      users_id: 1,
+      users_id: "1",
       condition_name: conditionName,
       price_min: minPrice,
       price_max: maxPrice,
@@ -59,7 +59,7 @@ export const PATCH = async (req: NextRequest) => {
     .from(search_conditions)
     .where(
       and(
-        eq(search_conditions.users_id, 1),
+        eq(search_conditions.users_id, "1"),
         eq(search_conditions.condition_name, conditionName),
         // 変更を加えるデータについては一意制約を無視（名前が変更されない場合のコンフリクトエラーを回避）
         sql`${search_conditions.id} <> ${searchConditionId}`,
@@ -105,7 +105,7 @@ export const GET = async () => {
         keyWord: search_conditions.word,
       })
       .from(search_conditions)
-      .where(eq(search_conditions.users_id, 1));
+      .where(eq(search_conditions.users_id, "1"));
     return NextResponse.json(response);
   } catch (error) {
     console.error(error);
@@ -121,7 +121,7 @@ export const DELETE = async (req: NextRequest) => {
       and(
         // MEMO: ユーザーのID、検索条件のIDを元に書き換える
         eq(search_conditions.id, searchConditionId),
-        eq(search_conditions.users_id, 1),
+        eq(search_conditions.users_id, "1"),
       ),
     );
     return NextResponse.json({ message: "検索条件の編集が成功しました。" }, { status: 200 });

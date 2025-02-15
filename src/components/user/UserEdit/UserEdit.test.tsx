@@ -10,7 +10,7 @@ describe("UserEditコンポーネントのテスト", () => {
       name: "test",
       email: "test@test.com",
       birthday: "2001-01-29",
-    }
+    };
     render(<UserEdit userData={mockUserData} />);
     expect(screen.getByText("EditForm")).toBeInTheDocument();
   });
