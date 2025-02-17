@@ -6,8 +6,8 @@ import { checkAuth, getUserInfo } from "@/utils/apiFunc";
 
 const UserEditPage = async () => {
   const userId = await checkAuth();
-  if(!userId) {
-    return <UnauthorizedAccess />
+  if (!userId) {
+    return <UnauthorizedAccess />;
   }
 
   const userDataJson = await getUserInfo(userId);

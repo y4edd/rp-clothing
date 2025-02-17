@@ -3,7 +3,6 @@
 import Button from "@/components/utils/button/Button";
 import buttonStyles from "@/components/utils/button/Button.module.css";
 import { showErrorToast, showToast } from "@/components/utils/toast/toast";
-import { useAuth } from "@/contexts/Authcontexts";
 import { deleteUser } from "@/utils/apiFunc";
 import { useRouter } from "next/navigation";
 import styles from "./DeleteButtons.module.css";
@@ -13,10 +12,7 @@ type Prop = {
 };
 const DeleteButtons = ({ setIsDeleteModal }: Prop) => {
   const router = useRouter();
-  const token = useAuth();
-  if (!token) {
-    return;
-  }
+
   const handleDelete = async () => {
     const response = await deleteUser();
     if (!response.ok) {

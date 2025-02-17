@@ -2,13 +2,12 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import MypageContents from "@/components/mypage/MypageContents/MypageContents";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
-import { AuthProvider } from "@/contexts/Authcontexts";
-import { checkAuth } from "@/utils/apiFunc";
+import { checkAuth } from "@/utils/chechAuth";
 
 const MyPage = async () => {
   const userId = await checkAuth();
-  if(!userId) {
-    return <UnauthorizedAccess />
+  if (!userId) {
+    return <UnauthorizedAccess />;
   }
 
   return (
@@ -20,9 +19,7 @@ const MyPage = async () => {
         ]}
       />
       <PageTitle title={"マイページ"} />
-      <AuthProvider>
-        <MypageContents />
-      </AuthProvider>
+      <MypageContents />
     </>
   );
 };

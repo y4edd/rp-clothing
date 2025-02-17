@@ -1,4 +1,3 @@
-import { useAuth } from "@/contexts/Authcontexts";
 import { deleteUser } from "@/utils/apiFunc";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useRouter } from "next/navigation";
@@ -18,17 +17,12 @@ jest.mock("@/components/utils/toast/toast", () => ({
   showErrorToast: jest.fn(),
 }));
 
-jest.mock("@/contexts/Authcontexts", () => ({
-  useAuth: jest.fn(),
-}));
-
 describe("DeleteButtonsコンポーネントのテスト", () => {
   let mockRouterPush: jest.Mock;
 
   beforeEach(() => {
     mockRouterPush = jest.fn();
     (useRouter as jest.Mock).mockReturnValue({ push: mockRouterPush });
-    (useAuth as jest.Mock).mockReturnValue("mockToken");
   });
 
   test("削除ボタンとキャンセルボタンが存在することを確認", () => {

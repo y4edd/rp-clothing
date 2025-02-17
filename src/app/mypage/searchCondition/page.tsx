@@ -2,14 +2,14 @@ import FavConditions from "@/components/favorite/Condition/FavConditions/FavCond
 import RegisterConditionButton from "@/components/favorite/Condition/RegisterConditionButton/RegisterConditionButton";
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
-import styles from "./page.module.css";
-import { checkAuth } from "@/utils/apiFunc";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
+import { checkAuth } from "@/utils/chechAuth";
+import styles from "./page.module.css";
 
-const SearchCondition = async() => {
+const SearchCondition = async () => {
   const userId = await checkAuth();
-  if(!userId) {
-    return <UnauthorizedAccess />
+  if (!userId) {
+    return <UnauthorizedAccess />;
   }
   return (
     <>
