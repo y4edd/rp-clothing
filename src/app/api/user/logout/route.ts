@@ -25,7 +25,6 @@ export const POST = async (req: NextRequest) => {
     // Cookie を削除
     cookieStore.delete("sessionId");
 
-
     return response;
   } catch (error) {
     console.error(error);
