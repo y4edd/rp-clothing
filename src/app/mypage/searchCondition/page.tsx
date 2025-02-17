@@ -3,8 +3,14 @@ import RegisterConditionButton from "@/components/favorite/Condition/RegisterCon
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import styles from "./page.module.css";
+import { checkAuth } from "@/utils/apiFunc";
+import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
 
-const SearchCondition = () => {
+const SearchCondition = async() => {
+  const userId = await checkAuth();
+  if(!userId) {
+    return <UnauthorizedAccess />
+  }
   return (
     <>
       <BreadList
