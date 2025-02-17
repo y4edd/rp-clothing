@@ -1,4 +1,5 @@
 import Redis from "ioredis";
+import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
@@ -8,6 +9,7 @@ export const POST = async (req: NextRequest) => {
   }
 
   const redisClient = new Redis(redisURL);
+  const cookieStore = await cookies();
 
   try {
     // クライアントのセッションIDを取得
@@ -20,8 +22,9 @@ export const POST = async (req: NextRequest) => {
     await redisClient.del(`session:${sessionId}`);
 
     const response = NextResponse.json({ message: "ログアウトしました" }, { status: 200 });
-    // Cookie を無効化
-    response.cookies.set("sessionId", "", { expires: new Date(0) });
+    // Cookie を削除
+    cookieStore.delete("sessionId");
+
 
     return response;
   } catch (error) {

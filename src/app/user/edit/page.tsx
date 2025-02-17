@@ -2,7 +2,8 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
 import UserEdit from "@/components/user/UserEdit/UserEdit";
-import { checkAuth, getUserInfo } from "@/utils/apiFunc";
+import { getUserInfo } from "@/utils/apiFunc";
+import { checkAuth } from "@/utils/chechAuth";
 
 const UserEditPage = async () => {
   const userId = await checkAuth();
