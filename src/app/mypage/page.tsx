@@ -1,7 +1,15 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import MypageContents from "@/components/mypage/MypageContents/MypageContents";
-const MyPage = () => {
+import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
+import { checkAuth } from "@/utils/chechAuth";
+
+const MyPage = async () => {
+  const userId = await checkAuth();
+  if (!userId) {
+    return <UnauthorizedAccess />;
+  }
+
   return (
     <>
       <BreadList

@@ -1,6 +1,6 @@
 "use client";
 import type { RegisterAction } from "@/types/search/search";
-import { categories } from "@/utils/data/category";
+import { categories } from "@/utils/category";
 import React, { useCallback } from "react";
 import Category from "../Category/Category";
 import styles from "./CategoryCondition.module.css";

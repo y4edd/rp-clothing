@@ -1,8 +1,10 @@
 "use client";
 
 import Button from "@/components/utils/button/Button";
-import buttonStyles from "@/components/utils/button/Button.module.css";
+import { showToast } from "@/components/utils/toast/toast";
 import type { LoginProps } from "@/types/user/user";
+import { login } from "@/utils/apiFunc";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./LoginComponent.module.css";
@@ -10,6 +12,7 @@ import LoginEmail from "./LoginEmail/LoginEmail";
 import LoginPassword from "./LoginPassword/LoginPassword";
 
 const LoginComponent = () => {
+  const router = useRouter();
   const [loginError, setLoginError] = useState("");
   const {
     register,
@@ -24,28 +27,34 @@ const LoginComponent = () => {
 
   const onSubmit = async (data: LoginProps) => {
     try {
-      const res = await fetch("/api/user/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) {
-        setLoginError("メールアドレスもしくはパスワードが違います。");
+      const response: Response = await login(data);
+
+      if (!response.ok) {
+        const res = await response.json();
+        setLoginError(res.message || "ログインに失敗しました。");
+        return;
+      } else {
+        setLoginError("");
+        showToast("ログインに成功しました！");
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
       }
     } catch (error) {
-      console.error("エラー内容", error);
+      console.error(error);
     }
   };
+
   return (
     <div className={styles.login}>
       <h2>ログイン</h2>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <LoginEmail register={register} errors={errors} />
         <LoginPassword register={register} errors={errors} />
-        <div className={styles.btn}>
-          {loginError && <div className="error">{loginError}</div>}
-          <Button type="submit" className={`${buttonStyles.black} ${styles.btn}`} text="ログイン" />
+        <div>
+          <Button type="submit" className={styles.btn} text="ログイン" />
         </div>
+        {loginError && <div className={styles.error}>{loginError}</div>}
       </form>
     </div>
   );

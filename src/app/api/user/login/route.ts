@@ -1,33 +1,75 @@
 import { db } from "@/db";
 import { users } from "@/db/schemas/schema";
+import { redisClient } from "@/lib/redis/redis";
+import { cookieOpt } from "@/utils/cookie";
+import { REDIS_MAX_AGE } from "@/utils/redis";
+import bcrypt from "bcrypt";
+import { eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid";
 
 export const POST = async (req: NextRequest) => {
-  const body = await req.json();
-  const { email, password } = body;
+  const secretKey = process.env.SECRET_KEY;
+  if (!secretKey) {
+    return NextResponse.json({ message: "秘密鍵が設定されていません" }, { status: 409 });
+  }
+
   try {
+    const body = await req.json();
+    const { email, password } = body;
+
     if (!email || !password) {
-      NextResponse.json({ message: "未入力です。" }, { status: 400 });
-    }
-
-    const selectEmail = await db.selectDistinct(email).from(users);
-
-    console.log(selectEmail, "77722");
-
-    if (!selectEmail) console.log(selectEmail, "33");
-
-    if (!selectEmail) {
-      NextResponse.json(
-        { message: "メースアドレスもしくはパスワードが違います。" },
-        { status: 409 },
+      return NextResponse.json(
+        { message: "メールアドレスとパスワードを入力してください。" },
+        { status: 400 },
       );
     }
 
-    // ここにcookieの処理をかく！
+    const userData = await db.query.users.findFirst({
+      where: eq(users.email, email),
+    });
 
-    return NextResponse.json({ message: "ログインが成功しました。" }, { status: 200 });
+    if (!userData) {
+      return NextResponse.json(
+        { message: "メールアドレスもしくはパスワードが違います。" },
+        { status: 401 },
+      );
+    }
+
+    const isMatch = await bcrypt.compare(password, userData.password);
+    if (!isMatch) {
+      return NextResponse.json({ message: "パスワードが違います。" }, { status: 401 });
+    }
+
+    // クッキーから既存の sessionId を取得
+    const existingSessionId = req.cookies.get("sessionId")?.value;
+    let sessionId = existingSessionId;
+
+    // 既存の sessionId がある場合、Redis のデータを更新
+    if (sessionId) {
+      await redisClient.set(
+        `sessionId:${sessionId}`,
+        JSON.stringify({ userId: userData.id }),
+        "EX",
+        REDIS_MAX_AGE,
+      );
+    } else {
+      // 新規に sessionId を生成し、Cookie & Redis に保存
+      sessionId = uuidv4();
+      await redisClient.set(
+        `sessionId:${sessionId}`,
+        JSON.stringify({ userId: userData.id }),
+        "EX",
+        REDIS_MAX_AGE,
+      );
+    }
+
+    const response = NextResponse.json({ message: "ログインが成功しました。" }, { status: 200 });
+    response.cookies.set("sessionId", sessionId, cookieOpt);
+
+    return response;
   } catch (error) {
-    console.error({ error });
+    console.error("エラー発生:", error);
     return NextResponse.json({ message: "サーバーエラーが発生しました。" }, { status: 500 });
   }
 };

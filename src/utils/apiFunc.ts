@@ -1,4 +1,5 @@
 import type { FavConditionProps } from "@/types/search/search";
+import type { EditUserProps, LoginProps } from "@/types/user/user";
 
 // 新着アイテムの取得関数
 export const getNewItems = async () => {
@@ -49,7 +50,7 @@ export async function getItemDetail(itemCode: string) {
     const itemDetail = await response.json();
     return itemDetail.item;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 }
@@ -120,5 +121,113 @@ export const deleteCondition = async (req: number) => {
     return response;
   } catch (err) {
     console.error("通信に失敗しました", err);
+  }
+};
+
+// ログインを行うための非同期関数
+export const login = async (data: LoginProps): Promise<Response> => {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    return response;
+  } catch (error) {
+    console.error("エラー内容", error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// ログアウトを行うための非同期関数
+export const postLogout = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    return response;
+  } catch (error) {
+    console.error("エラー内容", error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// クライアントサイドから、cookieの中のトークンを取得
+export const getSessionId = async (
+  setToken: (token: string | null) => void,
+  setLoading: (loading: boolean) => void,
+) => {
+  try {
+    const res = await fetch("http://localhost:3000/api/user/token");
+    const data = await res.json();
+
+    if (!res.ok) {
+      setLoading(false);
+      return;
+    }
+    setToken(data.sessionId);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
+
+// アカウントを削除する非同期関数
+export const deleteUser = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/delete", {
+      method: "DELETE",
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// アカウント情報を編集する非同期関数
+export const editUser = async (data: EditUserProps) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/edit", {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+//ユーザー情報を取得する非同期関数（引数：userId）
+export const getUserInfo = async (userId: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/user/getInfo", {
+      method: "POST",
+      body: JSON.stringify(userId),
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 };

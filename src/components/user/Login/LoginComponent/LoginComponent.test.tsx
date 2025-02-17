@@ -1,6 +1,8 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import LoginComponent from "./LoginComponent";
 
+jest.mock("next/navigation", () => ({ useRouter: jest.fn() }));
+
 describe("LoginComponentコンポーネントのテスト", () => {
   test("フォームの内容が空の場合、エラーメッセージが表示すること", async () => {
     render(<LoginComponent />);

@@ -1,17 +1,6 @@
-.login {
-  position: relative;
-  height: 100vh;
-}
-
 .main {
+  margin: 5% auto;
   display: flex;
-  align-items: stretch;
-  align-items: flex-start;
   width: 70%;
-  position: absolute;
-  top: 53%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: #d9d9d9;
-  justify-content: space-between;
 }

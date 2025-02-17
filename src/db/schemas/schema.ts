@@ -1,18 +1,12 @@
 import { sql } from "drizzle-orm";
-import {
-  boolean,
-  date,
-  integer,
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  unique,
-} from "drizzle-orm/pg-core";
+import { boolean, date, pgTable, text, timestamp, unique } from "drizzle-orm/pg-core";
+
+// シーケンスを `TEXT` 型で管理（連番を `TEXT` で保存）
+const nextTextId = (tableName: string) => sql`nextval('${tableName}_id_seq')::text`;
 
 // テーブルの定義
 export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
+  id: text("id").primaryKey().default(nextTextId("users")).notNull(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
   password: text("password").notNull(),
@@ -24,8 +18,8 @@ export const users = pgTable("users", {
 export const search_conditions = pgTable(
   "search_conditions",
   {
-    id: serial("id").primaryKey(),
-    users_id: integer("users_id")
+    id: text("id").primaryKey().default(nextTextId("search_conditions")).notNull(),
+    users_id: text("users_id")
       .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
       .notNull(),
     condition_name: text("condition_name").notNull(),
@@ -37,14 +31,13 @@ export const search_conditions = pgTable(
     updated_at: timestamp("updated_at").defaultNow(),
   },
   (table) => ({
-    // １人のユーザーが同じ名前の検索条件を持つことをゆるさない
     uniqueSearchCondition: unique().on(table.users_id, table.condition_name),
   }),
 );
 
 export const purchase_history = pgTable("purchase_history", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
+  id: text("id").primaryKey().default(nextTextId("purchase_history")).notNull(),
+  users_id: text("users_id")
     .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
     .notNull(),
   item_price: text("item_price").notNull(),
@@ -58,8 +51,8 @@ export const purchase_history = pgTable("purchase_history", {
 });
 
 export const look_history = pgTable("look_history", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
+  id: text("id").primaryKey().default(nextTextId("look_history")).notNull(),
+  users_id: text("users_id")
     .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
     .notNull(),
   item_code: text("item_code").notNull(),
@@ -68,8 +61,8 @@ export const look_history = pgTable("look_history", {
 });
 
 export const favorite_item = pgTable("favorite_item", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
+  id: text("id").primaryKey().default(nextTextId("favorite_item")).notNull(),
+  users_id: text("users_id")
     .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
     .notNull(),
   item_code: text("item_code").notNull(),
@@ -78,8 +71,8 @@ export const favorite_item = pgTable("favorite_item", {
 });
 
 export const favorite_shop = pgTable("favorite_shop", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
+  id: text("id").primaryKey().default(nextTextId("favorite_shop")).notNull(),
+  users_id: text("users_id")
     .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
     .notNull(),
   shop_code: text("shop_code").notNull(),
@@ -88,8 +81,8 @@ export const favorite_shop = pgTable("favorite_shop", {
 });
 
 export const cart = pgTable("cart", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
+  id: text("id").primaryKey().default(nextTextId("cart")).notNull(),
+  users_id: text("users_id")
     .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
     .notNull(),
   item_code: text("item_code").notNull(),
