@@ -2,24 +2,12 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
 import UserEdit from "@/components/user/UserEdit/UserEdit";
-import { redisClient } from "@/lib/redis/redis";
-import { getUserInfo } from "@/utils/apiFunc";
-import { getTokenFromCookie } from "@/utils/cookie";
+import { checkAuth, getUserInfo } from "@/utils/apiFunc";
 
 const UserEditPage = async () => {
-  const sessionId = await getTokenFromCookie();
-  if (!sessionId) {
-    return <UnauthorizedAccess />;
-  }
-
-  const userIdJason = await redisClient.get(`sessionId:${sessionId}`);
-  if (!userIdJason) {
-    return <UnauthorizedAccess />;
-  }
-
-  const userId = JSON.parse(userIdJason).userId;
-  if (!userId) {
-    return <UnauthorizedAccess />;
+  const userId = await checkAuth();
+  if(!userId) {
+    return <UnauthorizedAccess />
   }
 
   const userDataJson = await getUserInfo(userId);

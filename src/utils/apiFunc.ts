@@ -1,5 +1,7 @@
 import type { FavConditionProps } from "@/types/search/search";
 import type { EditUserProps, LoginProps } from "@/types/user/user";
+import { getTokenFromCookie } from "./cookie";
+import { redisClient } from "@/lib/redis/redis";
 
 // 新着アイテムの取得関数
 export const getNewItems = async () => {
@@ -229,5 +231,23 @@ export const getUserInfo = async (userId: string) => {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
+  }
+};
+
+// セッションIDをcookieから取得し、ユーザーIDをredisから取得する非同期関数
+export const checkAuth = async () => {
+  const sessionId = await getTokenFromCookie();
+  if (!sessionId) {
+    return false;
+  }
+
+  const userIdJason = await redisClient.get(`sessionId:${sessionId}`);
+  if (!userIdJason) {
+    return false;
+  }
+
+  const userId = JSON.parse(userIdJason).userId;
+  if (!userId) {
+    return false;
   }
 };
