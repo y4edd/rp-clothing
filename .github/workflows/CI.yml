@@ -7,6 +7,13 @@ jobs:
   run-nextjs-ci:
     runs-on: ubuntu-latest
 
+    # Redis をサービスとしてセットアップ
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+
     strategy:
       matrix:
         node-version: [20.x]
@@ -25,18 +32,19 @@ jobs:
     - name: Install Dependencies
       run: yarn install
     
-    # githubの環境変数を読み取る
+    # 環境変数をセットアップ（.env ファイルの作成）
     - name: Set up .env
       run: |
         echo "DATABASE_URL=${{ secrets.RAKUTEN_API_ID }}" > .env
+        echo "REDIS_URL=redis://127.0.0.1:6379" >> .env  # Redis の環境変数を追加
 
-    # localhost:3000サーバーを起動
+    # Next.js サーバーを起動（バックグラウンド実行）
     - name: Start Next.js server
       run: yarn dev &
       env:
         PORT: 3000
 
-    # サーバー起動まで待機
+    # サーバーが起動するまで待機（最大 30 秒）
     - name: Wait for localhost:3000
       run: |
         echo "Waiting for server to start..."
@@ -53,6 +61,10 @@ jobs:
     # コードの品質チェックを行い、ルール違反がないか確認する
     - name: Check Lint
       run: yarn biome check
+
+    # キャッシュを削除
+    - name: cache delete
+      run: yarn cache clean
 
     # Next.js のビルドを実行して、アプリケーションをビルドできるか確認する
     - name: Build

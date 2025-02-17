@@ -34,7 +34,6 @@ const DeleteModal = () => {
 
   // 削除ボタンを押したときの処理
   const handleDelete = async () => {
-    setErrorMessage("");
     try {
       await deleteCondition(searchConditionId);
       router.push("/mypage/searchCondition");

@@ -36,6 +36,20 @@
       "when": 1738916775460,
       "tag": "0004_huge_sleeper",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1739502566022,
+      "tag": "0005_lethal_angel",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1739502769405,
+      "tag": "0006_magical_mystique",
+      "breakpoints": true
     }
   ]
 }

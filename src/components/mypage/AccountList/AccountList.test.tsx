@@ -3,6 +3,7 @@ import AccountList from "./AccountList";
 
 jest.mock("@/components/mypage/ActionButton/ActionButton", () => () => <div>ActionButton</div>);
 jest.mock("@/components/mypage/ActionLink/ActionLink", () => () => <div>ActionLink</div>);
+jest.mock("next/navigation", () => ({ useRouter: jest.fn() }));
 
 describe("AccountListコンポーネントのテスト", () => {
   test("テキストが正常に表示されていることを確認", () => {

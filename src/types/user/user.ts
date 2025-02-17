@@ -19,4 +19,5 @@ export type EditUserProps = {
   name: string;
   email: string;
   password: string;
+  birthDay: string;
 };
