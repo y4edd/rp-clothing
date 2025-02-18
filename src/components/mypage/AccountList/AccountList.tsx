@@ -39,7 +39,7 @@ const AccountList = () => {
       <div className={styles.contentList}>
         <h2 className={styles.title}>アカウント関連</h2>
         <ActionLink
-          linkPath="/user"
+          linkPath="/user/edit"
           textArray={["ユーザー情報", "確認・変更"]}
           MUIicon={<PersonIcon sx={{ fontSize: ICON_SIZE }} />}
         />

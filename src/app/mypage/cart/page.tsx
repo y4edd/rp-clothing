@@ -18,10 +18,10 @@ const Cart = () => {
         <table className={styles.table}>
           <thead>
             <tr className={styles.conditionTitleContainer}>
-              <td className={styles.listTitle}>商品情報</td>
-              <td className={styles.listTitle}>販売店舗</td>
-              <td className={styles.listTitle}>数量</td>
-              <td className={styles.listTitle}>削除</td>
+              <td className={styles.itemInfo}>商品情報</td>
+              <td className={styles.itemShop}>販売店舗</td>
+              <td className={styles.quantity}>数量</td>
+              <td className={styles.delete}>削除</td>
             </tr>
           </thead>
           <tbody>
