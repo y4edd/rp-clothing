@@ -10,12 +10,12 @@ const FavoriteList = () => {
     <div className={styles.contentList}>
       <h2 className={styles.title}>お気に入り関連</h2>
       <ActionLink
-        linkPath="/mypage/favorite/item"
+        linkPath="/mypage/favoriteItem"
         textArray={["お気に入り", "アイテム・ショップ"]}
         MUIicon={<FavoriteBorderIcon sx={{ fontSize: ICON_SIZE }} />}
       />
       <ActionLink
-        linkPath="/mypage/favorite/searchCondition"
+        linkPath="/mypage/searchCondition"
         textArray={["お気に入り条件"]}
         MUIicon={<TuneIcon sx={{ fontSize: ICON_SIZE }} />}
       />
