@@ -1,7 +1,7 @@
+import CartItem from "@/components/cart/CartItem/CartItem";
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import styles from "./page.module.css";
-import CartItem from "@/components/cart/CartItem/CartItem";
 
 const Cart = () => {
   return (
@@ -30,7 +30,7 @@ const Cart = () => {
         </table>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Cart;
