@@ -1,6 +1,6 @@
 import Image from "next/image";
-import styles from "./CartItem.module.css";
 import DeleteCartButton from "../DeleteCartButton/DeleteCartButton";
+import styles from "./CartItem.module.css";
 
 const CartItem = () => {
   return (
@@ -23,12 +23,8 @@ const CartItem = () => {
             <dd>2000円</dd>
           </dl>
         </td>
-        <td className={styles.itemShop}>
-          2ndStreetコートジボワール店
-        </td>
-        <td className={styles.itemQuantity}>
-          1
-        </td>
+        <td className={styles.itemShop}>2ndStreetコートジボワール店</td>
+        <td className={styles.itemQuantity}>1</td>
         <td className={styles.deleteButton}>
           <DeleteCartButton />
         </td>
@@ -51,12 +47,8 @@ const CartItem = () => {
             <dd>2000円</dd>
           </dl>
         </td>
-        <td className={styles.itemShop}>
-          2ndStreetコートジボワール店
-        </td>
-        <td className={styles.itemQuantity}>
-          1
-        </td>
+        <td className={styles.itemShop}>2ndStreetコートジボワール店</td>
+        <td className={styles.itemQuantity}>1</td>
         <td className={styles.deleteButton}>
           <DeleteCartButton />
         </td>
@@ -79,18 +71,14 @@ const CartItem = () => {
             <dd>2000円</dd>
           </dl>
         </td>
-        <td className={styles.itemShop}>
-          2ndStreetコートジボワール店
-        </td>
-        <td className={styles.itemQuantity}>
-          1
-        </td>
+        <td className={styles.itemShop}>2ndStreetコートジボワール店</td>
+        <td className={styles.itemQuantity}>1</td>
         <td className={styles.deleteButton}>
           <DeleteCartButton />
         </td>
       </tr>
     </>
-  )
-}
+  );
+};
 
 export default CartItem;
