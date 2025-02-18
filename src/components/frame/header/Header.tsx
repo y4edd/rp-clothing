@@ -1,4 +1,4 @@
-import CartButton from "@/components/cart/CartButton/CartButton";
+import CartButton from "../../cart/CartButton/CartButton";
 import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteButton";
 import SearchButton from "@/components/search/SearchButton/SearchButton";
 import Link from "next/link";
