@@ -1,8 +1,8 @@
 import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteButton";
 import SearchButton from "@/components/search/SearchButton/SearchButton";
 import Link from "next/link";
-import WordSearch from "../../search/WordSearch/WordSearch";
 import CartButton from "../../cart/CartButton/CartButton";
+import WordSearch from "../../search/WordSearch/WordSearch";
 import styles from "./Header.module.css";
 
 const Header = () => {
