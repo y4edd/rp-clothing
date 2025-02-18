@@ -1,7 +1,7 @@
+import ToCartButton from "@/components/cart/ToCartButton/ToCartButton";
 import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteButton";
 import SearchButton from "@/components/search/SearchButton/SearchButton";
 import Link from "next/link";
-import CartButton from "../../cart/CartButton/CartButton";
 import WordSearch from "../../search/WordSearch/WordSearch";
 import styles from "./Header.module.css";
 
@@ -29,7 +29,7 @@ const Header = () => {
           </Link>
           <ToFavoriteButton />
           <SearchButton />
-          <CartButton />
+          <ToCartButton />
         </div>
       </div>
     </>
