@@ -161,26 +161,8 @@ export const postLogout = async () => {
   }
 };
 
-// クライアントサイドから、cookieの中のトークンを取得
-export const getSessionId = async (
-  setToken: (token: string | null) => void,
-  setLoading: (loading: boolean) => void,
-) => {
-  try {
-    const res = await fetch("http://localhost:3000/api/user/token");
-    const data = await res.json();
+// クライアントサイドから、cookieのsessionIdを取得し、
 
-    if (!res.ok) {
-      setLoading(false);
-      return;
-    }
-    setToken(data.sessionId);
-  } catch (err) {
-    console.error(err);
-  } finally {
-    setLoading(false);
-  }
-};
 
 // アカウントを削除する非同期関数
 export const deleteUser = async () => {
