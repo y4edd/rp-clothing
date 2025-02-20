@@ -65,7 +65,7 @@ export const POST = async (req: NextRequest) => {
     }
 
     // redirect先をバックエンドより指定
-    const response = NextResponse.redirect(new URL("/",req.url ));
+    const response = NextResponse.redirect(new URL("/", req.url));
     response.cookies.set("sessionId", sessionId, cookieOpt);
 
     return response;

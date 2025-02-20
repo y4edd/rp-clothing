@@ -161,8 +161,26 @@ export const postLogout = async () => {
   }
 };
 
-// クライアントサイドから、cookieのsessionIdを取得し、
+// クライアントサイドにおいて、api内でcookieからsessionIdを取得し、redisよりuserIdを取得する非同期関数
+export const fetchUserId = async (): Promise<{ userId: string | null; error: string | null }> => {
+  try {
+    const res = await fetch("http://localhost:3000/api/user/token", {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+    });
 
+    if (!res.ok) {
+      return { userId: null, error: null };
+    }
+
+    const data = await res.json();
+    return { userId: data.userId, error: null };
+  } catch (err) {
+    console.error(err);
+    return { userId: null, error: "サーバーエラーが発生しました" };
+  }
+};
 
 // アカウントを削除する非同期関数
 export const deleteUser = async () => {

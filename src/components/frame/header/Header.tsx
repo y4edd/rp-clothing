@@ -3,11 +3,12 @@
 import ToCartButton from "@/components/cart/ToCartButton/ToCartButton";
 import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteButton";
 import SearchButton from "@/components/search/SearchButton/SearchButton";
+import { fetchUserId } from "@/utils/apiFunc";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import WordSearch from "../../search/WordSearch/WordSearch";
 import styles from "./Header.module.css";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [userId, setUserId] = useState<string | null>(null);
@@ -18,34 +19,18 @@ const Header = () => {
   // それを再レンダリングのきっかけに使う
   const pathname = usePathname();
 
-  // ユーザー情報を取得する関数
-  const fetchUserId = async () => {
-    try {
-      const res = await fetch("http://localhost:3000/api/user/token", {
-        method: "GET",
-        credentials: "include",
-        cache: "no-store",
-      });
-
-      if (!res.ok) {
-        setUserId(null);
-        return;
-      }
-
-      const data = await res.json();
-      setUserId(data.userId);
-    } catch (err) {
-      console.error("API 呼び出しエラー:", err);
-      setError("サーバーエラーが発生しました");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   // 初回マウントとルート変更時に発火
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
-    setLoading(true);
-    fetchUserId();
+    const getUserId = async () => {
+      setLoading(true);
+      const { userId, error } = await fetchUserId();
+      setUserId(userId);
+      setError(error);
+      setLoading(false);
+    };
+
+    getUserId();
   }, [pathname]);
 
   return (

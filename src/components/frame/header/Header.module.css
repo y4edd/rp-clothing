@@ -28,7 +28,8 @@
   gap: 1.5rem;
 }
 
-.mypage, .login {
+.mypage,
+.login {
   font-size: 1.5rem;
   text-decoration: none;
 }
