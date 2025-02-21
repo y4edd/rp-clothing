@@ -16,8 +16,8 @@ import styles from "./SearchModal.module.css";
 
 type SearchModalProps = {
   userId: string;
-}
-const SearchModal = ({userId}: SearchModalProps) => {
+};
+const SearchModal = ({ userId }: SearchModalProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(reducer, searchParams, initialState);
@@ -36,6 +36,7 @@ const SearchModal = ({userId}: SearchModalProps) => {
   }, [searchParams]);
 
   // 初回レンダリングと同時にお気に入り条件を取得する
+  // biome-ignore lint/correctness/useExhaustiveDependencies: 検索条件の取得のため
   useEffect(() => {
     const fetchConditions = async () => {
       const response = await getCondition(userId);

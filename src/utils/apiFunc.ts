@@ -79,7 +79,7 @@ export const editCondition = async (
   userId: string,
 ) => {
   req.searchConditionId = searchConditionId;
-  req.userId = userId; 
+  req.userId = userId;
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "PATCH",
@@ -118,7 +118,7 @@ export const deleteCondition = async (searchConditionId: number, userId: string)
   const request = {
     searchConditionId: searchConditionId,
     userId: userId,
-  }
+  };
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "DELETE",

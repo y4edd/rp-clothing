@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { search_conditions } from "@/db/schemas/schema";
 import { eq } from "drizzle-orm";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 // 検索条件を取得する(リクエストでuser_idは受け取る必要がある)
 export const POST = async (request: NextRequest) => {

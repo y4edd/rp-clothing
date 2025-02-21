@@ -2,7 +2,7 @@ import RegisterModal from "@/components/favorite/Condition/RegisterModal/Registe
 import { checkAuth } from "@/utils/chechAuth";
 import { Suspense } from "react";
 
-const Page = async() => {
+const Page = async () => {
   const userId = await checkAuth();
   return (
     // useclientを宣言していても、Next.jsはpage.tsxをSSRで事前レンダリングしようとするため、Suspenseで囲む

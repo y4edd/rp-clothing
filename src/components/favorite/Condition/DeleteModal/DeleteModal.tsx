@@ -10,9 +10,9 @@ import styles from "./DeleteModal.module.css";
 
 type DeleteModalProps = {
   userId: string;
-}
+};
 
-const DeleteModal = ({userId}: DeleteModalProps) => {
+const DeleteModal = ({ userId }: DeleteModalProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");

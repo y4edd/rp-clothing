@@ -22,7 +22,10 @@ export const POST = async (req: NextRequest) => {
     .select()
     .from(search_conditions)
     .where(
-      and(eq(search_conditions.users_id, userId), eq(search_conditions.condition_name, conditionName)),
+      and(
+        eq(search_conditions.users_id, userId),
+        eq(search_conditions.condition_name, conditionName),
+      ),
     );
 
   if (existingItem.length > 0) {
@@ -50,8 +53,15 @@ export const POST = async (req: NextRequest) => {
 export const PATCH = async (req: NextRequest) => {
   // MEMO: ユーザーIDが必要
   const request = await req.json();
-  const { searchConditionId, conditionName, minPrice, maxPrice, selectedCategory, keyWord, userId } =
-    request;
+  const {
+    searchConditionId,
+    conditionName,
+    minPrice,
+    maxPrice,
+    selectedCategory,
+    keyWord,
+    userId,
+  } = request;
 
   // 検索条件の名前が重複していたらエラーを返す
   const existingItem = await db

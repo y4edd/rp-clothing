@@ -13,9 +13,9 @@ import styles from "./RegisterModal.module.css";
 
 type RegisterModalProps = {
   userId: string;
-}
+};
 
-const RegisterModal = ({userId}: RegisterModalProps) => {
+const RegisterModal = ({ userId }: RegisterModalProps) => {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
