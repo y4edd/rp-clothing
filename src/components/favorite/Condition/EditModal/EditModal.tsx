@@ -13,9 +13,9 @@ import styles from "./EditModal.module.css";
 
 type EditModalProps = {
   userId: string;
-}
+};
 
-const EditModal: React.FC<EditModalProps> = ({userId}: EditModalProps) => {
+const EditModal: React.FC<EditModalProps> = ({ userId }: EditModalProps) => {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
