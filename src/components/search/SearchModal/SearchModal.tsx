@@ -14,7 +14,10 @@ import { useEffect, useMemo, useReducer, useState } from "react";
 import SearchFavConditions from "../SearchFavConditions/SearchFavConditions";
 import styles from "./SearchModal.module.css";
 
-const SearchModal = () => {
+type SearchModalProps = {
+  userId: string;
+};
+const SearchModal = ({ userId }: SearchModalProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(reducer, searchParams, initialState);
@@ -35,14 +38,14 @@ const SearchModal = () => {
   // 初回レンダリングと同時にお気に入り条件を取得する
   useEffect(() => {
     const fetchConditions = async () => {
-      const response = await getCondition();
+      const response = await getCondition(userId);
       if (response) {
         const res: FavConditionProps[] = await response.json();
         setFavConditions(res);
       }
     };
     fetchConditions();
-  }, []);
+  }, [userId]);
 
   // stateの変更をリアルタイムでqueryに反映
   const query = useMemo(() => {

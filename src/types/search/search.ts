@@ -52,4 +52,5 @@ export type FavConditionProps = {
   selectedCategory?: string;
   keyWord?: string;
   condition?: FavConditionProps;
+  userId?: string;
 };

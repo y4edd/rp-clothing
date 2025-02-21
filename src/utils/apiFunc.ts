@@ -56,7 +56,8 @@ export async function getItemDetail(itemCode: string) {
 }
 
 // 検索条件を保存する非同期関数
-export const postCondition = async (req: FavConditionProps) => {
+export const postCondition = async (req: FavConditionProps, userId: string) => {
+  req.userId = userId;
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "POST",
@@ -75,9 +76,10 @@ export const postCondition = async (req: FavConditionProps) => {
 export const editCondition = async (
   req: FavConditionProps,
   searchConditionId: number | undefined,
+  userId: string,
 ) => {
   req.searchConditionId = searchConditionId;
-
+  req.userId = userId;
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "PATCH",
@@ -91,11 +93,12 @@ export const editCondition = async (
 };
 
 // 検索条件を取得する非同期関数
-export const getCondition = async () => {
+export const getCondition = async (userId: string) => {
   try {
-    const response = await fetch("http://localhost:3000/api/condition", {
-      method: "GET",
+    const response = await fetch("http://localhost:3000/api/condition/getByToken", {
+      method: "POST",
       cache: "no-cache",
+      body: userId,
     });
 
     if (!response.ok) {
@@ -111,12 +114,16 @@ export const getCondition = async () => {
 };
 
 // 検索条件を削除する非同期関数
-export const deleteCondition = async (req: number) => {
+export const deleteCondition = async (searchConditionId: number, userId: string) => {
+  const request = {
+    searchConditionId: searchConditionId,
+    userId: userId,
+  };
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(req),
+      body: JSON.stringify(request),
     });
     return response;
   } catch (err) {

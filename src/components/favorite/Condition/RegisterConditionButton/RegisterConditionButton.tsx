@@ -8,7 +8,7 @@ const RegisterConditionButton = () => {
   const router = useRouter();
 
   const toRegisterCondition = () => {
-    router.push("/mypage/searchCondition/register");
+    router.push("/mypage/search/condition/register");
   };
 
   return (
