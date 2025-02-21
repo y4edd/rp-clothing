@@ -1,10 +1,14 @@
-import type { FavConditionProps } from "@/types/search/search";
 import { getCondition } from "@/utils/apiFunc";
 import ConditionEditButtons from "../ConditionEditButtons/ConditionEditButtons";
 import styles from "./FavConditions.module.css";
+import { FavConditionProps } from "@/types/search/search";
 
-const FavConditions = async () => {
-  const response = await getCondition();
+type FavConditionsProps = {
+  userId: string;
+} 
+
+const FavConditions = async ({userId}: FavConditionsProps) => {
+  const response = await getCondition(userId);
 
   // API が失敗した場合のエラーチェック
   if (!response || !response.ok) {

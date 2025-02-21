@@ -21,12 +21,12 @@ const ConditionEditButtons: React.FC<searchConditionIdProps> = ({ condition }) =
     <>
       <dl className={styles.buttons}>
         <dd className={styles.editButton}>
-          <Link href={`/mypage/searchCondition/edit?${queryString}`} className={styles.white}>
+          <Link href={`/mypage/search/condition/edit?${queryString}`} className={styles.white}>
             編集
           </Link>
         </dd>
         <dd className={styles.deleteButton}>
-          <Link href={`/mypage/searchCondition/delete?${queryString}`} className={styles.white}>
+          <Link href={`/mypage/search/condition/delete?${queryString}`} className={styles.white}>
             削除
           </Link>
         </dd>
