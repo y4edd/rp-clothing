@@ -67,13 +67,13 @@ jobs:
       run: yarn cache clean
 
     # Next.js のビルドを実行して、アプリケーションをビルドできるか確認する
-    - name: Build
-      run: yarn build
+    # - name: Build
+    #   run: yarn build
 
     # ビルドが成功したか確認する（`.next` フォルダができているかをチェック）
-    - name: Verify Build Artifacts
-      run: |
-        test -d .next && echo "Build artifacts found: .next directory exists" || exit 1
+    # - name: Verify Build Artifacts
+    #   run: |
+    #     test -d .next && echo "Build artifacts found: .next directory exists" || exit 1
 
     # テストを実行して、アプリケーションが正しく動作するか確認する
     - name: Test

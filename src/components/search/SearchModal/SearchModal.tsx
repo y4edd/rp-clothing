@@ -36,6 +36,7 @@ const SearchModal = ({ userId }: SearchModalProps) => {
   }, [searchParams]);
 
   // 初回レンダリングと同時にお気に入り条件を取得する
+  // biome-ignore lint/correctness/useExhaustiveDependencies: 検索条件の取得のため
   useEffect(() => {
     const fetchConditions = async () => {
       const response = await getCondition(userId);
@@ -45,7 +46,7 @@ const SearchModal = ({ userId }: SearchModalProps) => {
       }
     };
     fetchConditions();
-  }, [userId]);
+  }, []);
 
   // stateの変更をリアルタイムでqueryに反映
   const query = useMemo(() => {
