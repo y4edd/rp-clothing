@@ -8,9 +8,7 @@ jest.mock("@/utils/apiFunc", () => ({
 }));
 
 describe("FavConditions", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+  const userIdMock = "29";
 
   test("正常にデータを取得し、条件一覧を表示する", async () => {
     const mockData = [
@@ -29,10 +27,9 @@ describe("FavConditions", () => {
       json: async () => mockData,
     });
 
-    const fav = await FavConditions();
-    render(fav);
+    // 非同期関数を直接呼び出さず、Reactコンポーネントとしてレンダリング
+    render(<FavConditions userId={userIdMock} />);
 
-    // データが表示されるのを待つ
     await waitFor(() => {
       expect(screen.getByText("セール")).toBeInTheDocument();
       expect(screen.getByText("1000〜5000円")).toBeInTheDocument();
@@ -44,8 +41,7 @@ describe("FavConditions", () => {
   test("API が失敗した場合、エラーメッセージが表示される", async () => {
     (getCondition as jest.Mock).mockResolvedValue({ ok: false });
 
-    const fav = await FavConditions();
-    render(fav);
+    render(<FavConditions userId={userIdMock} />);
 
     await waitFor(() => {
       expect(screen.getByText("データの取得に失敗しました。")).toBeInTheDocument();
@@ -55,8 +51,8 @@ describe("FavConditions", () => {
   test("API が `undefined` を返した場合、エラーメッセージが表示される", async () => {
     (getCondition as jest.Mock).mockResolvedValue(undefined);
 
-    const fav = await FavConditions();
-    render(fav);
+    // 非同期関数を直接呼ばない
+    render(<FavConditions userId={userIdMock} />);
 
     await waitFor(() => {
       expect(screen.getByText("データの取得に失敗しました。")).toBeInTheDocument();

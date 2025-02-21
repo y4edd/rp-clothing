@@ -29,7 +29,7 @@ describe("ConditionEditButtonsコンポーネントのテスト", () => {
     const editLink = screen.getByRole("link", { name: "編集" });
 
     const expectedUrl =
-      "/mypage/searchCondition/edit?searchConditionId=47&conditionName=566&minPrice=4000";
+      "/mypage/search/condition/edit?searchConditionId=47&conditionName=566&minPrice=4000";
 
     expect(editLink).toHaveAttribute("href", expectedUrl);
   });
@@ -40,7 +40,7 @@ describe("ConditionEditButtonsコンポーネントのテスト", () => {
     const deleteLink = screen.getByRole("link", { name: "削除" });
 
     const expectedUrl =
-      "/mypage/searchCondition/delete?searchConditionId=47&conditionName=566&minPrice=4000";
+      "/mypage/search/condition/delete?searchConditionId=47&conditionName=566&minPrice=4000";
 
     expect(deleteLink).toHaveAttribute("href", expectedUrl);
   });
