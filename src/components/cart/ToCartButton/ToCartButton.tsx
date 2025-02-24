@@ -3,7 +3,7 @@
 import Icon from "@/components/utils/headerIcon/Icon";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-const CartButton = () => {
+const ToCartButton = () => {
   const toCart = () => {
     console.log("カートボタンがクリックされました");
   };
@@ -14,4 +14,4 @@ const CartButton = () => {
   );
 };
 
-export default CartButton;
+export default ToCartButton;

@@ -1,4 +1,4 @@
-import CartButton from "@/components/cart/cartButton/CartButton";
+import ToCartButton from "@/components/cart/ToCartButton/ToCartButton";
 import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteButton";
 import SearchButton from "@/components/search/SearchButton/SearchButton";
 import Link from "next/link";
@@ -29,7 +29,7 @@ const Header = () => {
           </Link>
           <ToFavoriteButton />
           <SearchButton />
-          <CartButton />
+          <ToCartButton />
         </div>
       </div>
     </>

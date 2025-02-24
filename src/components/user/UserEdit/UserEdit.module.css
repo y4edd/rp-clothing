@@ -8,6 +8,6 @@
 }
 
 .errorMessage {
-  align-items: center;
+  text-align: center;
   color: red;
 }
