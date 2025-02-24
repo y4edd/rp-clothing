@@ -231,3 +231,20 @@ export const getUserInfo = async (userId: string) => {
     });
   }
 };
+
+// ユーザーIdを元にカート内の商品を取得する非同期関数（引数：userId）
+export const getCartItems = async (userId: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/items/cartItems", {
+      method: "POST",
+      body: JSON.stringify(userId),
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+}
