@@ -2,12 +2,10 @@ import CartItem from "@/components/cart/CartItem/CartItem";
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import styles from "./page.module.css";
-import { checkAuth } from "@/utils/chechAuth";
 import { getCartItems } from "@/utils/apiFunc";
 
 const Cart = async() => {
-  const userId = await checkAuth();
-  const cartItems = await getCartItems(userId);
+  const cartItems = await getCartItems();
   return (
     <>
       <BreadList

@@ -233,11 +233,27 @@ export const getUserInfo = async (userId: string) => {
 };
 
 // ユーザーIdを元にカート内の商品を取得する非同期関数（引数：userId）
-export const getCartItems = async (userId: string) => {
+export const getCartItems = async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/items/cartItems", {
+    const response = await fetch("http://localhost:3000/api/cart_items", {
+      method: "GET",
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+}
+
+// カートに商品を追加する非同期関数（引数：itemCode）
+export const postCart = async (itemCode: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/cart_items", {
       method: "POST",
-      body: JSON.stringify(userId),
+      body: JSON.stringify(itemCode),
     });
     return response;
   } catch (error) {
