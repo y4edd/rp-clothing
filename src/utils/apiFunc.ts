@@ -232,13 +232,18 @@ export const getUserInfo = async (userId: string) => {
   }
 };
 
-// ユーザーIdを元にカート内の商品を取得する非同期関数（引数：userId）
-export const getCartItems = async () => {
+// ユーザーIdを元にカート内の商品を取得する非同期関数
+export const getCartItems = async (userId: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/cart_items", {
       method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': `userid=${userId}`,
+      },
     });
-    return response;
+    const res = await response.json();
+    return res;
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {

@@ -3,9 +3,12 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import styles from "./page.module.css";
 import { getCartItems } from "@/utils/apiFunc";
+import { checkAuth } from "@/utils/chechAuth";
 
 const Cart = async() => {
-  const cartItems = await getCartItems();
+  const userId = await checkAuth();
+  const cartItems = await getCartItems(userId);
+  console.log(cartItems.items);
   return (
     <>
       <BreadList
@@ -27,7 +30,14 @@ const Cart = async() => {
             </tr>
           </thead>
           <tbody>
-            <CartItem />
+            {cartItems.items.map((item: any) => {
+              return (
+                <CartItem
+                  key={item.itemCode}
+                  item={item}
+                />
+              );
+            })}
           </tbody>
         </table>
       </div>

@@ -5,11 +5,13 @@ import { getTokenFromCookie } from "./cookie";
 export const checkAuth = async () => {
   const sessionId = await getTokenFromCookie();
   if (!sessionId) {
+    console.log("sessionId");
     return false;
   }
 
   const userIdJason = await redisClient.get(`sessionId:${sessionId}`);
   if (!userIdJason) {
+    console.log("useIdJason");
     return false;
   }
 
