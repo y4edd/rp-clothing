@@ -2,10 +2,12 @@
 
 import Icon from "@/components/utils/headerIcon/Icon";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useRouter } from "next/navigation";
 
 const ToCartButton = () => {
+  const router = useRouter();
   const toCart = () => {
-    console.log("カートボタンがクリックされました");
+    router.push("/cart");
   };
   return (
     <Icon type="button" onClick={toCart}>

@@ -161,24 +161,24 @@ export const postLogout = async () => {
   }
 };
 
-// クライアントサイドから、cookieの中のトークンを取得
-export const getSessionId = async (
-  setToken: (token: string | null) => void,
-  setLoading: (loading: boolean) => void,
-) => {
+// クライアントサイドにおいて、api内でcookieからsessionIdを取得し、redisよりuserIdを取得する非同期関数
+export const fetchUserId = async (): Promise<{ userId: string | null; error: string | null }> => {
   try {
-    const res = await fetch("http://localhost:3000/api/user/token");
-    const data = await res.json();
+    const res = await fetch("http://localhost:3000/api/user/token", {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+    });
 
     if (!res.ok) {
-      setLoading(false);
-      return;
+      return { userId: null, error: null };
     }
-    setToken(data.sessionId);
+
+    const data = await res.json();
+    return { userId: data.userId, error: null };
   } catch (err) {
     console.error(err);
-  } finally {
-    setLoading(false);
+    return { userId: null, error: "サーバーエラーが発生しました" };
   }
 };
 
