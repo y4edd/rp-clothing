@@ -36,6 +36,7 @@ const UserEdit = ({ userData }: UserEditProps) => {
     if (!res.ok) {
       setServerError(res.message);
     }
+    
     return;
   };
 

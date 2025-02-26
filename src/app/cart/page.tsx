@@ -8,7 +8,6 @@ import { checkAuth } from "@/utils/chechAuth";
 const Cart = async() => {
   const userId = await checkAuth();
   const cartItems = await getCartItems(userId);
-  console.log(cartItems.items);
   return (
     <>
       <BreadList
@@ -35,6 +34,7 @@ const Cart = async() => {
                 <CartItem
                   key={item.itemCode}
                   item={item}
+                  userId={userId}
                 />
               );
             })}

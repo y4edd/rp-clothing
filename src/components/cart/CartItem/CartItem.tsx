@@ -15,9 +15,10 @@ type cartItemObj = {
 
 type CartItemProps = {
   item: cartItemObj;
+  userId: string
 }
 
-const CartItem = ({item}: CartItemProps) => {
+const CartItem = ({item,userId}: CartItemProps) => {
   const name = item.itemName;
   const trimmedName = name.length > 10 ? name.slice(0, 10) + "..." : name;
   return (
@@ -43,7 +44,7 @@ const CartItem = ({item}: CartItemProps) => {
         <td className={styles.itemShop}><Link href={item.shopUrl}>{item.shopName}</Link></td>
         <td className={styles.itemQuantity}>1</td>
         <td className={styles.deleteButton}>
-          <DeleteCartButton />
+          <DeleteCartButton itemCode={item.itemCode} userId={userId} />
         </td>
       </tr>
     </>
