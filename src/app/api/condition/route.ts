@@ -54,14 +54,8 @@ export const POST = async (req: NextRequest) => {
 export const PATCH = async (req: NextRequest) => {
   // MEMO: ユーザーIDが必要
   const request = await req.json();
-  const {
-    searchConditionId,
-    conditionName,
-    minPrice,
-    maxPrice,
-    selectedCategory,
-    keyWord,
-  } = request.req;
+  const { searchConditionId, conditionName, minPrice, maxPrice, selectedCategory, keyWord } =
+    request.req;
   const userId = request.userId;
 
   // 検索条件の名前が重複していたらエラーを返す

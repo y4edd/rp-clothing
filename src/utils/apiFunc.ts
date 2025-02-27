@@ -61,7 +61,7 @@ export const postCondition = async (req: FavConditionProps, userId: string) => {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({req, userId}),
+      body: JSON.stringify({ req, userId }),
     });
     return response;
   } catch (err) {
@@ -82,7 +82,7 @@ export const editCondition = async (
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({req, userId}),
+      body: JSON.stringify({ req, userId }),
     });
     return response;
   } catch (err) {
@@ -117,7 +117,7 @@ export const deleteCondition = async (searchConditionId: number, userId: string)
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({searchConditionId, userId}),
+      body: JSON.stringify({ searchConditionId, userId }),
     });
     return response;
   } catch (err) {
