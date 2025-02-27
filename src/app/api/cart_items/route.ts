@@ -76,6 +76,11 @@ export const GET = async (request: NextRequest) => {
       })
     );
 
+    // itemが空の配列の場合、nullを返し別のコンポーネントが表示されるように
+    if(item.length === 0) {
+      return NextResponse.json(null, { status: 200 });
+    }
+
     return NextResponse.json({ items: item }, { status: 200 });
   } catch (error) {
     console.error(error);
