@@ -172,8 +172,6 @@ export const postLogout = async () => {
 export const fetchUserId = async (): Promise<{ userId: string | null; error: string | null }> => {
   try {
     const res = await fetch("http://localhost:3000/api/user/token", {
-      method: "GET",
-      credentials: "include",
       cache: "no-store",
     });
 
