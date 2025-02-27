@@ -115,15 +115,11 @@ export const getCondition = async (userId: string) => {
 
 // 検索条件を削除する非同期関数
 export const deleteCondition = async (searchConditionId: number, userId: string) => {
-  const request = {
-    searchConditionId: searchConditionId,
-    userId: userId,
-  };
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(request),
+      body: JSON.stringify({searchConditionId, userId}),
     });
     return response;
   } catch (err) {
