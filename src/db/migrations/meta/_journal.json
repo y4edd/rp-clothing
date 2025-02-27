@@ -50,6 +50,13 @@
       "when": 1739502769405,
       "tag": "0006_magical_mystique",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1740641058308,
+      "tag": "0007_groovy_susan_delgado",
+      "breakpoints": true
     }
   ]
 }
