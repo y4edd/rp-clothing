@@ -1,12 +1,12 @@
 import { relations } from "drizzle-orm/relations";
 import {
-  users,
-  searchConditions,
-  purchaseHistory,
-  lookHistory,
+  cart,
   favoriteItem,
   favoriteShop,
-  cart,
+  lookHistory,
+  purchaseHistory,
+  searchConditions,
+  users,
 } from "./schema";
 
 export const searchConditionsRelations = relations(searchConditions, ({ one }) => ({

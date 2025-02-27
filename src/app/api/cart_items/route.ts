@@ -1,9 +1,10 @@
 import { db } from "@/db";
 import { cart } from "@/db/schemas/schema";
+import type { CartItem } from "@/types/cart_item/cart_item";
 import { checkAuth } from "@/utils/chechAuth";
 import axios from "axios";
 import { and, eq } from "drizzle-orm";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {
   const userIdString = request.headers.get("Cookie");
@@ -26,13 +27,13 @@ export const GET = async (request: NextRequest) => {
       .where(eq(cart.users_id, userId));
 
     // cartItemCodesという配列を作らなきゃいけない。
-    // formatItemに対し、各アイテムの量を追加する必要がある。
-    let cartItemCodes: string[] = [];
+    // formatItemに対し、各アイテムの量を追加。
+    const cartItemCodes: string[] = [];
     cartItems.map((cartItem) => {
       cartItemCodes.push(cartItem.itemCode);
     });
 
-    let item: any[] = [];
+    const item: CartItem[] = [];
     const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
     const applicationId = process.env.RAKUTEN_API_ID;
 
@@ -79,11 +80,8 @@ export const GET = async (request: NextRequest) => {
           } else {
             console.error(`下記アイテムコードに該当する商品は存在しません: ${itemCode}`);
           }
-        } catch (error: any) {
-          console.error(
-            `アイテムの取得に失敗しました "${itemCode}":`,
-            error.response?.data || error.message,
-          );
+        } catch (error) {
+          console.error(`アイテムの取得に失敗しました "${itemCode}":`, error);
         }
       }),
     );
@@ -118,7 +116,7 @@ export const POST = async (request: NextRequest) => {
       .from(cart)
       .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
 
-    if (cartItem.length = 0) {
+    if (cartItem.length === 0) {
       await db
         .update(cart)
         .set({ quantity: cartItem[0].quantity + selectedQquantity })

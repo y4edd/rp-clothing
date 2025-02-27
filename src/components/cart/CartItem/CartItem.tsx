@@ -1,7 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import DeleteCartButton from "../DeleteCartButton/DeleteCartButton";
 import styles from "./CartItem.module.css";
-import Link from "next/link";
 
 type cartItemObj = {
   itemName: string;
@@ -21,7 +21,7 @@ type CartItemProps = {
 
 const CartItem = ({ item, userId }: CartItemProps) => {
   const name = item.itemName;
-  const trimmedName = name.length > 10 ? name.slice(0, 10) + "..." : name;
+  const trimmedName = name.length > 10 ? `${name.slice(0, 10)} ...` : name;
   return (
     <>
       <tr className={styles.cartItem}>

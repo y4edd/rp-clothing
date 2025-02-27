@@ -1,8 +1,8 @@
 "use client";
 
+import Button from "@/components/utils/button/Button";
 import { deleteItem } from "@/utils/actions";
 import styles from "./DeleteCartButton.module.css";
-import Button from "@/components/utils/button/Button";
 
 type DeleteCartButtonProps = {
   itemCode: string;

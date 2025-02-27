@@ -1,15 +1,14 @@
 import {
-  pgTable,
-  unique,
-  serial,
-  text,
+  boolean,
   date,
-  timestamp,
   foreignKey,
   integer,
-  boolean,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  unique,
 } from "drizzle-orm/pg-core";
-import { sql } from "drizzle-orm";
 
 export const users = pgTable(
   "users",

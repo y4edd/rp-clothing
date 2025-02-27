@@ -1,10 +1,10 @@
 "use client";
 import Button from "@/components/utils/button/Button";
 import btnStyles from "@/components/utils/button/Button.module.css";
-import styles from "./SelectQuantity.module.css";
-import { postCart } from "@/utils/apiFunc";
 import { showErrorToast, showToast } from "@/components/utils/toast/toast";
+import { postCart } from "@/utils/apiFunc";
 import { useState } from "react";
+import styles from "./SelectQuantity.module.css";
 
 type SelectQuantityProps = {
   itemCode: string;

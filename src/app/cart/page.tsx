@@ -1,11 +1,22 @@
 import CartItem from "@/components/cart/CartItem/CartItem";
-import BreadList from "@/components/frame/breadList/BreadList";
-import PageTitle from "@/components/frame/pageTitle/PageTitle";
-import styles from "./page.module.css";
-import { getCartItems } from "@/utils/apiFunc";
-import { checkAuth } from "@/utils/chechAuth";
 import NoCartItems from "@/components/cart/NoCartItems/NoCartItems";
 import TotalPrice from "@/components/cart/TotalPrice/TotalPrice";
+import BreadList from "@/components/frame/breadList/BreadList";
+import PageTitle from "@/components/frame/pageTitle/PageTitle";
+import { getCartItems } from "@/utils/apiFunc";
+import { checkAuth } from "@/utils/chechAuth";
+import styles from "./page.module.css";
+
+type CartItemObj = {
+  itemName: string;
+  itemCode: string;
+  itemPrice: number;
+  itemImage: string;
+  shopCode: string;
+  shopName: string;
+  shopUrl: string;
+  quantity: number;
+};
 
 const Cart = async () => {
   try {
@@ -50,7 +61,7 @@ const Cart = async () => {
               </tr>
             </thead>
             <tbody>
-              {cartItems.items.map((item: any) => (
+              {cartItems.items.map((item: CartItemObj) => (
                 <CartItem key={item.itemCode} item={item} userId={userId} />
               ))}
             </tbody>
@@ -71,7 +82,9 @@ const Cart = async () => {
           ]}
         />
         <PageTitle title="ショッピングカート" />
-        <p style={{ textAlign: "center", color: "red" }}>エラーが発生しました。再度お試しください。</p>
+        <p style={{ textAlign: "center", color: "red" }}>
+          エラーが発生しました。再度お試しください。
+        </p>
       </>
     );
   }

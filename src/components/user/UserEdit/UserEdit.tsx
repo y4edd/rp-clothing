@@ -1,11 +1,11 @@
 "use client";
 import type { EditUserProps } from "@/types/user/user";
 import { editUser } from "@/utils/apiFunc";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import EditForm from "./EditForm/EditForm";
 import styles from "./UserEdit.module.css";
-import { useRouter } from "next/navigation";
 
 type UserData = {
   name: string;
