@@ -11,7 +11,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useReducer, useState } from "react";
 import styles from "./RegisterModal.module.css";
 
-const RegisterModal: React.FC = () => {
+type RegisterModalProps = {
+  userId: string;
+};
+
+const RegisterModal = ({ userId }: RegisterModalProps) => {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
@@ -56,7 +60,7 @@ const RegisterModal: React.FC = () => {
               buttonType="register"
               state={state}
               validate={validateConditionName}
-              // searchConditionId={searchConditionId}
+              userId={userId}
             />
             <div className={styles.errorMessage}>{errorMessage}</div>
           </div>

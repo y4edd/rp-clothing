@@ -3,10 +3,12 @@ import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import SearchFilters from "@/components/search/SearchFilters/SearchFilters";
 import SearchModal from "@/components/search/SearchModal/SearchModal";
 import type { SearchParamsProps } from "@/types/search/search";
+import { checkAuth } from "@/utils/chechAuth";
 import SearchResults from "../../components/search/SearchResults/SearchResults";
 
 const Search = async ({ searchParams }: { searchParams?: Promise<SearchParamsProps> }) => {
   const params = searchParams ? await searchParams : undefined;
+  const userId = await checkAuth();
 
   return (
     <>
@@ -17,7 +19,7 @@ const Search = async ({ searchParams }: { searchParams?: Promise<SearchParamsPro
         ]}
       />
       <PageTitle title="検索結果" />
-      <SearchModal />
+      <SearchModal userId={userId} />
       <SearchFilters searchParams={params} />
       <SearchResults searchParams={params} />
     </>
