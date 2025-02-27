@@ -90,8 +90,9 @@ export const POST = async (request: NextRequest) => {
       return NextResponse.json({message: "ユーザーIDが取得できませんでした。"}, {status: 400});
     }
     const itemCode = await request.text();
+    const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, '');
     // カートに商品を追加
-    await db.insert(cart).values({users_id: userId, item_code: itemCode}).execute();
+    await db.insert(cart).values({users_id: userId, item_code: decodedItemCode}).execute();
     return NextResponse.json({message: "商品をカートに追加しました。"}, {status: 200});
   }catch(error){
     console.error(error);

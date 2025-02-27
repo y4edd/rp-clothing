@@ -12,10 +12,8 @@ type SelectQuantityProps = {
 const SelectQuantity = ({itemCode}: SelectQuantityProps) => {
   // 数量選択の配列を生成　生成させる大きさを変えるにはlength部分を変える
   const quantities: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
-  const decodedItemCode = decodeURIComponent(itemCode);
 
   const handleCart = async() => {
-    console.log("itemCode", decodedItemCode);
     const response = await postCart(itemCode);
     const res = await response.json();
 
