@@ -237,8 +237,8 @@ export const getCartItems = async (userId: string) => {
     const response = await fetch("http://localhost:3000/api/cart_items", {
       method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Cookie': `userid=${userId}`,
+        "Content-Type": "application/json",
+        Cookie: `userid=${userId}`,
       },
     });
     const res = await response.json();
@@ -250,14 +250,14 @@ export const getCartItems = async (userId: string) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};
 
 // カートに商品を追加する非同期関数（引数：itemCode,selectedQuantity）
 export const postCart = async (itemCode: string, selectedQuantity: number) => {
   try {
     const response = await fetch("http://localhost:3000/api/cart_items", {
       method: "POST",
-      body: JSON.stringify({itemCode, selectedQuantity}),
+      body: JSON.stringify({ itemCode, selectedQuantity }),
     });
     return response;
   } catch (error) {
@@ -267,4 +267,4 @@ export const postCart = async (itemCode: string, selectedQuantity: number) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};

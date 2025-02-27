@@ -10,10 +10,8 @@ type DeleteCartButtonProps = {
 };
 
 const DeleteCartButton = ({ itemCode, userId }: DeleteCartButtonProps) => {
-
-  const handleDelete = async() => {
-    const response = await deleteItem(itemCode, userId);
-    console.log(response);
+  const handleDelete = async () => {
+    await deleteItem(itemCode, userId);
   };
 
   return (

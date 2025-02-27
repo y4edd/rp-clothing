@@ -7,9 +7,8 @@ import { revalidatePath } from "next/cache";
 
 // カートから商品を削除する関数
 export const deleteItem = async (itemCode: string, userId: string) => {
-
   try {
-    await db.delete(cart).where(and(eq(cart.item_code, itemCode),eq(cart.users_id, userId)));
+    await db.delete(cart).where(and(eq(cart.item_code, itemCode), eq(cart.users_id, userId)));
     revalidatePath("/");
   } catch (error) {
     console.error("削除エラー:", error);

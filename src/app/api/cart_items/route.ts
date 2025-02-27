@@ -12,7 +12,7 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({ message: "ユーザーIDが取得できませんでした。" }, { status: 400 });
   }
 
-  const userId = Number(userIdString.split('=')[1]);
+  const userId = Number(userIdString.split("=")[1]);
 
   if (!userId) {
     return NextResponse.json({ message: "ユーザーIDが取得できませんでした。" }, { status: 400 });
@@ -23,15 +23,14 @@ export const GET = async (request: NextRequest) => {
     const cartItems = await db
       .select({ itemCode: cart.item_code, quantity: cart.quantity })
       .from(cart)
-      .where(eq(cart.users_id, userId))
-    ;
+      .where(eq(cart.users_id, userId));
 
     // cartItemCodesという配列を作らなきゃいけない。
     // formatItemに対し、各アイテムの量を追加する必要がある。
-    let cartItemCodes:string[] = [];
+    let cartItemCodes: string[] = [];
     cartItems.map((cartItem) => {
       cartItemCodes.push(cartItem.itemCode);
-    })
+    });
 
     let item: any[] = [];
     const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -41,10 +40,10 @@ export const GET = async (request: NextRequest) => {
     await Promise.all(
       cartItemCodes.map(async (cartItemCode, index) => {
         // itemCodeをデコードし、余計な「""」を排除
-        const itemCode = decodeURIComponent(cartItemCode).replace(/^"|"$/g, '');
+        const itemCode = decodeURIComponent(cartItemCode).replace(/^"|"$/g, "");
 
         try {
-           // 楽天APIの制約により、リクエストを1秒遅延させる
+          // 楽天APIの制約により、リクエストを1秒遅延させる
           await delay(index * 1000);
 
           const response = await axios.get(
@@ -56,7 +55,7 @@ export const GET = async (request: NextRequest) => {
                 availability: 1,
                 elements: "itemName,itemCode,mediumImageUrls,itemPrice,shopName,shopCode,shopUrl",
               },
-            }
+            },
           );
 
           // レスポンスがある場合、商品情報を取得
@@ -81,13 +80,16 @@ export const GET = async (request: NextRequest) => {
             console.error(`下記アイテムコードに該当する商品は存在しません: ${itemCode}`);
           }
         } catch (error: any) {
-          console.error(`アイテムの取得に失敗しました "${itemCode}":`, error.response?.data || error.message);
+          console.error(
+            `アイテムの取得に失敗しました "${itemCode}":`,
+            error.response?.data || error.message,
+          );
         }
-      })
+      }),
     );
 
     // itemが空の配列の場合、nullを返し別のコンポーネントが表示されるように
-    if(item.length === 0) {
+    if (item.length === 0) {
       return NextResponse.json(null, { status: 200 });
     }
 
@@ -102,46 +104,36 @@ export const POST = async (request: NextRequest) => {
   const req = await request.json();
   const userIdString = await checkAuth();
   const userId = Number(userIdString);
-  try{
-    if(!userId){
-      return NextResponse.json({message: "ユーザーIDが取得できませんでした。"}, {status: 400});
+  try {
+    if (!userId) {
+      return NextResponse.json({ message: "ユーザーIDが取得できませんでした。" }, { status: 400 });
     }
     const itemCode = req.itemCode;
-    const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, '');
+    const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, "");
     const selectedQquantity = req.selectedQuantity;
 
     // カートに同じ商品があれば、数量を更新
     const cartItem = await db
       .select()
       .from(cart)
-      .where(
-        and(
-          eq(cart.users_id, userId),
-          eq(cart.item_code, decodedItemCode)
-        )
-      )
-    ;
+      .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
 
-    if(cartItem) {
+    if (cartItem.length = 0) {
       await db
         .update(cart)
-        .set({quantity: cartItem[0].quantity + selectedQquantity})
-        .where(
-          and(
-            eq(cart.users_id, userId),
-            eq(cart.item_code, decodedItemCode)
-          )
-        )
-      ;
-      return NextResponse.json({message: "商品をカートに追加しました。"}, {status: 200});
-    }else {
+        .set({ quantity: cartItem[0].quantity + selectedQquantity })
+        .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
+      return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
+    } else {
       // カートに商品を追加
-      await db.insert(cart).values({users_id: userId, item_code: decodedItemCode, quantity: selectedQquantity}).execute();
-      return NextResponse.json({message: "商品をカートに追加しました。"}, {status: 200});
+      await db
+        .insert(cart)
+        .values({ users_id: userId, item_code: decodedItemCode, quantity: selectedQquantity })
+        .execute();
+      return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
     }
-
-  }catch(error){
+  } catch (error) {
     console.error(error);
-    return NextResponse.json({message: "商品をカートに追加できませんでした。"}, {status: 400});
+    return NextResponse.json({ message: "商品をカートに追加できませんでした。" }, { status: 400 });
   }
-}
+};

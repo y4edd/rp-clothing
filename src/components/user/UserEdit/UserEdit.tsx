@@ -40,7 +40,7 @@ const UserEdit = ({ userData }: UserEditProps) => {
     }
     setTimeout(() => {
       router.push("/user");
-    },500);
+    }, 500);
     return;
   };
 

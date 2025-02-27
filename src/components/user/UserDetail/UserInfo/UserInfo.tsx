@@ -42,7 +42,6 @@ const UserInfo = async () => {
       <dt>パスワード</dt>
       <dd>**********</dd>
     </dl>
-
   );
 };
 

@@ -12,14 +12,14 @@ type cartItemObj = {
   shopName: string;
   shopUrl: string;
   quantity: number;
-}
+};
 
 type CartItemProps = {
   item: cartItemObj;
-  userId: string
-}
+  userId: string;
+};
 
-const CartItem = ({item,userId}: CartItemProps) => {
+const CartItem = ({ item, userId }: CartItemProps) => {
   const name = item.itemName;
   const trimmedName = name.length > 10 ? name.slice(0, 10) + "..." : name;
   return (
@@ -37,12 +37,16 @@ const CartItem = ({item,userId}: CartItemProps) => {
           </figure>
           <dl className={styles.itemInfoDetail}>
             <dt className={styles.itemName}>商品名：</dt>
-            <dd className={styles.itemName}><Link href={`http://localhost:3000/item/${item.itemCode}`}>{trimmedName}</Link></dd>
+            <dd className={styles.itemName}>
+              <Link href={`http://localhost:3000/item/${item.itemCode}`}>{trimmedName}</Link>
+            </dd>
             <dt className={styles.itemPrice}>価格：</dt>
-            <dd>{item.itemPrice}円</dd>
+            <dd>{item.itemPrice.toLocaleString()}円</dd>
           </dl>
         </td>
-        <td className={styles.itemShop}><Link href={item.shopUrl}>{item.shopName}</Link></td>
+        <td className={styles.itemShop}>
+          <Link href={item.shopUrl}>{item.shopName}</Link>
+        </td>
         <td className={styles.itemQuantity}>{item.quantity}</td>
         <td className={styles.deleteButton}>
           <DeleteCartButton itemCode={item.itemCode} userId={userId} />
