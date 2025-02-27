@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { cart } from "@/db/schemas/schema";
 import { checkAuth } from "@/utils/chechAuth";
 import axios from "axios";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {
@@ -100,17 +100,46 @@ export const GET = async (request: NextRequest) => {
 
 export const POST = async (request: NextRequest) => {
   const req = await request.json();
-  const userId = await checkAuth();
+  const userIdString = await checkAuth();
+  const userId = Number(userIdString);
   try{
     if(!userId){
       return NextResponse.json({message: "ユーザーIDが取得できませんでした。"}, {status: 400});
     }
     const itemCode = req.itemCode;
     const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, '');
-    const quantity = req.selectedQuantity;
-    // カートに商品を追加
-    await db.insert(cart).values({users_id: userId, item_code: decodedItemCode, quantity: quantity}).execute();
-    return NextResponse.json({message: "商品をカートに追加しました。"}, {status: 200});
+    const selectedQquantity = req.selectedQuantity;
+
+    // カートに同じ商品があれば、数量を更新
+    const cartItem = await db
+      .select()
+      .from(cart)
+      .where(
+        and(
+          eq(cart.users_id, userId),
+          eq(cart.item_code, decodedItemCode)
+        )
+      )
+    ;
+
+    if(cartItem) {
+      await db
+        .update(cart)
+        .set({quantity: cartItem[0].quantity + selectedQquantity})
+        .where(
+          and(
+            eq(cart.users_id, userId),
+            eq(cart.item_code, decodedItemCode)
+          )
+        )
+      ;
+      return NextResponse.json({message: "商品をカートに追加しました。"}, {status: 200});
+    }else {
+      // カートに商品を追加
+      await db.insert(cart).values({users_id: userId, item_code: decodedItemCode, quantity: selectedQquantity}).execute();
+      return NextResponse.json({message: "商品をカートに追加しました。"}, {status: 200});
+    }
+
   }catch(error){
     console.error(error);
     return NextResponse.json({message: "商品をカートに追加できませんでした。"}, {status: 400});

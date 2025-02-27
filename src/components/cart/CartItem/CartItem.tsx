@@ -22,7 +22,6 @@ type CartItemProps = {
 const CartItem = ({item,userId}: CartItemProps) => {
   const name = item.itemName;
   const trimmedName = name.length > 10 ? name.slice(0, 10) + "..." : name;
-  console.log(item);
   return (
     <>
       <tr className={styles.cartItem}>
