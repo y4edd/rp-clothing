@@ -57,12 +57,11 @@ export async function getItemDetail(itemCode: string) {
 
 // 検索条件を保存する非同期関数
 export const postCondition = async (req: FavConditionProps, userId: string) => {
-  req.userId = userId;
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(req),
+      body: JSON.stringify({req, userId}),
     });
     return response;
   } catch (err) {
@@ -79,12 +78,11 @@ export const editCondition = async (
   userId: string,
 ) => {
   req.searchConditionId = searchConditionId;
-  req.userId = userId;
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(req),
+      body: JSON.stringify({req, userId}),
     });
     return response;
   } catch (err) {

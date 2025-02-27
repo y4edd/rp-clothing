@@ -40,10 +40,10 @@ const RegisterButton: React.FC<RegisterButtonProps> = ({
         return;
       }
       const res = await response.json();
-      setServerError(res.message);
-      if (response.ok) {
-        router.push("/mypage/search/condition");
+      if (!response.ok) {
+        setServerError(res.message);;
       }
+      router.push("/mypage/search/condition")
     } catch (err) {
       console.error(err);
     }

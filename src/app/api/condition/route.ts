@@ -8,7 +8,8 @@ import { type NextRequest, NextResponse } from "next/server";
 export const POST = async (req: NextRequest) => {
   // MEMO: ユーザーIDが必要
   const request = await req.json();
-  const { conditionName, minPrice, maxPrice, selectedCategory, keyWord, userId } = request;
+  const { conditionName, minPrice, maxPrice, selectedCategory, keyWord } = request.req;
+  const userId = request.userId;
 
   // すでに５件登録されていたら、エラーを発生させる
   const conditionCount = await db.select({ count: count() }).from(search_conditions);
@@ -60,8 +61,8 @@ export const PATCH = async (req: NextRequest) => {
     maxPrice,
     selectedCategory,
     keyWord,
-    userId,
-  } = request;
+  } = request.req;
+  const userId = request.userId;
 
   // 検索条件の名前が重複していたらエラーを返す
   const existingItem = await db
