@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import EditForm from "./EditForm/EditForm";
 import styles from "./UserEdit.module.css";
+import { useRouter } from "next/navigation";
 
 type UserData = {
   name: string;
@@ -18,6 +19,7 @@ type UserEditProps = {
 
 const UserEdit = ({ userData }: UserEditProps) => {
   const [serverError, setServerError] = useState();
+  const router = useRouter();
   const {
     register,
     formState: { errors },
@@ -36,7 +38,9 @@ const UserEdit = ({ userData }: UserEditProps) => {
     if (!res.ok) {
       setServerError(res.message);
     }
-    
+    setTimeout(() => {
+      router.push("/user");
+    },500);
     return;
   };
 

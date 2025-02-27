@@ -55,7 +55,7 @@ const EditForm = ({ register, errors, handleSubmit, birthDay }: Prop) => {
         errors={errors.password?.message}
       >
         <input
-          type="password"
+          type="text"
           id="password"
           {...register("password", {
             required: errorMessages.password.require,
