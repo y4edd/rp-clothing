@@ -1,10 +1,10 @@
 import type { ItemDetailModel } from "@/types/item/item";
+import { type History, addHistory } from "@/utils/addHistory";
 import { getItemDetail } from "@/utils/apiFunc";
 import ItemDescription from "./ItemDescription/ItemDescription";
 import styles from "./ItemDetail.module.css";
 import ItemInfo from "./ItemInfo/ItemInfo";
 import NoItem from "./NoItem/NoItem";
-import { addHistory, History } from "@/utils/addHistory";
 
 type Props = {
   itemCode: string;
@@ -16,10 +16,10 @@ const ItemDetail = async ({ itemCode, history }: Props) => {
   if (!itemData) return <NoItem />;
 
   await addHistory(history);
-  
+
   return (
-    <div className={styles.container} >
-      <ItemInfo itemData={itemData}  />
+    <div className={styles.container}>
+      <ItemInfo itemData={itemData} />
       <ItemDescription description={itemData.itemCaption} />
     </div>
   );

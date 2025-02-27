@@ -25,7 +25,7 @@ const ItemDetailPage = async ({ params }: ItemPageProp) => {
         ]}
       />
       <PageTitle title={"商品詳細"} />
-      <ItemDetail itemCode={itemCode}  history={history}/>
+      <ItemDetail itemCode={itemCode} history={history} />
       <LookHistory />
     </>
   );

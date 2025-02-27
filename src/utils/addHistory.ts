@@ -1,7 +1,7 @@
-export type History= {
+export type History = {
   itemCode: string;
   userId: string;
-}
+};
 
 export const addHistory = async (history: History) => {
   try {
@@ -11,9 +11,10 @@ export const addHistory = async (history: History) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify(history),
-    })
+    });
     const data = await response.json();
+    console.log("data:", data);
   } catch (error) {
     console.error("エラーが発生しました", error);
   }
-}
+};

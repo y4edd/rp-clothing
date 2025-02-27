@@ -1,6 +1,6 @@
 import Item from "@/components/top/Item/Item";
+import type { History } from "@/types/history/history";
 import styles from "./WatchedList.module.css";
-import { History } from "@/types/history/history";
 
 type Props = {
   histories: History[];
@@ -8,9 +8,7 @@ type Props = {
 
 const WatchedList = ({ histories }: Props) => {
   if (!histories.length) {
-    return (
-      <p className={styles.message}>最近チェックしたアイテムがありません</p>
-    );
+    return <p className={styles.message}>最近チェックしたアイテムがありません</p>;
   }
 
   return (
@@ -18,13 +16,11 @@ const WatchedList = ({ histories }: Props) => {
       {histories.map((history: History) => {
         return (
           <Item
+            key={history.itemInfo.itemCode}
             itemCode={history.itemInfo.itemCode}
             itemName={history.itemInfo.itemName}
             itemPrice={history.itemInfo.itemPrice}
-            itemImage={history.itemInfo.mediumImageUrls[0].imageUrl.replace(
-              "128x128",
-              "250x250"
-            )}
+            itemImage={history.itemInfo.mediumImageUrls[0].imageUrl.replace("128x128", "250x250")}
           />
         );
       })}

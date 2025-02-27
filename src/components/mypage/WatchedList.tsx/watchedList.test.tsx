@@ -1,6 +1,6 @@
+import type { History } from "@/types/history/history";
 import { render, screen } from "@testing-library/react";
 import WatchedList from "./WatchedList";
-import { History } from "@/types/history/history";
 
 const mockHistories: History[] = [
   {
