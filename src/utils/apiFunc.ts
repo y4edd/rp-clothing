@@ -56,12 +56,12 @@ export async function getItemDetail(itemCode: string) {
 }
 
 // 検索条件を保存する非同期関数
-export const postCondition = async (req: FavConditionProps) => {
+export const postCondition = async (req: FavConditionProps, userId: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(req),
+      body: JSON.stringify({ req, userId }),
     });
     return response;
   } catch (err) {
@@ -75,14 +75,14 @@ export const postCondition = async (req: FavConditionProps) => {
 export const editCondition = async (
   req: FavConditionProps,
   searchConditionId: number | undefined,
+  userId: string,
 ) => {
   req.searchConditionId = searchConditionId;
-
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(req),
+      body: JSON.stringify({ req, userId }),
     });
     return response;
   } catch (err) {
@@ -91,11 +91,12 @@ export const editCondition = async (
 };
 
 // 検索条件を取得する非同期関数
-export const getCondition = async () => {
+export const getCondition = async (userId: string) => {
   try {
-    const response = await fetch("http://localhost:3000/api/condition", {
-      method: "GET",
+    const response = await fetch("http://localhost:3000/api/condition/getByToken", {
+      method: "POST",
       cache: "no-cache",
+      body: userId,
     });
 
     if (!response.ok) {
@@ -111,12 +112,12 @@ export const getCondition = async () => {
 };
 
 // 検索条件を削除する非同期関数
-export const deleteCondition = async (req: number) => {
+export const deleteCondition = async (searchConditionId: number, userId: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/condition", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(req),
+      body: JSON.stringify({ searchConditionId, userId }),
     });
     return response;
   } catch (err) {
@@ -161,24 +162,22 @@ export const postLogout = async () => {
   }
 };
 
-// クライアントサイドから、cookieの中のトークンを取得
-export const getSessionId = async (
-  setToken: (token: string | null) => void,
-  setLoading: (loading: boolean) => void,
-) => {
+// クライアントサイドにおいて、api内でcookieからsessionIdを取得し、redisよりuserIdを取得する非同期関数
+export const fetchUserId = async (): Promise<{ userId: string | null; error: string | null }> => {
   try {
-    const res = await fetch("http://localhost:3000/api/user/token");
-    const data = await res.json();
+    const res = await fetch("http://localhost:3000/api/user/token", {
+      cache: "no-store",
+    });
 
     if (!res.ok) {
-      setLoading(false);
-      return;
+      return { userId: null, error: null };
     }
-    setToken(data.sessionId);
+
+    const data = await res.json();
+    return { userId: data.userId, error: null };
   } catch (err) {
     console.error(err);
-  } finally {
-    setLoading(false);
+    return { userId: null, error: "サーバーエラーが発生しました" };
   }
 };
 

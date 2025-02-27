@@ -32,7 +32,7 @@ const SearchCondition = async () => {
             </tr>
           </thead>
           <tbody>
-            <FavConditions />
+            <FavConditions userId={userId} />
           </tbody>
         </table>
       </div>

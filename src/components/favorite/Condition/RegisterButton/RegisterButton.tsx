@@ -13,6 +13,7 @@ type RegisterButtonProps = {
   state: FavConditionProps;
   validate: () => boolean;
   searchConditionId?: number | undefined;
+  userId: string;
 };
 
 const RegisterButton: React.FC<RegisterButtonProps> = ({
@@ -20,6 +21,7 @@ const RegisterButton: React.FC<RegisterButtonProps> = ({
   state,
   validate,
   searchConditionId,
+  userId,
 }) => {
   const router = useRouter();
   const [serverError, setServerError] = useState<string>("");
@@ -31,17 +33,17 @@ const RegisterButton: React.FC<RegisterButtonProps> = ({
     try {
       const response =
         buttonType === "register"
-          ? await postCondition(state)
-          : await editCondition(state, searchConditionId);
+          ? await postCondition(state, userId)
+          : await editCondition(state, searchConditionId, userId);
 
       if (!response) {
         return;
       }
       const res = await response.json();
-      setServerError(res.message);
-      if (response.ok) {
-        router.push("/mypage/searchCondition");
+      if (!response.ok) {
+        setServerError(res.message);
       }
+      router.push("/mypage/search/condition");
     } catch (err) {
       console.error(err);
     }

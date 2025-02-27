@@ -34,7 +34,6 @@ const LoginComponent = () => {
         setLoginError(res.message || "ログインに失敗しました。");
         return;
       } else {
-        setLoginError("");
         showToast("ログインに成功しました！");
         setTimeout(() => {
           router.push("/");
