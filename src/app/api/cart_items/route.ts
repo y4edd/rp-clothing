@@ -12,7 +12,7 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({ message: "ユーザーIDが取得できませんでした。" }, { status: 400 });
   }
 
-  const userId = userIdString.split('=')[1];
+  const userId = Number(userIdString.split('=')[1]);
 
   if (!userId) {
     return NextResponse.json({ message: "ユーザーIDが取得できませんでした。" }, { status: 400 });
@@ -20,10 +20,18 @@ export const GET = async (request: NextRequest) => {
 
   try {
     // ユーザーIdを元にカート情報を取得
-    const cartItemCodes = await db
-      .select({ itemCode: cart.item_code })
+    const cartItems = await db
+      .select({ itemCode: cart.item_code, quantity: cart.quantity })
       .from(cart)
-      .where(eq(cart.users_id, userId));
+      .where(eq(cart.users_id, userId))
+    ;
+
+    // cartItemCodesという配列を作らなきゃいけない。
+    // formatItemに対し、各アイテムの量を追加する必要がある。
+    let cartItemCodes:string[] = [];
+    cartItems.map((cartItem) => {
+      cartItemCodes.push(cartItem.itemCode);
+    })
 
     let item: any[] = [];
     const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -33,7 +41,7 @@ export const GET = async (request: NextRequest) => {
     await Promise.all(
       cartItemCodes.map(async (cartItemCode, index) => {
         // itemCodeをデコードし、余計な「""」を排除
-        const itemCode = decodeURIComponent(cartItemCode.itemCode).replace(/^"|"$/g, '');
+        const itemCode = decodeURIComponent(cartItemCode).replace(/^"|"$/g, '');
 
         try {
            // 楽天APIの制約により、リクエストを1秒遅延させる
@@ -63,6 +71,8 @@ export const GET = async (request: NextRequest) => {
               shopCode: itemData.shopCode,
               shopName: itemData.shopName,
               shopUrl: itemData.shopUrl,
+              // カートに追加された商品の数量を取得
+              quantity: cartItems[index].quantity,
             };
 
             item.push(formatItem);
@@ -89,15 +99,17 @@ export const GET = async (request: NextRequest) => {
 };
 
 export const POST = async (request: NextRequest) => {
+  const req = await request.json();
   const userId = await checkAuth();
   try{
     if(!userId){
       return NextResponse.json({message: "ユーザーIDが取得できませんでした。"}, {status: 400});
     }
-    const itemCode = await request.text();
+    const itemCode = req.itemCode;
     const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, '');
+    const quantity = req.selectedQuantity;
     // カートに商品を追加
-    await db.insert(cart).values({users_id: userId, item_code: decodedItemCode}).execute();
+    await db.insert(cart).values({users_id: userId, item_code: decodedItemCode, quantity: quantity}).execute();
     return NextResponse.json({message: "商品をカートに追加しました。"}, {status: 200});
   }catch(error){
     console.error(error);

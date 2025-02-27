@@ -253,12 +253,12 @@ export const getCartItems = async (userId: string) => {
   }
 }
 
-// カートに商品を追加する非同期関数（引数：itemCode）
-export const postCart = async (itemCode: string) => {
+// カートに商品を追加する非同期関数（引数：itemCode,selectedQuantity）
+export const postCart = async (itemCode: string, selectedQuantity: number) => {
   try {
     const response = await fetch("http://localhost:3000/api/cart_items", {
       method: "POST",
-      body: JSON.stringify(itemCode),
+      body: JSON.stringify({itemCode, selectedQuantity}),
     });
     return response;
   } catch (error) {
