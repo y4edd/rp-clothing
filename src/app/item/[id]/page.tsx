@@ -2,13 +2,19 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import ItemDetail from "@/components/item/ItemDetail";
 import LookHistory from "@/components/top/LookHistoryItems/LookHistory";
+import { checkAuth } from "@/utils/chechAuth";
 
 type ItemPageProp = {
   params: Promise<{ id: string }>;
+  history: { itemCode: string; userId: string };
 };
+
 const ItemDetailPage = async ({ params }: ItemPageProp) => {
   const itemCode = (await params).id;
-  console.log(itemCode);
+  const userId = await checkAuth();
+  const itemCodeObj = { itemCode: itemCode };
+  const userIdObj = { userId: userId };
+  const history = { ...itemCodeObj, ...userIdObj };
 
   return (
     <>
@@ -19,7 +25,7 @@ const ItemDetailPage = async ({ params }: ItemPageProp) => {
         ]}
       />
       <PageTitle title={"商品詳細"} />
-      <ItemDetail itemCode={itemCode} />
+      <ItemDetail itemCode={itemCode}  history={history}/>
       <LookHistory />
     </>
   );

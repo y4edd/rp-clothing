@@ -1,0 +1,9 @@
+.container {
+  margin-bottom: 80px;
+}
+.contentTitle {
+  font-size: 1.25rem;
+  font-weight: normal;
+  text-align: center;
+  margin: 30px auto;
+}

@@ -1,12 +1,11 @@
-.container {
-  margin-bottom: 80px;
-}
-.contentTitle {
+
+.message {
   font-size: 1.25rem;
-  font-weight: normal;
+  font-weight: bold;
+  margin-bottom: 1rem;
   text-align: center;
-  margin: 30px auto;
 }
+
 .gridItems {
   max-width: 1120px;
   width: 100%;

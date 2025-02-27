@@ -26,7 +26,9 @@ const Item = ({ itemCode, itemName, itemPrice, itemImage }: ItemData) => {
             className={styles.itemImage}
           />
           <h3 className={styles.itemName}>{itemName}</h3>
-          <p className={styles.price}>金額 : ¥ {itemPrice.toLocaleString()} (税込) </p>
+          <p className={styles.price}>
+            金額 : ¥ {typeof itemPrice === "number" ? itemPrice.toLocaleString() : "価格不明"} (税込)
+          </p>
         </div>
       </Link>
       <FavoriteBUtton />

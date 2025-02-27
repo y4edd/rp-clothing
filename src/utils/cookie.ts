@@ -21,7 +21,7 @@ export const getTokenFromCookie = async () => {
 export const cookieOpt: Partial<ResponseCookie> = {
   httpOnly: true,
   secure: true,
-  sameSite: "strict",
+  sameSite: "lax",
   maxAge: COOKIE_MAX_AGE,
   path: "/",
 };
