@@ -5,11 +5,13 @@ import LookHistory from "@/components/top/LookHistoryItems/LookHistory";
 import { checkAuth } from "@/utils/chechAuth";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-const ItemDetailPage = async ({ params }: Props) => {
-  const itemCode = params.id;
+const ItemDetailPage = async ({params}: Props) => {
+  const {id} = await params;
+  // 明示された型にそろえる 
+  const itemCode = id;
   const userId = await checkAuth();
   const history = { itemCode, userId };
 
@@ -18,11 +20,11 @@ const ItemDetailPage = async ({ params }: Props) => {
       <BreadList
         bread={[
           { link: "/", title: "トップ" },
-          { link: `/item/${itemCode}`, title: "商品詳細" },
+          { link: `/item/${id}`, title: "商品詳細" },
         ]}
       />
       <PageTitle title={"商品詳細"} />
-      <ItemDetail itemCode={itemCode} history={history} />
+      <ItemDetail history={history} />
       <LookHistory />
     </>
   );

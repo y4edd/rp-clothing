@@ -13,7 +13,9 @@ export const addHistory = async (history: History) => {
       body: JSON.stringify(history),
     });
     const data = await response.json();
-    console.log("data:", data);
+    if(!data) {
+      throw new Error("データが取得できませんでした");
+    }
   } catch (error) {
     console.error("エラーが発生しました", error);
   }

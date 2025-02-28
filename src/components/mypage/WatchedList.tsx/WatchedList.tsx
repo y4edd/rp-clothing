@@ -12,11 +12,11 @@ const WatchedList = ({ histories }: Props) => {
   }
 
   return (
-    <div className={styles.gridItems}>
-      {histories.map((history: History) => {
+    <div className={styles.gridItems} >
+      {histories.map((history: History,index) => {
         return (
           <Item
-            key={history.itemInfo?.itemCode}
+            key={index}
             itemCode={history.itemInfo?.itemCode}
             itemName={history.itemInfo?.itemName}
             itemPrice={history.itemInfo?.itemPrice}

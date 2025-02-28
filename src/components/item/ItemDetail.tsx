@@ -7,11 +7,10 @@ import ItemInfo from "./ItemInfo/ItemInfo";
 import NoItem from "./NoItem/NoItem";
 
 type Props = {
-  itemCode: string;
   history: History;
 };
-const ItemDetail = async ({ itemCode, history }: Props) => {
-  const itemData: ItemDetailModel | null = await getItemDetail(itemCode);
+const ItemDetail = async ({ history }: Props) => {
+  const itemData: ItemDetailModel | null = await getItemDetail(history.itemCode);
 
   if (!itemData) return <NoItem />;
 

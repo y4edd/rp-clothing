@@ -5,11 +5,7 @@ import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/Unauthorize
 import { checkAuth } from "@/utils/chechAuth";
 import { fetchWatched } from "@/utils/fetchWatched";
 
-type Props = {
-  title: string;
-};
-
-const Watched = async ({ title }: Props) => {
+const Watched = async () => {
   const userId = await checkAuth();
 
   if (!userId) {
@@ -28,7 +24,7 @@ const Watched = async ({ title }: Props) => {
         ]}
       />
       <PageTitle title={"閲覧履歴"} />
-      <WatchedContainer title={title} histories={data?.histories || []} />
+      <WatchedContainer histories={data?.histories || []} />
     </>
   );
 };
