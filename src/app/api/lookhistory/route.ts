@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
                 availability: 1, // 販売可能
                 elements: "itemName,itemCode,mediumImageUrls,itemPrice",
               },
-            },
+            },  
           );
 
           // APIからの商品情報

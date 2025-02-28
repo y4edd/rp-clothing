@@ -16,11 +16,11 @@ const WatchedList = ({ histories }: Props) => {
       {histories.map((history: History) => {
         return (
           <Item
-            key={history.itemInfo.itemCode}
-            itemCode={history.itemInfo.itemCode}
-            itemName={history.itemInfo.itemName}
-            itemPrice={history.itemInfo.itemPrice}
-            itemImage={history.itemInfo.mediumImageUrls[0].imageUrl.replace("128x128", "250x250")}
+            key={history.itemInfo?.itemCode}
+            itemCode={history.itemInfo?.itemCode}
+            itemName={history.itemInfo?.itemName}
+            itemPrice={history.itemInfo?.itemPrice}
+            itemImage={history.itemInfo?.mediumImageUrls[0].imageUrl.replace("128x128", "250x250")}
           />
         );
       })}
