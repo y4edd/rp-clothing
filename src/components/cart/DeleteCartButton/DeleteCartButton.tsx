@@ -6,7 +6,7 @@ import styles from "./DeleteCartButton.module.css";
 
 type DeleteCartButtonProps = {
   itemCode: string;
-  userId: string;
+  userId: number;
 };
 
 const DeleteCartButton = ({ itemCode, userId }: DeleteCartButtonProps) => {

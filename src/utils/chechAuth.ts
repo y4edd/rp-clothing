@@ -5,7 +5,6 @@ import { getTokenFromCookie } from "./cookie";
 export const checkAuth = async () => {
   const sessionId = await getTokenFromCookie();
   if (!sessionId) {
-    console.log("sessionId");
     return false;
   }
 

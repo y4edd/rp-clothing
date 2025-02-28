@@ -16,7 +16,7 @@ type cartItemObj = {
 
 type CartItemProps = {
   item: cartItemObj;
-  userId: string;
+  userId: number;
 };
 
 const CartItem = ({ item, userId }: CartItemProps) => {

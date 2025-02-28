@@ -110,7 +110,7 @@ export const POST = async (request: NextRequest) => {
     const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, "");
     const selectedQquantity = req.selectedQuantity;
 
-    // カートに同じ商品があれば、数量を更新
+    // カートテーブルから商品を取得し、なければ新たに追加
     const cartItem = await db
       .select()
       .from(cart)
@@ -118,16 +118,14 @@ export const POST = async (request: NextRequest) => {
 
     if (cartItem.length === 0) {
       await db
+        .insert(cart)
+        .values({ users_id: userId, item_code: decodedItemCode, quantity: selectedQquantity });
+      return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
+    } else {
+      await db
         .update(cart)
         .set({ quantity: cartItem[0].quantity + selectedQquantity })
         .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
-      return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
-    } else {
-      // カートに商品を追加
-      await db
-        .insert(cart)
-        .values({ users_id: userId, item_code: decodedItemCode, quantity: selectedQquantity })
-        .execute();
       return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
     }
   } catch (error) {

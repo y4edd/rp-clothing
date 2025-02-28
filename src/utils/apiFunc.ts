@@ -133,8 +133,8 @@ export const login = async (data: LoginProps): Promise<Response> => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-
-    return response;
+    const res = await response.json();
+    return res;
   } catch (error) {
     console.error("エラー内容", error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {

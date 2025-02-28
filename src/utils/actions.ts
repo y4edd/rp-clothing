@@ -6,7 +6,7 @@ import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 // カートから商品を削除する関数
-export const deleteItem = async (itemCode: string, userId: string) => {
+export const deleteItem = async (itemCode: string, userId: number) => {
   try {
     await db.delete(cart).where(and(eq(cart.item_code, itemCode), eq(cart.users_id, userId)));
     revalidatePath("/");
