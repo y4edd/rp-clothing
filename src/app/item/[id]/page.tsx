@@ -4,20 +4,14 @@ import ItemDetail from "@/components/item/ItemDetail";
 import LookHistory from "@/components/top/LookHistoryItems/LookHistory";
 import { checkAuth } from "@/utils/chechAuth";
 
-type Prop = {
+type Props = {
   params: { id: string };
-  history: { itemCode: string; userId: string };
 };
 
-const ItemDetailPage = async ({ params }: Prop) => {
+const ItemDetailPage = async ({ params }: Props) => {
   const itemCode = params.id;
   const userId = await checkAuth();
   const history = { itemCode, userId };
-  // const itemCode = (params).id;
-  // const userId = await checkAuth();
-  // const itemCodeObj = { itemCode: itemCode };
-  // const userIdObj = { userId: userId };
-  // const history = { ...itemCodeObj, ...userIdObj };
 
   return (
     <>
