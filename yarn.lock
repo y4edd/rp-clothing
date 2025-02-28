@@ -5396,9 +5396,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"drizzle-kit@npm:^0.30.1":
-  version: 0.30.1
-  resolution: "drizzle-kit@npm:0.30.1"
+"drizzle-kit@npm:^0.30.4":
+  version: 0.30.4
+  resolution: "drizzle-kit@npm:0.30.4"
   dependencies:
     "@drizzle-team/brocli": "npm:^0.10.2"
     "@esbuild-kit/esm-loader": "npm:^2.5.5"
@@ -5406,13 +5406,13 @@ __metadata:
     esbuild-register: "npm:^3.5.0"
   bin:
     drizzle-kit: bin.cjs
-  checksum: 10c0/775f8e1afa85a3c8d5a86a621d130110012063d7204134fdaf494860a0913433c3a755113a71c0555009123012900bbe40b149d4e4e0eadcef953374f273922c
+  checksum: 10c0/effbf922bce693de2ab66d1e29be58b27818da7bea83804b2f8f79ceea186242a7d1d789978ca06578a97d54bcd5405253b975cd0a3b64c5b7854c943d58361e
   languageName: node
   linkType: hard
 
-"drizzle-orm@npm:^0.38.2":
-  version: 0.38.2
-  resolution: "drizzle-orm@npm:0.38.2"
+"drizzle-orm@npm:^0.39.3":
+  version: 0.39.3
+  resolution: "drizzle-orm@npm:0.39.3"
   peerDependencies:
     "@aws-sdk/client-rds-data": ">=3"
     "@cloudflare/workers-types": ">=4"
@@ -5427,7 +5427,6 @@ __metadata:
     "@tidbcloud/serverless": "*"
     "@types/better-sqlite3": "*"
     "@types/pg": "*"
-    "@types/react": ">=18"
     "@types/sql.js": "*"
     "@vercel/postgres": ">=0.8.0"
     "@xata.io/client": "*"
@@ -5439,7 +5438,6 @@ __metadata:
     mysql2: ">=2"
     pg: ">=8"
     postgres: ">=3"
-    react: ">=18"
     sql.js: ">=1"
     sqlite3: ">=5"
   peerDependenciesMeta:
@@ -5469,8 +5467,6 @@ __metadata:
       optional: true
     "@types/pg":
       optional: true
-    "@types/react":
-      optional: true
     "@types/sql.js":
       optional: true
     "@vercel/postgres":
@@ -5495,13 +5491,11 @@ __metadata:
       optional: true
     prisma:
       optional: true
-    react:
-      optional: true
     sql.js:
       optional: true
     sqlite3:
       optional: true
-  checksum: 10c0/9907de2fc7cf78b006703b91ad4428d4bb59111598af49492139f99585e5c7f0d9278b4266dc53ffcb0ea7e290db7b21f697f364389919f72b8c3dd9d139337b
+  checksum: 10c0/0b2982e03079d7868d23ffca4a95635fc49274691cbb7e7275f9e8ab580ad617d9abbf67ea052ee7304fa97cc6b063951aa16efe6946f61ee47a4c26931b2f3d
   languageName: node
   linkType: hard
 
@@ -12181,8 +12175,8 @@ __metadata:
     axios: "npm:^1.7.9"
     bcrypt: "npm:^5.1.1"
     dotenv: "npm:^16.4.7"
-    drizzle-kit: "npm:^0.30.1"
-    drizzle-orm: "npm:^0.38.2"
+    drizzle-kit: "npm:^0.30.4"
+    drizzle-orm: "npm:^0.39.3"
     generate: "npm:^0.14.0"
     identity-obj-proxy: "npm:^3.0.0"
     install: "npm:^0.13.0"

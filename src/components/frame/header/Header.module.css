@@ -1,12 +1,16 @@
 .headerContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* 真ん中基準 */
   align-items: center;
+  gap: 5rem; /* 3等分の間隔を作る */
   padding: 0 2.5rem;
 }
 
 .container {
   flex: 1;
+  display: flex;
+  justify-content: center; /* 中央配置 */
+  align-items: center;
 }
 
 .title {
@@ -19,11 +23,12 @@
 .navigationContainer {
   flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center; /* 中央配置 */
   align-items: center;
   gap: 1.5rem;
 }
 
+.mypage,
 .login {
   font-size: 1.5rem;
   text-decoration: none;

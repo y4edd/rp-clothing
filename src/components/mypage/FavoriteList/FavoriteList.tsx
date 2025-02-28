@@ -15,7 +15,7 @@ const FavoriteList = () => {
         MUIicon={<FavoriteBorderIcon sx={{ fontSize: ICON_SIZE }} />}
       />
       <ActionLink
-        linkPath="/mypage/favorite/searchCondition"
+        linkPath="/mypage/search/condition"
         textArray={["お気に入り条件"]}
         MUIicon={<TuneIcon sx={{ fontSize: ICON_SIZE }} />}
       />

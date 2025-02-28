@@ -11,7 +11,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useReducer, useState } from "react";
 import styles from "./EditModal.module.css";
 
-const EditModal: React.FC = () => {
+type EditModalProps = {
+  userId: string;
+};
+
+const EditModal: React.FC<EditModalProps> = ({ userId }: EditModalProps) => {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(registerReducer, searchParams, registerInitialState);
   const [errorMessage, setErrorMessage] = useState("");
@@ -61,6 +65,7 @@ const EditModal: React.FC = () => {
               state={state}
               validate={validateConditionName}
               searchConditionId={searchConditionId}
+              userId={userId}
             />
             <div className={styles.errorMessage}>{errorMessage}</div>
           </div>

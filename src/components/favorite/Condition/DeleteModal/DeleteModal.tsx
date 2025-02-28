@@ -8,7 +8,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import styles from "./DeleteModal.module.css";
 
-const DeleteModal = () => {
+type DeleteModalProps = {
+  userId: string;
+};
+
+const DeleteModal = ({ userId }: DeleteModalProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,8 +39,8 @@ const DeleteModal = () => {
   // 削除ボタンを押したときの処理
   const handleDelete = async () => {
     try {
-      await deleteCondition(searchConditionId);
-      router.push("/mypage/searchCondition");
+      await deleteCondition(searchConditionId, userId);
+      router.push("/mypage/search/condition");
     } catch (error) {
       console.error(error);
       setErrorMessage("削除に失敗しました。もう一度お試しください。");
