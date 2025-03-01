@@ -45,14 +45,13 @@ export const POST = async (req: NextRequest) => {
     const existingSessionId = req.cookies.get("sessionId")?.value;
     let sessionId = existingSessionId;
 
-    // 既存の sessionId がある場合、Redis のデータを更新
+    // 既存の sessionId がある場合、Redis内のcartItemはcartテーブルにPOSTし、
+    // RedisにはuserIdだけが保持される
     if (sessionId) {
-      await redisClient.set(
+      const redis = await redisClient.get(
         `sessionId:${sessionId}`,
-        JSON.stringify({ userId: userData.id }),
-        "EX",
-        REDIS_MAX_AGE,
       );
+      console.log("redis", redis);
     } else {
       // 新規に sessionId を生成し、Cookie & Redis に保存
       sessionId = uuidv4();

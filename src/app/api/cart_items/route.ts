@@ -1,10 +1,14 @@
 import { db } from "@/db";
 import { cart } from "@/db/schemas/schema";
+import { redisClient } from "@/lib/redis/redis";
 import type { CartItem } from "@/types/cart_item/cart_item";
 import { checkAuth } from "@/utils/chechAuth";
+import { cookieOpt } from "@/utils/cookie";
+import { REDIS_MAX_AGE } from "@/utils/redis";
 import axios from "axios";
 import { and, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid";
 
 export const GET = async (request: NextRequest) => {
   const userIdString = request.headers.get("Cookie");
@@ -103,12 +107,53 @@ export const POST = async (request: NextRequest) => {
   const userIdString = await checkAuth();
   const userId = Number(userIdString);
   try {
-    if (!userId) {
-      return NextResponse.json({ message: "ユーザーIDが取得できませんでした。" }, { status: 400 });
-    }
     const itemCode = req.itemCode;
     const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, "");
     const selectedQquantity = req.selectedQuantity;
+    let cartItems = [];
+
+    // 非ログであれば、一度だけredisとcookieに、ランダム生成された同一のsessionIdを渡す
+    if (!userId) {
+      // もしsessionIdがあれば同一のsessionIdをキーとしさらにカートアイテムを追加
+      // クッキーから既存の sessionId を取得
+      const existingSessionId = request.cookies.get("sessionId")?.value;
+
+      // 既存のカート情報を取得（空の場合は [] をデフォルト）
+      const cartData = await redisClient.get(`sessionId:${existingSessionId}`);
+      cartItems = cartData ? JSON.parse(cartData) : [];
+
+      // 新しい商品を追加
+      cartItems.push({ cartItem: itemCode, quantity: selectedQquantity });
+
+      // Redis に更新（リスト全体を保存）
+      await redisClient.set(
+        `sessionId:${existingSessionId}`,
+        JSON.stringify(cartItems),
+        "EX",
+        REDIS_MAX_AGE,
+      );
+
+      // sessionIdなければredisには「sessionId：hogehoge」をキーとし、
+      // 「cart:fugafuga」みたいな感じでポストする
+      if(!existingSessionId) {
+        const sessionId = uuidv4();
+        cartItems = cartData ? JSON.parse(cartData) : [];
+
+        // 新しい商品を追加
+        cartItems.push({ cartItem: itemCode, quantity: selectedQquantity });
+
+        await redisClient.set(
+          `sessionId:${sessionId}`,
+          JSON.stringify(cartItems),
+          "EX",
+          REDIS_MAX_AGE,
+        );
+        const response =  NextResponse.json({ message: "カートに商品が登録されました。" }, { status: 200 });
+        response.cookies.set("sessionId", sessionId, cookieOpt);
+        return response;
+      }
+      return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
+    };
 
     // カートテーブルから商品を取得し、なければ新たに追加
     const cartItem = await db
