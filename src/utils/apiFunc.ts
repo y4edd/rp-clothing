@@ -270,8 +270,8 @@ export const postCart = async (itemCode: string, selectedQuantity: number) => {
 };
 
 // 非ログ時、redisからカート内の商品を取得する非同期関数
-export const getSessionCartItems = async(token: string) => {
-  try{
+export const getSessionCartItems = async (token: string) => {
+  try {
     const response = await fetch("http://localhost:3000/api/session_cart_items", {
       method: "GET",
       headers: {
@@ -288,4 +288,4 @@ export const getSessionCartItems = async(token: string) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};

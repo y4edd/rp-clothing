@@ -48,9 +48,7 @@ export const POST = async (req: NextRequest) => {
     // 既存の sessionId がある場合、Redis内のcartItemはcartテーブルにPOSTし、
     // RedisにはuserIdだけが保持される
     if (sessionId) {
-      const redis = await redisClient.get(
-        `sessionId:${sessionId}`,
-      );
+      const redis = await redisClient.get(`sessionId:${sessionId}`);
       console.log("redis", redis);
     } else {
       // 新規に sessionId を生成し、Cookie & Redis に保存
@@ -63,7 +61,7 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const response = NextResponse.json({ message: "ログインに成功しました"}, { status: 200 });
+    const response = NextResponse.json({ message: "ログインに成功しました" }, { status: 200 });
     response.cookies.set("sessionId", sessionId, cookieOpt);
 
     return response;

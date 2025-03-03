@@ -5,8 +5,8 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import { getCartItems, getSessionCartItems } from "@/utils/apiFunc";
 import { checkAuth } from "@/utils/chechAuth";
-import styles from "./page.module.css";
 import { cookies } from "next/headers";
+import styles from "./page.module.css";
 
 type CartItemObj = {
   itemName: string;
@@ -19,19 +19,23 @@ type CartItemObj = {
   quantity: number;
 };
 
+type CartItems = {
+  items: CartItemObj[];
+};
+
 const Cart = async () => {
-  let cartItems;
+  let cartItems: CartItems;
   try {
     const userId = await checkAuth();
-    if(userId) {
+    if (userId) {
       console.log("ログイン中なり", userId);
       cartItems = await getCartItems(userId);
     } else {
       const cookieStore = await cookies();
       const token = cookieStore.get("sessionId");
       console.log("非ログなり");
-      if(!token) {
-        return ;
+      if (!token) {
+        return;
       }
       cartItems = await getSessionCartItems(token.value);
     }
@@ -53,6 +57,7 @@ const Cart = async () => {
       );
     }
 
+    console.log(cartItems);
     return (
       <>
         <BreadList

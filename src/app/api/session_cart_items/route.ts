@@ -1,36 +1,37 @@
 import { redisClient } from "@/lib/redis/redis";
-import { CartItem, CartItemInRedis } from "@/types/cart_item/cart_item";
+import type { CartItem, CartItemInRedis } from "@/types/cart_item/cart_item";
 import axios from "axios";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {
   // cookieからsessionIdを取得し、redisよりカート情報を取得する
   const sessionIdString = request.headers.get("Cookie");
-  if(!sessionIdString) {
-    return NextResponse.json({ message: "セッションなし。カートに商品は登録されていないようです"}, {status: 200});
+  if (!sessionIdString) {
+    return NextResponse.json(
+      { message: "セッションなし。カートに商品は登録されていないようです" },
+      { status: 200 },
+    );
   }
   const sessionId = sessionIdString.split("=")[1];
-  const redis = await redisClient.get(
-    `sessionId:${sessionId}`,
-  );
+  const redis = await redisClient.get(`sessionId:${sessionId}`);
 
-  if(!redis) {
-    return NextResponse.json({ message: "カートに商品は登録されていないようです"}, {status: 200});
+  if (!redis) {
+    return NextResponse.json(
+      { message: "カートに商品は登録されていないようです" },
+      { status: 200 },
+    );
   }
 
-  const redisObj:CartItemInRedis = JSON.parse(redis);
+  const redisObj: CartItemInRedis[] = JSON.parse(redis);
 
-  const delay = (ms: number) => new Promise((resolve) => setTimeout(
-    resolve, ms))
-  ;
+  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const applicationId = process.env.RAKUTEN_API_ID;
 
   try {
-
     const item: CartItem[] = [];
     await Promise.all(
-      redisObj.map(async(cartItemCode, index) => {
+      redisObj.map(async (cartItemCode, index) => {
         // itemCodeをデコードし、余計な「""」を排除
         const itemCode = decodeURIComponent(cartItemCode.cartItem).replace(/^"|"$/g, "");
 
@@ -83,8 +84,8 @@ export const GET = async (request: NextRequest) => {
     }
 
     return NextResponse.json({ items: item }, { status: 200 });
-  } catch(error) {
+  } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: "サーバーエラーが発生しました" },{ status: 500 });
+    return NextResponse.json({ message: "サーバーエラーが発生しました" }, { status: 500 });
   }
-}
+};
