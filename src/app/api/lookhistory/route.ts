@@ -4,7 +4,7 @@ import axios from "axios";
 import { and, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export const POST = async (req: NextRequest) => {
   const request = await req.json();
   const userId = request.userId;
   const itemCode = request.itemCode;
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 }
 
 // 取得できる
-export async function GET(req: NextRequest) {
+export const GET = async (req: NextRequest) => {
   try {
     const userIdString = req.headers.get("Cookie");
     if (!userIdString) {
