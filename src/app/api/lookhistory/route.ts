@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { look_history } from "@/db/schemas/schema";
 import axios from "axios";
-import { and, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
@@ -14,7 +14,9 @@ export const POST = async (req: NextRequest) => {
     const exitingHistory = await db
       .select()
       .from(look_history)
-      .where(and(eq(look_history.users_id, userId), eq(look_history.item_code, itemCode)));
+      .where(and(eq(look_history.users_id, userId), eq(look_history.item_code, itemCode)))
+      .orderBy(desc(look_history.updated_at))
+      
 
     //新規履歴を登録
     if (exitingHistory.length === 0) {
@@ -22,6 +24,12 @@ export const POST = async (req: NextRequest) => {
         users_id: userId,
         item_code: itemCode,
       });
+    } else {
+      //既存の履歴がある場合は更新
+      await db
+        .update(look_history)
+        .set({ updated_at: new Date() })
+        .where(and(eq(look_history.users_id, userId), eq(look_history.item_code, itemCode)));
     }
     return NextResponse.json({ message: "履歴を追加しました。" });
   } catch (error) {
