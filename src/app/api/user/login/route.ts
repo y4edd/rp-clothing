@@ -63,8 +63,7 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    // redirect先をバックエンドより指定
-    const response = NextResponse.redirect(new URL("/", req.url));
+    const response = NextResponse.json({ message: "ログインに成功しました"}, { status: 200 });
     response.cookies.set("sessionId", sessionId, cookieOpt);
 
     return response;

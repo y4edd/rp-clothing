@@ -3,9 +3,10 @@ import NoCartItems from "@/components/cart/NoCartItems/NoCartItems";
 import TotalPrice from "@/components/cart/TotalPrice/TotalPrice";
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
-import { getCartItems } from "@/utils/apiFunc";
+import { getCartItems, getSessionCartItems } from "@/utils/apiFunc";
 import { checkAuth } from "@/utils/chechAuth";
 import styles from "./page.module.css";
+import { cookies } from "next/headers";
 
 type CartItemObj = {
   itemName: string;
@@ -19,9 +20,21 @@ type CartItemObj = {
 };
 
 const Cart = async () => {
+  let cartItems;
   try {
     const userId = await checkAuth();
-    const cartItems = await getCartItems(userId);
+    if(userId) {
+      console.log("ログイン中なり", userId);
+      cartItems = await getCartItems(userId);
+    } else {
+      const cookieStore = await cookies();
+      const token = cookieStore.get("sessionId");
+      console.log("非ログなり");
+      if(!token) {
+        return ;
+      }
+      cartItems = await getSessionCartItems(token.value);
+    }
 
     // カートが空の場合
     if (!cartItems || !cartItems.items.length) {

@@ -10,3 +10,10 @@ export type CartItem = {
 };
 
 export type CartItemArr = CartItem[];
+
+export type CartItemInRedis = [
+  {
+    cartItem: string;
+    quantity: number;
+  }
+]
