@@ -126,9 +126,9 @@ export const deleteCondition = async (searchConditionId: number, userId: string)
 };
 
 // ログインを行うための非同期関数
-export const login = async (data: LoginProps): Promise<Response> => {
+export const login = async (data: LoginProps, sessionId: string): Promise<Response> => {
   try {
-    const response = await fetch("http://localhost:3000/api/user/login", {
+    const response = await fetch(`http://localhost:3000/api/user/login/${sessionId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
