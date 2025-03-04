@@ -13,7 +13,7 @@ jest.mock("next/navigation", () => ({
 }));
 
 describe("ログイン画面のテスト", () => {
-  test("各コンポーネントがレンダリングされていること", async() => {
+  test("各コンポーネントがレンダリングされていること", async () => {
     const login = await Login();
     render(login);
     const button = screen.getByRole("button", { name: "ログイン" });
