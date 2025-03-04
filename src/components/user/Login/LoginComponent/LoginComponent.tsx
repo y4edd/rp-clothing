@@ -13,9 +13,9 @@ import LoginPassword from "./LoginPassword/LoginPassword";
 
 type SessionId = {
   sessionId: string;
-}
+};
 
-const LoginComponent = ({sessionId}: SessionId) => {
+const LoginComponent = ({ sessionId }: SessionId) => {
   const router = useRouter();
   const [loginError, setLoginError] = useState("");
   const {
