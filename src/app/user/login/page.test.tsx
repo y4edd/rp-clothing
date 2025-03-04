@@ -2,6 +2,12 @@ import { screen } from "@testing-library/dom";
 import { render } from "@testing-library/react";
 import Login from "./page";
 
+jest.mock("next/headers", () => ({
+  cookies: jest.fn(() => ({
+    get: jest.fn(() => "mocked_cookie_value"),
+  })),
+}));
+
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
