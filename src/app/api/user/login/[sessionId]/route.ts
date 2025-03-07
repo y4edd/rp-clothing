@@ -7,11 +7,10 @@ import bcrypt from "bcrypt";
 import { and, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 
-type Params = {
-  params: { sessionId: string };
-};
-
-export const POST = async (request: NextRequest, { params }: Params) => {
+export const POST = async (
+  request: NextRequest,
+  { params }: { params: Promise<{ sessionId: string }> },
+) => {
   const secretKey = process.env.SECRET_KEY;
   if (!secretKey) {
     return NextResponse.json({ message: "秘密鍵が設定されていません" }, { status: 409 });
