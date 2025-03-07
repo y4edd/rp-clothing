@@ -139,7 +139,6 @@ export const POST = async (request: NextRequest) => {
         const cartData = await redisClient.get(`sessionId:${existingSessionId}`);
         cartItems = cartData ? JSON.parse(cartData) : [];
         const existingItem = cartItems.find((item) => item.cartItem === itemCode);
-        console.log(existingItem);
 
         // すでにカート内にある商品か確認
         if (existingItem) {

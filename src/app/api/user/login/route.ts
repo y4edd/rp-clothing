@@ -41,25 +41,14 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "パスワードが違います。" }, { status: 401 });
     }
 
-    // クッキーから既存の sessionId を取得
-    const existingSessionId = req.cookies.get("sessionId")?.value;
-    let sessionId = existingSessionId;
-
-    // 既存の sessionId がある場合、Redis内のcartItemはcartテーブルにPOSTし、
-    // RedisにはuserIdだけが保持される
-    if (sessionId) {
-      const redis = await redisClient.get(`sessionId:${sessionId}`);
-      console.log("redis", redis);
-    } else {
-      // 新規に sessionId を生成し、Cookie & Redis に保存
-      sessionId = uuidv4();
-      await redisClient.set(
-        `sessionId:${sessionId}`,
-        JSON.stringify({ userId: userData.id }),
-        "EX",
-        REDIS_MAX_AGE,
-      );
-    }
+    // 新規に sessionId を生成し、Cookie & Redis に保存
+    const sessionId = uuidv4();
+    await redisClient.set(
+      `sessionId:${sessionId}`,
+      JSON.stringify({ userId: userData.id }),
+      "EX",
+      REDIS_MAX_AGE,
+    );
 
     const response = NextResponse.json({ message: "ログインに成功しました" }, { status: 200 });
     response.cookies.set("sessionId", sessionId, cookieOpt);

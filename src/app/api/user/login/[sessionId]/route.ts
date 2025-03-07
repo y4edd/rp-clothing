@@ -3,6 +3,7 @@ import { cart, users } from "@/db/schemas/schema";
 import { redisClient } from "@/lib/redis/redis";
 import type { CartItemInRedis } from "@/types/cart_item/cart_item";
 import { REDIS_MAX_AGE } from "@/utils/redis";
+import bcrypt from "bcrypt";
 import { and, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -20,21 +21,29 @@ export const POST = async (request: NextRequest, { params }: Params) => {
   const { sessionId } = await params;
 
   // userIdを取得する（誰のところにカート情報を保存するか明確にする）
-
   const redis = await redisClient.get(`sessionId:${sessionId}`);
   if (!redis) return NextResponse.json({ message: "sessionIdが無効です" }, { status: 400 });
 
   const redisJSON: CartItemInRedis[] = JSON.parse(redis);
+
   try {
-    const userIdString = await db.query.users.findFirst({
-      where: and(eq(users.email, email), eq(users.password, password)),
-      columns: { id: true },
+    const userData = await db.query.users.findFirst({
+      where: eq(users.email, email),
     });
 
-    if (!userIdString) {
-      return NextResponse.json({ message: "ユーザーが見つかりませんでした" }, { status: 404 });
+    if (!userData) {
+      return NextResponse.json(
+        { message: "メールアドレスもしくはパスワードが違います。" },
+        { status: 401 },
+      );
     }
-    const userId = Number(userIdString.id);
+
+    const isMatch = await bcrypt.compare(password, userData.password);
+    if (!isMatch) {
+      return NextResponse.json({ message: "パスワードが違います。" }, { status: 401 });
+    }
+
+    const userId = Number(userData.id);
     // redisの中身をcartテーブルに移行する
     await Promise.all(
       redisJSON.map(async (cartItemObj) => {
@@ -46,7 +55,7 @@ export const POST = async (request: NextRequest, { params }: Params) => {
           .from(cart)
           .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedCartItem)));
         //ユーザーのカートに商品があれば、数量だけを更新
-        if (Array.isArray(itemDBArr)) {
+        if (itemDBArr.length) {
           itemDBArr.map(async (itemDB) => {
             if (itemDB.itemCode === decodedCartItem) {
               const sum = itemDB.quantity + quantity;
