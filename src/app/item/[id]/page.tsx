@@ -8,7 +8,6 @@ type ItemPageProp = {
 };
 const ItemDetailPage = async ({ params }: ItemPageProp) => {
   const itemCode = (await params).id;
-  console.log(itemCode);
 
   return (
     <>

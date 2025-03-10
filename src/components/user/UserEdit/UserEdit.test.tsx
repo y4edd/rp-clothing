@@ -4,6 +4,9 @@ import UserEdit from "./UserEdit";
 jest.mock("./EditForm/EditForm", () => () => {
   return <div>EditForm</div>;
 });
+
+jest.mock("next/navigation", () => ({ useRouter: jest.fn() }));
+
 describe("UserEditコンポーネントのテスト", () => {
   test("EditFormコンポーネントが表示されることを確認", () => {
     const mockUserData = {

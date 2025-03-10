@@ -7,9 +7,10 @@ import styles from "./ItemInfo.module.css";
 
 type Props = {
   itemData: ItemDetailModel;
+  itemCode: string;
 };
 
-const ItemInfo = ({ itemData }: Props) => {
+const ItemInfo = ({ itemData, itemCode }: Props) => {
   return (
     <div className={styles.container}>
       <ItemImage itemImage={itemData.itemImage} />
@@ -34,7 +35,7 @@ const ItemInfo = ({ itemData }: Props) => {
             <span className={styles.taxText}>(税込)</span>
           </dd>
         </div>
-        <SelectQuantity />
+        <SelectQuantity itemCode={itemCode} />
       </dl>
     </div>
   );

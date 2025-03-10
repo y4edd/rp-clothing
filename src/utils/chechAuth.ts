@@ -10,6 +10,7 @@ export const checkAuth = async () => {
 
   const userIdJason = await redisClient.get(`sessionId:${sessionId}`);
   if (!userIdJason) {
+    console.log("useIdJason");
     return false;
   }
 

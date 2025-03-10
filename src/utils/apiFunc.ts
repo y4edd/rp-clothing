@@ -133,8 +133,8 @@ export const login = async (data: LoginProps): Promise<Response> => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-
-    return response;
+    const res = await response.json();
+    return res;
   } catch (error) {
     console.error("エラー内容", error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
@@ -220,6 +220,44 @@ export const getUserInfo = async (userId: string) => {
     const response = await fetch("http://localhost:3000/api/user/getInfo", {
       method: "POST",
       body: JSON.stringify(userId),
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// ユーザーIdを元にカート内の商品を取得する非同期関数
+export const getCartItems = async (userId: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/cart_items", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `userid=${userId}`,
+      },
+    });
+    const res = await response.json();
+    return res;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// カートに商品を追加する非同期関数（引数：itemCode,selectedQuantity）
+export const postCart = async (itemCode: string, selectedQuantity: number) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/cart_items", {
+      method: "POST",
+      body: JSON.stringify({ itemCode, selectedQuantity }),
     });
     return response;
   } catch (error) {

@@ -1,14 +1,21 @@
 "use client";
 
 import Button from "@/components/utils/button/Button";
+import { deleteItem } from "@/utils/actions";
 import styles from "./DeleteCartButton.module.css";
 
-const DeleteCartButton = () => {
-  const handleDelete = () => {
-    console.log("削除処理実装予定");
+type DeleteCartButtonProps = {
+  itemCode: string;
+  userId: number;
+};
+
+const DeleteCartButton = ({ itemCode, userId }: DeleteCartButtonProps) => {
+  const handleDelete = async () => {
+    await deleteItem(itemCode, userId);
   };
+
   return (
-    <Button type="button" onClick={handleDelete} className={styles.black} text="カートから削除" />
+    <Button type="submit" className={styles.black} onClick={handleDelete} text={"カートから削除"} />
   );
 };
 

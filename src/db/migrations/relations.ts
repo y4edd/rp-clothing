@@ -1,61 +1,61 @@
 import { relations } from "drizzle-orm/relations";
 import {
   cart,
-  favorite_item,
-  favorite_shop,
-  look_history,
-  purchase_history,
-  search_conditions,
+  favoriteItem,
+  favoriteShop,
+  lookHistory,
+  purchaseHistory,
+  searchConditions,
   users,
-} from "../schemas/schema";
+} from "./schema";
 
-export const cartRelations = relations(cart, ({ one }) => ({
+export const searchConditionsRelations = relations(searchConditions, ({ one }) => ({
   user: one(users, {
-    fields: [cart.users_id],
+    fields: [searchConditions.usersId],
     references: [users.id],
   }),
 }));
 
 export const usersRelations = relations(users, ({ many }) => ({
+  searchConditions: many(searchConditions),
+  purchaseHistories: many(purchaseHistory),
+  lookHistories: many(lookHistory),
+  favoriteItems: many(favoriteItem),
+  favoriteShops: many(favoriteShop),
   carts: many(cart),
-  favorite_items: many(favorite_item),
-  favorite_shops: many(favorite_shop),
-  look_histories: many(look_history),
-  purchase_histories: many(purchase_history),
-  search_conditions: many(search_conditions),
 }));
 
-export const favoriteItemRelations = relations(favorite_item, ({ one }) => ({
+export const purchaseHistoryRelations = relations(purchaseHistory, ({ one }) => ({
   user: one(users, {
-    fields: [favorite_item.users_id],
+    fields: [purchaseHistory.usersId],
     references: [users.id],
   }),
 }));
 
-export const favoriteShopRelations = relations(favorite_shop, ({ one }) => ({
+export const lookHistoryRelations = relations(lookHistory, ({ one }) => ({
   user: one(users, {
-    fields: [favorite_shop.users_id],
+    fields: [lookHistory.usersId],
     references: [users.id],
   }),
 }));
 
-export const lookHistoryRelations = relations(look_history, ({ one }) => ({
+export const favoriteItemRelations = relations(favoriteItem, ({ one }) => ({
   user: one(users, {
-    fields: [look_history.users_id],
+    fields: [favoriteItem.usersId],
     references: [users.id],
   }),
 }));
 
-export const purchaseHistoryRelations = relations(purchase_history, ({ one }) => ({
+export const favoriteShopRelations = relations(favoriteShop, ({ one }) => ({
   user: one(users, {
-    fields: [purchase_history.users_id],
+    fields: [favoriteShop.usersId],
     references: [users.id],
   }),
 }));
 
-export const searchConditionsRelations = relations(search_conditions, ({ one }) => ({
+export const cartRelations = relations(cart, ({ one }) => ({
   user: one(users, {
-    fields: [search_conditions.users_id],
+    fields: [cart.usersId],
     references: [users.id],
   }),
 }));
