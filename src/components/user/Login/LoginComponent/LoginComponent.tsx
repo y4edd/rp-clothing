@@ -11,7 +11,11 @@ import styles from "./LoginComponent.module.css";
 import LoginEmail from "./LoginEmail/LoginEmail";
 import LoginPassword from "./LoginPassword/LoginPassword";
 
-const LoginComponent = () => {
+type SessionId = {
+  sessionId: string;
+};
+
+const LoginComponent = ({ sessionId }: SessionId) => {
   const router = useRouter();
   const [loginError, setLoginError] = useState("");
   const {
@@ -27,7 +31,7 @@ const LoginComponent = () => {
 
   const onSubmit = async (data: LoginProps) => {
     try {
-      const response: Response = await login(data);
+      const response: Response = await login(data, sessionId);
 
       if (!response.ok) {
         const res = await response.json();

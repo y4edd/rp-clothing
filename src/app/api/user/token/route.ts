@@ -9,7 +9,7 @@ export const GET = async () => {
     const sessionId = cookieStore.get("sessionId")?.value;
 
     if (!sessionId) {
-      return NextResponse.json({ message: "認証に失敗しました" }, { status: 401 });
+      return NextResponse.json({ message: "認証に失敗しました" }, { status: 200 });
     }
 
     // Redis から userId を取得

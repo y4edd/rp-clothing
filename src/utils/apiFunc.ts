@@ -126,15 +126,15 @@ export const deleteCondition = async (searchConditionId: number, userId: string)
 };
 
 // ログインを行うための非同期関数
-export const login = async (data: LoginProps): Promise<Response> => {
+export const login = async (data: LoginProps, sessionId: string): Promise<Response> => {
   try {
-    const response = await fetch("http://localhost:3000/api/user/login", {
+    const response = await fetch(`http://localhost:3000/api/user/login/${sessionId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    const res = await response.json();
-    return res;
+
+    return response;
   } catch (error) {
     console.error("エラー内容", error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
@@ -260,6 +260,27 @@ export const postCart = async (itemCode: string, selectedQuantity: number) => {
       body: JSON.stringify({ itemCode, selectedQuantity }),
     });
     return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// 非ログ時、redisからカート内の商品を取得する非同期関数
+export const getSessionCartItems = async (token: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/session_cart_items", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `sessionId=${token}`,
+      },
+    });
+    const res = await response.json();
+    return res;
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {

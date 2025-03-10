@@ -1,10 +1,14 @@
 import { db } from "@/db";
 import { cart } from "@/db/schemas/schema";
-import type { CartItem } from "@/types/cart_item/cart_item";
+import { redisClient } from "@/lib/redis/redis";
+import type { CartItem, CartItemInRedis } from "@/types/cart_item/cart_item";
 import { checkAuth } from "@/utils/chechAuth";
+import { cookieOpt } from "@/utils/cookie";
+import { REDIS_MAX_AGE } from "@/utils/redis";
 import axios from "axios";
 import { and, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid";
 
 export const GET = async (request: NextRequest) => {
   const userIdString = request.headers.get("Cookie");
@@ -102,30 +106,78 @@ export const POST = async (request: NextRequest) => {
   const req = await request.json();
   const userIdString = await checkAuth();
   const userId = Number(userIdString);
+  const itemCode = req.itemCode;
+  const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, "");
+  const selectedQquantity = req.selectedQuantity;
+  let cartItems: CartItemInRedis[] = [];
+
   try {
-    if (!userId) {
-      return NextResponse.json({ message: "ユーザーIDが取得できませんでした。" }, { status: 400 });
-    }
-    const itemCode = req.itemCode;
-    const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, "");
-    const selectedQquantity = req.selectedQuantity;
-
-    // カートテーブルから商品を取得し、なければ新たに追加
-    const cartItem = await db
-      .select()
-      .from(cart)
-      .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
-
-    if (cartItem.length === 0) {
-      await db
-        .insert(cart)
-        .values({ users_id: userId, item_code: decodedItemCode, quantity: selectedQquantity });
-      return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
-    } else {
-      await db
-        .update(cart)
-        .set({ quantity: cartItem[0].quantity + selectedQquantity })
+    if (userId) {
+      // カートテーブルから商品を取得し、なければ新たに追加
+      const cartItem = await db
+        .select()
+        .from(cart)
         .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
+
+      if (cartItem.length === 0) {
+        await db
+          .insert(cart)
+          .values({ users_id: userId, item_code: decodedItemCode, quantity: selectedQquantity });
+        return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
+      } else {
+        await db
+          .update(cart)
+          .set({ quantity: cartItem[0].quantity + selectedQquantity })
+          .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
+        return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
+      }
+    } else {
+      // 非ログの状態の場合、sessionIdの有無を確認する
+      // すでに商品がカート内にある場合、クッキーから既存の sessionId を取得
+      const existingSessionId = request.cookies.get("sessionId")?.value;
+      if (existingSessionId) {
+        const cartData = await redisClient.get(`sessionId:${existingSessionId}`);
+        cartItems = cartData ? JSON.parse(cartData) : [];
+        const existingItem = cartItems.find((item) => item.cartItem === itemCode);
+
+        // すでにカート内にある商品か確認
+        if (existingItem) {
+          cartItems = cartItems.map((item) => {
+            return item.cartItem === itemCode
+              ? { ...item, quantity: item.quantity + selectedQquantity }
+              : item;
+          });
+        } else {
+          // カート内にない商品の追加なら、配列に追加
+          cartItems.push({ cartItem: itemCode, quantity: selectedQquantity });
+        }
+
+        // Redis に更新（リスト全体を保存）
+        await redisClient.set(
+          `sessionId:${existingSessionId}`,
+          JSON.stringify(cartItems),
+          "EX",
+          REDIS_MAX_AGE,
+        );
+      } else {
+        // sessionIdなければredisには「sessionId：hogehoge」をキーとし、
+        // 「cart:fugafuga」みたいな感じでポストする
+        const sessionId = uuidv4();
+        cartItems.push({ cartItem: itemCode, quantity: selectedQquantity });
+
+        await redisClient.set(
+          `sessionId:${sessionId}`,
+          JSON.stringify(cartItems),
+          "EX",
+          REDIS_MAX_AGE,
+        );
+        const response = NextResponse.json(
+          { message: "カートに商品が登録されました。" },
+          { status: 200 },
+        );
+        response.cookies.set("sessionId", sessionId, cookieOpt);
+        return response;
+      }
       return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
     }
   } catch (error) {
