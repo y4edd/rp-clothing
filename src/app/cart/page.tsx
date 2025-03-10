@@ -63,8 +63,7 @@ const Cart = async () => {
         <BreadList
           bread={[
             { link: "/", title: "トップ" },
-            { link: "/mypage", title: "マイページ" },
-            { link: "/mypage/cart", title: "ショッピングカート" },
+            { link: "/cart", title: "ショッピングカート" },
           ]}
         />
         <PageTitle title="ショッピングカート" />
