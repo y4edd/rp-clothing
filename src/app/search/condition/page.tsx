@@ -4,7 +4,7 @@ import SearchFilters from "@/components/search/SearchFilters/SearchFilters";
 import SearchModal from "@/components/search/SearchModal/SearchModal";
 import SearchResults from "@/components/search/SearchResults/SearchResults";
 import type { SearchParamsProps } from "@/types/search/search";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 
 const Search = async ({ searchParams }: { searchParams?: Promise<SearchParamsProps> }) => {
   const params = searchParams ? await searchParams : undefined;

@@ -2,7 +2,7 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import MypageContents from "@/components/mypage/MypageContents/MypageContents";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 
 const MyPage = async () => {
   const userId = await checkAuth();

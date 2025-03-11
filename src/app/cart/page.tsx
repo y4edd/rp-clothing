@@ -4,7 +4,7 @@ import TotalPrice from "@/components/cart/TotalPrice/TotalPrice";
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import { getCartItems, getSessionCartItems } from "@/utils/apiFunc";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 import { cookies } from "next/headers";
 import styles from "./page.module.css";
 

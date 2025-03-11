@@ -1,5 +1,5 @@
 import RegisterModal from "@/components/favorite/Condition/RegisterModal/RegisterModal";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 import { Suspense } from "react";
 
 const Page = async () => {

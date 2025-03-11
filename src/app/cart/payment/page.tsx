@@ -2,7 +2,7 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import styles from "./page.module.css";
 import LinkBtn from "@/components/utils/link/LinkBtn";
-import PaymentButton from "@/components/payment/PaymentButton/PaymentButton";
+import CreditCardForm from "@/components/payment/CreditCardForm/CreditCardForm";
 
 const Payment = () => {
   return (
@@ -17,16 +17,13 @@ const Payment = () => {
       <PageTitle title="お支払い" />
       <div className={styles.container}>
         {/* 決済画面が埋め込まれます */}
-        <Elements stripe={stripePromise} options={options}>
-          <PaymentElement  />
-        </Elements>
+        <CreditCardForm />
         <div className={styles.buttonContainer}>
           <LinkBtn pathName="/cart" text="戻る" btnColor="white" />
-          <PaymentButton />
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Payment;

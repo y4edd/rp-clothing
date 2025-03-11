@@ -1,8 +1,9 @@
+import SelectQuantity from "@/components/item/SelectQuantity/SelectQuantity";
 import { db } from "@/db";
 import { cart } from "@/db/schemas/schema";
 import { redisClient } from "@/lib/redis/redis";
 import type { CartItem, CartItemInRedis } from "@/types/cart_item/cart_item";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 import { cookieOpt } from "@/utils/cookie";
 import { REDIS_MAX_AGE } from "@/utils/redis";
 import axios from "axios";
@@ -38,6 +39,7 @@ export const GET = async (request: NextRequest) => {
     });
 
     const item: CartItem[] = [];
+    let totalAmount = 0;
     const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
     const applicationId = process.env.RAKUTEN_API_ID;
 
@@ -66,6 +68,7 @@ export const GET = async (request: NextRequest) => {
           // レスポンスがある場合、商品情報を取得
           if (response.data.Items && response.data.Items.length > 0) {
             const itemData = response.data.Items[0].Item;
+            const quantity = cartItems[index].quantity;
 
             const formatItem = {
               itemName: itemData.itemName,
@@ -80,6 +83,8 @@ export const GET = async (request: NextRequest) => {
             };
 
             item.push(formatItem);
+
+            totalAmount += itemData.itemPrice * quantity;
             return formatItem;
           } else {
             console.error(`下記アイテムコードに該当する商品は存在しません: ${itemCode}`);
@@ -95,7 +100,7 @@ export const GET = async (request: NextRequest) => {
       return NextResponse.json(null, { status: 200 });
     }
 
-    return NextResponse.json({ items: item }, { status: 200 });
+    return NextResponse.json({ items: item, totalAmount }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "データを取得できませんでした。" }, { status: 400 });
@@ -178,6 +183,7 @@ export const POST = async (request: NextRequest) => {
         response.cookies.set("sessionId", sessionId, cookieOpt);
         return response;
       }
+
       return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
     }
   } catch (error) {

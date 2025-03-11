@@ -3,7 +3,7 @@ import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import SearchFilters from "@/components/search/SearchFilters/SearchFilters";
 import SearchModal from "@/components/search/SearchModal/SearchModal";
 import type { SearchParamsProps } from "@/types/search/search";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 import SearchResults from "../../components/search/SearchResults/SearchResults";
 
 const Search = async ({ searchParams }: { searchParams?: Promise<SearchParamsProps> }) => {

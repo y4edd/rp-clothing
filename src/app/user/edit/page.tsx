@@ -3,7 +3,7 @@ import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
 import UserEdit from "@/components/user/UserEdit/UserEdit";
 import { getUserInfo } from "@/utils/apiFunc";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 
 const UserEditPage = async () => {
   const userId = await checkAuth();
