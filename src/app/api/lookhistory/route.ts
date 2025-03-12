@@ -3,7 +3,6 @@ import { look_history } from "@/db/schemas/schema";
 import axios from "axios";
 import { and, desc, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
-import { resolve } from "path";
 
 export const POST = async (req: NextRequest) => {
   const request = await req.json();
@@ -16,8 +15,7 @@ export const POST = async (req: NextRequest) => {
       .select()
       .from(look_history)
       .where(and(eq(look_history.users_id, userId), eq(look_history.item_code, itemCode)))
-      .orderBy(desc(look_history.updated_at))
-      
+      .orderBy(desc(look_history.updated_at));
 
     //新規履歴を登録
     if (exitingHistory.length === 0) {
@@ -37,7 +35,7 @@ export const POST = async (req: NextRequest) => {
     console.error(error);
     return NextResponse.json({ message: "エラーが発生しました。" }, { status: 500 });
   }
-}
+};
 
 // 取得できる
 export const GET = async (req: NextRequest) => {
@@ -57,11 +55,11 @@ export const GET = async (req: NextRequest) => {
       .limit(10);
 
     // 遅延させるための関数
-    const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+    const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
     //商品情報を外部APIから取得する
     const itemDetails = await Promise.all(
-      histories.map(async (history,index) => {
+      histories.map(async (history, index) => {
         await delay(index * 500); // 1秒ごとにAPIリクエストを送信
         try {
           const response = await axios.get(
@@ -94,4 +92,4 @@ export const GET = async (req: NextRequest) => {
     console.error(error);
     return NextResponse.json({ message: "エラーが発生しました。" }, { status: 500 });
   }
-}
+};
