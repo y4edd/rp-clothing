@@ -3,6 +3,7 @@ import { look_history } from "@/db/schemas/schema";
 import axios from "axios";
 import { and, desc, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
+import { resolve } from "path";
 
 export const POST = async (req: NextRequest) => {
   const request = await req.json();
@@ -55,9 +56,13 @@ export const GET = async (req: NextRequest) => {
       .orderBy(look_history.created_at)
       .limit(10);
 
+    // 遅延させるための関数
+    const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
     //商品情報を外部APIから取得する
     const itemDetails = await Promise.all(
-      histories.map(async (history) => {
+      histories.map(async (history,index) => {
+        await delay(index * 500); // 1秒ごとにAPIリクエストを送信
         try {
           const response = await axios.get(
             "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601",
