@@ -3,7 +3,7 @@ import RegisterConditionButton from "@/components/favorite/Condition/RegisterCon
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 import styles from "./page.module.css";
 
 const SearchCondition = async () => {

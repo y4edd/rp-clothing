@@ -1,5 +1,5 @@
 import DeleteModal from "@/components/favorite/Condition/DeleteModal/DeleteModal";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 import { Suspense } from "react";
 
 const Page = async () => {

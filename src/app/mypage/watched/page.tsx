@@ -2,7 +2,7 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import WatchedContainer from "@/components/mypage/WatchedContainer/WatchedContainer";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 import { fetchWatched } from "@/utils/fetchWatched";
 
 const Watched = async () => {

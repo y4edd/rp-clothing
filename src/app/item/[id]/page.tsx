@@ -2,7 +2,7 @@ import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import ItemDetail from "@/components/item/ItemDetail";
 import LookHistory from "@/components/top/LookHistoryItems/LookHistory";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 
 type Props = {
   params: Promise<{ id: string }>;
