@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { cart } from "@/db/schemas/schema";
 import { redisClient } from "@/lib/redis/redis";
 import type { CartItem, CartItemInRedis } from "@/types/cart_item/cart_item";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 import { cookieOpt } from "@/utils/cookie";
 import { REDIS_MAX_AGE } from "@/utils/redis";
 import axios from "axios";
