@@ -7,7 +7,6 @@ import { checkAuth } from "@/utils/checkAuth";
 type Props = {
   params: Promise<{ id: string }>;
 };
-
 const ItemDetailPage = async ({ params }: Props) => {
   const { id } = await params;
   // 明示された型にそろえる

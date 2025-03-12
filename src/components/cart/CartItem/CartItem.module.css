@@ -14,10 +14,15 @@
   margin-right: 1.0rem;
 }
 
+.itemName {
+  text-decoration: underline;
+}
+
 .itemShop {
   width: 30%;
   border-bottom: 1px solid black;
   padding: 0rem 2.0rem;
+  text-decoration: underline;
 }
 
 .itemQuantity {

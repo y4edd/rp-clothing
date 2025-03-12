@@ -1,15 +1,34 @@
 import Image from "next/image";
+import Link from "next/link";
 import DeleteCartButton from "../DeleteCartButton/DeleteCartButton";
 import styles from "./CartItem.module.css";
 
-const CartItem = () => {
+type cartItemObj = {
+  itemName: string;
+  itemCode: string;
+  itemPrice: number;
+  itemImage: string;
+  shopCode: string;
+  shopName: string;
+  shopUrl: string;
+  quantity: number;
+};
+
+type CartItemProps = {
+  item: cartItemObj;
+  userId: number;
+};
+
+const CartItem = ({ item, userId }: CartItemProps) => {
+  const name = item.itemName;
+  const trimmedName = name.length > 10 ? `${name.slice(0, 10)} ...` : name;
   return (
     <>
       <tr className={styles.cartItem}>
         <td className={styles.itemInfo}>
           <figure className={styles.itemImage}>
             <Image
-              src="/sample/sample-item-image.png"
+              src={item.itemImage}
               alt="アイテム画像"
               width={200}
               height={200}
@@ -18,15 +37,19 @@ const CartItem = () => {
           </figure>
           <dl className={styles.itemInfoDetail}>
             <dt className={styles.itemName}>商品名：</dt>
-            <dd>サンプル</dd>
+            <dd className={styles.itemName}>
+              <Link href={`http://localhost:3000/item/${item.itemCode}`}>{trimmedName}</Link>
+            </dd>
             <dt className={styles.itemPrice}>価格：</dt>
-            <dd>2000円</dd>
+            <dd>{item.itemPrice.toLocaleString()}円</dd>
           </dl>
         </td>
-        <td className={styles.itemShop}>2ndStreetコートジボワール店</td>
-        <td className={styles.itemQuantity}>1</td>
+        <td className={styles.itemShop}>
+          <Link href={item.shopUrl}>{item.shopName}</Link>
+        </td>
+        <td className={styles.itemQuantity}>{item.quantity}</td>
         <td className={styles.deleteButton}>
-          <DeleteCartButton />
+          <DeleteCartButton itemCode={item.itemCode} userId={userId} />
         </td>
       </tr>
     </>

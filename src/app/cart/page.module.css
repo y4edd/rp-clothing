@@ -5,7 +5,7 @@
   margin: 6.0rem 0rem 6.0rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
 
 .table {

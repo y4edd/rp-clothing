@@ -1,6 +1,7 @@
 "use client";
 import type { EditUserProps } from "@/types/user/user";
 import { editUser } from "@/utils/apiFunc";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import EditForm from "./EditForm/EditForm";
@@ -18,6 +19,7 @@ type UserEditProps = {
 
 const UserEdit = ({ userData }: UserEditProps) => {
   const [serverError, setServerError] = useState();
+  const router = useRouter();
   const {
     register,
     formState: { errors },
@@ -36,6 +38,9 @@ const UserEdit = ({ userData }: UserEditProps) => {
     if (!res.ok) {
       setServerError(res.message);
     }
+    setTimeout(() => {
+      router.push("/user");
+    }, 500);
     return;
   };
 

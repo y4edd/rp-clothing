@@ -1,0 +1,34 @@
+.totalPriceContainer {
+  display: flex;
+  margin-top: 5.0rem;
+  margin-bottom: 3.0rem;
+  background-color: #d9d9d9;
+  padding: 3.0rem;
+  font-size: 1.4rem;
+}
+
+.toTop {
+  position: relative;
+  top: 2.0rem;
+}
+
+.separation {
+  margin-left: 1.0rem;
+  border: 0.1rem solid #ffffff;
+  margin-right: 1.0rem;
+}
+
+.paymentContainer {
+  display: inline-block;
+  align-items: center;
+  margin-left: 1.2rem;
+}
+
+.price {
+  margin-bottom: 3.0rem;
+}
+
+.toPayment {
+  align-items: center;
+  margin-left: 1.4rem;
+}
