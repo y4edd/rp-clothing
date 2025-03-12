@@ -44,7 +44,11 @@ export const GET = async (req: NextRequest) => {
     if (!userIdString) {
       return NextResponse.json({ message: "セッションエラーが発生しました" }, { status: 401 });
     }
-    const userId = userIdString.split("=")[1];
+    const userId = Number(userIdString.split("=")[1]);
+
+    if (!userId) {
+      return NextResponse.json({ message: "ユーザーIDの取得処理に失敗しました" }, { status: 401 });
+    }
 
     //履歴を取得する
     const histories = await db
