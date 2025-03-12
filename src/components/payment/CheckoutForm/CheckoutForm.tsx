@@ -1,30 +1,56 @@
 "use client";
 
-import { loadStripe } from "@stripe/stripe-js";
-import Stripe from "stripe";
-import { Elements, PaymentElement } from "@stripe/react-stripe-js";
+import { CardElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import Button from "@/components/utils/button/Button";
+import styles from "./CheckoutForm.module.css";
+import LinkBtn from "@/components/utils/link/LinkBtn";
+import { useEffect } from "react";
 
-if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
-  throw new Error("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEYを設定してください。");
-}
+const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
+  const stripe = useStripe();
+  const elements = useElements();
 
-const CheckoutForm: React.FC<{
-  stripe: ReturnType<typeof loadStripe>;
-  paymentIntent: Pick<Stripe.PaymentIntent, "client_secret" | "payment_method_options">;
-}> = ({ stripe, paymentIntent }) => {
-  if (!paymentIntent.client_secret) return null;
+  useEffect(() => {
+    if (elements) {
+      setTimeout(() => {
+        console.log("PaymentElement:", elements.getElement(PaymentElement));
+      }, 2000);
+    }
+  }, [elements]);
+
+  if (!stripe || !elements) return;
+  // StripeElementsのCardElement(カード情報入力フォーム)を取得する
+  const card = elements.getElement(CardElement);
+
+  const handlePayment = async(event:any) => {
+    event.preventDefault();
+    if(!card) {
+      console.log("card", card);
+      return;
+    }
+
+    // 支払いを確定させる
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        // カード情報を取得
+        card: card,
+      },
+    });
+    console.log("result", result);
+
+  }
+
   return (
     <>
-      <Elements
-        stripe={stripe}
-        options={{
-          clientSecret: paymentIntent.client_secret,
-        }}
-      >
+      <form onSubmit={handlePayment}>
         <PaymentElement />
-      </Elements>
+        <div className={styles.paymentButton}>
+          <LinkBtn pathName="/cart" text="戻る" btnColor="white" />
+          <Button type="submit" className={styles.black} text="確定する"/>
+        </div>
+      </form>
     </>
   );
-};
+}
 
 export default CheckoutForm;

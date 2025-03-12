@@ -1,10 +1,16 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import styles from "./page.module.css";
-import LinkBtn from "@/components/utils/link/LinkBtn";
-import CreditCardForm from "@/components/payment/CreditCardForm/CreditCardForm";
+import { checkAuth } from "@/utils/checkAuth";
+import { getCartItems } from "@/utils/apiFunc";
+import CheckoutFormWrapper from "@/components/payment/CheckoutFormWrapper/CheckoutFormWrapper";
 
-const Payment = () => {
+const Payment = async() => {
+    // sessionIdよりユーザーID取得
+    const userId = await checkAuth();
+    // DBからカート情報を取得する非同期関数
+    const response = await getCartItems(userId);
+    const totalPrice = response.totalAmount;
   return (
     <>
       <BreadList
@@ -16,10 +22,11 @@ const Payment = () => {
       />
       <PageTitle title="お支払い" />
       <div className={styles.container}>
-        {/* 決済画面が埋め込まれます */}
-        <CreditCardForm />
-        <div className={styles.buttonContainer}>
-          <LinkBtn pathName="/cart" text="戻る" btnColor="white" />
+        <div className={styles.priceContainer}>
+          <p className={styles.price}>合計金額：{totalPrice.toLocaleString()}円</p>
+        </div>
+        <div className={styles.paymentContainer}>
+          <CheckoutFormWrapper totalPrice={totalPrice} />
         </div>
       </div>
     </>
