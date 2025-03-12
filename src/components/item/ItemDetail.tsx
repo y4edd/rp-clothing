@@ -18,7 +18,7 @@ const ItemDetail = async ({ history }: Props) => {
 
   return (
     <div className={styles.container}>
-      <ItemInfo itemData={itemData} itemCode={itemCode} />
+      <ItemInfo itemData={itemData} itemCode={history.itemCode} />
       <ItemDescription description={itemData.itemCaption} />
     </div>
   );
