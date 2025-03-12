@@ -4,11 +4,12 @@ import { CardElement, PaymentElement, useElements, useStripe } from "@stripe/rea
 import Button from "@/components/utils/button/Button";
 import styles from "./CheckoutForm.module.css";
 import LinkBtn from "@/components/utils/link/LinkBtn";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [message, setMessage] = useState<string | undefined | null>(null);
 
   useEffect(() => {
     if (elements) {
@@ -20,24 +21,25 @@ const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
 
   if (!stripe || !elements) return;
   // StripeElementsのCardElement(カード情報入力フォーム)を取得する
-  const card = elements.getElement(CardElement);
 
   const handlePayment = async(event:any) => {
     event.preventDefault();
-    if(!card) {
-      console.log("card", card);
-      return;
-    }
 
     // 支払いを確定させる
-    const result = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        // カード情報を取得
-        card: card,
-      },
-    });
-    console.log("result", result);
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        // 支払い成功時のリダイレクト先
+        return_url: "http://localhost:3000/cart/payment/sucess",
+      }
+    })
 
+    // エラー用のハンドリング
+    if (error.type === "card_error" || error.type === "validation_error") {
+      setMessage(error.message);
+    } else {
+      setMessage("予期せぬエラーが発生しました");
+    }
   }
 
   return (
@@ -48,6 +50,7 @@ const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
           <LinkBtn pathName="/cart" text="戻る" btnColor="white" />
           <Button type="submit" className={styles.black} text="確定する"/>
         </div>
+        {message}
       </form>
     </>
   );
