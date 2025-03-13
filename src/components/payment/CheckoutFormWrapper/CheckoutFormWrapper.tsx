@@ -36,7 +36,7 @@ const CheckoutFormWrapper = ({ totalPrice }: { totalPrice: number }) => {
   
   return (
     <Elements stripe={stripePromise} options={{ clientSecret }}>
-      <CheckoutForm clientSecret={clientSecret}/>
+      <CheckoutForm />
     </Elements>
   )
 }

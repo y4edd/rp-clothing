@@ -4,10 +4,15 @@ import styles from "./page.module.css";
 import { checkAuth } from "@/utils/checkAuth";
 import { getCartItems } from "@/utils/apiFunc";
 import CheckoutFormWrapper from "@/components/payment/CheckoutFormWrapper/CheckoutFormWrapper";
+import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
 
 const Payment = async() => {
     // sessionIdよりユーザーID取得
     const userId = await checkAuth();
+    if (!userId) {
+      return <UnauthorizedAccess />;
+    }
+
     // DBからカート情報を取得する非同期関数
     const response = await getCartItems(userId);
     const totalPrice = response.totalAmount;

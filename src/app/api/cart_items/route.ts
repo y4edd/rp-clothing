@@ -191,3 +191,19 @@ export const POST = async (request: NextRequest) => {
     return NextResponse.json({ message: "商品をカートに追加できませんでした。" }, { status: 400 });
   }
 };
+
+export const DELETE = async() => {
+  const userIdString = await checkAuth();
+  const userId = Number(userIdString);
+
+  if(!userId) {
+    return NextResponse.json({ message: "ユーザーの認証に失敗しました" }, { status: 401 });
+  }
+
+  try{
+
+  } catch(error) {
+    console.error(error);
+    return NextResponse.json({ message: "サーバーエラーが発生しました" }, { status: 500 });
+  }
+};

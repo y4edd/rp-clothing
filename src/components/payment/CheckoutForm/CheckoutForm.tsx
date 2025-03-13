@@ -1,27 +1,21 @@
 "use client";
 
-import { CardElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import Button from "@/components/utils/button/Button";
 import styles from "./CheckoutForm.module.css";
 import LinkBtn from "@/components/utils/link/LinkBtn";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { deleteCartItems } from "@/utils/apiFunc";
 
-const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
+const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const router = useRouter();
   const [message, setMessage] = useState<string | undefined | null>(null);
-
-  useEffect(() => {
-    if (elements) {
-      setTimeout(() => {
-        console.log("PaymentElement:", elements.getElement(PaymentElement));
-      }, 2000);
-    }
-  }, [elements]);
 
   if (!stripe || !elements) return;
   // StripeElementsのCardElement(カード情報入力フォーム)を取得する
-
   const handlePayment = async(event:any) => {
     event.preventDefault();
 
@@ -29,16 +23,27 @@ const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // 支払い成功時のリダイレクト先
-        return_url: "http://localhost:3000/cart/payment/sucess",
-      }
-    })
+        // リダイレクトを防ぐ
+        return_url: "if_required",
+      },
+    });
 
-    // エラー用のハンドリング
-    if (error.type === "card_error" || error.type === "validation_error") {
+     // エラー用のハンドリング
+    if (error) {
       setMessage(error.message);
-    } else {
-      setMessage("予期せぬエラーが発生しました");
+      return;
+    }
+
+    // 正常に決済が行われ、DBのカート情報を削除
+    try {
+      const response = await deleteCartItems();
+      if(!response.ok) {
+        const res = await response.json();
+        return res.message;
+      }
+      router.push("/cart/payment/success");
+    } catch (error) {
+      console.error(error);
     }
   }
 
