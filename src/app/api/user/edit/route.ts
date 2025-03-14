@@ -38,7 +38,6 @@ export const PATCH = async (request: NextRequest) => {
         name: name,
         email: email,
         password: hashedPassword,
-        updated_at: new Date(),
       })
       .where(eq(users.id, userId));
 

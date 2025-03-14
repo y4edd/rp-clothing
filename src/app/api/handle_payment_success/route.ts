@@ -37,13 +37,13 @@ export const GET = async(request: NextRequest) => {
           itemPrice: item.itemPrice,
           itemName: item.itemName,
           itemImage: item.itemImage,
-          itemShop: item.itemShop,
-          isBirthdaySaleUse: false,
+          itemShop: item.shopName,
           paymentIntent: paymentIntent,
+          isBirthdaySaleUse: false,
           quantity: item.quantity,
         })
       }
-      // **カートの削除処理 (トランザクション内)**
+      // カートの削除処理 (トランザクション内)
       const isDeleted = await tx.delete(cart).where(eq(cart.usersId, userId));
 
       if (!isDeleted || (isDeleted.rowCount !== undefined && isDeleted.rowCount === 0)) {
@@ -54,6 +54,7 @@ export const GET = async(request: NextRequest) => {
     return NextResponse.redirect("http://localhost:3000/cart/payment/success");
   } catch(error) {
     console.error(error);
+    // ロールバックを確実にする
     return NextResponse.json({ message: "サーバーエラーが発生しました"}, { status: 500});
   }
 };
