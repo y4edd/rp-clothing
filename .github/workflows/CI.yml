@@ -39,7 +39,7 @@ jobs:
         echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
         echo "RAKUTEN_API_ID=${{ secrets.RAKUTEN_API_ID }}" > .env
         echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" > .env
-        echo "REDIS_URL=redis://redis:6379" > .env
+        echo "REDIS_URL=redis://127.0.0.1:6379"" > .env
         echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}" > .env
         echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" > .env
 
