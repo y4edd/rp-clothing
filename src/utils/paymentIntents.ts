@@ -1,9 +1,8 @@
-
 // （引数：totalPrice）
 // // 指定された金額（totalPrice）に基づいて PaymentIntent を作成する関数
-export const createPaymentIntents = async(totalPrice:number) => {
+export const createPaymentIntents = async (totalPrice: number) => {
   try {
-    const response = await fetch("http://localhost:3000/api/payment_intent",{
+    const response = await fetch("http://localhost:3000/api/payment_intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,4 +18,4 @@ export const createPaymentIntents = async(totalPrice:number) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};

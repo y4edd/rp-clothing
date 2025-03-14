@@ -1,10 +1,10 @@
 "use client";
 
-import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import Button from "@/components/utils/button/Button";
-import styles from "./CheckoutForm.module.css";
 import LinkBtn from "@/components/utils/link/LinkBtn";
+import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import styles from "./CheckoutForm.module.css";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -13,7 +13,7 @@ const CheckoutForm = () => {
 
   if (!stripe || !elements) return;
   // StripeElementsのCardElement(カード情報入力フォーム)を取得する
-  const handlePayment = async(event:any) => {
+  const handlePayment = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // 支払いを確定させる
@@ -29,7 +29,7 @@ const CheckoutForm = () => {
       setMessage(result.error.message);
       return;
     }
-  }
+  };
 
   return (
     <>
@@ -37,12 +37,12 @@ const CheckoutForm = () => {
         <PaymentElement />
         <div className={styles.paymentButton}>
           <LinkBtn pathName="/cart" text="戻る" btnColor="white" />
-          <Button type="submit" className={styles.black} text="確定する"/>
+          <Button type="submit" className={styles.black} text="確定する" />
         </div>
         {message}
       </form>
     </>
   );
-}
+};
 
 export default CheckoutForm;

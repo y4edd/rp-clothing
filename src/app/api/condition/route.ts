@@ -23,10 +23,7 @@ export const POST = async (req: NextRequest) => {
     .select()
     .from(searchConditions)
     .where(
-      and(
-        eq(searchConditions.usersId, userId),
-        eq(searchConditions.conditionName, conditionName),
-      ),
+      and(eq(searchConditions.usersId, userId), eq(searchConditions.conditionName, conditionName)),
     );
 
   if (existingItem.length > 0) {
