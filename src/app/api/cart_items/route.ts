@@ -28,7 +28,12 @@ export const GET = async (request: NextRequest) => {
     const cartItems = await db
       .select({ itemCode: cart.itemCode, quantity: cart.quantity })
       .from(cart)
-      .where(eq(cart.usersId, userId));
+      .where(eq(cart.usersId, userId))
+    ;
+
+    if(cartItems.length === 0) {
+      return NextResponse.json({ message: "カート内に商品はありませんでした。" }, { status: 200 });
+    }
 
     // cartItemCodesという配列を作らなきゃいけない。
     // formatItemに対し、各アイテムの量を追加。
