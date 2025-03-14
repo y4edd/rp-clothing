@@ -1,0 +1,1 @@
+ALTER TABLE "purchase_history" ALTER COLUMN "item_price" SET DATA TYPE text;

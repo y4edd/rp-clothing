@@ -1,4 +1,3 @@
-import SelectQuantity from "@/components/item/SelectQuantity/SelectQuantity";
 import { db } from "@/db";
 import { cart } from "@/db/schemas/schema";
 import { redisClient } from "@/lib/redis/redis";
@@ -27,9 +26,9 @@ export const GET = async (request: NextRequest) => {
   try {
     // ユーザーIdを元にカート情報を取得
     const cartItems = await db
-      .select({ itemCode: cart.item_code, quantity: cart.quantity })
+      .select({ itemCode: cart.itemCode, quantity: cart.quantity })
       .from(cart)
-      .where(eq(cart.users_id, userId));
+      .where(eq(cart.usersId, userId));
 
     // cartItemCodesという配列を作らなきゃいけない。
     // formatItemに対し、各アイテムの量を追加。
@@ -122,18 +121,18 @@ export const POST = async (request: NextRequest) => {
       const cartItem = await db
         .select()
         .from(cart)
-        .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
+        .where(and(eq(cart.usersId, userId), eq(cart.itemCode, decodedItemCode)));
 
       if (cartItem.length === 0) {
         await db
           .insert(cart)
-          .values({ users_id: userId, item_code: decodedItemCode, quantity: selectedQquantity });
+          .values({ usersId: userId, itemCode: decodedItemCode, quantity: selectedQquantity });
         return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
       } else {
         await db
           .update(cart)
           .set({ quantity: cartItem[0].quantity + selectedQquantity })
-          .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
+          .where(and(eq(cart.usersId, userId), eq(cart.itemCode, decodedItemCode)));
         return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
       }
     } else {

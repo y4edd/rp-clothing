@@ -1,98 +1,109 @@
-import { boolean, integer, pgTable, serial, text, timestamp, unique } from "drizzle-orm/pg-core";
+import { pgTable, unique, serial, text, timestamp, foreignKey, integer, boolean } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  email: text("email").notNull().unique(),
-  password: text("password").notNull(),
-  birthday: text("birthday").notNull(),
-  created_at: timestamp("created_at").defaultNow(),
-  updated_at: timestamp("updated_at").defaultNow(),
-});
+  id: serial().primaryKey().notNull(),
+  name: text().notNull(),
+  email: text().notNull(),
+  password: text().notNull(),
+  birthday: text().notNull(),
+  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
+}, (table) => [
+  unique("users_email_unique").on(table.email),
+]);
 
-export const search_conditions = pgTable(
-  "search_conditions",
-  {
-    id: serial("id").primaryKey(),
-    users_id: integer("users_id")
-      .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
-      .notNull(),
-    condition_name: text("condition_name").notNull(),
-    price_min: text("price_min"),
-    price_max: text("price_max"),
-    category: text("category"),
-    word: text("word"),
-    created_at: timestamp("created_at").defaultNow(),
-    updated_at: timestamp("updated_at").defaultNow(),
-  },
-  (table) => ({
-    uniqueSearchCondition: unique().on(table.users_id, table.condition_name),
-  }),
-);
+export const searchConditions = pgTable("search_conditions", {
+  id: serial().primaryKey().notNull(),
+  usersId: integer("users_id").notNull(),
+  conditionName: text("condition_name").notNull(),
+  priceMin: text("price_min"),
+  priceMax: text("price_max"),
+  category: text(),
+  word: text(),
+  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
+}, (table) => [
+  foreignKey({
+      columns: [table.usersId],
+      foreignColumns: [users.id],
+      name: "search_conditions_users_id_users_id_fk"
+    }).onUpdate("cascade").onDelete("cascade"),
+  unique("search_conditions_users_id_condition_name_unique").on(table.usersId, table.conditionName),
+]);
 
-export const purchase_history = pgTable("purchase_history", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
-    .notNull(),
-  item_price: text("item_price").notNull(),
-  item_name: text("item_name").notNull(),
-  item_image: text("item_image").notNull(),
-  quantity: integer("quantity").notNull(),
-  item_shop: text("item_shop").notNull(),
-  date: text("date").notNull(),
-  is_birthday_sale_use: boolean("is_birthday_sale_use"),
-  created_at: timestamp("created_at").defaultNow(),
-  updated_at: timestamp("updated_at").defaultNow(),
-});
+export const purchaseHistory = pgTable("purchase_history", {
+  id: serial().primaryKey().notNull(),
+  usersId: integer("users_id").notNull(),
+  itemPrice: text("item_price").notNull(),
+  itemName: text("item_name").notNull(),
+  itemImage: text("item_image").notNull(),
+  itemShop: text("item_shop").notNull(),
+  paymentIntent: text("payment_intent").notNull(),
+  isBirthdaySaleUse: boolean("is_birthday_sale_use"),
+  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
+  quantity: integer().notNull(),
+}, (table) => [
+  foreignKey({
+      columns: [table.usersId],
+      foreignColumns: [users.id],
+      name: "purchase_history_users_id_users_id_fk"
+    }).onUpdate("cascade").onDelete("cascade"),
+]);
 
-export const look_history = pgTable("look_history", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
-    .notNull(),
-  item_code: text("item_code").notNull(),
-  created_at: timestamp("created_at").defaultNow(),
-  updated_at: timestamp("updated_at").defaultNow(),
-});
+export const lookHistory = pgTable("look_history", {
+  id: serial().primaryKey().notNull(),
+  usersId: integer("users_id").notNull(),
+  itemCode: text("item_code").notNull(),
+  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
+}, (table) => [
+  foreignKey({
+      columns: [table.usersId],
+      foreignColumns: [users.id],
+      name: "look_history_users_id_users_id_fk"
+    }).onUpdate("cascade").onDelete("cascade"),
+]);
 
-export const favorite_item = pgTable("favorite_item", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
-    .notNull(),
-  item_code: text("item_code").notNull(),
-  created_at: timestamp("created_at").defaultNow(),
-  updated_at: timestamp("updated_at").defaultNow(),
-});
+export const favoriteItem = pgTable("favorite_item", {
+  id: serial().primaryKey().notNull(),
+  usersId: integer("users_id").notNull(),
+  itemCode: text("item_code").notNull(),
+  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
+}, (table) => [
+  foreignKey({
+      columns: [table.usersId],
+      foreignColumns: [users.id],
+      name: "favorite_item_users_id_users_id_fk"
+    }).onUpdate("cascade").onDelete("cascade"),
+]);
 
-export const favorite_shop = pgTable("favorite_shop", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
-    .notNull(),
-  shop_code: text("shop_code").notNull(),
-  created_at: timestamp("created_at").defaultNow(),
-  updated_at: timestamp("updated_at").defaultNow(),
-});
+export const favoriteShop = pgTable("favorite_shop", {
+  id: serial().primaryKey().notNull(),
+  usersId: integer("users_id").notNull(),
+  shopCode: text("shop_code").notNull(),
+  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
+}, (table) => [
+  foreignKey({
+      columns: [table.usersId],
+      foreignColumns: [users.id],
+      name: "favorite_shop_users_id_users_id_fk"
+    }).onUpdate("cascade").onDelete("cascade"),
+]);
 
 export const cart = pgTable("cart", {
-  id: serial("id").primaryKey(),
-  users_id: integer("users_id")
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
-    .notNull(),
-  item_code: text("item_code").notNull(),
-  quantity: integer("quantity").notNull(),
-  created_at: timestamp("created_at").defaultNow(),
-  updated_at: timestamp("updated_at").defaultNow(),
-});
-
-export const schema = {
-  users,
-  search_conditions,
-  purchase_history,
-  look_history,
-  favorite_item,
-  favorite_shop,
-  cart,
-};
+  id: serial().primaryKey().notNull(),
+  usersId: integer("users_id").notNull(),
+  itemCode: text("item_code").notNull(),
+  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
+  quantity: integer().notNull(),
+}, (table) => [
+  foreignKey({
+      columns: [table.usersId],
+      foreignColumns: [users.id],
+      name: "cart_users_id_users_id_fk"
+    }).onUpdate("cascade").onDelete("cascade"),
+]);
