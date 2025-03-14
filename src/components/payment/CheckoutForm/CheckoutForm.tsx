@@ -5,13 +5,10 @@ import Button from "@/components/utils/button/Button";
 import styles from "./CheckoutForm.module.css";
 import LinkBtn from "@/components/utils/link/LinkBtn";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { deleteCartItems } from "@/utils/apiFunc";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const router = useRouter();
   const [message, setMessage] = useState<string | undefined | null>(null);
 
   if (!stripe || !elements) return;
@@ -20,30 +17,17 @@ const CheckoutForm = () => {
     event.preventDefault();
 
     // 支払いを確定させる
-    const { error } = await stripe.confirmPayment({
+    const result = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // リダイレクトを防ぐ
-        return_url: "if_required",
+        return_url: "http://localhost:3000/api/handle_payment_success",
       },
     });
 
-     // エラー用のハンドリング
-    if (error) {
-      setMessage(error.message);
+    // エラー用のハンドリング
+    if (result.error) {
+      setMessage(result.error.message);
       return;
-    }
-
-    // 正常に決済が行われ、DBのカート情報を削除
-    try {
-      const response = await deleteCartItems();
-      if(!response.ok) {
-        const res = await response.json();
-        return res.message;
-      }
-      router.push("/cart/payment/success");
-    } catch (error) {
-      console.error(error);
     }
   }
 

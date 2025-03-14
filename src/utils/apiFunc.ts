@@ -289,23 +289,3 @@ export const getSessionCartItems = async (token: string) => {
     });
   }
 };
-
-// 決済が行われるとき、当該商品をカートDBから削除するための非同期関数（引数：）
-export const deleteCartItems = async() => {
-  try {
-    const response = await fetch("http://localhost:3000/api/cart_items", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const res = await response.json();
-    return res;
-  } catch (error) {
-    console.error(error);
-    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-};

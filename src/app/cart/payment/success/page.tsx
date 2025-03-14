@@ -2,19 +2,8 @@ import BreadList from "@/components/frame/breadList/BreadList"
 import PageTitle from "@/components/frame/pageTitle/PageTitle"
 import styles from "./page.module.css";
 import LinkBtn from "@/components/utils/link/LinkBtn";
-import { redirect } from "next/navigation";
 
-type Params = {
-  payment_intent: string;
-}
-
-const Success = async({searchParams}: {searchParams:Promise<Params>}) => {
-  const params = await searchParams;
-
-  if (params.payment_intent) {
-     // クエリパラメータを削除してリダイレクト
-    redirect("/cart/payment/success");
-  }
+const Success = async() => {
   return (
     <>
       <BreadList
