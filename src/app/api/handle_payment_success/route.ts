@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { cart, purchase_history } from "@/db/schemas/schema";
+import { cart, purchaseHistory } from "@/db/schemas/schema";
 import { getCartItems } from "@/utils/apiFunc";
 import { checkAuth } from "@/utils/checkAuth";
 import { eq } from "drizzle-orm";
@@ -27,36 +27,29 @@ export const GET = async(request: NextRequest) => {
     // purchasedテーブルにPOSTするための処理を実装
     // ユーザーIDよりカートにある商品情報を取得
     const items = await getCartItems(userIdString);
-
-    // トランザクションになる
-    // やらなきゃいけないこと
-    // 非推奨となること
-    // mapメソッドの中でSQLを実行すること
-
-    // DB編集
-    // item_priceをintegerに、dateは削除しpaymentIntenを追加
   
+    // カートの商品をpurchased_historyテーブルに追加し、
+    // cartテーブルから削除するまでの処理を一つの塊（トランザクション）とする
     await db.transaction(async (tx) => {
       for(const item of items.items) {
-        await tx.insert(purchase_history).values({
-          users_id: userId,
-          item_price: item.itemPrice,
-          item_name: item.itemName,
-          item_image: item.itemImage,
-          item_shop: item.itemShop,
-          is_birthday_sale_use: false,
-          // paymentも保存しておく
+        await tx.insert(purchaseHistory).values({
+          usersId: userId,
+          itemPrice: item.itemPrice,
+          itemName: item.itemName,
+          itemImage: item.itemImage,
+          itemShop: item.itemShop,
+          isBirthdaySaleUse: false,
+          paymentIntent: paymentIntent,
           quantity: item.quantity,
         })
       }
+      // **カートの削除処理 (トランザクション内)**
+      const isDeleted = await tx.delete(cart).where(eq(cart.usersId, userId));
+
+      if (!isDeleted || (isDeleted.rowCount !== undefined && isDeleted.rowCount === 0)) {
+        throw new Error("カート情報の削除に失敗しました");
+      }
     })
-
-    // DELETEメソッドを使うべきだがリダイレクトのためにGETを使用
-    const isDeleted =await db.delete(cart).where(eq(cart.users_id, userId));
-
-    if (isDeleted.rowCount === 0) {
-      return NextResponse.json({ message: "カート情報の削除に失敗しました"}, { status: 500 });
-    }
 
     return NextResponse.redirect("http://localhost:3000/cart/payment/success");
   } catch(error) {
