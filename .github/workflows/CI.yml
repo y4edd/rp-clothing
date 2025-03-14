@@ -35,8 +35,10 @@ jobs:
     # 環境変数をセットアップ（.env ファイルの作成）
     - name: Set up .env
       run: |
-        echo "DATABASE_URL=${{ secrets.RAKUTEN_API_ID }}" > .env
-        echo "REDIS_URL=${{ secrets.REDIS_URL }}" >> .env  # Redis の環境変数を追加
+        echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+        echo "RAKUTEN_API_ID=${{ secrets.RAKUTEN_API_ID }}" > .env
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+        echo "REDIS_URL=${{ secrets.REDIS_URL }}" >> .env
         echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}" > .env
         echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" > .env
 
