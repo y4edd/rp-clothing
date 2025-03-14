@@ -37,6 +37,8 @@ jobs:
       run: |
         echo "DATABASE_URL=${{ secrets.RAKUTEN_API_ID }}" > .env
         echo "REDIS_URL=redis://127.0.0.1:6379" >> .env  # Redis の環境変数を追加
+        echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}" > .env
+        echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" > .env
 
     # Next.js サーバーを起動（バックグラウンド実行）
     - name: Start Next.js server
