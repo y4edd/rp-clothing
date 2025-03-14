@@ -36,12 +36,12 @@ jobs:
     # Redisコンテナは、専用の内部ネットワークで動作するため.envとは違うものを指定して使う
     - name: Set up .env
       run: |
-        echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
-        echo "RAKUTEN_API_ID=${{ secrets.RAKUTEN_API_ID }}" > .env
-        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" > .env
-        echo "REDIS_URL=redis://127.0.0.1:6379" > .env
-        echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}" > .env
-        echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" > .env
+        echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+        echo "RAKUTEN_API_ID=${{ secrets.RAKUTEN_API_ID }}" >> .env
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+        echo "REDIS_URL=redis://127.0.0.1:6379" >> .env
+        echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}" >> .env
+        echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" >> .env
 
     # Next.js サーバーを起動（バックグラウンド実行）
     - name: Start Next.js server
