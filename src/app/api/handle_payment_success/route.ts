@@ -28,8 +28,11 @@ export const GET = async (request: NextRequest) => {
     // ユーザーIDよりカートにある商品情報を取得
     const items = await getCartItems(userIdString);
 
-    if(!items) {
-      return NextResponse.json({ message: "カートの中に商品は存在しません。決済は中断されます" }, { status: 400 });
+    if (!items) {
+      return NextResponse.json(
+        { message: "カートの中に商品は存在しません。決済は中断されます" },
+        { status: 400 },
+      );
     }
 
     // カートの商品をpurchased_historyテーブルに追加し、
