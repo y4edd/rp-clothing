@@ -4,15 +4,19 @@ import styles from "./WatchedList.module.css";
 
 type Props = {
   histories: History[];
+  className?: string;
 };
 
-const WatchedList = ({ histories }: Props) => {
+const WatchedList = ({ histories, className }: Props) => {
   if (!histories.length) {
     return <p className={styles.message}>最近チェックしたアイテムがありません</p>;
   }
 
   return (
-    <div className={styles.gridItems}>
+    // <div className={styles.gridItems}>  {/*スライダーだったらスライダーの表示、そうじゃなかったら普通の表示*/}
+    <div className={`${className === "slider" ? styles.slider : styles.gridItems}`}>
+      {" "}
+      {/*スライダーだったらスライダーの表示、そうじゃなかったら普通の表示 */}
       {histories.map((history: History) => {
         return (
           <Item

@@ -7,9 +7,34 @@
 
 .gridItems {
   max-width: 1120px;
-  width: 100%;
+  width: auto;
   margin: 20px auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 20px 15px;
+}
+/* .gridItems {
+  max-width: 1120px;
+  width: auto;
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px 15px;
+} */
+
+.slider {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  max-width: 1014px;
+  margin-left: 100px;
+  /* gap: 15px; */
+  overflow-x: auto; /* 横スクロールを有効化 */
+  scroll-snap-type: x mandatory; /*横方向にスナップ */
+  padding-bottom: 10px; /*スクロールバーのための余白 */
+}
+
+.slider > * {
+  min-width: 150px; /*アイテムの最小幅を指定（任意） */
+  flex: 0 0 18.5%; /*アイテムの幅を固定し、縮小されないようにする */
 }

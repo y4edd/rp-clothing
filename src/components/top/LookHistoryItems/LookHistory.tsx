@@ -1,16 +1,20 @@
-import Item from "../Item/Item";
+import WatchedContainer from "@/components/mypage/WatchedContainer/WatchedContainer";
+import { checkAuth } from "@/utils/checkAuth";
+import { fetchWatched } from "@/utils/fetchWatched";
 import styles from "./LookHistory.module.css";
 
-const LookHistory = () => {
+const LookHistory = async () => {
   // MEMO アイテム情報取得したら消します
-
-  const sampleArrayHistory = new Array(5).fill("").map((_, index) => index + 1);
-
+  const userId = await checkAuth();
+  // const sampleArrayHistory = new Array(5).fill("").map((_, index) => index + 1);
+  const data = await fetchWatched(userId);
+  console.log("データ", data);
   return (
     <div className={styles.container}>
       <h2 className={styles.contentTitle}>最近チェックしたアイテム</h2>
       <div className={styles.gridItemsHistory}>
-        {sampleArrayHistory.map((item) => (
+        <WatchedContainer histories={data?.histories || []} className="slider" />
+        {/* {sampleArrayHistory.map((item) => (
           <Item
             key={item}
             itemName={"sample Item"}
@@ -18,7 +22,7 @@ const LookHistory = () => {
             itemImage={"/sample/sample-item-image.png"}
             itemPrice={2000}
           />
-        ))}
+        ))} */}
       </div>
 
       {/* MEMO:未ログ状態の時表示する。後でボタンコンポーネントに変更する */}

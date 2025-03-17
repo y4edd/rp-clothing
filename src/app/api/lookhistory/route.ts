@@ -56,7 +56,7 @@ export const GET = async (req: NextRequest) => {
       .from(look_history)
       .where(eq(look_history.users_id, userId))
       .orderBy(look_history.created_at)
-      .limit(10);
+      .limit(5);
 
     // 遅延させるための関数
     const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
