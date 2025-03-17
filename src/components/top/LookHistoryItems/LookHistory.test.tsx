@@ -1,6 +1,6 @@
+import LookHistory from "@/components/top/LookHistoryItems/LookHistory";
 // test/LookHistory.test.tsx
 import { render, screen, waitFor } from "@testing-library/react";
-import LookHistory from "@/components/top/LookHistoryItems/LookHistory";
 
 // モック関数
 import { checkAuth } from "@/utils/checkAuth";
