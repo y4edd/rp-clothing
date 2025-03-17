@@ -16,6 +16,7 @@ export type ItemData = {
   itemName: string;
   itemPrice: number;
   itemImage?: string;
+  mediumImageUrls?: { imageUrl: string }[];
 };
 
 // 商品のリスト情報(Itemsの中の構造)

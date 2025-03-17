@@ -1,19 +1,18 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
+import WatchedContainer from "@/components/mypage/WatchedContainer/WatchedContainer";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
-import UserEdit from "@/components/user/UserEdit/UserEdit";
-import { getUserInfo } from "@/utils/apiFunc";
 import { checkAuth } from "@/utils/checkAuth";
+import { fetchWatched } from "@/utils/fetchWatched";
 
-const UserEditPage = async () => {
+const Watched = async () => {
   const userId = await checkAuth();
+
   if (!userId) {
     return <UnauthorizedAccess />;
   }
 
-  const userDataJson = await getUserInfo(userId);
-  const userDataArr = await userDataJson.json();
-  const userData = userDataArr[0];
+  const data = await fetchWatched(userId);
 
   return (
     <>
@@ -21,13 +20,13 @@ const UserEditPage = async () => {
         bread={[
           { link: "/", title: "トップ" },
           { link: "/mypage", title: "マイページ" },
-          { link: "/edit", title: "ユーザー情報編集" },
+          { link: "/mypage/watched", title: "閲覧履歴" },
         ]}
       />
-      <PageTitle title={"ユーザー情報編集"} />
-      <UserEdit userData={userData} />
+      <PageTitle title={"閲覧履歴"} />
+      <WatchedContainer histories={data?.histories || []} />
     </>
   );
 };
 
-export default UserEditPage;
+export default Watched;

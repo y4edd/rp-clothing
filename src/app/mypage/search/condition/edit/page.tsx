@@ -1,5 +1,5 @@
 import EditModal from "@/components/favorite/Condition/EditModal/EditModal";
-import { checkAuth } from "@/utils/chechAuth";
+import { checkAuth } from "@/utils/checkAuth";
 import { Suspense } from "react";
 
 const Page = async () => {
