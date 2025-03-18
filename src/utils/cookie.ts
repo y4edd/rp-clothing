@@ -20,8 +20,7 @@ export const getTokenFromCookie = async () => {
 // クッキー設定（httpOnlyを有効化）
 export const cookieOpt: Partial<ResponseCookie> = {
   httpOnly: true,
-  secure: false,
-  sameSite: "lax",
+  secure: true,
   maxAge: COOKIE_MAX_AGE,
   path: "/",
 };

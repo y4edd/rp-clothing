@@ -1,7 +1,6 @@
 -- Custom SQL migration file, put your code below! --
 INSERT INTO "users" ("name", "email", "password", "birthday", "created_at", "updated_at") 
 VALUES 
-  ('rp太郎', 'test@rp.com', 'testMan', '2000-09-05', NOW(), NOW()),
   ('rp座衛門', 'clothing@clothing.com', 'clothing', '2000-10-10', NOW(), NOW());
 
 INSERT INTO "search_conditions" ("users_id", "condition_name", "price_min", "price_max", "category", "word", "created_at", "updated_at") 

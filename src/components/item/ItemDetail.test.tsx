@@ -17,7 +17,7 @@ const mockItemData = {
   shopName: "testShop",
   shopUrl: "/shopPath",
 };
-const mockItemCode = { itemCode: "00000" };
+const mockItemCode = { history: { itemCode: "0000", userId: "testUser" } };
 describe("ItemDetailコンポーネントのテスト", () => {
   afterEach(() => {
     jest.clearAllMocks();
