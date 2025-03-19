@@ -1,12 +1,12 @@
 import { db } from "@/db";
-import { favoriteItem } from "@/db/schemas/schema";
+import { favoriteShop } from "@/db/schemas/schema";
 import { and, eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async(request: NextRequest) => {
   const res = await request.json();
   const userId = res.userId;
-  const itemCode = res.itemCode;
+  const shopCode = res.shopCode;
   const numUserId = Number(userId);
 
   if(!userId) {
@@ -16,13 +16,13 @@ export const POST = async(request: NextRequest) => {
   try {
     // DB処理を記載
     await db
-      .insert(favoriteItem)
+      .insert(favoriteShop)
       .values({
-        itemCode: itemCode,
+        shopCode: shopCode,
         usersId: numUserId
       })
     ;
-    return NextResponse.json({message: "お気に入りアイテムが登録されました"}, { status: 200 });
+    return NextResponse.json({message: "お気に入りのショップに登録されました"}, { status: 200 });
   } catch(error) {
     console.error(error);
     return NextResponse.json({message: "サーバーエラーが発生しました"}, { status: 500 });
@@ -32,7 +32,7 @@ export const POST = async(request: NextRequest) => {
 export const DELETE = async(request: NextRequest) => {
   const res = await request.json();
   const userId = res.userId;
-  const itemCode = res.itemCode;
+  const shopCode = res.shopCode;
   const numUserId = Number(userId);
 
   if(!userId) {
@@ -42,18 +42,18 @@ export const DELETE = async(request: NextRequest) => {
   try {
     // DB処理を記載
     await db
-      .delete(favoriteItem)
+      .delete(favoriteShop)
       .where(
         and(
           eq(
-            favoriteItem.usersId, numUserId
+            favoriteShop.usersId, numUserId
           ),
-          eq(favoriteItem.itemCode, itemCode)
+          eq(favoriteShop.shopCode, shopCode)
         )
       )
     ;
 
-    return NextResponse.json({message: "お気に入りアイテムの削除に成功しました"}, { status: 200 });
+    return NextResponse.json({message: "お気に入りショップの削除に成功しました"}, { status: 200 });
   } catch(error) {
     console.error(error);
     return NextResponse.json({message: "サーバーエラーが発生しました"}, { status: 500 });

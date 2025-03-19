@@ -27,7 +27,7 @@ const ItemInfo = async({ itemData, itemCode }: Props) => {
             <Link href={itemData.shopUrl} className={styles.shopLink}>
               {itemData.shopName}
             </Link>
-            <FavoriteShopButton userId={userId} itemCode={itemCode} />
+            <FavoriteShopButton userId={userId} shopCode={itemData.shopCode} />
           </dd>
         </div>
         <div className={styles.infoContent}>
