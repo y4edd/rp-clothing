@@ -1,18 +1,30 @@
 "use client";
 import { showErrorToast, showToast } from "@/components/utils/toast/toast";
-import { deleteFavItem, postFavItem } from "@/utils/apiFunc";
+import { deleteFavItem, fetchUserId, postFavItem } from "@/utils/apiFunc";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./FavoriteButton.module.css";
 
 type FavoriteButtonProps = {
   itemCode: string;
-  userId: string;
 };
 
-const FavoriteButton = ({ itemCode, userId }: FavoriteButtonProps) => {
+const FavoriteButton = ({ itemCode }: FavoriteButtonProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    const fetchFunction = async () => {
+      const currentUserId = await fetchUserId();
+      if (!currentUserId.userId) {
+        return;
+      }
+      setUserId(currentUserId.userId);
+    };
+    fetchFunction();
+  }, []);
+
   const handleFavorite = async () => {
     // 登録済みなら削除し、未登録なら登録する非同期を走らせる
     let response: Response;
