@@ -26,7 +26,7 @@ const ItemImage = ({ itemImage, itemCode, userId }: Prop) => {
         priority
         className={styles.img}
       />
-      <FavoriteButton itemCode={itemCode} userId={userId} />
+      <FavoriteButton itemCode={itemCode} />
     </div>
   );
 };
