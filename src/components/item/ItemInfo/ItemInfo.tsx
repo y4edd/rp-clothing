@@ -15,7 +15,7 @@ const ItemInfo = async ({ itemData, itemCode }: Props) => {
   const userId = await checkAuth();
   return (
     <div className={styles.container}>
-      <ItemImage itemImage={itemData.itemImage} itemCode={itemCode} userId={userId} />
+      <ItemImage itemImage={itemData.itemImage} itemCode={itemCode} />
       <dl className={styles.infoList}>
         <div className={styles.infoContent}>
           <dt>商品名 :</dt>

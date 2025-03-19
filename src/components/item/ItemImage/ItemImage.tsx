@@ -7,10 +7,9 @@ import styles from "./ItemImage.module.css";
 type Prop = {
   itemImage: string;
   itemCode: string;
-  userId: string;
 };
 
-const ItemImage = ({ itemImage, itemCode, userId }: Prop) => {
+const ItemImage = ({ itemImage, itemCode }: Prop) => {
   const [imageSrc, setImageSrc] = useState(itemImage);
   const handleError = () => {
     setImageSrc("/images/no-image.jpg");
