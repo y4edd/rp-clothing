@@ -291,7 +291,7 @@ export const getSessionCartItems = async (token: string) => {
 };
 
 // お気に入りアイテムを登録する非同期処理（引数：userId,itemCode）
-export const postFavItem = async(userId: string, itemCode: string) => {
+export const postFavItem = async (userId: string, itemCode: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/favorite_items", {
       method: "POST",
@@ -305,10 +305,10 @@ export const postFavItem = async(userId: string, itemCode: string) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};
 
 // お気に入りアイテムを削除する非同期処理（引数：userId,itemCode）
-export const deleteFavItem = async(userId: string, itemCode: string) => {
+export const deleteFavItem = async (userId: string, itemCode: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/favorite_items", {
       method: "DELETE",
@@ -322,12 +322,12 @@ export const deleteFavItem = async(userId: string, itemCode: string) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};
 
 // MEMO: お気に入りアイテムを取得する非同期処理（引数：userId,itemCode）
 
 // お気に入りショップを登録する非同期処理（引数：userId,shopCode）
-export const postFavShop = async(userId: string, shopCode: string) => {
+export const postFavShop = async (userId: string, shopCode: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/favorite_shops", {
       method: "POST",
@@ -341,10 +341,10 @@ export const postFavShop = async(userId: string, shopCode: string) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};
 
 // お気に入りショップを削除する非同期処理（引数：userId,shopCode）
-export const deleteFavShop = async(userId: string, shopCode: string) => {
+export const deleteFavShop = async (userId: string, shopCode: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/favorite_shops", {
       method: "DELETE",
@@ -358,4 +358,4 @@ export const deleteFavShop = async(userId: string, shopCode: string) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};

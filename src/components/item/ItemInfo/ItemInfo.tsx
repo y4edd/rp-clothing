@@ -1,17 +1,17 @@
 import type { ItemDetailModel } from "@/types/item/item";
+import { checkAuth } from "@/utils/checkAuth";
 import Link from "next/link";
 import FavoriteShopButton from "../FavoriteShopButton/FavoriteShopButton";
 import ItemImage from "../ItemImage/ItemImage";
 import SelectQuantity from "../SelectQuantity/SelectQuantity";
 import styles from "./ItemInfo.module.css";
-import { checkAuth } from "@/utils/checkAuth";
 
 type Props = {
   itemData: ItemDetailModel;
   itemCode: string;
 };
 
-const ItemInfo = async({ itemData, itemCode }: Props) => {
+const ItemInfo = async ({ itemData, itemCode }: Props) => {
   const userId = await checkAuth();
   return (
     <div className={styles.container}>
