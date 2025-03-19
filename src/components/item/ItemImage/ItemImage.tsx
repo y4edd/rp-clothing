@@ -6,9 +6,11 @@ import styles from "./ItemImage.module.css";
 
 type Prop = {
   itemImage: string;
+  itemCode: string;
+  userId: string;
 };
 
-const ItemImage = ({ itemImage }: Prop) => {
+const ItemImage = ({ itemImage, itemCode, userId }: Prop) => {
   const [imageSrc, setImageSrc] = useState(itemImage);
   const handleError = () => {
     setImageSrc("/images/no-image.jpg");
@@ -24,7 +26,7 @@ const ItemImage = ({ itemImage }: Prop) => {
         priority
         className={styles.img}
       />
-      <FavoriteButton />
+      <FavoriteButton itemCode={itemCode} userId={userId} />
     </div>
   );
 };
