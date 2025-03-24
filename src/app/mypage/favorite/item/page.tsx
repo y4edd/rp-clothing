@@ -3,18 +3,17 @@ import PageTitle from "@/components/frame/pageTitle/PageTitle";
 import FavItemList from "@/components/mypage/FavItemList/FavItemList";
 import FavLink from "@/components/mypage/FavLink/FavLink";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
-import { ItemData } from "@/types/item/item";
-import { getNewItems } from "@/utils/apiFunc";
+import { getFavItems } from "@/utils/apiFunc";
 import { checkAuth } from "@/utils/checkAuth";
 
 const FavItem = async() => {
   const userId = await checkAuth();
-  // お気に入りアイテムのみ取得する
-  const newItems: ItemData[] | null = await getNewItems();
-
   if (!userId) {
     return <UnauthorizedAccess />;
   }
+  // お気に入りアイテムのみ取得する
+  const favItems= await getFavItems(userId);
+  console.log(favItems);
 
   return (
     <>
@@ -27,7 +26,7 @@ const FavItem = async() => {
       />
       <PageTitle title="お気に入り" />
       <FavLink />
-      <FavItemList items={newItems} />
+      <FavItemList items={favItems} />
     </>
   )
 }
