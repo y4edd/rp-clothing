@@ -1,4 +1,4 @@
-.container {
+/* .container {
   margin-bottom: 80px;
 }
 .contentTitle {
@@ -10,6 +10,75 @@
 .gridItemsHistory {
   width: 100%;
   margin: 20px;
+  display: grid;
+  gap: 20px 15px;
+}
+
+.onlyMember {
+  background-color: #d9d9d9;
+  text-align: center;
+  padding: 20px 0;
+}
+.onlyTitle {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: normal;
+  position: relative;
+}
+.onlyTitle h3 {
+  width: 270px;
+  font-size: 1.2rem;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.onlyTitle::before,
+.onlyTitle::after {
+  content: "";
+  width: 45%;
+  height: 2px;
+  background-color: #000;
+}
+
+.onlyMember p {
+  margin: 30px auto;
+  font-size: 0.9rem;
+}
+
+.onlyButton {
+  text-align: center;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px;
+  border: 2px solid #000000;
+  cursor: pointer;
+}
+
+.onlyButton:hover {
+  background-color: #ffffff;
+  color: #000000;
+} */
+
+
+.container {
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contentTitle {
+  font-size: 1.25rem;
+  font-weight: normal;
+  text-align: center;
+  margin: 30px auto;
+}
+.gridItemsHistory {
+  align-items: center;
   display: grid;
   gap: 20px 15px;
 }

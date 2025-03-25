@@ -7,11 +7,7 @@ type Props = {
   className?: string;
 };
 const WatchedContainer = ({ histories, className }: Props) => {
-  return (
-    <div className={styles.container}>
-      <WatchedList histories={histories} className={className} />
-    </div>
-  );
+  return <WatchedList histories={histories} className={className} />;
 };
 
 export default WatchedContainer;

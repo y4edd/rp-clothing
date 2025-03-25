@@ -6,9 +6,8 @@
 }
 
 .gridItems {
-  max-width: 1120px;
+  max-width: 900px;
   width: auto;
-  margin: 20px auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 20px 15px;
@@ -18,8 +17,7 @@
   width: 100%;
   display: flex;
   gap: 20px;
-  max-width: 1014px;
-  margin-left: 100px;
+  max-width: 900px;
   overflow-x: auto; /* 横スクロールを有効化 */
   scroll-snap-type: x mandatory; /*横方向にスナップ */
   padding-bottom: 10px; /*スクロールバーのための余白 */
