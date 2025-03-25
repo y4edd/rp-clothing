@@ -163,6 +163,7 @@ export const postLogout = async () => {
 };
 
 // クライアントサイドにおいて、api内でcookieからsessionIdを取得し、redisよりuserIdを取得する非同期関数
+// MEMO: この関数は本来存在してはいけない。クライアントサイドでのcookie取得から
 export const fetchUserId = async (): Promise<{ userId: string | null; error: string | null }> => {
   try {
     const res = await fetch("http://localhost:3000/api/user/token", {
@@ -346,6 +347,23 @@ export const getFavItems = async (sessionId: string) => {
   }
 }
 
+// お気に入りアイテムとして登録済みかを確認する非同期処理（引数：userid, itemCode）
+export const fetchFavItem = async(userId: string, itemCode: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/is_fav", {
+      method: "POST",
+      body: JSON.stringify({ userId, itemCode }),
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+}
+
 // お気に入りショップを登録する非同期処理（引数：userId,shopCode）
 export const postFavShop = async (userId: string, shopCode: string) => {
   try {
@@ -379,3 +397,5 @@ export const deleteFavShop = async (userId: string, shopCode: string) => {
     });
   }
 };
+
+

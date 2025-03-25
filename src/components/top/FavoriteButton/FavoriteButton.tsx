@@ -21,9 +21,19 @@ const FavoriteButton = ({ itemCode }: FavoriteButtonProps) => {
         return;
       }
       setUserId(currentUserId.userId);
+
+      // お気に入りに登録済みかどうかを確認する非同期を走らせる
+      const confirmFav = await fetchFavItem(userId, itemCode);
+      if(!confirmFav) {
+        setIsFavorite(false);
+        return;
+      }
+      // trueなら、そのまま「isFavorite」がtrueになるようにセット
+      setIsFavorite(true);
     };
     fetchFunction();
   }, []);
+  console.log("isFavorite", isFavorite);
 
   const handleFavorite = async () => {
     // 登録済みなら削除し、未登録なら登録する非同期を走らせる
