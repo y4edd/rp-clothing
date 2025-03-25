@@ -8,11 +8,9 @@
   margin: 30px auto;
 }
 .gridItemsHistory {
-  max-width: 950px;
   width: 100%;
   margin: 20px;
   display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
   gap: 20px 15px;
 }
 
@@ -50,4 +48,18 @@
 .onlyMember p {
   margin: 30px auto;
   font-size: 0.9rem;
+}
+
+.onlyButton {
+  text-align: center;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px;
+  border: 2px solid #000000;
+  cursor: pointer;
+}
+
+.onlyButton:hover {
+  background-color: #ffffff;
+  color: #000000;
 }

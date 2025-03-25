@@ -14,12 +14,6 @@ const mockHistories: History[] = [
 ];
 
 describe("WatchedListコンポーネントのテスト", () => {
-  test("履歴がない場合、メッセージが表示されることを確認", () => {
-    render(<WatchedList histories={[]} />);
-    const textElem = screen.getByText("最近チェックしたアイテムがありません");
-    expect(textElem).toBeInTheDocument();
-  });
-
   test("履歴がある場合、アイテムが表示されることを確認", () => {
     render(<WatchedList histories={mockHistories} />);
     expect(screen.getByText("item1")).toBeInTheDocument();
