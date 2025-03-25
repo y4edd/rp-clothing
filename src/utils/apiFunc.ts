@@ -325,14 +325,18 @@ export const deleteFavItem = async (userId: string, itemCode: string) => {
 };
 
 // MEMO: お気に入りアイテムを取得する非同期処理（引数：userId）
-export const getFavItems = async (userId: string) => {
+export const getFavItems = async (sessionId: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/favorite_items", {
-      // GETメソッドだからbodyじゃなくてcookieからredis経由で取得しないとだめ
       method: "GET",
-      body: JSON.stringify({ userId }),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `sessionId=${sessionId}`,
+      },
     });
-    return response;
+    const items = await response.json();
+    return items;
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {

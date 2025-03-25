@@ -33,6 +33,7 @@ export const GET = async (request: NextRequest) => {
     if (cartItems.length === 0) {
       return NextResponse.json({ message: "カート内に商品はありませんでした。" }, { status: 200 });
     }
+    console.log("cartItems", cartItems);
 
     // cartItemCodesという配列を作らなきゃいけない。
     // formatItemに対し、各アイテムの量を追加。

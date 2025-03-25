@@ -1,13 +1,16 @@
 import { db } from "@/db";
 import { favoriteItem } from "@/db/schemas/schema";
+import { redisClient } from "@/lib/redis/redis";
 import { FavItem } from "@/types/fav_item/fav_item";
 import axios from "axios";
 import { and, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
+
 export const POST = async (request: NextRequest) => {
   const res = await request.json();
   const userId = res.userId;
   const itemCode = res.itemCode;
+  const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, "");
   const numUserId = Number(userId);
 
   if (!userId) {
@@ -17,7 +20,7 @@ export const POST = async (request: NextRequest) => {
   try {
     // DB処理を記載
     await db.insert(favoriteItem).values({
-      itemCode: itemCode,
+      itemCode: decodedItemCode,
       usersId: numUserId,
     });
     return NextResponse.json({ message: "お気に入りアイテムが登録されました" }, { status: 200 });
@@ -31,6 +34,7 @@ export const DELETE = async (request: NextRequest) => {
   const res = await request.json();
   const userId = res.userId;
   const itemCode = res.itemCode;
+  const decodedItemCode = decodeURIComponent(itemCode).replace(/^"|"$/g, "");
   const numUserId = Number(userId);
 
   if (!userId) {
@@ -41,7 +45,8 @@ export const DELETE = async (request: NextRequest) => {
     // DB処理を記載
     await db
       .delete(favoriteItem)
-      .where(and(eq(favoriteItem.usersId, numUserId), eq(favoriteItem.itemCode, itemCode)));
+      .where(and(eq(favoriteItem.usersId, numUserId), eq(favoriteItem.itemCode, decodedItemCode)))
+    ;
 
     return NextResponse.json(
       { message: "お気に入りアイテムの削除に成功しました" },
@@ -54,16 +59,28 @@ export const DELETE = async (request: NextRequest) => {
 };
 
 export const GET = async (request: NextRequest) => {
-  const req = await request.json();
-  const userId = req.userId;
-  const numUserId = Number(userId);
+  const sessionIdString = request.headers.get("Cookie");
+  if (!sessionIdString) {
+    return NextResponse.json(
+      { message: "セッションなし。このページは表示できません" },
+      { status: 401 },
+    );
+  }
+  const sessionId = sessionIdString.split("=")[1];
+  // sessionIdからredis内のuserId取得
+  const userIdObj = await redisClient.get(`sessionId:${sessionId}`);
+  if(!userIdObj) {
+    return NextResponse.json({ message: "ユーザーIDの取得に失敗しました" }, { status: 401 });
+  }
+  const userId = JSON.parse(userIdObj).userId;
 
   try {
     // ユーザーIdを元にお気に入りアイテム情報を取得
     const favItems = await db
       .select({ itemCode: favoriteItem.itemCode })
       .from(favoriteItem)
-      .where(eq(favoriteItem.usersId, userId));
+      .where(eq(favoriteItem.usersId, userId))
+    ;
 
     if (favItems.length === 0) {
       return NextResponse.json({ message: "お気に入りの商品はありませんでした。" }, { status: 200 });
@@ -77,7 +94,6 @@ export const GET = async (request: NextRequest) => {
     });
 
     const item: FavItem[] = [];
-    let totalAmount = 0;
     const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
     const applicationId = process.env.RAKUTEN_API_ID;
 
@@ -134,9 +150,9 @@ export const GET = async (request: NextRequest) => {
       return NextResponse.json(null, { status: 200 });
     }
 
-    return NextResponse.json({ items: item, totalAmount }, { status: 200 });
+    return NextResponse.json({ items: item }, { status: 200 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: "データを取得できませんでした。" }, { status: 400 });
+    return NextResponse.json({ message: "データを取得できませんでした。" }, { status: 500 });
   }
 };

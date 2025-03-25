@@ -7,6 +7,7 @@ export const POST = async (request: NextRequest) => {
   const res = await request.json();
   const userId = res.userId;
   const shopCode = res.shopCode;
+  const decodedShopCode = decodeURIComponent(shopCode).replace(/^"|"$/g, "");
   const numUserId = Number(userId);
 
   if (!userId) {
@@ -16,7 +17,7 @@ export const POST = async (request: NextRequest) => {
   try {
     // DB処理を記載
     await db.insert(favoriteShop).values({
-      shopCode: shopCode,
+      shopCode: decodedShopCode,
       usersId: numUserId,
     });
     return NextResponse.json({ message: "お気に入りのショップに登録されました" }, { status: 200 });
@@ -30,6 +31,7 @@ export const DELETE = async (request: NextRequest) => {
   const res = await request.json();
   const userId = res.userId;
   const shopCode = res.shopCode;
+  const decodedShopCode = decodeURIComponent(shopCode).replace(/^"|"$/g, "");
   const numUserId = Number(userId);
 
   if (!userId) {
@@ -40,7 +42,7 @@ export const DELETE = async (request: NextRequest) => {
     // DB処理を記載
     await db
       .delete(favoriteShop)
-      .where(and(eq(favoriteShop.usersId, numUserId), eq(favoriteShop.shopCode, shopCode)));
+      .where(and(eq(favoriteShop.usersId, numUserId), eq(favoriteShop.shopCode, decodedShopCode)));
 
     return NextResponse.json(
       { message: "お気に入りショップの削除に成功しました" },
