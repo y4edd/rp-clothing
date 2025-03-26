@@ -12,7 +12,7 @@ export const deleteItem = async (itemCode: string, userId: number) => {
   try {
     // ログイン済みユーザー
     if (userId) {
-      await db.delete(cart).where(and(eq(cart.item_code, itemCode), eq(cart.users_id, userId)));
+      await db.delete(cart).where(and(eq(cart.itemCode, itemCode), eq(cart.usersId, userId)));
       revalidatePath("/");
     } else {
       const sessionId = await getTokenFromCookie();

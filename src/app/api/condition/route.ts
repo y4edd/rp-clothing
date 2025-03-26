@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { search_conditions } from "@/db/schemas/schema";
+import { searchConditions } from "@/db/schemas/schema";
 import { and, count, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
@@ -12,7 +12,7 @@ export const POST = async (req: NextRequest) => {
   const userId = request.userId;
 
   // すでに５件登録されていたら、エラーを発生させる
-  const conditionCount = await db.select({ count: count() }).from(search_conditions);
+  const conditionCount = await db.select({ count: count() }).from(searchConditions);
 
   if (conditionCount[0].count >= 6) {
     return NextResponse.json({ message: "登録できるのは6件までです！" }, { status: 403 });
@@ -21,12 +21,9 @@ export const POST = async (req: NextRequest) => {
   // 検索条件の名前が重複していたらエラーを返す
   const existingItem = await db
     .select()
-    .from(search_conditions)
+    .from(searchConditions)
     .where(
-      and(
-        eq(search_conditions.users_id, userId),
-        eq(search_conditions.condition_name, conditionName),
-      ),
+      and(eq(searchConditions.usersId, userId), eq(searchConditions.conditionName, conditionName)),
     );
 
   if (existingItem.length > 0) {
@@ -34,11 +31,11 @@ export const POST = async (req: NextRequest) => {
   }
 
   try {
-    await db.insert(search_conditions).values({
-      users_id: userId,
-      condition_name: conditionName,
-      price_min: minPrice,
-      price_max: maxPrice,
+    await db.insert(searchConditions).values({
+      usersId: userId,
+      conditionName: conditionName,
+      priceMin: minPrice,
+      priceMax: maxPrice,
       category: selectedCategory,
       word: keyWord,
     });
@@ -61,13 +58,13 @@ export const PATCH = async (req: NextRequest) => {
   // 検索条件の名前が重複していたらエラーを返す
   const existingItem = await db
     .select()
-    .from(search_conditions)
+    .from(searchConditions)
     .where(
       and(
-        eq(search_conditions.users_id, userId),
-        eq(search_conditions.condition_name, conditionName),
+        eq(searchConditions.usersId, userId),
+        eq(searchConditions.conditionName, conditionName),
         // 変更を加えるデータについては一意制約を無視（名前が変更されない場合のコンフリクトエラーを回避）
-        sql`${search_conditions.id} <> ${searchConditionId}`,
+        sql`${searchConditions.id} <> ${searchConditionId}`,
       ),
     );
 
@@ -77,18 +74,17 @@ export const PATCH = async (req: NextRequest) => {
 
   try {
     await db
-      .update(search_conditions)
+      .update(searchConditions)
       .set({
-        condition_name: conditionName,
-        price_min: minPrice,
-        price_max: maxPrice,
+        conditionName: conditionName,
+        priceMin: minPrice,
+        priceMax: maxPrice,
         category: selectedCategory,
         word: keyWord,
-        updated_at: new Date(),
       })
       .where(
         // MEMO: 検索条件のIDを元に書き換える
-        eq(search_conditions.id, searchConditionId),
+        eq(searchConditionId, searchConditionId),
       );
     return NextResponse.json({ message: "検索条件の編集が成功しました。" }, { status: 200 });
   } catch (error) {
@@ -103,11 +99,11 @@ export const DELETE = async (request: NextRequest) => {
   const searchConditionId = req.searchConditionId;
   const userId = req.userId;
   try {
-    await db.delete(search_conditions).where(
+    await db.delete(searchConditions).where(
       and(
         // MEMO: ユーザーのID、検索条件のIDを元に書き換える
-        eq(search_conditions.id, searchConditionId),
-        eq(search_conditions.users_id, userId),
+        eq(searchConditionId, searchConditionId),
+        eq(searchConditions.usersId, userId),
       ),
     );
     return NextResponse.json({ message: "検索条件の編集が成功しました。" }, { status: 200 });

@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { look_history } from "@/db/schemas/schema";
+import { lookHistory } from "@/db/schemas/schema";
 import axios from "axios";
 import { and, desc, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
@@ -8,27 +8,29 @@ export const POST = async (req: NextRequest) => {
   const request = await req.json();
   const userId = request.userId;
   const itemCode = request.itemCode;
+  const today = new Date();
+  const upDateAt = today.toISOString();
 
   try {
     //既存の履歴を取得(重複防止)
     const exitingHistory = await db
       .select()
-      .from(look_history)
-      .where(and(eq(look_history.users_id, userId), eq(look_history.item_code, itemCode)))
-      .orderBy(desc(look_history.updated_at));
+      .from(lookHistory)
+      .where(and(eq(lookHistory.usersId, userId), eq(lookHistory.itemCode, itemCode)))
+      .orderBy(desc(lookHistory.updatedAt));
 
     //新規履歴を登録
     if (exitingHistory.length === 0) {
-      await db.insert(look_history).values({
-        users_id: userId,
-        item_code: itemCode,
+      await db.insert(lookHistory).values({
+        usersId: userId,
+        itemCode: itemCode,
       });
     } else {
       //既存の履歴がある場合は更新
       await db
-        .update(look_history)
-        .set({ updated_at: new Date() })
-        .where(and(eq(look_history.users_id, userId), eq(look_history.item_code, itemCode)));
+        .update(lookHistory)
+        .set({ updatedAt: upDateAt })
+        .where(and(eq(lookHistory.usersId, userId), eq(lookHistory.itemCode, itemCode)));
     }
     return NextResponse.json({ message: "履歴を追加しました。" });
   } catch (error) {
@@ -53,10 +55,10 @@ export const GET = async (req: NextRequest) => {
     //履歴を取得する
     const histories = await db
       .select()
-      .from(look_history)
-      .where(eq(look_history.users_id, userId))
-      .orderBy(look_history.created_at)
-      .limit(5);
+      .from(lookHistory)
+      .where(eq(lookHistory.usersId, userId))
+      .orderBy(lookHistory.createdAt)
+      .limit(10);
 
     // 遅延させるための関数
     const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -71,7 +73,7 @@ export const GET = async (req: NextRequest) => {
             {
               params: {
                 applicationId: process.env.RAKUTEN_API_ID,
-                itemCode: decodeURIComponent(history.item_code), // item_codeを正しく渡す
+                itemCode: decodeURIComponent(history.itemCode),
                 availability: 1, // 販売可能
                 elements: "itemName,itemCode,mediumImageUrls,itemPrice",
               },
@@ -82,11 +84,11 @@ export const GET = async (req: NextRequest) => {
           const itemInfo = response.data.Items[0]?.Item;
           return {
             ...history,
-            itemInfo: itemInfo || null, // 商品情報が無い場合の処理
+            itemInfo: itemInfo || null,
           };
         } catch (error) {
           console.error(error);
-          return { ...history, itemInfo: null }; // エラー時は商品情報をnullに
+          return { ...history, itemInfo: null };
         }
       }),
     );

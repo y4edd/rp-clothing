@@ -50,23 +50,23 @@ export const POST = async (
         const quantity = cartItemObj.quantity;
         const decodedCartItem = decodeURIComponent(itemCode).replace(/^"|"$/g, "");
         const itemDBArr = await db
-          .select({ itemCode: cart.item_code, quantity: cart.quantity })
+          .select({ itemCode: cart.itemCode, quantity: cart.quantity })
           .from(cart)
-          .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedCartItem)));
+          .where(and(eq(cart.usersId, userId), eq(cart.itemCode, decodedCartItem)));
         //ユーザーのカートに商品があれば、数量だけを更新
         if (itemDBArr.length) {
           itemDBArr.map(async (itemDB) => {
             if (itemDB.itemCode === decodedCartItem) {
               const sum = itemDB.quantity + quantity;
-              await db.update(cart).set({ quantity: sum }).where(eq(cart.users_id, userId));
+              await db.update(cart).set({ quantity: sum }).where(eq(cart.usersId, userId));
             }
           });
         } else {
           //そのユーザーのカートに商品がなければ、新しくDBに追加
           await db.insert(cart).values({
-            item_code: decodedCartItem,
+            itemCode: decodedCartItem,
             quantity: quantity,
-            users_id: userId,
+            usersId: userId,
           });
         }
       }),

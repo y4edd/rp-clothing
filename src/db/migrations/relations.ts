@@ -7,7 +7,7 @@ import {
   purchaseHistory,
   searchConditions,
   users,
-} from "./schema";
+} from "../schemas/schema";
 
 export const searchConditionsRelations = relations(searchConditions, ({ one }) => ({
   user: one(users, {
