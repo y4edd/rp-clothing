@@ -163,7 +163,6 @@ export const postLogout = async () => {
 };
 
 // クライアントサイドにおいて、api内でcookieからsessionIdを取得し、redisよりuserIdを取得する非同期関数
-// MEMO: この関数は本来存在してはいけない。クライアントサイドでのcookie取得から
 export const fetchUserId = async (): Promise<{ userId: string | null; error: string | null }> => {
   try {
     const res = await fetch("http://localhost:3000/api/user/token", {

@@ -1,6 +1,6 @@
 "use client";
 import { showErrorToast, showToast } from "@/components/utils/toast/toast";
-import { deleteFavItem, fetchUserId, postFavItem } from "@/utils/apiFunc";
+import { deleteFavItem, fetchFavItem, fetchUserId, postFavItem } from "@/utils/apiFunc";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useEffect, useState } from "react";
