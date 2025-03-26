@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  margin-top: 5.0rem;
+  flex-flow: column;
+  align-items: center;
+}
+
+.succeed {
+  font-size: 2.5rem;
+}
+
+.buttonContainer {
+  margin-top: 2.0rem;
+  display: flex;
+  justify-content: space-between;
+  width: 35%;
+}

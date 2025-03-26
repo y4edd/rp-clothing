@@ -26,9 +26,13 @@ export const GET = async (request: NextRequest) => {
   try {
     // ユーザーIdを元にカート情報を取得
     const cartItems = await db
-      .select({ itemCode: cart.item_code, quantity: cart.quantity })
+      .select({ itemCode: cart.itemCode, quantity: cart.quantity })
       .from(cart)
-      .where(eq(cart.users_id, userId));
+      .where(eq(cart.usersId, userId));
+
+    if (cartItems.length === 0) {
+      return NextResponse.json({ message: "カート内に商品はありませんでした。" }, { status: 200 });
+    }
 
     // cartItemCodesという配列を作らなきゃいけない。
     // formatItemに対し、各アイテムの量を追加。
@@ -38,6 +42,7 @@ export const GET = async (request: NextRequest) => {
     });
 
     const item: CartItem[] = [];
+    let totalAmount = 0;
     const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
     const applicationId = process.env.RAKUTEN_API_ID;
 
@@ -66,6 +71,7 @@ export const GET = async (request: NextRequest) => {
           // レスポンスがある場合、商品情報を取得
           if (response.data.Items && response.data.Items.length > 0) {
             const itemData = response.data.Items[0].Item;
+            const quantity = cartItems[index].quantity;
 
             const formatItem = {
               itemName: itemData.itemName,
@@ -80,6 +86,8 @@ export const GET = async (request: NextRequest) => {
             };
 
             item.push(formatItem);
+
+            totalAmount += itemData.itemPrice * quantity;
             return formatItem;
           } else {
             console.error(`下記アイテムコードに該当する商品は存在しません: ${itemCode}`);
@@ -95,7 +103,7 @@ export const GET = async (request: NextRequest) => {
       return NextResponse.json(null, { status: 200 });
     }
 
-    return NextResponse.json({ items: item }, { status: 200 });
+    return NextResponse.json({ items: item, totalAmount }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "データを取得できませんでした。" }, { status: 400 });
@@ -117,18 +125,18 @@ export const POST = async (request: NextRequest) => {
       const cartItem = await db
         .select()
         .from(cart)
-        .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
+        .where(and(eq(cart.usersId, userId), eq(cart.itemCode, decodedItemCode)));
 
       if (cartItem.length === 0) {
         await db
           .insert(cart)
-          .values({ users_id: userId, item_code: decodedItemCode, quantity: selectedQquantity });
+          .values({ usersId: userId, itemCode: decodedItemCode, quantity: selectedQquantity });
         return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
       } else {
         await db
           .update(cart)
           .set({ quantity: cartItem[0].quantity + selectedQquantity })
-          .where(and(eq(cart.users_id, userId), eq(cart.item_code, decodedItemCode)));
+          .where(and(eq(cart.usersId, userId), eq(cart.itemCode, decodedItemCode)));
         return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
       }
     } else {
@@ -178,6 +186,7 @@ export const POST = async (request: NextRequest) => {
         response.cookies.set("sessionId", sessionId, cookieOpt);
         return response;
       }
+
       return NextResponse.json({ message: "商品をカートに追加しました。" }, { status: 200 });
     }
   } catch (error) {

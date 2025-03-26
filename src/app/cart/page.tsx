@@ -28,12 +28,10 @@ const Cart = async () => {
   try {
     const userId = await checkAuth();
     if (userId) {
-      console.log("ログイン中なり", userId);
       cartItems = await getCartItems(userId);
     } else {
       const cookieStore = await cookies();
       const token = cookieStore.get("sessionId");
-      console.log("非ログなり");
       if (!token) {
         return;
       }
@@ -63,8 +61,7 @@ const Cart = async () => {
         <BreadList
           bread={[
             { link: "/", title: "トップ" },
-            { link: "/mypage", title: "マイページ" },
-            { link: "/mypage/cart", title: "ショッピングカート" },
+            { link: "/cart", title: "ショッピングカート" },
           ]}
         />
         <PageTitle title="ショッピングカート" />

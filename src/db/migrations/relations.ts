@@ -1,5 +1,13 @@
 import { relations } from "drizzle-orm/relations";
-import { users, favoriteItem, lookHistory, purchaseHistory, searchConditions, favoriteShop, cart } from "./schema";
+import {
+  cart,
+  favoriteItem,
+  favoriteShop,
+  lookHistory,
+  purchaseHistory,
+  searchConditions,
+  users,
+} from "../schemas/schema";
 
 export const favoriteItemRelations = relations(favoriteItem, ({one}) => ({
 	user: one(users, {
