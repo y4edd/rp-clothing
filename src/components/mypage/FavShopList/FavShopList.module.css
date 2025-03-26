@@ -1,0 +1,25 @@
+.container {
+  margin-bottom: 80px;
+  margin-left: 2.0rem;
+  margin-top: 5.0rem;
+}
+
+.gridItems {
+  max-width: 1120px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.shopContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.shopInfo {
+  flex: 1;
+  word-break: break-word;
+}

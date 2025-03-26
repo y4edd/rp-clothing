@@ -364,11 +364,11 @@ export const fetchFavItem = async( itemCode: string) => {
 }
 
 // お気に入りショップを登録する非同期処理（引数：userId,shopCode）
-export const postFavShop = async (userId: string, shopCode: string) => {
+export const postFavShop = async (userId: string, shopCode: string, shopName: string, shopUrl: string) => {
   try {
     const response = await fetch("http://localhost:3000/api/favorite_shops", {
       method: "POST",
-      body: JSON.stringify({ userId, shopCode }),
+      body: JSON.stringify({ userId, shopCode, shopName, shopUrl }),
     });
     return response;
   } catch (error) {

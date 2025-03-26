@@ -9,9 +9,11 @@ import styles from "./FavoriteShopButton.module.css";
 type FavoriteShopButton = {
   userId: string;
   shopCode: string;
+  shopName: string;
+  shopUrl: string;
 };
 
-const FavoriteShopButton = ({ shopCode }: FavoriteShopButton) => {
+const FavoriteShopButton = ({ shopCode, shopName, shopUrl }: FavoriteShopButton) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [userId, setUserId] = useState("");
 
@@ -41,7 +43,7 @@ const FavoriteShopButton = ({ shopCode }: FavoriteShopButton) => {
     if (isFavorite) {
       response = await deleteFavShop(userId, shopCode);
     } else {
-      response = await postFavShop(userId, shopCode);
+      response = await postFavShop(userId, shopCode, shopName, shopUrl);
     }
     const res = await response.json();
     if (!response.ok) {

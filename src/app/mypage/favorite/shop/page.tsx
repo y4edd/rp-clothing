@@ -1,5 +1,6 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
+import FavLink from "@/components/mypage/FavLink/FavLink";
 import FavShopList from "@/components/mypage/FavShopList/FavShopList";
 import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
 import { getFavShops } from "@/utils/apiFunc";
@@ -13,9 +14,9 @@ const FavShop = async() => {
     return <UnauthorizedAccess />;
   }
 
-  // お気に入りアイテムのみ取得する
-  const favShopsObj= await getFavShops(sessionId);
-  const favShops = favShopsObj.items;
+  // お気に入りショップのみ取得する
+  const favShopsObj = await getFavShops(sessionId);
+  const favShopsArr = favShopsObj.favShops; 
 
   return (
     <>
@@ -27,7 +28,8 @@ const FavShop = async() => {
           ]}
       />
       <PageTitle title="お気に入り" />
-      <FavShopList />
+      <FavLink />
+      <FavShopList favShopsArr={favShopsArr} userId={userId} />
     </>
   )
 }

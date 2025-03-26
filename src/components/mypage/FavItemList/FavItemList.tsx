@@ -4,14 +4,12 @@ import styles from "./FavItemList.module.css";
 import Item from "@/components/top/Item/Item";
 type Props = {
   items: ItemData[] | null;
-  title?: string;
 };
 
-const FavItemList = ({ items, title }: Props) => {
+const FavItemList = ({ items }: Props) => {
   if (!items) return <NoItems />;
   return (
     <div className={styles.container}>
-      <h2 className={styles.contentTitle}>{title}</h2>
       <div className={styles.gridItems}>
         {items.map((item) => (
           <Item
