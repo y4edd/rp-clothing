@@ -413,3 +413,25 @@ export const fetchFavShop = async( shopCode: string) => {
     });
   }
 }
+
+// MEMO: お気に入り店舗を取得する非同期処理（引数：sessionId）
+export const getFavShops = async (sessionId: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/favorite_shops", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `sessionId=${sessionId}`,
+      },
+    });
+    const shops = await response.json();
+    return shops;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+}
