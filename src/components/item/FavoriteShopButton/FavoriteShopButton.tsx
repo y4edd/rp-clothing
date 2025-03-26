@@ -1,9 +1,9 @@
 "use client";
 import { showErrorToast, showToast } from "@/components/utils/toast/toast";
-import { deleteFavShop, postFavShop } from "@/utils/apiFunc";
+import { deleteFavShop, fetchFavShop, fetchUserId, postFavShop } from "@/utils/apiFunc";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./FavoriteShopButton.module.css";
 
 type FavoriteShopButton = {
@@ -11,8 +11,30 @@ type FavoriteShopButton = {
   shopCode: string;
 };
 
-const FavoriteShopButton = ({ userId, shopCode }: FavoriteShopButton) => {
+const FavoriteShopButton = ({ shopCode }: FavoriteShopButton) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    const fetchFunction = async () => {
+      const currentUserId = await fetchUserId();
+      if (!currentUserId.userId) {
+        return;
+      }
+      setUserId(currentUserId.userId);
+
+      // お気に入りに登録済みかどうかを確認する非同期を走らせる
+      const confirmFav = await fetchFavShop(shopCode);
+      if(!confirmFav) {
+        setIsFavorite(false);
+        return;
+      }
+      // trueなら、そのまま「isFavorite」がtrueになるようにセット
+      setIsFavorite(true);
+    };
+    fetchFunction();
+  }, []);
+
   const handleFavorite = async () => {
     // 登録済みなら削除し、未登録なら登録する非同期を走らせる
     let response: Response;

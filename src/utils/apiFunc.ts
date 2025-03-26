@@ -397,4 +397,19 @@ export const deleteFavShop = async (userId: string, shopCode: string) => {
   }
 };
 
-
+// お気に入りアイテムとして登録済みかを確認する非同期処理（引数：userid, itemCode）
+export const fetchFavShop = async( shopCode: string) => {
+  try {
+    const response = await fetch(`http://localhost:3000/api/is_fav_shop/${shopCode}`, {
+      method: "GET",
+    });
+    const res = await response.json();
+    return res.isFav;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+}

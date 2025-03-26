@@ -33,7 +33,6 @@ const FavoriteButton = ({ itemCode }: FavoriteButtonProps) => {
     };
     fetchFunction();
   }, []);
-  console.log("isFavorite", isFavorite);
 
   const handleFavorite = async () => {
     // 登録済みなら削除し、未登録なら登録する非同期を走らせる
