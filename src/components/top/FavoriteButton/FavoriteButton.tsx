@@ -14,6 +14,7 @@ const FavoriteButton = ({ itemCode }: FavoriteButtonProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [userId, setUserId] = useState("");
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
     const fetchFunction = async () => {
       const currentUserId = await fetchUserId();
@@ -24,7 +25,7 @@ const FavoriteButton = ({ itemCode }: FavoriteButtonProps) => {
 
       // お気に入りに登録済みかどうかを確認する非同期を走らせる
       const confirmFav = await fetchFavItem(itemCode);
-      if(!confirmFav) {
+      if (!confirmFav) {
         setIsFavorite(false);
         return;
       }

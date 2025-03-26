@@ -344,10 +344,10 @@ export const getFavItems = async (sessionId: string) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};
 
 // お気に入りアイテムとして登録済みかを確認する非同期処理（引数：userid, itemCode）
-export const fetchFavItem = async( itemCode: string) => {
+export const fetchFavItem = async (itemCode: string) => {
   try {
     const response = await fetch(`http://localhost:3000/api/is_fav_item/${itemCode}`, {
       method: "GET",
@@ -361,10 +361,15 @@ export const fetchFavItem = async( itemCode: string) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};
 
 // お気に入りショップを登録する非同期処理（引数：userId,shopCode）
-export const postFavShop = async (userId: string, shopCode: string, shopName: string, shopUrl: string) => {
+export const postFavShop = async (
+  userId: string,
+  shopCode: string,
+  shopName: string,
+  shopUrl: string,
+) => {
   try {
     const response = await fetch("http://localhost:3000/api/favorite_shops", {
       method: "POST",
@@ -398,7 +403,7 @@ export const deleteFavShop = async (userId: string, shopCode: string) => {
 };
 
 // お気に入りアイテムとして登録済みかを確認する非同期処理（引数：userid, itemCode）
-export const fetchFavShop = async( shopCode: string) => {
+export const fetchFavShop = async (shopCode: string) => {
   try {
     const response = await fetch(`http://localhost:3000/api/is_fav_shop/${shopCode}`, {
       method: "GET",
@@ -412,7 +417,7 @@ export const fetchFavShop = async( shopCode: string) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};
 
 // MEMO: お気に入り店舗を取得する非同期処理（引数：sessionId）
 export const getFavShops = async (sessionId: string) => {
@@ -434,4 +439,4 @@ export const getFavShops = async (sessionId: string) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};

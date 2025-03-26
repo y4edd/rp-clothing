@@ -6,7 +6,7 @@ export type FavShop = {
   shopCode: string;
   shopName: string;
   shopUrl: string;
-}
+};
 
 export type FavShopListProps = {
   favShopsArr: FavShop[];
@@ -26,16 +26,13 @@ const FavShopList = async ({ favShopsArr, userId }: FavShopListProps) => {
               shopUrl={favShop.shopUrl}
             />
             <div className={styles.shopInfo}>
-              <Shop
-                shopName={favShop.shopName}
-                shopUrl={favShop.shopUrl}
-              />
+              <Shop shopName={favShop.shopName} shopUrl={favShop.shopUrl} />
             </div>
           </div>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default FavShopList;

@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { favoriteItem } from "@/db/schemas/schema";
 import { redisClient } from "@/lib/redis/redis";
-import { FavItem } from "@/types/fav_item/fav_item";
+import type { FavItem } from "@/types/fav_item/fav_item";
 import axios from "axios";
 import { and, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
@@ -45,8 +45,7 @@ export const DELETE = async (request: NextRequest) => {
     // DB処理を記載
     await db
       .delete(favoriteItem)
-      .where(and(eq(favoriteItem.usersId, numUserId), eq(favoriteItem.itemCode, decodedItemCode)))
-    ;
+      .where(and(eq(favoriteItem.usersId, numUserId), eq(favoriteItem.itemCode, decodedItemCode)));
 
     return NextResponse.json(
       { message: "お気に入りアイテムの削除に成功しました" },
@@ -69,7 +68,7 @@ export const GET = async (request: NextRequest) => {
   const sessionId = sessionIdString.split("=")[1];
   // sessionIdからredis内のuserId取得
   const userIdObj = await redisClient.get(`sessionId:${sessionId}`);
-  if(!userIdObj) {
+  if (!userIdObj) {
     return NextResponse.json({ message: "ユーザーIDの取得に失敗しました" }, { status: 401 });
   }
   const userId = JSON.parse(userIdObj).userId;
@@ -79,11 +78,13 @@ export const GET = async (request: NextRequest) => {
     const favItems = await db
       .select({ itemCode: favoriteItem.itemCode })
       .from(favoriteItem)
-      .where(eq(favoriteItem.usersId, userId))
-    ;
+      .where(eq(favoriteItem.usersId, userId));
 
     if (favItems.length === 0) {
-      return NextResponse.json({ message: "お気に入りの商品はありませんでした。" }, { status: 200 });
+      return NextResponse.json(
+        { message: "お気に入りの商品はありませんでした。" },
+        { status: 200 },
+      );
     }
 
     // favItemCodesという配列を作らなきゃいけない。

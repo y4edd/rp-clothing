@@ -70,25 +70,24 @@ export const GET = async (request: NextRequest) => {
   const sessionId = sessionIdString.split("=")[1];
   // sessionIdからredis内のuserId取得
   const userIdObj = await redisClient.get(`sessionId:${sessionId}`);
-  if(!userIdObj) {
+  if (!userIdObj) {
     return NextResponse.json({ message: "ユーザーIDの取得に失敗しました" }, { status: 401 });
   }
   const userId = JSON.parse(userIdObj).userId;
 
-    try {
-      // ユーザーIdを元にお気に入りアイテム情報を取得
-      const favShops = await db
-        .select({
-          shopCode: favoriteShop.shopCode,
-          shopName: favoriteShop.shopName,
-          shopUrl: favoriteShop.shopUrl,
-        })
-        .from(favoriteShop)
-        .where(eq(favoriteShop.usersId, userId))
-      ;  
-      return NextResponse.json({ favShops: favShops }, { status: 200 });
-    } catch (error) {
-      console.error(error);
-      return NextResponse.json({ message: "データを取得できませんでした。" }, { status: 500 });
-    }
-}
+  try {
+    // ユーザーIdを元にお気に入りアイテム情報を取得
+    const favShops = await db
+      .select({
+        shopCode: favoriteShop.shopCode,
+        shopName: favoriteShop.shopName,
+        shopUrl: favoriteShop.shopUrl,
+      })
+      .from(favoriteShop)
+      .where(eq(favoriteShop.usersId, userId));
+    return NextResponse.json({ favShops: favShops }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: "データを取得できませんでした。" }, { status: 500 });
+  }
+};

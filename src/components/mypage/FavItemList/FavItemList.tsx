@@ -1,7 +1,8 @@
 import NoItems from "@/app/search/noItems";
-import { ItemData } from "@/types/item/item";
-import styles from "./FavItemList.module.css";
 import Item from "@/components/top/Item/Item";
+import type { ItemData } from "@/types/item/item";
+import styles from "./FavItemList.module.css";
+
 type Props = {
   items: ItemData[] | null;
 };
@@ -22,7 +23,7 @@ const FavItemList = ({ items }: Props) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default FavItemList;
