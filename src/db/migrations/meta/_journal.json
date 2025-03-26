@@ -71,6 +71,13 @@
       "when": 1741921913113,
       "tag": "0009_rich_star_brand",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1742949824320,
+      "tag": "0010_mysterious_peter_quill",
+      "breakpoints": true
     }
   ]
 }
