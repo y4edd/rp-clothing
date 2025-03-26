@@ -23,7 +23,7 @@ const FavoriteButton = ({ itemCode }: FavoriteButtonProps) => {
       setUserId(currentUserId.userId);
 
       // お気に入りに登録済みかどうかを確認する非同期を走らせる
-      const confirmFav = await fetchFavItem(userId, itemCode);
+      const confirmFav = await fetchFavItem(itemCode);
       if(!confirmFav) {
         setIsFavorite(false);
         return;
