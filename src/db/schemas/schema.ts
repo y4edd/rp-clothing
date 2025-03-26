@@ -56,6 +56,7 @@ export const purchaseHistory = pgTable(
   {
     id: serial().primaryKey().notNull(),
     usersId: integer("users_id").notNull(),
+    itemCode: text("item_code").notNull(),
     itemPrice: text("item_price").notNull(),
     itemName: text("item_name").notNull(),
     itemImage: text("item_image").notNull(),

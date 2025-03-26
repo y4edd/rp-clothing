@@ -1,34 +1,33 @@
-import Item from "../Item/Item";
+import WatchedContainer from "@/components/mypage/WatchedContainer/WatchedContainer";
+import { checkAuth } from "@/utils/checkAuth";
+import { fetchWatched } from "@/utils/fetchWatched";
+import Link from "next/link";
 import styles from "./LookHistory.module.css";
 
-const LookHistory = () => {
-  // MEMO アイテム情報取得したら消します
-
-  const sampleArrayHistory = new Array(5).fill("").map((_, index) => index + 1);
+const LookHistory = async () => {
+  const userId = await checkAuth();
+  const data = await fetchWatched(userId);
 
   return (
     <div className={styles.container}>
       <h2 className={styles.contentTitle}>最近チェックしたアイテム</h2>
       <div className={styles.gridItemsHistory}>
-        {sampleArrayHistory.map((item) => (
-          <Item
-            key={item}
-            itemName={"sample Item"}
-            itemCode={"sampleCode"}
-            itemImage={"/sample/sample-item-image.png"}
-            itemPrice={2000}
-          />
-        ))}
+        <WatchedContainer histories={data?.histories || []} className="slider" />
       </div>
 
-      {/* MEMO:未ログ状態の時表示する。後でボタンコンポーネントに変更する */}
-      {/* <div className={styles.onlyMember}>
-        <div className={styles.onlyTitle}>
-          <h3>会員限定機能です</h3>
+      {!userId && (
+        <div className={styles.onlyMember}>
+          <div className={styles.onlyTitle}>
+            <h3>会員限定機能です</h3>
+          </div>
+          <p>取扱商品多数！まずは会員登録！</p>
+          <Link href="/user/register">
+            <button type="button" className={styles.onlyButton}>
+              新規会員登録
+            </button>
+          </Link>
         </div>
-        <p>取扱商品多数！まずは会員登録！</p>
-        <button>新規会員登録</button>
-      </div> */}
+      )}
     </div>
   );
 };

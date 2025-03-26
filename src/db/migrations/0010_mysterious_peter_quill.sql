@@ -1,0 +1,1 @@
+ALTER TABLE "purchase_history" ADD COLUMN "item_code" text NOT NULL;

@@ -4,13 +4,10 @@ import styles from "./WatchedContainer.module.css";
 
 type Props = {
   histories: History[];
+  className?: string;
 };
-const WatchedContainer = ({ histories }: Props) => {
-  return (
-    <div className={styles.container}>
-      <WatchedList histories={histories} />
-    </div>
-  );
+const WatchedContainer = ({ histories, className }: Props) => {
+  return <WatchedList histories={histories} className={className} />;
 };
 
 export default WatchedContainer;
