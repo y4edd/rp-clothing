@@ -4,7 +4,7 @@ import type { ItemData } from "@/types/item/item";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import FavoriteBUtton from "../FavoriteButton/FavoriteButton";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import styles from "./Item.module.css";
 
 const Item = ({ itemCode, itemName, itemPrice, itemImage }: ItemData) => {
@@ -32,7 +32,7 @@ const Item = ({ itemCode, itemName, itemPrice, itemImage }: ItemData) => {
           </p>
         </div>
       </Link>
-      <FavoriteBUtton />
+      <FavoriteButton itemCode={itemCode} />
     </div>
   );
 };

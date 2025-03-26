@@ -1,4 +1,5 @@
 import type { ItemDetailModel } from "@/types/item/item";
+import { checkAuth } from "@/utils/checkAuth";
 import Link from "next/link";
 import FavoriteShopButton from "../FavoriteShopButton/FavoriteShopButton";
 import ItemImage from "../ItemImage/ItemImage";
@@ -10,10 +11,11 @@ type Props = {
   itemCode: string;
 };
 
-const ItemInfo = ({ itemData, itemCode }: Props) => {
+const ItemInfo = async ({ itemData, itemCode }: Props) => {
+  const userId = await checkAuth();
   return (
     <div className={styles.container}>
-      <ItemImage itemImage={itemData.itemImage} />
+      <ItemImage itemImage={itemData.itemImage} itemCode={itemCode} />
       <dl className={styles.infoList}>
         <div className={styles.infoContent}>
           <dt>商品名 :</dt>
@@ -25,7 +27,7 @@ const ItemInfo = ({ itemData, itemCode }: Props) => {
             <Link href={itemData.shopUrl} className={styles.shopLink}>
               {itemData.shopName}
             </Link>
-            <FavoriteShopButton />
+            <FavoriteShopButton userId={userId} shopCode={itemData.shopCode} />
           </dd>
         </div>
         <div className={styles.infoContent}>

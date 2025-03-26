@@ -289,3 +289,73 @@ export const getSessionCartItems = async (token: string) => {
     });
   }
 };
+
+// お気に入りアイテムを登録する非同期処理（引数：userId,itemCode）
+export const postFavItem = async (userId: string, itemCode: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/favorite_items", {
+      method: "POST",
+      body: JSON.stringify({ userId, itemCode }),
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// お気に入りアイテムを削除する非同期処理（引数：userId,itemCode）
+export const deleteFavItem = async (userId: string, itemCode: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/favorite_items", {
+      method: "DELETE",
+      body: JSON.stringify({ userId, itemCode }),
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// MEMO: お気に入りアイテムを取得する非同期処理（引数：userId,itemCode）
+
+// お気に入りショップを登録する非同期処理（引数：userId,shopCode）
+export const postFavShop = async (userId: string, shopCode: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/favorite_shops", {
+      method: "POST",
+      body: JSON.stringify({ userId, shopCode }),
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// お気に入りショップを削除する非同期処理（引数：userId,shopCode）
+export const deleteFavShop = async (userId: string, shopCode: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/favorite_shops", {
+      method: "DELETE",
+      body: JSON.stringify({ userId, shopCode }),
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
