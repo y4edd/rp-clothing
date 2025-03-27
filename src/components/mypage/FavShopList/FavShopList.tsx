@@ -1,6 +1,6 @@
 import FavoriteShopButton from "@/components/item/FavoriteShopButton/FavoriteShopButton";
-import Shop from "../Shop/Shop";
 import styles from "./FavShopList.module.css";
+import Link from "next/link";
 
 export type FavShop = {
   shopCode: string;
@@ -26,7 +26,7 @@ const FavShopList = async ({ favShopsArr, userId }: FavShopListProps) => {
               shopUrl={favShop.shopUrl}
             />
             <div className={styles.shopInfo}>
-              <Shop shopName={favShop.shopName} shopUrl={favShop.shopUrl} />
+              <Link href={favShop.shopUrl}>{favShop.shopName}</Link>
             </div>
           </div>
         ))}
