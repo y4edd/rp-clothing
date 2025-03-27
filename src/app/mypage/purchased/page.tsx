@@ -1,10 +1,28 @@
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
+import PurchasedItem from "@/components/mypage/PurchasedItem/PurchasedItem";
+import UnauthorizedAccess from "@/components/user/UnauthorizedAccess/UnauthorizedAccess";
+import { getPurchasedItems } from "@/utils/apiFunc";
+import { checkAuth } from "@/utils/checkAuth";
 import styles from "./page.module.css";
-import Image from "next/image";
-import Link from "next/link";
 
-const Purchased = () => {
+type PurchasedItemObj = {
+  itemCode: string;
+  itemName: string;
+  itemPrice: number;
+  itemImage: string;
+  itemShop: string;
+  createdAt: string;
+  quantity: number;
+};
+
+const Purchased = async () => {
+  const token = await checkAuth();
+  if (!token) {
+    return <UnauthorizedAccess />;
+  }
+  const purchasedItems = await getPurchasedItems(token);
+
   return (
     <>
       <BreadList
@@ -22,39 +40,12 @@ const Purchased = () => {
               <td className={styles.itemInfo}>商品情報</td>
               <td className={styles.itemShop}>販売店舗</td>
               <td className={styles.quantity}>決済日</td>
-              {/* <td className={styles.delete}>削除</td> */}
             </tr>
           </thead>
           <tbody>
-            <tr className={styles.cartItem}>
-              <td className={styles.itemInfoCart}>
-                <figure className={styles.itemImage}>
-                  <Image
-                    src="/sample/sample-item-image.png"
-                    alt="アイテム画像"
-                    width={200}
-                    height={200}
-                    className={styles.itemImage}
-                  />
-                </figure>
-                <dl className={styles.itemInfoDetail}>
-                  <dt className={styles.itemName}>商品名：</dt>
-                  <dt className={styles.itemPrice}>価格：</dt>
-                  <dt className={styles.itemPrice}>数量：</dt>
-                  {/* <dd>{item.itemPrice.toLocaleString()}円</dd> */}
-                </dl>
-              </td>
-              <td className={styles.itemShop}>
-                {/* <Link href={item.shopUrl}>{item.shopName}</Link> */}
-                <Link href="/">ショップ名</Link>
-              </td>
-              <td className={styles.itemShop}>
-                <p>2024/10/01</p>
-              </td>
-            </tr>
-            {/* {cartItems.items.map((item: CartItemObj) => (
-                <CartItem key={item.itemCode} item={item} userId={userId} />
-              ))} */}
+            {purchasedItems.purchasedHistories.map((purchasedHistory: PurchasedItemObj) => (
+              <PurchasedItem key={purchasedHistory.itemCode} purchasedHistory={purchasedHistory} />
+            ))}
           </tbody>
         </table>
       </div>

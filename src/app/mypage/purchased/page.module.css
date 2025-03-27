@@ -26,27 +26,13 @@
   padding: 0.5rem 0rem;
 }
 
-/* .itemShop {
-  border: 1px solid #ffffff;
-  background-color: #d9d9d9;
-} */
-
 .itemShop {
   width: 30%;
-  border-bottom: 1px solid black;
   padding: 0rem 2.0rem;
-  text-decoration: underline;
+  background-color: #d9d9d9;
 }
 
 .quantity {
   border: 1px solid #ffffff;
   background-color: #d9d9d9;
-}
-
-.itemInfoCart {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid black;
-  padding: 1rem;
 }

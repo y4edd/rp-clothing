@@ -1,48 +1,30 @@
 import { db } from "@/db";
-import { purchase_history } from "@/db/schemas/schema";
-import { checkAuth } from "@/utils/checkAuth";
-import axios from "axios";
+import { purchaseHistory } from "@/db/schemas/schema";
 import { eq } from "drizzle-orm";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
-  const request = await req.json();
-  const userId = request.userId;
-  const itemCode = request.itemCode;
-
+  const userIdString = req.headers.get("Cookie");
   try {
-    const userIdString = await checkAuth();
-    const userId = Number(userIdString);
+    if (!userIdString) {
+      return NextResponse.json({ message: "セッションエラーが発生しました" }, { status: 401 });
+    }
+    const userId = Number(userIdString.split("=")[1]);
 
-    if(!userId) {
-      return NextResponse.json({ message: "ユーザーIDの取得処理に失敗しました"})
+    if (!userId) {
+      return NextResponse.json({ message: "ユーザーIDの取得処理に失敗しました" });
     }
 
     const purchasedHistories = await db
       .select()
-      .from(purchase_history)
-      .where(eq(purchase_history.users_id, userId))
-      .orderBy(purchase_history.date)
+      .from(purchaseHistory)
+      .where(eq(purchaseHistory.usersId, userId))
+      .orderBy(purchaseHistory.createdAt)
       .limit(5);
 
-    const itemDetails = await Promise.all(
-      purchasedHistories.map(async (purchaseHistory,index) => {
-        try {
-          const response = await axios.get(
-            "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601",
-            {
-              params: {
-                applicationId: process.env.RAKUTEN_API_ID,
-                itemCode: purchaseHistory.
-              }
-            }
-          )
-        } catch (error) {
-          
-        }
-      })
-    )
+    return NextResponse.json({ purchasedHistories });
   } catch (error) {
-    
+    console.error("エラー", error);
+    return NextResponse.json({ message: "エラーが発生しました" }, { status: 500 });
   }
-}
+};

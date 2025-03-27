@@ -12,7 +12,7 @@ export const POST = async (req: NextRequest) => {
   const upDateAt = today.toISOString();
 
   try {
-    //既存の履歴を取得(重複防止)
+    //既存の履歴を取得
     const exitingHistory = await db
       .select()
       .from(lookHistory)
@@ -43,6 +43,7 @@ export const POST = async (req: NextRequest) => {
 export const GET = async (req: NextRequest) => {
   try {
     const userIdString = req.headers.get("Cookie");
+    console.log("ユーザーIDストリング", userIdString);
     if (!userIdString) {
       return NextResponse.json({ message: "セッションエラーが発生しました" }, { status: 401 });
     }

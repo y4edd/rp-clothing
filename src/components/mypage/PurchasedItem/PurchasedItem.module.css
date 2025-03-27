@@ -1,0 +1,40 @@
+.cartItem {
+  font-size: 1.4rem;
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid black;
+  padding: 1rem;
+}
+
+.itemImage {
+  margin-right: 1.0rem;
+}
+
+.itemShop {
+  width: 30%;
+  border-bottom: 1px solid black;
+  padding: 0rem 2.0rem;
+}
+
+.itemQuantity {
+  width: 10%;
+  border-bottom: 1px solid black;
+}
+
+.number {
+  width: 15%;
+  border-bottom: 1px solid black;
+  padding: 0rem 1.0rem;
+}
+
+.itemInfoCart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid black;
+  padding: 1rem;
+}
