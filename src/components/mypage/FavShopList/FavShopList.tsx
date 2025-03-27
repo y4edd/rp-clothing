@@ -1,6 +1,6 @@
 import FavoriteShopButton from "@/components/item/FavoriteShopButton/FavoriteShopButton";
-import styles from "./FavShopList.module.css";
 import Link from "next/link";
+import styles from "./FavShopList.module.css";
 
 export type FavShop = {
   shopCode: string;
