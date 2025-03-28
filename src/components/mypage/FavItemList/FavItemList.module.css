@@ -1,0 +1,13 @@
+.container {
+  margin-bottom: 80px;
+  margin-left: 2.0rem;
+}
+
+.gridItems {
+  max-width: 1120px;
+  width: 100%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px 15px;
+}

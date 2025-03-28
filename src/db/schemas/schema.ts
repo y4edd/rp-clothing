@@ -124,6 +124,8 @@ export const favoriteShop = pgTable(
     id: serial().primaryKey().notNull(),
     usersId: integer("users_id").notNull(),
     shopCode: text("shop_code").notNull(),
+    shopName: text("shop_name").notNull(),
+    shopUrl: text("shop_url").notNull(),
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow(),
     updatedAt: timestamp("updated_at", { mode: "string" }).defaultNow(),
   },

@@ -1,0 +1,1 @@
+ALTER TABLE "favorite_shop" ADD COLUMN "shop_name" text NOT NULL;

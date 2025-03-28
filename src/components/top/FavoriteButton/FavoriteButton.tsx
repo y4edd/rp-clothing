@@ -1,6 +1,6 @@
 "use client";
 import { showErrorToast, showToast } from "@/components/utils/toast/toast";
-import { deleteFavItem, fetchUserId, postFavItem } from "@/utils/apiFunc";
+import { deleteFavItem, fetchFavItem, fetchUserId, postFavItem } from "@/utils/apiFunc";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useEffect, useState } from "react";
@@ -14,6 +14,7 @@ const FavoriteButton = ({ itemCode }: FavoriteButtonProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [userId, setUserId] = useState("");
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
     const fetchFunction = async () => {
       const currentUserId = await fetchUserId();
@@ -21,6 +22,15 @@ const FavoriteButton = ({ itemCode }: FavoriteButtonProps) => {
         return;
       }
       setUserId(currentUserId.userId);
+
+      // お気に入りに登録済みかどうかを確認する非同期を走らせる
+      const confirmFav = await fetchFavItem(itemCode);
+      if (!confirmFav) {
+        setIsFavorite(false);
+        return;
+      }
+      // trueなら、そのまま「isFavorite」がtrueになるようにセット
+      setIsFavorite(true);
     };
     fetchFunction();
   }, []);

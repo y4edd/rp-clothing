@@ -324,14 +324,56 @@ export const deleteFavItem = async (userId: string, itemCode: string) => {
   }
 };
 
-// MEMO: お気に入りアイテムを取得する非同期処理（引数：userId,itemCode）
+// MEMO: お気に入りアイテムを取得する非同期処理（引数：userId）
+export const getFavItems = async (sessionId: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/favorite_items", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `sessionId=${sessionId}`,
+      },
+    });
+    const items = await response.json();
+    return items;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// お気に入りアイテムとして登録済みかを確認する非同期処理（引数：userid, itemCode）
+export const fetchFavItem = async (itemCode: string) => {
+  try {
+    const response = await fetch(`http://localhost:3000/api/is_fav_item/${itemCode}`, {
+      method: "GET",
+    });
+    const res = await response.json();
+    return res.isFav;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
 
 // お気に入りショップを登録する非同期処理（引数：userId,shopCode）
-export const postFavShop = async (userId: string, shopCode: string) => {
+export const postFavShop = async (
+  userId: string,
+  shopCode: string,
+  shopName: string,
+  shopUrl: string,
+) => {
   try {
     const response = await fetch("http://localhost:3000/api/favorite_shops", {
       method: "POST",
-      body: JSON.stringify({ userId, shopCode }),
+      body: JSON.stringify({ userId, shopCode, shopName, shopUrl }),
     });
     return response;
   } catch (error) {
@@ -359,7 +401,6 @@ export const deleteFavShop = async (userId: string, shopCode: string) => {
     });
   }
 };
-
 //購入履歴を取得する非同期処理
 export const getPurchasedItems = async (token: string) => {
   try {
@@ -372,6 +413,45 @@ export const getPurchasedItems = async (token: string) => {
     });
     const data = await response.json();
     return data;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// お気に入りアイテムとして登録済みかを確認する非同期処理（引数：userid, itemCode）
+export const fetchFavShop = async (shopCode: string) => {
+  try {
+    const response = await fetch(`http://localhost:3000/api/is_fav_shop/${shopCode}`, {
+      method: "GET",
+    });
+    const res = await response.json();
+    return res.isFav;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+
+// MEMO: お気に入り店舗を取得する非同期処理（引数：sessionId）
+export const getFavShops = async (sessionId: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/favorite_shops", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `sessionId=${sessionId}`,
+      },
+    });
+    const shops = await response.json();
+    return shops;
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
