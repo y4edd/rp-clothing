@@ -18,8 +18,8 @@ type PurchasedItemProps = {
 const PurchasedItem = ({ purchasedHistory }: PurchasedItemProps) => {
   const name = purchasedHistory.itemName;
   const trimmedName = name.length > 10 ? `${name.slice(0, 10)} ...` : name;
-  const cratedAt = purchasedHistory.createdAt;
-  const trimmedCreatedAt = cratedAt.length > 10 ? `${cratedAt.slice(0, 10)} ...` : cratedAt;
+  const createdAt = purchasedHistory.createdAt;
+  const trimmedCreatedAt = createdAt.length > 10 ? `${createdAt.slice(0, 10)} ...` : createdAt;
   return (
     <>
       <tr className={styles.cartItem}>
