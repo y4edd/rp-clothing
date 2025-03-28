@@ -35,7 +35,7 @@ const Cart = async () => {
       const token = cookieStore.get("sessionId");
       if (!token) {
         return;
-      } 
+      }
       cartItems = await getSessionCartItems(token.value);
     }
 

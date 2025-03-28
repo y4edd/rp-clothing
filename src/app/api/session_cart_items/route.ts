@@ -8,18 +8,12 @@ export const GET = async (request: NextRequest) => {
   // cookieからsessionIdを取得し、redisよりカート情報を取得する
   const sessionIdString = request.headers.get("Cookie");
   if (!sessionIdString) {
-    return NextResponse.json(
-      { items: item },
-      { status: 200 },
-    );
+    return NextResponse.json({ items: item }, { status: 200 });
   }
   const sessionId = sessionIdString.split("=")[1];
   const redis = await redisClient.get(`sessionId:${sessionId}`);
   if (!redis) {
-    return NextResponse.json(
-      { items: item },
-      { status: 200 },
-    );
+    return NextResponse.json({ items: item }, { status: 200 });
   }
 
   const redisObj: CartItemInRedis[] = JSON.parse(redis);
