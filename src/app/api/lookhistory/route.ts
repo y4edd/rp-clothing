@@ -43,7 +43,7 @@ export const POST = async (req: NextRequest) => {
 export const GET = async (req: NextRequest) => {
   try {
     const userIdString = req.headers.get("Cookie");
-    console.log("ユーザーIDストリング", userIdString);
+
     if (!userIdString) {
       return NextResponse.json({ message: "セッションエラーが発生しました" }, { status: 401 });
     }

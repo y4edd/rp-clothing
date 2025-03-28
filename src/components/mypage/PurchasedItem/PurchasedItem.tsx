@@ -19,7 +19,8 @@ const PurchasedItem = ({ purchasedHistory }: PurchasedItemProps) => {
   const name = purchasedHistory.itemName;
   const trimmedName = name.length > 10 ? `${name.slice(0, 10)} ...` : name;
   const createdAt = purchasedHistory.createdAt;
-  const trimmedCreatedAt = createdAt.length > 10 ? `${createdAt.slice(0, 10)} ...` : createdAt;
+  const trimmedCreatedAt =
+    createdAt.length > 10 ? `${createdAt.slice(0, 10)} ...` : createdAt;
   return (
     <>
       <tr className={styles.cartItem}>
@@ -35,8 +36,12 @@ const PurchasedItem = ({ purchasedHistory }: PurchasedItemProps) => {
           </figure>
           <dl className={styles.itemInfoDetail}>
             <dt className={styles.itemName}>商品名：{trimmedName}</dt>
-            <dt className={styles.itemPrice}>価格：{purchasedHistory.itemPrice}円</dt>
-            <dt className={styles.itemPrice}>数量：{purchasedHistory.quantity}</dt>
+            <dt className={styles.itemPrice}>
+              価格：{purchasedHistory.itemPrice}円
+            </dt>
+            <dt className={styles.itemPrice}>
+              数量：{purchasedHistory.quantity}
+            </dt>
           </dl>
         </td>
         <td className={styles.itemShop}>{purchasedHistory.itemShop}</td>
