@@ -31,7 +31,7 @@ export const GET = async (request: NextRequest) => {
       .where(eq(cart.usersId, userId));
 
     if (cartItems.length === 0) {
-      return NextResponse.json({ message: "カート内に商品はありませんでした。" }, { status: 200 });
+      return NextResponse.json({ items: cartItems }, { status: 200 });
     }
 
     // cartItemCodesという配列を作らなきゃいけない。

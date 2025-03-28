@@ -1,13 +1,9 @@
 import ToFavoriteButton from "@/components/favorite/toFavoriteButton/ToFavoriteButton";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("next/navigation", () => ({ useRouter: jest.fn() }))
+jest.mock("next/navigation", () => ({ useRouter: jest.fn() }));
 
 describe("ToFavoriteButton コンポーネントの単体テスト", () => {
-  const mockRouter = {
-    push: jest.fn()
-  };
-
   test("ボタンが正しくレンダリングされること", () => {
     render(<ToFavoriteButton />);
 

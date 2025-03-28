@@ -31,10 +31,11 @@ const Cart = async () => {
       cartItems = await getCartItems(userId);
     } else {
       const cookieStore = await cookies();
+      // 根本的な設計ミス。
       const token = cookieStore.get("sessionId");
       if (!token) {
         return;
-      }
+      } 
       cartItems = await getSessionCartItems(token.value);
     }
 
@@ -55,7 +56,6 @@ const Cart = async () => {
       );
     }
 
-    console.log(cartItems);
     return (
       <>
         <BreadList

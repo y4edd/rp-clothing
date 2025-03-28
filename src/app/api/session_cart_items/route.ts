@@ -4,20 +4,20 @@ import axios from "axios";
 import { type NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {
+  const item: CartItem[] = [];
   // cookieからsessionIdを取得し、redisよりカート情報を取得する
   const sessionIdString = request.headers.get("Cookie");
   if (!sessionIdString) {
     return NextResponse.json(
-      { message: "セッションなし。カートに商品は登録されていないようです" },
+      { items: item },
       { status: 200 },
     );
   }
   const sessionId = sessionIdString.split("=")[1];
   const redis = await redisClient.get(`sessionId:${sessionId}`);
-
   if (!redis) {
     return NextResponse.json(
-      { message: "カートに商品は登録されていないようです" },
+      { items: item },
       { status: 200 },
     );
   }
@@ -29,7 +29,6 @@ export const GET = async (request: NextRequest) => {
   const applicationId = process.env.RAKUTEN_API_ID;
 
   try {
-    const item: CartItem[] = [];
     await Promise.all(
       redisObj.map(async (cartItemCode, index) => {
         // itemCodeをデコードし、余計な「""」を排除

@@ -46,7 +46,6 @@ export const GET = async (request: NextRequest) => {
           itemName: item.itemName,
           itemImage: item.itemImage,
           itemShop: item.shopName,
-          itemCode: item.itemCode,
           paymentIntent: paymentIntent,
           isBirthdaySaleUse: false,
           quantity: item.quantity,
