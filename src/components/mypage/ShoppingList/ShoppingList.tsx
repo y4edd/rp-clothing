@@ -22,7 +22,7 @@ const ShoppingList = () => {
         MUIicon={<AccessTimeOutlinedIcon sx={{ fontSize: ICON_SIZE }} />}
       />
       <ActionLink
-        linkPath="/history/purchased"
+        linkPath="/mypage/purchased"
         textArray={["購入履歴"]}
         MUIicon={<ShoppingBasketIcon sx={{ fontSize: ICON_SIZE }} />}
       />

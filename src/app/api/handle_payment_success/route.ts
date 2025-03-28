@@ -41,6 +41,7 @@ export const GET = async (request: NextRequest) => {
       for (const item of items.items) {
         await tx.insert(purchaseHistory).values({
           usersId: userId,
+          itemCode: item.itemCode,
           itemPrice: item.itemPrice,
           itemName: item.itemName,
           itemImage: item.itemImage,
