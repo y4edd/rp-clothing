@@ -401,6 +401,26 @@ export const deleteFavShop = async (userId: string, shopCode: string) => {
     });
   }
 };
+//購入履歴を取得する非同期処理
+export const getPurchasedItems = async (token: string) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/purchased_items", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `usersId=${token}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: "通信エラーが発生しました。" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
 
 // お気に入りアイテムとして登録済みかを確認する非同期処理（引数：userid, itemCode）
 export const fetchFavShop = async (shopCode: string) => {
