@@ -1,15 +1,22 @@
 import { db } from "@/db";
 import { purchaseHistory } from "@/db/schemas/schema";
 import { eq } from "drizzle-orm";
-import { type NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest) => {
-  const userIdString = req.headers.get("Cookie");
+export const GET = async () => {
+  const cookiesStore = await cookies();
+
   try {
-    if (!userIdString) {
+    if (!cookiesStore) {
       return NextResponse.json({ message: "セッションエラーが発生しました" }, { status: 401 });
     }
-    const userId = Number(userIdString.split("=")[1]);
+    const userIdString = cookiesStore.get("usersId");
+
+    if (!userIdString) {
+      return NextResponse.json({ message: "ユーザーIDの取得処理に失敗しました" });
+    }
+    const userId = Number(userIdString.value);
 
     if (!userId) {
       return NextResponse.json({ message: "ユーザーIDの取得処理に失敗しました" });
