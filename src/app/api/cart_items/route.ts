@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { cart } from "@/db/schemas/schema";
 import { redisClient } from "@/lib/redis/redis";
 import type { CartItem, CartItemInRedis } from "@/types/cart_item/cart_item";
+import { getIsBirthday } from "@/utils/apiFunc";
 import { checkAuth } from "@/utils/checkAuth";
 import { cookieOpt } from "@/utils/cookie";
 import { REDIS_MAX_AGE } from "@/utils/redis";
@@ -88,6 +89,13 @@ export const GET = async (request: NextRequest) => {
             item.push(formatItem);
 
             totalAmount += itemData.itemPrice * quantity;
+
+            const isBirthday = await getIsBirthday(userId.toString());
+
+            if (isBirthday) {
+              totalAmount = Math.round(totalAmount * 0.7);
+            }
+
             return formatItem;
           } else {
             console.error(`下記アイテムコードに該当する商品は存在しません: ${itemCode}`);

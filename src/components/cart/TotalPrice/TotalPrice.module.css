@@ -32,3 +32,12 @@
   align-items: center;
   margin-left: 1.4rem;
 }
+
+.birthday {
+  margin-top: 5.0rem;
+}
+
+p.birthday {
+  font-size: 1.4rem;
+  color: red;
+}
