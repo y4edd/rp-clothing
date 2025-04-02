@@ -90,12 +90,6 @@ export const GET = async (request: NextRequest) => {
 
             totalAmount += itemData.itemPrice * quantity;
 
-            const isBirthday = await getIsBirthday(userId.toString());
-
-            if (isBirthday) {
-              totalAmount = Math.round(totalAmount * 0.7);
-            }
-
             return formatItem;
           } else {
             console.error(`下記アイテムコードに該当する商品は存在しません: ${itemCode}`);
@@ -109,6 +103,15 @@ export const GET = async (request: NextRequest) => {
     // itemが空の配列の場合、nullを返し別のコンポーネントが表示されるように
     if (item.length === 0) {
       return NextResponse.json(null, { status: 200 });
+    }
+
+    const isBirthday = await getIsBirthday(userId.toString());
+
+    const discountRate = 0.3;
+    const discountPrice = totalAmount * (1 - discountRate);
+
+    if (isBirthday.isBirthday) {
+      totalAmount = Math.round(discountPrice);
     }
 
     return NextResponse.json({ items: item, totalAmount }, { status: 200 });

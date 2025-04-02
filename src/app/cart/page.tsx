@@ -21,6 +21,7 @@ type CartItemObj = {
 
 type CartItems = {
   items: CartItemObj[];
+  totalAmount: number;
 };
 
 const Cart = async () => {
@@ -40,10 +41,10 @@ const Cart = async () => {
     }
 
     const isBirthdayObj = await getIsBirthday(userId);
-    console.log("aaaaaaa", isBirthdayObj);
 
     const isBirthday = isBirthdayObj.isBirthday;
-    console.log("bbbbbbb", isBirthday);
+
+    const totalPrice = cartItems.totalAmount;
 
     // カートが空の場合
     if (!cartItems || !cartItems.items.length) {
@@ -87,7 +88,7 @@ const Cart = async () => {
               ))}
             </tbody>
           </table>
-          <TotalPrice cartItemArr={cartItems.items} isBirthday={isBirthday} />
+          <TotalPrice isBirthday={isBirthday} totalPrice={totalPrice} />
         </div>
       </>
     );
