@@ -3,7 +3,7 @@ import NoCartItems from "@/components/cart/NoCartItems/NoCartItems";
 import TotalPrice from "@/components/cart/TotalPrice/TotalPrice";
 import BreadList from "@/components/frame/breadList/BreadList";
 import PageTitle from "@/components/frame/pageTitle/PageTitle";
-import { getCartItems, getSessionCartItems } from "@/utils/apiFunc";
+import { getCartItems, getIsBirthday, getSessionCartItems } from "@/utils/apiFunc";
 import { checkAuth } from "@/utils/checkAuth";
 import { cookies } from "next/headers";
 import styles from "./page.module.css";
@@ -21,6 +21,7 @@ type CartItemObj = {
 
 type CartItems = {
   items: CartItemObj[];
+  totalAmount: number;
 };
 
 const Cart = async () => {
@@ -38,6 +39,12 @@ const Cart = async () => {
       }
       cartItems = await getSessionCartItems(token.value);
     }
+
+    const isBirthdayObj = await getIsBirthday(userId);
+
+    const isBirthday = isBirthdayObj.isBirthday;
+
+    const totalPrice = cartItems.totalAmount;
 
     // カートが空の場合
     if (!cartItems || !cartItems.items.length) {
@@ -81,7 +88,7 @@ const Cart = async () => {
               ))}
             </tbody>
           </table>
-          <TotalPrice cartItemArr={cartItems.items} />
+          <TotalPrice isBirthday={isBirthday} totalPrice={totalPrice} />
         </div>
       </>
     );
