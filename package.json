@@ -41,7 +41,7 @@
     "react-use": "^17.6.0",
     "redis": "^4.7.0",
     "stripe": "^17.7.0",
-    "styled-components": "^6.1.13",
+    "styled-components": "^6.1.18",
     "uuid": "^11.0.5"
   },
   "devDependencies": {
