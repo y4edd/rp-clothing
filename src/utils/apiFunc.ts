@@ -128,10 +128,16 @@ export const deleteCondition = async (searchConditionId: number, userId: string)
 // ログインを行うための非同期関数
 export const login = async (data: LoginProps, sessionId: string): Promise<Response> => {
   try {
-    const response = await fetch(`http://localhost:3000/api/user/login/${sessionId}`, {
+    // dataとsessionIdを1つのオブジェクトに結合
+    const dataObj = {
+      ...data,
+      sessionId,
+    };
+
+    const response = await fetch(`http://localhost:3000/api/user/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(dataObj),
     });
 
     return response;
@@ -143,6 +149,7 @@ export const login = async (data: LoginProps, sessionId: string): Promise<Respon
     });
   }
 };
+
 
 // ログアウトを行うための非同期関数
 export const postLogout = async () => {

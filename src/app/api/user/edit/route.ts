@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { users } from "@/db/schemas/schema";
 import { redisClient } from "@/lib/redis/redis";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -29,7 +29,7 @@ export const PATCH = async (request: NextRequest) => {
       return NextResponse.json({ message: "編集用のデータがありません" }, { status: 401 });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
 
     // userIdを元に対象のデータを更新する
     await db

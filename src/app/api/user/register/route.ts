@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { users } from "@/db/schemas/schema";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -17,7 +17,7 @@ export const POST = async (req: NextRequest) => {
     if (selectEmail.length) {
       return NextResponse.json({ message: "このemailは重複しています。" }, { status: 409 });
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
 
     await db.insert(users).values({
       name,

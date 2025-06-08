@@ -1,0 +1,38 @@
+services:
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres:15
+    container_name: rp-clothing-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: rp_clothing
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./.env.docker
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - db
+      - redis
+    # drizzle-kit pushを行う
+    command: sh -c "npm run db:push && npm run start"
+
+volumes:
+  db-data:

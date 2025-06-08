@@ -7,7 +7,6 @@ jobs:
   run-nextjs-ci:
     runs-on: ubuntu-latest
 
-    # Redis をサービスとしてセットアップ
     services:
       redis:
         image: redis
@@ -19,67 +18,54 @@ jobs:
         node-version: [20.x]
 
     steps:
-    # リポジトリのコードをチェックアウト（取得）する
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    # Node.js のバージョンをセットアップする（ここでは 20.x）
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    # 必要な依存関係（ライブラリなど）をインストールする
-    - name: Install Dependencies
-      run: yarn install
-    
-    # 環境変数をセットアップ（.env ファイルの作成）
-    # Redisコンテナは、専用の内部ネットワークで動作するため.envとは違うものを指定して使う
-    - name: Set up .env
-      run: |
-        echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-        echo "RAKUTEN_API_ID=${{ secrets.RAKUTEN_API_ID }}" >> .env
-        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
-        echo "REDIS_URL=redis://127.0.0.1:6379" >> .env
-        echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}" >> .env
-        echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" >> .env
+      - name: Install Dependencies
+        run: npm ci
 
-    # Next.js サーバーを起動（バックグラウンド実行）
-    - name: Start Next.js server
-      run: yarn dev &
-      env:
-        PORT: 3000
+      - name: Set up .env
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "RAKUTEN_API_ID=${{ secrets.RAKUTEN_API_ID }}" >> .env
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+          echo "REDIS_URL=redis://127.0.0.1:6379" >> .env
+          echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}" >> .env
+          echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" >> .env
 
-    # サーバーが起動するまで待機（最大 30 秒）
-    - name: Wait for localhost:3000
-      run: |
-        echo "Waiting for server to start..."
-        for i in {1..30}; do
-          curl -sSf http://localhost:3000 > /dev/null && echo "Server is up!" && break
-          echo "Server is not ready yet. Retrying in 2 seconds..."
-          sleep 2
-        done
+      - name: Start Next.js server
+        run: npm run dev &
+        env:
+          PORT: 3000
 
-    # コードのフォーマットをチェックし、自動整形する（美しいコードにするため）
-    - name: Check Format
-      run: yarn biome format
+      - name: Wait for localhost:3000
+        run: |
+          echo "Waiting for server to start..."
+          for i in {1..30}; do
+            curl -sSf http://localhost:3000 > /dev/null && echo "Server is up!" && break
+            echo "Server is not ready yet. Retrying in 2 seconds..."
+            sleep 2
+          done
 
-    # コードの品質チェックを行い、ルール違反がないか確認する
-    - name: Check Lint
-      run: yarn biome check
+      - name: Check Format
+        run: npm run format
 
-    # キャッシュを削除
-    - name: cache delete
-      run: yarn cache clean
+      - name: Check Lint
+        run: npm run lint
 
-    # Next.js のビルドを実行して、アプリケーションをビルドできるか確認する
-    - name: Build
-      run: yarn build
+      - name: Cache delete
+        run: npm cache clean --force
 
-    # ビルドが成功したか確認する（`.next` フォルダができているかをチェック）
-    - name: Verify Build Artifacts
-      run: |
-        test -d .next && echo "Build artifacts found: .next directory exists" || exit 1
+      - name: Build
+        run: npm run build
 
-    # テストを実行して、アプリケーションが正しく動作するか確認する
-    - name: Test
-      run: yarn test
+      - name: Verify Build Artifacts
+        run: |
+          test -d .next && echo "Build artifacts found: .next directory exists" || exit 1
+
+      - name: Test
+        run: npm test

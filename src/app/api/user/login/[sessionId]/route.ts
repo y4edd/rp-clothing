@@ -3,7 +3,7 @@ import { cart, users } from "@/db/schemas/schema";
 import { redisClient } from "@/lib/redis/redis";
 import type { CartItemInRedis } from "@/types/cart_item/cart_item";
 import { REDIS_MAX_AGE } from "@/utils/redis";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import { and, eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -37,7 +37,7 @@ export const POST = async (
       );
     }
 
-    const isMatch = await bcrypt.compare(password, userData.password);
+    const isMatch = await bcryptjs.compare(password, userData.password);
     if (!isMatch) {
       return NextResponse.json({ message: "パスワードが違います。" }, { status: 401 });
     }
