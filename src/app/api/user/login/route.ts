@@ -36,7 +36,7 @@ export const POST = async (request: NextRequest) => {
 
     const userId = Number(userData.id);
 
-    if(sessionId) {
+    if (sessionId) {
       // userIdを取得する（誰のところにカート情報を保存するか明確にする）
       const redis = await redisClient.get(`sessionId:${sessionId}`);
       if (!redis) return NextResponse.json({ message: "sessionIdが無効です" }, { status: 400 });
@@ -77,7 +77,7 @@ export const POST = async (request: NextRequest) => {
         "EX",
         REDIS_MAX_AGE,
       );
-      const response =  NextResponse.json({ message: "ログインに成功しました" }, { status: 200 });
+      const response = NextResponse.json({ message: "ログインに成功しました" }, { status: 200 });
 
       response.cookies.set("sessionId", sessionId, cookieOpt);
       return response;
@@ -91,7 +91,7 @@ export const POST = async (request: NextRequest) => {
         "EX",
         REDIS_MAX_AGE,
       );
-      const response =  NextResponse.json({ message: "ログインに成功しました" }, { status: 200 });
+      const response = NextResponse.json({ message: "ログインに成功しました" }, { status: 200 });
       response.cookies.set("sessionId", genSessionId, cookieOpt);
       return response;
     }
