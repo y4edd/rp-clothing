@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RP Clothing - ECサイト
 
-## Getting Started
+本リポジトリは、Next.js を基盤としたファッション系ECサイトです。ユーザーにとって快適でスムーズなショッピング体験を提供します。
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 使用技術
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js** – フロントエンド & サーバーサイドレンダリング  
+- **Drizzle ORM** – 型安全なデータベース操作（PostgreSQL）  
+- **Redis** – ログインセッション管理に使用  
+- **Stripe** – 決済処理（クレジットカード支払い対応）
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔧 実装されている主な機能
 
-## Learn More
+- ✅ お気に入り登録機能  
+- 🎂 お誕生日割引の自動適用  
+- 👤 ユーザー登録・ログイン（セッションはRedisで管理）  
+- 💳 Stripeによる決済機能  
+- 🛒 カート（ショッピングバスケット）機能  
+- 🔍 商品検索（検索条件の保存機能付き）  
+- 🕘 閲覧履歴の保存・表示
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠 環境変数の設定
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+以下の環境変数を `.env.local` に記述してください：
 
-## Deploy on Vercel
+```env
+# PostgreSQLデータベースURL
+DATABASE_URL=postgres://<username>:<password>@<host>:<port>/<dbname>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 楽天API（検索等に使用）
+RAKUTEN_API_ID=各自で楽天アプリIDを取得
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# JWTなどで使用（第三者に漏洩しない強固な値）
+SECRET_KEY=長いランダム文字列を指定
+
+# Redis（ログインセッション用）
+REDIS_URL=redis://<user>:<password>@<host>:<port>
+
+# Stripe 公開キー（クライアント用）
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=Stripeダッシュボードで取得
+
+# Stripe 秘密キー（サーバー用）
+STRIPE_SECRET_KEY=Stripeのシークレットキー
